@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SNC 学员互动工具包 · Day1（第1–6章）</title>
+<style>
+:root{
+  --paper:#ffffff; --bg:#f5f5f0; --ink:#1a1a1a; --ink-soft:#5a5a5a;
+  --brand:#1a2332; --accent:#c9a84c; --line:#e8e4dc;
+  --ok:#1a3a2a; --warn:#8a6d1b; --bad:#8a2a2a;
+  --gold-soft:#f7f1e3; --brand-soft:#e8ecf0;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:"Songti SC","STSong","SimSun","Noto Serif CJK SC",serif;
+  font-size:15.5px; line-height:1.75;
+}
+h1,h2,h3,h4,.sans,nav,button,label,.tag,.chip,.q-opt,.sop-note{
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC",system-ui,sans-serif;
+}
+header{
+  background:var(--paper); border-bottom:3px solid var(--accent);
+  padding:26px 20px 18px; text-align:center;
+}
+header h1{margin:0 0 6px; font-size:24px; color:var(--brand); letter-spacing:2px; font-weight:700;}
+header .sub{color:var(--ink-soft); font-size:13.5px; line-height:1.7;}
+.wrap{max-width:1080px; margin:0 auto; padding:0 18px 60px;}
+nav.tabs{
+  position:sticky; top:0; z-index:20; background:var(--bg);
+  display:flex; flex-wrap:wrap; gap:6px; padding:14px 0 10px;
+  border-bottom:1px solid var(--line);
+}
+nav.tabs button{
+  border:1px solid var(--line); background:var(--paper); color:var(--ink-soft);
+  padding:8px 18px; border-radius:999px; font-size:15px; cursor:pointer;
+  transition:all .2s ease;
+}
+nav.tabs button:hover{border-color:var(--accent); color:var(--brand); background:#faf8f3;}
+nav.tabs button.active{background:linear-gradient(135deg, var(--brand) 0%, #243044 100%); border-color:var(--brand); color:#fff; box-shadow:0 2px 6px rgba(26,35,50,.18);}
+.chip-row{display:flex; flex-wrap:wrap; gap:8px; padding:12px 0 4px;}
+.chip{
+  border:1px solid var(--line); background:transparent; color:var(--ink-soft);
+  padding:4px 14px; border-radius:999px; font-size:13px; cursor:pointer;
+}
+.chip.active{background:var(--accent); border-color:var(--accent); color:#fff;}
+section.tab-panel{display:none; padding-top:18px;}
+section.tab-panel.active{display:block;}
+.sec-intro{color:var(--ink-soft); font-size:14px; margin:6px 0 14px;}
+.tag{display:inline-block; font-size:12px; padding:1px 9px; border-radius:4px;
+  background:var(--brand-soft); color:var(--brand); border:1px solid #cdd5de; margin-right:6px;}
+.tag.gold{background:var(--gold-soft); color:#7a5c10; border-color:#e4d9b8;}
+.tag.redtag{background:#fbeaea; color:var(--bad); border-color:#e3c6c6;}
+
+/* ===== 翻卡 ===== */
+.card-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(285px,1fr)); gap:16px;}
+.flip{perspective:1200px; height:230px; cursor:pointer;}
+.flip-inner{position:relative; width:100%; height:100%; transition:transform .55s; transform-style:preserve-3d;}
+.flip.on .flip-inner{transform:rotateY(180deg);}
+.face{
+  position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden;
+  border:1px solid var(--line); border-radius:10px; background:var(--paper);
+  padding:16px 16px 14px; overflow:auto; box-shadow:0 1px 3px rgba(0,0,0,.04), 0 4px 12px rgba(0,0,0,.06);
+}
+.face.back{transform:rotateY(180deg); background:#eee9dd; border-color:#d8d0be;}
+.face .fhead{display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;}
+.face .fch{font-size:12px; color:var(--brand); font-family:"PingFang SC",sans-serif;}
+.face .hint{font-size:11.5px; color:var(--ink-soft); font-family:"PingFang SC",sans-serif;}
+.face .ftext{font-size:15px;}
+.face.back .ftext{font-size:13.8px; color:#2a2820;}
+.flip-tip{font-size:13px; color:var(--ink-soft); margin:0 0 12px;}
+
+/* ===== 自测 ===== */
+.q-card{
+  background:var(--paper); border:1px solid var(--line); border-radius:10px;
+  padding:16px 18px; margin-bottom:14px;
+}
+.q-card.right{border-color:#a8c5b8; background:#f2f7f4;}
+.q-card.wrong{border-color:#dfb9b9; background:#fbf3f3;}
+.q-title{font-weight:bold; margin-bottom:10px; font-family:"PingFang SC",sans-serif; font-size:15px;}
+.q-title .qno{color:var(--brand); margin-right:6px;}
+.q-opt{display:block; padding:5px 10px; margin:4px 0; border-radius:6px; cursor:pointer; font-size:14.5px;}
+.q-opt:hover{background:#f5f0e3;}
+.q-opt input{margin-right:8px;}
+.q-opt.ok-opt{background:#e2ede7; color:#1a3a2a; font-weight:bold;}
+.q-opt.bad-opt{background:#f3e0e0; color:#8a3333;}
+.q-ex{display:none; margin-top:10px; padding:10px 12px; border-left:3px solid var(--accent);
+  background:#faf6ec; font-size:13.5px; color:#3a362c; border-radius:0 6px 6px 0;}
+.q-card.graded .q-ex{display:block;}
+.q-verdict{font-family:"PingFang SC",sans-serif; font-size:13px; font-weight:bold; margin-left:8px;}
+.q-verdict.ok{color:var(--ok);} .q-verdict.no{color:var(--bad);}
+.btn{
+  font-family:"PingFang SC",sans-serif; font-size:15px; cursor:pointer;
+  border:1px solid var(--brand); background:linear-gradient(135deg, var(--brand) 0%, #243044 100%); color:#fff;
+  padding:9px 26px; border-radius:8px; margin:6px 8px 6px 0;
+  transition:all .2s ease; box-shadow:0 1px 3px rgba(26,35,50,.10);
+}
+.btn:hover{box-shadow:0 3px 10px rgba(26,35,50,.18); transform:translateY(-1px);}
+.btn.ghost{background:transparent; color:var(--brand); border-color:var(--brand);}
+.btn.ghost:hover{background:var(--brand-soft);}
+.btn:disabled{opacity:.5; cursor:not-allowed;}
+.score-banner{
+  display:none; background:var(--paper); border:2px solid var(--accent); border-radius:10px;
+  padding:18px 22px; margin:16px 0; text-align:center;
+}
+.score-banner h3{margin:0 0 6px; color:var(--brand);}
+.review-list{text-align:left; max-width:760px; margin:12px auto 0; font-size:14px;}
+.review-list li{margin-bottom:6px;}
+
+/* ===== SOP ===== */
+.sop-toolbar{text-align:center; margin:10px 0 18px;}
+.sop-sheet{
+  background:#fff; border:1px solid var(--line); border-radius:8px;
+  max-width:210mm; margin:0 auto 26px; padding:26px 30px;
+  box-shadow:0 1px 3px rgba(0,0,0,.04), 0 6px 20px rgba(0,0,0,.07);
+}
+.sop-sheet h3{color:var(--brand); border-bottom:2px solid var(--accent); padding-bottom:8px;
+  margin:0 0 6px; font-size:19px;}
+.sop-sheet .sop-meta{font-size:12.5px; color:var(--ink-soft); margin-bottom:14px; font-family:"PingFang SC",sans-serif;}
+.sop-sheet h4{font-size:15px; color:var(--accent); margin:16px 0 6px;}
+.sop-sheet table{width:100%; border-collapse:collapse; font-size:13px; margin:8px 0;}
+.sop-sheet th,.sop-sheet td{border:1px solid var(--line); padding:6px 8px; text-align:left; vertical-align:top;}
+.sop-sheet th{background:var(--brand); color:#fff; font-family:"PingFang SC",sans-serif; font-weight:600;}
+.sop-sheet ul,.sop-sheet ol{margin:6px 0 6px 20px; padding:0;}
+.sop-sheet li{margin-bottom:4px; font-size:13.5px;}
+.flow-box{border:1px dashed var(--accent); border-radius:8px; padding:10px 14px; margin:8px 0; background:#faf8f2; font-size:13.5px;}
+.flow-step{font-family:"PingFang SC",sans-serif; font-weight:bold; color:var(--brand);}
+.sop-note{font-size:12.5px; color:var(--ink-soft); background:#faf6ec; border-left:3px solid var(--accent);
+  padding:8px 12px; border-radius:0 6px 6px 0; margin-top:12px;}
+.redline{color:var(--bad); font-weight:bold;}
+
+/* ===== 计算器 ===== */
+.subtabs{display:flex; flex-wrap:wrap; gap:6px; margin:10px 0 18px;}
+.subtabs button{
+  font-family:"PingFang SC",sans-serif; font-size:14px; cursor:pointer;
+  border:1px solid var(--line); background:var(--paper); color:var(--ink-soft);
+  padding:7px 16px; border-radius:8px;
+}
+.subtabs button.active{background:linear-gradient(135deg, var(--accent) 0%, #b89530 100%); border-color:var(--accent); color:#fff; box-shadow:0 2px 6px rgba(201,168,76,.22);}
+.tool-panel{display:none;}
+.tool-panel.active{display:block;}
+.tool-card{
+  background:var(--paper); border:1px solid var(--line); border-radius:10px;
+  padding:20px 22px; max-width:860px; margin:0 auto;
+  box-shadow:0 1px 3px rgba(0,0,0,.04), 0 4px 12px rgba(0,0,0,.06);
+}
+.tool-card h3{margin:0 0 4px; color:var(--brand); font-size:18px;}
+.tool-card .formula{font-size:13.5px; color:var(--ink-soft); background:var(--gold-soft);
+  border-radius:6px; padding:8px 12px; margin:10px 0; font-family:"PingFang SC",sans-serif;}
+.form-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:12px 18px; margin:14px 0;}
+.field{display:flex; flex-direction:column; font-family:"PingFang SC",sans-serif; font-size:13.5px;}
+.field label{color:var(--ink-soft); margin-bottom:3px;}
+.field input,.field select{
+  padding:8px 10px; border:1px solid var(--line); border-radius:6px; font-size:15px;
+  background:#fff; color:var(--ink); font-family:inherit;
+}
+.result{
+  display:none; margin-top:16px; border-top:1px dashed var(--line); padding-top:14px;
+}
+.result.show{display:block;}
+.result .big{font-family:"PingFang SC",sans-serif; font-size:26px; font-weight:bold; color:var(--brand);}
+.verdict-box{border-radius:8px; padding:12px 16px; margin:12px 0; font-size:14.5px; font-family:"PingFang SC",sans-serif;}
+.verdict-box.green{background:#e6f0ea; border:1px solid #a8c5b8; color:#1a3a2a;}
+.verdict-box.yellow{background:var(--gold-soft); border:1px solid #ddd0a8; color:#6a4e10;}
+.verdict-box.red{background:#f8e8e8; border:1px solid #dfb9b9; color:#8a3333;}
+.verdict-box h4{margin:0 0 6px; font-size:16px;}
+.result table{width:100%; border-collapse:collapse; font-size:13.5px; margin:10px 0;}
+.result th,.result td{border:1px solid var(--line); padding:6px 9px; text-align:left;}
+.result th{background:var(--brand); color:#fff; font-family:"PingFang SC",sans-serif; font-weight:600;}
+.disclaimer{
+  margin-top:18px; font-size:12.8px; color:var(--ink-soft); background:#faf8f2;
+  border:1px solid var(--line); border-radius:8px; padding:10px 14px; font-family:"PingFang SC",sans-serif;
+}
+.checklist-item{display:flex; gap:10px; align-items:flex-start; padding:8px 10px; margin:6px 0;
+  border:1px solid var(--line); border-radius:8px; background:#fff; cursor:pointer; transition:box-shadow .15s; font-family:"PingFang SC",sans-serif; font-size:14px;}
+.checklist-item input{margin-top:4px;}
+.checklist-item.hard{border-left:4px solid var(--bad);}
+.checklist-item.soft{border-left:4px solid var(--accent);}
+.script-box{background:var(--gold-soft); border-radius:8px; padding:12px 16px; font-size:14px; margin-top:10px;
+  border:1px dashed var(--accent);}
+footer{text-align:center; color:var(--ink-soft); font-size:12.5px; padding:24px 0 10px;
+  border-top:1px solid var(--line); margin-top:30px; font-family:"PingFang SC",sans-serif;}
+
+@media print{
+  header,nav.tabs,.chip-row,.sop-toolbar,footer,.no-print{display:none !important;}
+  body{background:#fff;}
+  section.tab-panel{display:none !important;}
+  #tab-sop{display:block !important;}
+  .sop-sheet{box-shadow:none; border:1px solid #999; page-break-after:always; max-width:100%;}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>SNC 运动健身营养咨询师 · 学员互动工具包</h1>
+  <div class="sub">Day1 ｜ 覆盖教材第 1–6 章：定义边界与循证基础 · 运动饮食评估 · 身体成分评估 · 运动人群能量需求 · RED-S 能量摄入不足 · 营养生化基础<br>
+  2026年9月线上班（第一期）配套实操工具 ｜ 全部公式与阈值取自 SNC 基础教材，无外部数据</div>
+</header>
+<div class="wrap">
+
+<nav class="tabs">
+  <button data-tab="cards" class="active">知识点翻卡</button>
+  <button data-tab="quiz">章节自测</button>
+  <button data-tab="sop">SOP 决策卡（可打印）</button>
+  <button data-tab="tools">即用计算器</button>
+</nav>
+
+<div class="chip-row" id="chipRow"></div>
+
+<section class="tab-panel active" id="tab-cards">
+  <p class="flip-tip">点击卡片翻面查看要点；可用上方章节筛选。正面为术语/问题，背面含英文全称、关键数字与教材出处。</p>
+  <div class="card-grid" id="cardGrid"></div>
+</section>
+
+<section class="tab-panel" id="tab-quiz">
+  <p class="sec-intro">选择章节后开始作答，提交后即时显示对错与解析（解析标注教材章节出处），套末显示得分与错题回顾。</p>
+  <div id="quizControls" style="margin-bottom:14px;">
+    <button class="btn" id="quizStart">载入本章自测题</button>
+    <button class="btn ghost" id="quizRetry" style="display:none;">重新作答</button>
+  </div>
+  <div class="score-banner" id="scoreBanner"></div>
+  <div id="quizArea"></div>
+</section>
+
+<section class="tab-panel" id="tab-sop">
+  <div class="sop-toolbar no-print">
+    <button class="btn" onclick="window.print()">打印 / 另存为 PDF（A4，每张 SOP 一页）</button>
+  </div>
+  <div id="sopArea"></div>
+</section>
+
+<section class="tab-panel" id="tab-tools">
+  <div class="subtabs" id="toolTabs">
+    <button data-tool="ea" class="active">EA 能量可得性计算器</button>
+    <button data-tool="rmr">RMR / TEE 估算器</button>
+    <button data-tool="tlevel">T 层级自评问卷</button>
+    <button data-tool="redline">转介红线自查清单</button>
+  </div>
+  <div id="toolArea"></div>
+</section>
+
+<footer>
+  SNC 2026 学员工具包 · Day1（Ch01–06）｜ 本工具为教学辅助，不替代医学评估与个体化诊疗；出现红旗信号须按教材流程转介。<br>
+  标注「大众学员了解即可」的内容为 T3 及以上竞技营养范畴。
+</footer>
+
+</div>
+
+<script>
+'use strict';
+/* ============ 基础数据 ============ */
+const CHAPTERS = [
+  {id:0, name:'全部章节'},
+  {id:1, name:'Ch01 定义边界与循证基础'},
+  {id:2, name:'Ch02 运动饮食评估'},
+  {id:3, name:'Ch03 身体成分评估'},
+  {id:4, name:'Ch04 运动人群能量需求'},
+  {id:5, name:'Ch05 RED-S 能量摄入不足'},
+  {id:6, name:'Ch06 营养生化基础'}
+];
+let curChapter = 0;
+
+/* ============ 模块一：知识点翻卡（每章15张，共90张） ============ */
+const FLASHCARDS = [
+/* ---- Ch01 ---- */
+{c:1,f:'SNC 的职业定位与工作边界是什么？',b:'SNC（Sports Nutrition Coach，运动营养咨询师）面向运动与健身人群提供循证营养教育与实操指导；不做疾病诊断、不开处方、不替代医疗。工作边界=健康教育+行为支持+转介识别。涉及临床指标异常、进食障碍、月经/骨密度问题时必须转介。（教材第1章 第1节）'},
+{c:1,f:'运动营养领域必须转介医学评估的四条指征（红线）是什么？',b:'①月经紊乱超过3个周期；②骨密度低于年龄预期（DXA Z 值异常）；③疑似或确诊进食障碍；④血糖异常或严重电解质紊乱。命中任一即停止自行调整方案，转介医生/注册营养师多学科团队。（教材第1章 第1节）'},
+{c:1,f:'膳食评估与身体成分评估的教练可用边界分别是什么？',b:'膳食评估：教练可做24h回顾、食物日记、训练饮食记录等行为层面的收集与反馈；DLW（双标水）、血液生化等属研究/临床测量。身体成分：教练可做围度、皮褶（经培训）、BIA等现场方法；DXA、4C模型等为临床/科研级，可协助解读但不可下诊断。（教材第1章 第1节）'},
+{c:1,f:'T0–T5 训练者分层是谁提出的？依据是什么？',b:'McKay 等 2022 年提出（证据等级 B）。按训练承诺度与竞技水平分 6 级：T0 静坐少动、T1 休闲活跃、T2 训练/发展级、T3 高度训练/全国级、T4 精英/国际级、T5 世界级。分层决定营养策略的精细程度与是否需要周期化方案。（教材第1章 第2节）'},
+{c:1,f:'T0 与 T1 的判定标准（含 WHO 活动量）分别是什么？',b:'T0 静坐少动：未达到 WHO 身体活动量。T1 休闲活跃：达到 WHO 标准——每周150–300分钟中等强度，或75–150分钟高强度有氧活动（或等效组合），但无系统性竞技训练承诺。（教材第1章 第2节）'},
+{c:1,f:'T2、T3、T4、T5 各对应什么训练与竞技水平？',b:'T2 训练/发展级：每周≥3次专项训练并参加本地/地区赛事；T3 高度训练/全国级：系统化高负荷训练、全国级竞技（大众学员了解即可）；T4 精英/国际级；T5 世界级：奥运/世锦赛冠军级。层级越高，营养策略越需个体化与周期化。（教材第1章 第2节）'},
+{c:1,f:'循证实践的证据金字塔（五级）如何排列？',b:'I级：系统综述/Meta分析；II级：随机对照试验（RCT）；III级：队列研究；IV级：病例对照研究；V级：专家意见/病例报告。营养主张应优先采用金字塔上层证据；机制研究（体外/动物）不能直接等同于人体效果证据。（教材第1章 第5节）'},
+{c:1,f:'运动营养中判断一个主张的证据链顺序是什么？',b:'机制（生理/生化 plausibility）→ 急性代谢反应研究 → RCT（随机对照试验）→ 队列/观察性研究 → 专业组织立场声明（Position Statement）综合定级。只有机制成立≠人体有效；RCT 与立场声明才是实践决策的核心依据。（教材第1章 第5节）'},
+{c:1,f:'HEALM 证据分级对大型前瞻队列的特殊规定是什么？',b:'HEALM（等级化证据评估框架）将大型前瞻性队列研究（样本量 n>10000、随访>10年）与中小型 RCT 列为同一证据等级；队列研究方法学质量用 NOS（纽卡斯尔-渥太华量表）评分，NOS ≥7 分为高质量研究。（教材第1章 第5节）'},
+{c:1,f:'社交媒体营养主张的「红旗信号」清单（10条）有哪些？',b:'①用个案/前后对比代替系统证据；②阴谋论口吻「被隐藏的真相」；③把体外/动物实验结果当作人体结论；④无剂量概念「多多益善」；⑤声称适合所有人、无禁忌；⑥承诺快速见效；⑦未披露商业利益/带货关系；⑧绝对化语言（100%、必须、根治）；⑨引用文献断章取义、无法提供标题/DOI；⑩对主流共识作阴谋论解读。（教材第1章 第5节）'},
+{c:1,f:'立场声明（Position Statement）在证据体系中的位置与用法？',b:'立场声明是专业组织（如 ACSM、IOC、ISSN）对证据的系统综合与实践推荐，代表当前领域共识，是教练做决策最实用的上层依据；但有时效性，需关注更新版本（如 IOC RED-S 2014→2018→2023 演进）。（教材第1章 第5节）'},
+{c:1,f:'为什么「机制听起来合理」不足以指导实践？',b:'机制（体外实验、动物模型、生化通路）只说明「理论上可能」；人体是多系统整合环境，剂量、生物利用度、长期效应、个体差异均可能让机制效应不显现甚至反转。机制提供研究方向，人体 RCT 与长期队列才决定能否写进建议。（教材第1章 第5节）'},
+{c:1,f:'面对客户拿来的网红营养说法，教练应先问哪三个问题？',b:'①证据是什么等级？（有没有人体 RCT / 立场声明，还是只有机制与个案）②剂量是多少？（研究用剂量与产品含量是否一致）③谁在说、有无利益披露？。三问后再决定是否采纳，并向客户解释证据链。（教材第1章 第5节）'},
+{c:1,f:'运动营养教练「能做」与「不能做」的清单要点？',b:'能做：循证营养教育、膳食评估与反馈、训练饮食行为指导、目标设定与依从性支持、风险识别与转介。不能做：疾病诊断与治疗、处方药物/治疗性膳食方案、对进食障碍/月经紊乱/骨密度异常自行处理、宣称疗效。（教材第1章 第1节）'},
+{c:1,f:'不同 T 层级的营养教学重点有何差异？',b:'T0–T1：建立规律饮食、蛋白质与蔬果基础、补水与作息；T2：训练日/休息日能量分配、训练前后碳水蛋白、体重管理节奏；T3及以上（大众学员了解即可）：周期化营养、碳水上载、赛日策略、体成分精细调控，且 RED-S 筛查要求更高。（教材第1章 第2节）'},
+
+/* ---- Ch02 ---- */
+{c:2,f:'膳食摄入量评估的「金标准」是什么？精度多少？',b:'双标水法（DLW，Doubly Labeled Water）：通过同位素示踪测量 CO2 生成量推算总能量消耗，精度 ±5–7%，是自由生活状态下 TEE 测量的金标准；成本高、需同位素分析，主要用于科研与验证其他方法。（教材第2章 第1节）'},
+{c:2,f:'自报能量摄入的低估幅度有多大？（Capling 2017）',b:'Capling 等 2017 年系统综述（证据等级 B）：运动人群自报能量摄入平均低估约 19%，相当于约 668 kcal/d；个体低估区间约 10–30%。低报在高训练量、体重敏感项目与有进食障碍倾向者中更明显。（教材第2章 第2节）'},
+{c:2,f:'EI:BMR 比值如何提示低报？临界值是多少？',b:'Black 2000 标准（证据等级 B）：报告的能量摄入与基础代谢率之比 EI:BMR < 1.35 时，提示该份膳食记录「可疑低报」（自由生活人群长期摄入低于此值在生理上难以维持体重）。BMR 可用 Cunningham 1980 公式：BMR = 500 + 22×FFM(kg)。（教材第2章 第2节）'},
+{c:2,f:'称重记录（WFR）与份量估算的误差各有多大？',b:'称重饮食记录（WFR）低报可达 TEE 的 10–45%；不用秤、靠目测/餐具估算份量时，份量误差低估 20–50%；加上遗漏记录与隐瞒，膳食自报的总误差可达 30–70%。（教材第2章 第2节）'},
+{c:2,f:'膳食评估方法的证据分级（A/B/C/D）如何划分？',b:'A级：DLW 双标水；B级：3–7天称重记录（WFR）、24h多遍回顾法 + 生物标志物校正；C级：3–7天估算食物日记 + 训练日记、图像日记；D级：FFQ 食物频率问卷、单次24h膳食回顾。教练实操主要在 C 级，结果解读须说明局限。（教材第2章 第3节）'},
+{c:2,f:'3天与7天食物记录各自的精度与依从性特点？',b:'3天记录：个体内变异系数 CV ±15–20%（等级B）；7天记录 CV 可降至 ±10–15%，但从第4天起受试者依从性骤降、记录质量明显下滑。训练者能量摄入日间变异系数高达 40–60%（训练日/休息日差异大），因此 SOP 采用3天记录（2训练日+1休息日）。（教材第2章 第3节）'},
+{c:2,f:'单次24h膳食回顾为什么不够用？需要几次？',b:'单次24h回顾只代表一天，而训练者日间摄入波动大（CV 40–60%），单天无法反映习惯摄入；至少需要 3–5 次非连续日的24h回顾（含训练日与休息日）才能近似习惯摄入量。（教材第2章 第3节）'},
+{c:2,f:'教材推荐的膳食评估 SOP（记录天数→复盘→复评节奏）？',b:'首次：连续3天记录（2个训练日 + 1个休息日），同步训练日记；方案执行后 2–4 周做一次执行复盘（依从性与障碍）；正式复评间隔 6–8 周，用相同方法重复以便纵向比较。（教材第2章 第4节 SOP）'},
+{c:2,f:'TFEQ-R18 三因素进食行为问卷测哪三个维度？',b:'TFEQ-R18（Three-Factor Eating Questionnaire 简版18项）测量：①认知性饮食克制（cognitive restraint）；②情绪性进食（emotional eating）；③非控制性进食（uncontrolled eating）。用于识别限制性进食与情绪性进食模式，辅助发现 RED-S/进食障碍风险线索。（教材第2章 第4节）'},
+{c:2,f:'FFQ 食物频率问卷的定位与局限？',b:'FFQ 用结构化清单询问过去数周/数月各类食物摄入频率，适合大样本流行病学与「长期膳食模式」粗估（D级方法）；对绝对摄入量估计误差大、依赖食物表、对训练者的日内/日间波动不敏感，不能用于精确能量计算。（教材第2章 第3节）'},
+{c:2,f:'数字化膳食工具（图像识别/可穿戴）的实测精度？',b:'AI 图像识别：理想条件（标准化西餐、单盘单菜）误差 ±15–20%；中餐混合菜、共享菜肴场景误差扩大到 30–40%。可穿戴设备估算运动消耗 ExEE 误差 10–25%；用户依从性差距（记录中断率）25–30%。数字化工具可提升依从性但不能消除自报偏倚。（教材第2章 第5节）'},
+{c:2,f:'哪些食物类别最常被低估？校正系数是多少？',b:'高能量密度、易「隐形」的配料低报最严重：烹调油 +20–30%、坚果 +25–40%、酱料/沙拉酱 +30–50%、含糖饮料 +15–25%。对明显低报的记录可做保守校准：报告摄入值 ÷ 0.80（即上调约25%）再解读。（教材第2章 第4节）'},
+{c:2,f:'为什么食物日记必须与训练日记同步？',b:'能量与营养需求随训练量波动（训练者日间 CV 40–60%）：训练日与休息日的碳水、总能量需求差异显著。只记饮食不记训练，无法判断「摄入不足」是真不足还是休息日正常低摄入，也无法做训练前后营养匹配。（教材第2章 第4节）'},
+{c:2,f:'生物标志物在膳食评估中的作用（举例）？',b:'生物标志物（如尿氮评估蛋白摄入、血浆维生素/矿物质、DLW 测 TEE）用于客观校验自报数据的真实性，是 B 级方法组合「24h多遍回顾/称重记录 + 生物标志物」的组成部分；教练层一般不直接检测，但应知道其存在与意义，必要时转介临床检测。（教材第2章 第3节）'},
+{c:2,f:'教练拿到一份3天饮食记录，解读顺序是什么？',b:'①先查完整性（训练日/休息日是否齐、有无整餐遗漏）；②用 EI:BMR<1.35 初筛低报；③对油/坚果/酱料/饮料做类别校正（或按 ÷0.80 保守校准）；④看蛋白质 g/kg、碳水与训练匹配、蔬果与水分；⑤只给「模式与习惯」反馈，不给精确到个位 kcal 的结论，并安排 2–4 周复盘。（教材第2章 第4节 SOP）'},
+
+/* ---- Ch03 ---- */
+{c:3,f:'身体成分评估的最高精度模型是什么？精度多少？',b:'四组分模型（4C model）：把体重分为脂肪、水、矿物质、蛋白质四组分，需 DXA + 气体置换/水下称重 + 同位素稀释联合测量，体脂率 SEE（标准估计误差）±1.5–2.5% BF，是临床/科研级参考标准，设备门槛极高。（教材第3章 第1节）'},
+{c:3,f:'DXA 双能X线吸收法的精度、偏差与安全参数？',b:'重复测量 CV 1–2%；存在约 5% 的系统偏差——倾向高估 FFM、低估 FM；不同品牌设备结果相差 3–5%，纵向追踪须用同一台机器；辐射剂量 0.001–0.01 mSv（约为日常数日本底辐射）；设备限高约200cm、限重约120kg。（教材第3章 第2节）'},
+{c:3,f:'Bod Pod（空气置换体积描记法）的特点与精度？',b:'通过空气置换测身体体积推算体密度，操作快（约5–10分钟）、对受试者配合要求低；重复测量 CV 1–2%，与水下称重一致性好；需穿紧身衣、排空膀胱，毛发与湿度有影响。属临床级常用方法。（教材第3章 第2节）'},
+{c:3,f:'水下称重法（Hydrodensitometry）与 Siri 公式？',b:'阿基米德原理测体密度 Bd，再用 Siri 公式换算：%BF = 495/Bd − 450。经典实验室方法，精度高但流程繁琐（需多次水下呼气称量），已逐渐被 Bod Pod 与 DXA 取代。（教材第3章 第2节）'},
+{c:3,f:'皮褶厚度法（Jackson-Pollock / ISAK）的精度边界？',b:'经 ISAK 标准化培训的操作者测量 CV <2%；未训练操作者误差 >5%；公式基于欧美人群，对亚裔外推偏差可 >5%；体脂率过低（男 <8%）或过高（>30%）时公式失准。教练使用须接受规范培训并固定测量位点。（教材第3章 第3节）'},
+{c:3,f:'BIA 生物电阻抗法的最大干扰因素是什么？误差多少？',b:'BIA 通过身体导电性推算水分与去脂体重，对水合状态极度敏感：脱水/水肿、餐后、饮酒、经期、训练后均显著改变读数，误差 ±3–5%。标准化要求：晨起空腹排尿后、训练后24–48小时的休息日测量。（教材第3章 第3节）'},
+{c:3,f:'Navy 围度法体脂公式（男女）与精度？',b:'男性：%BF = 495/(1.0324 − 0.19077×log10(腰围−颈围) + 0.15456×log10(身高)) − 450；女性：%BF = 495/(1.29579 − 0.35004×log10(腰围+臀围−颈围) + 0.22100×log10(身高)) − 450；围度单位 cm。SEE 约 3.5–4.5%，适合无设备时的粗略筛查与纵向追踪。（教材第3章 第3节）'},
+{c:3,f:'为什么 BMI 不能用于训练者的体成分评估？',b:'BMI = 体重(kg)/身高(m)²，只反映身高体重关系，无法区分肌肉、脂肪与骨骼；抗阻训练者肌肉量大，常被 BMI 误判为「超重/肥胖」。教材明确：BMI 不用于训练者体成分评估，仅作人群层面初筛。（教材第3章 第3节）'},
+{c:3,f:'低体脂率的健康预警线（男/女）？',b:'男性体脂率约 5% 接近必需脂肪下限（必需脂肪 3–5%）；女性约 12–14%（必需脂肪 10–13%）。低于此区间可能伴随激素紊乱、月经异常、骨量丢失与免疫下降，是 RED-S 评估的重要线索。（教材第3章 第4节 / 第5章）'},
+{c:3,f:'FFMI 是什么？公式与自然训练者范围？',b:'FFMI（Fat-Free Mass Index，去脂体重指数）= FFM(kg)/身高(m)² + 6.3×(1.80 − 身高(m))（身高校正项）。自然训练男性通常 18–23，自然上限约 25；FFMI >27 需谨慎解读（提示数据误差或非自然因素可能）。（教材第3章 第4节）'},
+{c:3,f:'ALMI 与肌少症筛查阈值（EWGSOP2）？',b:'ALMI（Appendicular Lean Mass Index，四肢瘦体重指数）= 四肢瘦体重(kg)/身高(m)²。EWGSOP2 肌少症阈值：男性 <7.0 kg/m²、女性 <5.5 kg/m²。用于中高龄/慢病人群肌肉量评估，低阈值提示肌少症风险需进一步评估。（教材第3章 第4节）'},
+{c:3,f:'MDC（最小可检测变化）：体脂变动多少才算「真实变化」？',b:'MDC 表示超过测量误差的真实变化：DXA 约 1–2% 体脂率，皮褶法约 3–5%。两次测量差值小于 MDC 时应视为测量噪声。方法学上，检测 1kg FFM 的组间变化需每组 16–25 人。（教材第3章 第5节）'},
+{c:3,f:'身体成分测量的标准化要求（时间/状态/周期）？',b:'统一在晨起、空腹、排尿后测量；避开训练后24–48小时（选休息日）；女性固定在月经周期同一阶段；纵向比较必须用同一方法、同一设备、同一操作者。单日体重波动可达 ±3–5kg，不能凭单日体重下结论。（教材第3章 第5节）'},
+{c:3,f:'体重/体脂变化的合理节奏与「真实减脂」判定？',b:'脂肪组织每天净减少约 20–30g（每周约 140–210g）；只有每周下降 >1kg 且持续 2 周以上，才可判定为真实的脂肪减少趋势（否则多为水分/糖原/肠内容物波动）。不同方法结果相差 3–7%，方法之间不可互比。（教材第3章 第5节）'},
+{c:3,f:'不同人群的体成分评估频率与增/减脂期成分目标？',b:'频率：竞技赛季 8–12周一次、备赛期 4–6周、大众 12–16周、青少年 6个月、RED-S 高危者 4–6周。增肌期增重 0.5–1.5kg/周（其中 60–80% 应为肌肉）；减脂期每减 1kg 脂肪的 FFM 损失应 <0.1kg，减重速度 ≤0.5–1.0% 体重/周。（教材第3章 第5节 / 第4章）'},
+
+/* ---- Ch04 ---- */
+{c:4,f:'TEE 总能量消耗由哪几部分构成？',b:'TEE = RMR（静息代谢率）+ TEF（食物热效应）+ EAT（运动性活动产热，含结构化训练）+ NEAT（非运动性活动产热）。RMR 是最大组分，NEAT 个体差异最大、也是减脂期最易被忽视的变量。（教材第4章 第1节）'},
+{c:4,f:'BMR 与 RMR 的区别？RMR 占 TEE 的比例？',b:'BMR（基础代谢率）要求隔夜空腹、清醒平卧、热中性环境严格测量；RMR（静息代谢率）测量条件略宽松，二者差异 <5–10%，实践中常互用。RMR 占 TEE 比例：静坐人群 60–80%；精英男子耐力运动员因训练量巨大，仅占 38–47%。（教材第4章 第1节）'},
+{c:4,f:'TEF 食物热效应占比与三大营养素差异？',b:'TEF 约占 TEE 的 6–10%：蛋白质 20–30%（最高）、碳水化合物 5–10%、脂肪 3–5%（最低）。高蛋白饮食的热效应优势真实存在但幅度有限，不能替代总能量平衡。（教材第4章 第1节）'},
+{c:4,f:'教材默认使用的 RMR 预测公式是哪一个？',b:'Cunningham 1991 公式（默认首选，因以去脂体重 FFM 为核心变量，更适合训练者）：RMR(kcal/d) = 21.6 × FFM(kg) + 370。需先有体成分数据（FFM）；无 FFM 时退回体重公式并标注局限。（教材第4章 第2节）'},
+{c:4,f:'Cunningham 1980 与 Mifflin-St Jeor 公式分别是什么？',b:'Cunningham 1980：RMR = 500 + 22×FFM(kg)（常作敏感性参照与 EI:BMR 筛查用）。Mifflin-St Jeor：男 = 9.99×kg + 6.25×cm − 4.92×岁 + 5；女 = 9.99×kg + 6.25×cm − 4.92×岁 − 161。（教材第4章 第2节）'},
+{c:4,f:'Mifflin / Harris-Benedict 公式用于训练者的系统偏差？',b:'Mifflin-St Jeor 与 Harris-Benedict（1919）以总体重为变量，对高 FFM 的力量/爆发力训练者会低估 RMR 约 5–15%（肌肉被当作「普通体重」）。Harris-Benedict 1919 男 = 66.47 + 13.75×kg + 5.003×cm − 6.76×岁；女 = 655.10 + 9.563×kg + 1.850×cm − 4.676×岁。（教材第4章 第2节）'},
+{c:4,f:'ten Haaf-Weijs 2014 公式（两个版本）？',b:'体重版：RMR = 11.936×kg + 587.728×身高(m) − 8.129×岁 + 191.027×性别(男=1,女=0) − 29.279。FFM 版：RMR = 19.7×FFM + 413×性别 − 0.07×岁 + 57.2。为近年针对运动人群验证的公式，可作交叉参照。（教材第4章 第2节）'},
+{c:4,f:'De Lorenzo 1999 公式为什么只能作参考？',b:'De Lorenzo 公式（仅男性运动员）：RMR = −857 + 9.0×kg + 11.7×cm。其原始证据来自会议摘要（非完整同行评审论文），样本与验证有限，证据等级低，仅作多公式对比时的参考，不宜单独使用。（教材第4章 第2节）'},
+{c:4,f:'PAL 身体活动水平分级表（TEE/RMR）？',b:'PAL = TEE/RMR：卧床 1.2–1.3；静坐 1.3–1.4；轻度活动 1.5–1.6；中等活动 1.6–1.8；高活动 1.8–2.0；极高活动 2.0–2.5；超高活动 2.3–2.6+（精英耐力大训练量期）。用 RMR×PAL 可粗估 TEE。（教材第4章 第3节）'},
+{c:4,f:'各能量消耗测量方法的精度阶梯？',b:'DLW ±5%（自由生活金标准）；代谢舱 ±1–3%（实验室）；间接测热仪 IC 测 RMR ±5–10%；便携 VO2 设备 ±10–15%；心率法 ±15–25%；加速度计 ±15–30%；MET 查表法 ±20–40%（最粗糙）。教练场景多用后三类，必须标注为估算。（教材第4章 第3节）'},
+{c:4,f:'Weir 公式、RER 与 MET 的计算要点？',b:'Weir 间接测热：kcal/min = 3.941×VO2 + 1.106×VCO2。RER（呼吸交换率）：0.70 = 纯脂肪氧化、1.00 = 纯碳水氧化、0.82–0.87 = 混合饮食静息态。MET = 3.5 mL/kg/min（静息摄氧量），EE(kcal) = MET×体重(kg)×时间(h)。（教材第4章 第3节）'},
+{c:4,f:'中国居民 EER（2023）18–49 岁能量推荐量？',b:'男性：轻度身体活动 2250、中度 2600、重度 3000 kcal/d；女性：轻度 1800、中度 2100、重度 2400 kcal/d。为普通人群参考值；系统训练者 TEE 显著高于此，须按训练量另行估算。（教材第4章 第4节）'},
+{c:4,f:'不同项目运动员的 TEE 实测区间？',b:'耐力项目 4500–9000 kcal/d（极端训练/赛事期 8000–12000+）；力量/爆发力 3000–4500；团队球类 2500–6000；体重分级项目（摔跤/拳击等）1800–4000（含刻意减重期）；健美维持期 3000–4000；健身大众 1800–3200 kcal/d。（教材第4章 第4节）'},
+{c:4,f:'大众健身人群的能量需求快算法（kcal/kg）？',b:'维持期：体重(kg)×30–35；减脂期：×25–28；增肌期：×38–42；高训练量日：×35–45。快算法仅用于起点估算，2周后按体重趋势（每2周称重均值）以 100–250 kcal/d 步幅调整。（教材第4章 第5节）'},
+{c:4,f:'代谢适应（适应性产热）的判定与幅度？',b:'长期能量缺口后 RMR 可下调 5–15%；判定标准：实测 RMR / 预测 RMR < 0.9 为显著代谢适应。Knaan 2026（N=16 超重久坐者）示运动代偿 ExEC ≈39%（CV 116%，个体差异极大）、睡眠代谢率 −105、RMR −87 kcal/d、自报摄入偏差 583 kcal/d。减脂初始缺口建议 −300 至 −500 kcal/d、持续 8–12周。（教材第4章 第5–6节）'},
+
+/* ---- Ch05 ---- */
+{c:5,f:'能量可得性 EA 的定义与公式？',b:'EA（Energy Availability）=（能量摄入 EI − 运动消耗 ExEE）/ 去脂体重 FFM(kg)，单位 kcal/kg FFM/d。含义：每公斤去脂组织在「支付运动花费」后剩余多少能量维持生理功能。EA ≠ 能量平衡，是 RED-S 框架的核心指标。（教材第5章 第1节）'},
+{c:5,f:'EA 的三档阈值（Loucks 经典实验）？',b:'≥45 kcal/kg FFM/d：最优区间，生理功能正常；30–45：适应性 LEA（低能量可得性），短期可耐受但须限期（≤8周）并密切监测；<30：临床/问题性 LEA，多系统功能受抑风险高。Loucks 5天严格实验设 45/30/20/10 档，个体差异约 ±5。男性生化异常较一致的阈值为 <25，25–30 为待定灰区。（教材第5章 第1–2节）'},
+{c:5,f:'RED-S 概念框架的演进脉络？',b:'1992 女运动员三联征（Triad：进食紊乱—闭经—骨质疏松）→ 2007 三联征连续谱模型 → 2014 IOC 提出 RED-S（相对能量不足综合征）覆盖男女多系统 → 2018 更新（CAT1 临床评估工具）→ 2023 更新为 REDs，采用 CAT2：把 LEA 二分为「适应性 LEA」与「问题性 LEA」，并分红/黄/绿/灰四级风险。（教材第5章 第2节）'},
+{c:5,f:'CAT2 三步评估流程与红色级处置时限？',b:'第一步：LEAF-Q（女）/ LEAM-Q（男）问卷筛查；第二步：多系统体征与生化检查（月经/激素、骨密度、血常规、铁、电解质等）；第三步：综合评级（红/黄/绿/灰）。红色级须在 48 小时内启动多学科团队（MDT：医生+营养师+心理）介入。（教材第5章 第3节）'},
+{c:5,f:'LEAF-Q 问卷的结构与阳性界值？',b:'LEAF-Q（Low Energy Availability in Females Questionnaire，Melin 2014）：25 个条目，三个维度——胃肠道症状 9 项、损伤/生病 8 项、月经功能 8 项；总分 ≥8 分为 LEA 筛查阳性。验证性能：敏感性 78%、特异性 90%。男性对应工具为 LEAM-Q；进食行为另用 EDE-Q 评估。（教材第5章 第3节）'},
+{c:5,f:'骨密度与心率相关的 RED-S 红线值？',b:'DXA 骨密度 Z 值 < −1：启动干预；Z < −2：高风险，须多学科团队（MDT）管理，DXA 在 6 个月与 12 个月复查。静息心率 <40 次/分，或出现新发心律失常，须转心脏科评估（可能为 LEA 相关心功能改变，也需排除其他心脏问题）。（教材第5章 第3节）'},
+{c:5,f:'RED-S 恢复方案的能量目标与加量节奏？',b:'目标 EA >45 kcal/kg FFM/d（实践中可再高 5–10 留安全余量）。能量加量：每 1–2 周增加 100–200 kcal/d，逐步到位避免胃肠不适与心理抗拒。宏量营养素：碳水占 50–60%、蛋白 1.6–2.0 g/kg/d、脂肪 20–30%。（教材第5章 第4节）'},
+{c:5,f:'再喂养综合征（Refeeding Syndrome）如何预防？',b:'长期严重低摄入（EA <15–20）者突然大量补糖，可诱发低磷、低镁、维生素B1缺乏等再喂养综合征。预防：恢复初期补充磷、镁、维生素 B1；能量从小剂量起步、缓慢递增；严重者应在医疗监护下恢复。（教材第5章 第4节）'},
+{c:5,f:'Refeed（补碳日）怎么安排？',b:'恢复/平台期可安排每周 1–2 天 refeed：当日碳水增加 1.5–2 g/kg 体重，增量部分的 60–70% 来自碳水化合物；目的是补充糖原、上调瘦素与心理依从性，不是「欺骗餐」式放纵。（教材第5章 第4节）'},
+{c:5,f:'RED-S 各指标恢复的时间线？',b:'月经恢复：约 2–6 个月（能量达标后）；T3 水平恢复：约 4–12 周；LH/E2（促黄体生成素/雌二醇）：8–20 周；睾酮（男性）：3–6 个月；骨密度恢复：≥12 个月，且部分骨量丢失不可逆。骨恢复最慢，强调早识别。（教材第5章 第4节）'},
+{c:5,f:'RED-S 恢复期的训练量调整节奏？',b:'第 1–2 周：训练量减至 50% 或完全休训；第 3–6 周：每 2 周递增 10–15%，以晨起心率、睡眠、情绪、月经/主观状态为监测信号；出现回退信号立即降档。T3 及以上运动员的早期训练负荷可下调 15–25%（大众学员了解即可）。（教材第5章 第4节）'},
+{c:5,f:'RED-S 恢复的「终点」判定指标？',b:'①EA 持续 >45 kcal/kg FFM/d；②RMR 比（实测/预测）>0.9；③月经恢复并维持 2–6 个月（或男性睾酮恢复 3–6 个月）；④DXA 6 个月与 12 个月复查稳定/改善。全部达标且无红旗症状，方可逐步恢复正常训练负荷。（教材第5章 第4节）'},
+{c:5,f:'教材大众案例：摄入1600、运动600、FFM 42kg，EA 是多少？',b:'EA = (1600 − 600)/42 = 1000/42 ≈ 23.8 kcal/kg FFM/d，落在 <30 的临床/问题性 LEA 区间。该案例提示：体重「正常」、看起来吃得不少的规律运动者，运动消耗大时仍可能处于严重低能量可得性，不能凭体重判断。（教材第5章 第1节 案例）'},
+{c:5,f:'LEA 对身体的多系统影响有哪些（RED-S 模型）？',b:'代谢（RMR下降）、月经/生殖功能、骨骼健康（骨密度下降/应力骨折）、免疫（反复感染）、心血管（心率/血脂异常）、生长发育、心理（情绪/抑郁）、血液（铁缺乏/贫血）、胃肠功能、训练适应与表现下降、伤病恢复变慢。（教材第5章 第2节）'},
+{c:5,f:'适应性 LEA 与问题性 LEA 的区别（2023 框架）？',b:'适应性 LEA：EA 处于 30–45 区间，身体出现可代偿的代谢下调（如 RMR 略降），短期（≤8周）可耐受，须限期恢复与监测；问题性 LEA：EA <30（男性 <25 生化异常较一致），代偿失效、多系统出现客观异常（月经/骨/激素/血常规），须按 CAT2 流程干预甚至转介。（教材第5章 第2节）'},
+
+/* ---- Ch06 ---- */
+{c:6,f:'消化与合成代谢在化学上分别是什么反应？',b:'消化（分解大分子）= 水解反应（hydrolysis），加水打断糖苷键/肽键/酯键；体内合成（如糖原、蛋白质、甘油三酯合成）= 缩合反应（condensation），脱水形成化学键。（教材第6章 第1节）'},
+{c:6,f:'三大产能营养素的能量密度与 ATP 水解放能？',b:'脂肪 37 kJ/g（9 kcal/g）；碳水化合物与蛋白质均为 17 kJ/g（4 kcal/g，蛋白质因尿素丢失实际可利用净能略低）。ATP 末端磷酸键水解释放约 30.5 kJ/mol，是细胞能量的通用货币。（教材第6章 第1节）'},
+{c:6,f:'碳水化合物的消化酶与吸收转运体？',b:'消化：唾液/胰 α-淀粉酶将淀粉切为麦芽糖等寡糖 → 小肠刷状缘酶（麦芽糖酶、蔗糖酶-异麦芽糖酶、乳糖酶）分解为单糖。吸收：SGLT1 转运葡萄糖与半乳糖（钠协同）、GLUT5 转运果糖、GLUT2 在基底膜侧释放入血；单糖经门静脉先入肝脏。（教材第6章 第2节）'},
+{c:6,f:'乳糖不耐受的人群比例大概是多少？',b:'乳糖酶非持久性（成年后乳糖酶活性下降）在全球成人中约 68%；东亚人群比例高达 90% 以上。表现为饮奶后腹胀、腹泻、肠鸣；可选用低乳糖奶、酸奶或乳糖酶制剂，不等于「乳制品过敏」。（教材第6章 第2节）'},
+{c:6,f:'蛋白质的消化吸收过程与关键数字？',b:'胃酸（pH 1.5–3.5）变性蛋白并激活胃蛋白酶（内切）→ 小肠胰蛋白酶、糜蛋白酶、弹性蛋白酶、羧肽酶及肠黏膜氨肽酶继续分解 → 约 70% 以二肽/三肽形式经 PepT1 转运吸收（比游离氨基酸更高效）。蛋白质消化率：乳清 95–99%、鸡蛋约 97%、酪蛋白 >90%（胃排空 75–85% 较乳清慢）、肉类 90–95%、未加热大豆 75–85%（商业大豆制品 >90%）、麸质 70–80%。（教材第6章 第3节）'},
+{c:6,f:'脂肪消化吸收为什么主要走淋巴而非门静脉？',b:'胆汁乳化脂肪 → 胰脂酶（需辅脂酶）在甘油三酯 sn-1/sn-3 位切割，生成 2-单酰甘油（2-MAG）+ 2 游离脂肪酸 → 在微胶粒（4–8nm）中运至肠上皮 → 细胞内重新酯化为甘油三酯、组装成乳糜微粒（粒径太大无法进毛细血管）→ 经淋巴系统、胸导管入血，绕过肝脏首过。中链甘油三酯（MCT）水溶性较好，可直接经门静脉入肝。（教材第6章 第4节）'},
+{c:6,f:'糖酵解的产物、限速酶与净能量？',b:'1 葡萄糖 → 2 丙酮酸 + 2 ATP（净）+ 2 NADH。三个限速酶：己糖激酶、磷酸果糖激酶-1（PFK-1）、丙酮酸激酶。糖酵解在胞液进行，无需氧，是高强度运动（30秒–2分钟）的主要供能途径。（教材第6章 第5节）'},
+{c:6,f:'为什么「脂肪不能净变成糖」？关键酶是什么？',b:'丙酮酸脱氢酶复合体（PDH）催化丙酮酸 → 乙酰CoA，此反应不可逆；乙酰CoA 进入三羧酸循环后两个碳以 CO2 释放，无法净生成草酰乙酸用于糖异生。因此脂肪酸（除甘油部分外）不能净转变为葡萄糖——这是「生酮饮食下糖异生主要靠糖异生氨基酸与甘油」的生化基础。（教材第6章 第5节）'},
+{c:6,f:'三羧酸循环与氧化磷酸化的 ATP 产出？',b:'每个乙酰CoA 经 TCA 循环产生 3 NADH + 1 FADH2 + 1 GTP（约合 10 ATP）；现代换算 NADH ≈ 2.5 ATP、FADH2 ≈ 1.5 ATP。1 分子葡萄糖彻底氧化约 30–32 ATP。棕榈酸（16碳饱和脂肪酸）经 7 轮 β-氧化生成 8 个乙酰CoA，总计约 108 ATP。（教材第6章 第5节）'},
+{c:6,f:'糖异生的前体、能量代价与氨基酸转化率？',b:'主要前体：乳酸（Cori循环）、丙氨酸（葡萄糖-丙氨酸循环）、甘油、谷氨酰胺。合成 1 分子葡萄糖耗 6 ATP；约需 1.6–2.0 g 生糖氨基酸才能生成 1 g 葡萄糖。纯生酮氨基酸（不能净生糖）：亮氨酸、赖氨酸。（教材第6章 第5节）'},
+{c:6,f:'尿素循环与 DNL（脂肪从头合成）的关键数字？',b:'氨基酸脱氨产生的氨有毒，经尿素循环解毒：2 NH3 + CO2 → 尿素（分子量 60），经肾排出——这是蛋白质供能时有「净能损失」的原因。DNL（碳水转脂肪）：转化效率 75–85%、净能量留存 60–70%；日常膳食中 DNL 对体脂的贡献仅约 5–10%（长期高碳水 10–15%，极端 >700g/d 高糖膳食可达 30%+）；甘油骨架占甘油三酯约 5–10%（100g TG 中甘油约可生成 4–8g 葡萄糖）。（教材第6章 第5–6节）'},
+{c:6,f:'「蛋白质节省效应」与亮氨酸阈值是什么？',b:'充足碳水摄入可节省 15–25% 的蛋白质氧化（糖供能不足时氨基酸被大量糖异生消耗）。亮氨酸阈值：每餐 2–2.5g 亮氨酸可最大化启动肌肉蛋白合成；对应每餐蛋白 0.25–0.4 g/kg（约 20–40g，Morton 2018 Meta 证据）。（教材第6章 第6节）'},
+{c:6,f:'不同训练目标的每日蛋白质推荐量？',b:'增肌期：1.6–2.2 g/kg/d；减脂期保肌：2.0–2.5 g/kg/d；生酮饮食 + 高强度训练：2.2–3.0 g/kg/d；一般保守推荐（维持/轻训）：1.4–1.8 g/kg/d。以上为立场声明/Meta 分析范围，须按个体训练状态与肾功能调整。（教材第6章 第6节）'},
+{c:6,f:'胰岛素、胰高血糖素、肾上腺素、皮质醇的代谢角色？',b:'胰岛素：合成储存激素（促糖原/脂肪/蛋白合成，降血糖）；胰高血糖素：促肝糖原分解与糖异生（升血糖）；肾上腺素：应急激素，经 cAMP-PKA 通路激活激素敏感性脂肪酶（HSL）促脂肪分解；皮质醇：慢性应激激素，长期升高促进肌肉蛋白分解。（教材第6章 第7节）'},
+{c:6,f:'运动后 GLUT4 转位与「合成代谢窗口」的现代证据？',b:'运动后肌肉 GLUT4 以非胰岛素依赖方式转位至细胞膜，肌细胞胰岛素敏感性升高可持续 24–48 小时——这是运动后补碳水效率高的机制。Schoenfeld & Aragon 2018 综述：当日总蛋白 ≥1.6 g/kg 且分布合理时，「训练后1小时窗口」的额外增益有限，不必神话窗口、也不要忽视训练后这一餐。空腹有氧建议控制在 Zone 2 强度、≤45–60 分钟。糖原每克结合 3–4g 水（储水与体重波动来源之一）。（教材第6章 第7节）'}
+];
+
+/* ============ 模块二：章节自测题（t: single单选 / tf判断 / calc计算） ============ */
+const QUIZ = [
+/* ---- Ch01（13题） ---- */
+{c:1,t:'single',q:'SNC 运动营养咨询师的核心定位是：',o:['替代临床营养师为慢病患者制定治疗膳食','面向运动与健身人群提供循证营养教育与行为指导，并识别转介风险','为竞技运动员独立处理月经紊乱与进食障碍','开具营养补剂处方'],a:1,e:'SNC 定位为健康教育+行为支持+风险识别转介，不做诊断与治疗（教材第1章 第1节）。'},
+{c:1,t:'tf',q:'一名女学员主诉连续 4 个月经周期没来月经，但训练状态很好。教练可以先帮她把碳水加上去观察，不必马上转介。',o:['正确','错误'],a:1,e:'月经紊乱超过 3 个周期即属四条转介红线之一，须转介医学评估，不能自行处理（教材第1章 第1节）。'},
+{c:1,t:'single',q:'以下哪项不属于教材列出的必须转介医学评估的四条指征？',o:['月经紊乱超过 3 个周期','骨密度低于年龄预期','空腹血糖处于正常上限','疑似或确诊进食障碍'],a:2,e:'四条红线为：月经紊乱超3周期、骨密度低于年龄预期、疑似/确诊进食障碍、血糖异常或严重电解质紊乱。「正常上限」不等于血糖异常（教材第1章 第1节）。'},
+{c:1,t:'single',q:'T0–T5 训练者分层体系来自：',o:['ACSM 2000 立场声明','McKay 等 2022 年文献（证据等级 B）','IOC 2018 RED-S 共识','Loucks 2003 实验'],a:1,e:'T0–T5 分层由 McKay 等 2022 年提出，证据等级 B（教材第1章 第2节）。'},
+{c:1,t:'single',q:'按 WHO 身体活动建议，成年人每周应完成的中等强度有氧活动量为：',o:['75–150 分钟','150–300 分钟','300–450 分钟','500 分钟以上'],a:1,e:'WHO 标准：每周 150–300 分钟中等强度，或 75–150 分钟高强度，或等效组合（教材第1章 第2节）。'},
+{c:1,t:'single',q:'HEALM 证据分级中，可与中小型 RCT 同级的大型前瞻队列需满足：',o:['n>1000 且随访 >3 年','n>5000 且随访 >5 年','n>10000 且随访 >10 年','n>20000 且随访 >20 年'],a:2,e:'HEALM 规定 n>10000、随访 >10 年的大型前瞻队列与中小 RCT 同级；队列质量用 NOS 评分，≥7 分为高质量（教材第1章 第5节）。'},
+{c:1,t:'single',q:'某补剂广告称「实验室研究证明能激活脂肪分解酶，所以吃了就能瘦」。这主要违反了证据链中的哪条原则？',o:['机制/体外证据不能等同于人体 RCT 证据','队列研究不能用于营养领域','专家意见没有任何价值','立场声明不能引用'],a:0,e:'证据判断链为：机制→急性代谢→RCT→队列→立场声明。机制（酶学/细胞实验）只说明理论可能，必须有人体 RCT 等上层证据支撑实践建议（教材第1章 第5节）。'},
+{c:1,t:'tf',q:'评估营养主张时，随机对照试验（RCT）的证据等级高于病例对照研究。',o:['正确','错误'],a:0,e:'证据金字塔：I 系统综述/Meta、II RCT、III 队列、IV 病例对照、V 专家意见/病例报告（教材第1章 第5节）。'},
+{c:1,t:'single',q:'「这款产品适合所有人，没有任何禁忌，7天必瘦」这句话至少踩中几条社媒红旗信号？',o:['1 条（快速见效）','2 条（绝对化语言 + 快速见效）','3 条（声称无禁忌 + 绝对化 + 承诺快速见效）','不构成红旗'],a:2,e:'「适合所有人无禁忌」「必/100% 绝对化」「快速见效」分属第5、8、6条红旗；未提利益披露时还可能叠加第7条（教材第1章 第5节）。'},
+{c:1,t:'tf',q:'引用文献时只给截图、给不出论文标题或 DOI，是社交媒体营养主张的红旗信号之一。',o:['正确','错误'],a:0,e:'红旗第9条：引用断章取义、无法提供标题/DOI 可核查（教材第1章 第5节）。'},
+{c:1,t:'single',q:'专业组织发布的立场声明（Position Statement）在实践中的正确用法是：',o:['属于专家个人意见，等级最低','是系统综合证据后的领域共识，是教练决策最实用的上层依据，但需注意版本时效','一旦发布永不更新','效力高于系统综述'],a:1,e:'立场声明代表专业组织对证据的综合共识（如 IOC RED-S 2014→2018→2023 持续更新），是实践决策核心依据之一（教材第1章 第5节）。'},
+{c:1,t:'single',q:'NOS（纽卡斯尔-渥太华量表）评分达到多少分视为高质量队列研究？',o:['≥4 分','≥5 分','≥7 分','≥9 分'],a:2,e:'NOS ≥7 分为高质量队列研究（教材第1章 第5节）。'},
+{c:1,t:'tf',q:'T3 及以上层级的周期化营养、碳水上载等精细策略，大众健身学员只需了解即可，不必照搬。',o:['正确','错误'],a:0,e:'T3 为全国级高度训练者，其精细营养策略对大众学员标注「了解即可」（教材第1章 第2节）。'},
+
+/* ---- Ch02（13题） ---- */
+{c:2,t:'single',q:'自由生活状态下测量总能量消耗（TEE）的金标准是：',o:['3天称重饮食记录','双标水法（DLW）','MET 查表法','BIA 体成分仪'],a:1,e:'DLW 双标水精度 ±5–7%，为自由生活 TEE 测量金标准（教材第2章 第1节）。'},
+{c:2,t:'calc',q:'某女学员报告摄入 1500 kcal/d，其 FFM 为 48 kg。用 Cunningham 1980 估算 BMR 并计算 EI:BMR 比值，该记录是否提示可疑低报？',o:['比值约 0.96，提示可疑低报（<1.35）','比值约 1.35，处于临界','比值约 1.52，无低报提示','无法判断'],a:0,e:'BMR = 500 + 22×48 = 1556 kcal；EI:BMR = 1500/1556 ≈ 0.96 < 1.35，按 Black 2000 标准提示可疑低报（教材第2章 第2节）。'},
+{c:2,t:'single',q:'Capling 2017 系统综述显示，运动人群自报能量摄入平均低估约：',o:['5%','10%','19%（约 668 kcal/d）','45%'],a:2,e:'平均低估约 19%，约 668 kcal/d，个体区间 10–30%，证据等级 B（教材第2章 第2节）。'},
+{c:2,t:'tf',q:'称重饮食记录（WFR）因为有秤就不会低报。',o:['正确','错误'],a:1,e:'称重记录低报仍可达 TEE 的 10–45%，漏记与隐瞒依然存在（教材第2章 第2节）。'},
+{c:2,t:'single',q:'教练最常使用的「3–7天估算食物日记 + 训练日记」属于膳食评估方法分级中的：',o:['A 级','B 级','C 级','D 级'],a:2,e:'A=DLW；B=称重记录/24h多遍法+生物标志物；C=估算食物日记+训练日记/图像日记；D=FFQ/单次24h回顾（教材第2章 第3节）。'},
+{c:2,t:'single',q:'不用秤、靠目测和餐具估算份量时，份量误差通常为：',o:['低估 5–10%','低估 20–50%','高估 20–50%','基本准确'],a:1,e:'份量估算低估 20–50%；叠加漏记后总误差可达 30–70%（教材第2章 第2节）。'},
+{c:2,t:'single',q:'教材推荐的首次膳食记录 SOP 是：',o:['1 个休息日即可','3 天（2 训练日 + 1 休息日），并同步训练日记','连续 14 天称重记录','只记 1 天 24h 回顾'],a:1,e:'首次 3 天（2训练日+1休息日）；2–4周执行复盘；6–8周同法复评（教材第2章 第4节 SOP）。'},
+{c:2,t:'tf',q:'单次 24 小时膳食回顾足以代表训练者的习惯摄入量。',o:['正确','错误'],a:1,e:'训练者日间摄入变异系数 40–60%，单次24h回顾需 3–5 次非连续日才能近似习惯摄入（教材第2章 第3节）。'},
+{c:2,t:'single',q:'下列哪类食物的低报校正系数最高（最容易被少记）？',o:['含糖饮料 +15–25%','烹调油 +20–30%','坚果 +25–40%','酱料/沙拉酱 +30–50%'],a:3,e:'酱料/沙拉酱 +30–50% 为最高；坚果 +25–40%、油 +20–30%、含糖饮料 +15–25%（教材第2章 第4节）。'},
+{c:2,t:'single',q:'TFEQ-R18 问卷测量的三个维度是：',o:['认知性饮食克制、情绪性进食、非控制性进食','饥饿感、饱腹感、口渴感','蛋白偏好、碳水偏好、脂肪偏好','睡眠、压力、运动量'],a:0,e:'TFEQ-R18 测认知克制、情绪性进食、非控制性进食三维度（教材第2章 第4节）。'},
+{c:2,t:'single',q:'首次膳食方案执行后，正式复评的间隔建议为：',o:['3–5 天','2–4 周复盘，6–8 周正式复评','6 个月','1 年'],a:1,e:'2–4周做执行复盘，6–8周用相同方法正式复评（教材第2章 第4节 SOP）。'},
+{c:2,t:'tf',q:'AI 图像识别在中餐混合菜、共享菜肴场景下的误差可扩大到 30–40%。',o:['正确','错误'],a:0,e:'理想条件 ±15–20%，中餐混合菜场景 30–40%；可穿戴估 ExEE 误差 10–25%（教材第2章 第5节）。'},
+{c:2,t:'calc',q:'一份记录报告摄入 1800 kcal，教练判断存在明显低报，按「÷0.80 保守校准」后约为：',o:['1440 kcal','2000 kcal','2250 kcal','2600 kcal'],a:2,e:'1800 ÷ 0.80 = 2250 kcal（上调约 25%），校准后再做模式解读（教材第2章 第4节）。'},
+
+/* ---- Ch03（13题） ---- */
+{c:3,t:'single',q:'身体成分评估中精度最高的方法是：',o:['DXA','BIA 生物电阻抗','四组分模型（4C model）','皮褶厚度'],a:2,e:'4C 模型体脂率 SEE ±1.5–2.5%，为最高精度参考标准（教材第3章 第1节）。'},
+{c:3,t:'single',q:'关于 DXA 的系统偏差，正确的是：',o:['低估 FFM、高估 FM','高估 FFM、低估 FM，偏差约 5%','对 FFM 与 FM 均无偏差','偏差高达 20%'],a:1,e:'DXA 系统偏差约 5%，倾向高估 FFM、低估 FM；品牌间差 3–5%（教材第3章 第2节）。'},
+{c:3,t:'calc',q:'水下称重测得体密度 Bd = 1.050 g/cm³，用 Siri 公式计算体脂率约为：',o:['约 15.7%','约 21.4%','约 25.0%','约 30.1%'],a:1,e:'%BF = 495/1.050 − 450 = 471.4 − 450 ≈ 21.4%（教材第3章 第2节）。'},
+{c:3,t:'tf',q:'在 A 品牌 DXA 上测的体脂率，可以直接与 B 品牌 DXA 的结果比较变化。',o:['正确','错误'],a:1,e:'不同品牌 DXA 结果相差 3–5%，纵向追踪须同一台机器、同一方法（方法间差 3–7%，不可互比）（教材第3章 第2节/第5节）。'},
+{c:3,t:'single',q:'皮褶厚度法在哪种情况下测量者内部误差可能超过 5%？',o:['经 ISAK 标准化培训的操作者','未接受规范培训的操作者','同一操作者重复测量','使用 Jackson-Pollock 位点'],a:1,e:'ISAK 培训者 CV<2%，未训练者 >5%；亚裔外推偏差可 >5%；BF<8% 或 >30% 公式失准（教材第3章 第3节）。'},
+{c:3,t:'single',q:'BIA 生物电阻抗测量结果最主要的干扰因素是：',o:['身高','水合状态（脱水/水肿/餐后/经期）','头发颜色','测量时间在下午'],a:1,e:'BIA 对水合状态极度敏感，误差 ±3–5%；须晨起空腹排尿后、训练后24–48h休息日测量（教材第3章 第3节）。'},
+{c:3,t:'tf',q:'一名肌肉发达的力量训练者 BMI 为 27，可以据此判定他超重、需要减脂。',o:['正确','错误'],a:1,e:'BMI 不区分肌肉与脂肪，教材明确不用于训练者体成分评估（教材第3章 第3节）。'},
+{c:3,t:'single',q:'女性必需脂肪约为体重的：',o:['1–2%','3–5%','10–13%','20–25%'],a:2,e:'女性必需脂肪 10–13%（预警线约 12–14%）；男性必需脂肪 3–5%（预警线约 5%）（教材第3章 第4节）。'},
+{c:3,t:'calc',q:'男学员 FFM 62 kg、身高 1.75 m，其 FFMI 约为多少（公式：FFM/身高² + 6.3×(1.80−身高)）？',o:['约 20.6，落在自然训练者范围 18–23 内','约 22.1，处于自然上限附近','约 24.6，超过自然上限','约 27.3，需谨慎解读'],a:0,e:'FFMI = 62/1.75² + 6.3×(1.80−1.75) = 20.24 + 0.32 ≈ 20.6，落在自然训练男性 18–23 范围内；自然上限约 25，>27 需谨慎解读（教材第3章 第4节）。'},
+{c:3,t:'single',q:'按 EWGSOP2，男性 ALMI 低于多少提示肌少症可能？',o:['<5.5 kg/m²','<7.0 kg/m²','<8.5 kg/m²','<10.0 kg/m²'],a:1,e:'EWGSOP2：男 <7.0、女 <5.5 kg/m²（教材第3章 第4节）。'},
+{c:3,t:'single',q:'大众训练者的身体成分评估频率建议为：',o:['每周 1 次','每 2 周 1 次','12–16 周 1 次','5 年 1 次'],a:2,e:'大众 12–16 周；竞技赛季 8–12 周、备赛 4–6 周、青少年 6 个月、RED-S 高危 4–6 周（教材第3章 第5节）。'},
+{c:3,t:'single',q:'减脂期建议的安全减重速度上限为：',o:['每周 ≤0.5–1.0% 体重','每周 3–5% 体重','每月 0.1%','越快越好'],a:0,e:'减脂速度 ≤0.5–1.0% 体重/周；每减 1kg 脂肪 FFM 损失应 <0.1kg（教材第3章 第5节）。'},
+{c:3,t:'tf',q:'体重一周掉了 1.5 kg，说明减了 1.5 kg 纯脂肪。',o:['正确','错误'],a:1,e:'脂肪每天净减约 20–30g（每周 140–210g）；每周 >1kg 且持续 2 周以上才算真实脂肪减少趋势，单周骤降多为水分/糖原波动（教材第3章 第5节）。'},
+
+/* ---- Ch04（13题） ---- */
+{c:4,t:'single',q:'TEE 的构成是：',o:['RMR + TEF + EAT + NEAT','BMR + BMI + PAL','RMR + EER + DLW','TEF + RER + MET'],a:0,e:'TEE = RMR + TEF + EAT（运动产热）+ NEAT（非运动产热）（教材第4章 第1节）。'},
+{c:4,t:'single',q:'TEF 食物热效应约占 TEE 的：',o:['1–3%','6–10%','20–30%','40–50%'],a:1,e:'TEF 占 6–10%；其中蛋白 20–30%、碳水 5–10%、脂肪 3–5%（教材第4章 第1节）。'},
+{c:4,t:'single',q:'静坐少动人群的 PAL（TEE/RMR）约为：',o:['1.0–1.1','1.3–1.4','1.8–2.0','2.3–2.6'],a:1,e:'卧床 1.2–1.3、静坐 1.3–1.4、轻活动 1.5–1.6、中等 1.6–1.8、高 1.8–2.0、极高 2.0–2.5、超高 2.3–2.6+（教材第4章 第3节）。'},
+{c:4,t:'calc',q:'学员 FFM 55 kg，用教材默认的 Cunningham 1991 公式估算 RMR：',o:['约 1348 kcal/d','约 1558 kcal/d','约 1710 kcal/d','约 2100 kcal/d'],a:1,e:'RMR = 21.6×55 + 370 = 1188 + 370 = 1558 kcal/d（教材第4章 第2节）。'},
+{c:4,t:'tf',q:'Mifflin-St Jeor 公式用于高肌肉量力量训练者时，常低估 RMR 约 5–15%。',o:['正确','错误'],a:0,e:'以总体重为变量的公式对高 FFM 训练者低估 RMR 5–15%，故教材默认用 FFM 驱动的 Cunningham 1991（教材第4章 第2节）。'},
+{c:4,t:'single',q:'便携 VO2 设备估算运动能耗的精度约为：',o:['±1–3%','±5–10%','±10–15%','±40%'],a:2,e:'DLW ±5%、代谢舱 ±1–3%、IC 测 RMR ±5–10%、便携 VO2 ±10–15%、心率 ±15–25%、加速度计 ±15–30%、MET ±20–40%（教材第4章 第3节）。'},
+{c:4,t:'single',q:'RER（呼吸交换率）为 1.00 时，氧化供能的主要底物是：',o:['纯脂肪','纯碳水化合物','蛋白质为主','等量脂肪与蛋白质'],a:1,e:'RER 0.70=纯脂肪、1.00=纯碳水、0.82–0.87=混合静息态（教材第4章 第3节）。'},
+{c:4,t:'tf',q:'磷酸原系统（ATP-PCr）是 30 秒–2 分钟高强度运动的主要供能系统。',o:['正确','错误'],a:1,e:'磷酸原主导 5–10 秒极限运动；30 秒–2 分钟主要靠糖酵解；2 分钟以上为有氧主导（教材第4章 第6节）。'},
+{c:4,t:'single',q:'FATmax（脂肪氧化率最高的强度区间）约为：',o:['10–20% VO2max','45–65% VO2max','75–85% VO2max','90–100% VO2max'],a:1,e:'<50–55% VO2max 脂肪主导、55–70% 混合、>70–75% 糖原主导；FATmax 约 45–65%（教材第4章 第6节）。'},
+{c:4,t:'single',q:'2023 中国居民 EER：18–49 岁男性、轻度身体活动的能量推荐为：',o:['1800 kcal/d','2250 kcal/d','2600 kcal/d','3000 kcal/d'],a:1,e:'男：轻 2250/中 2600/重 3000；女：轻 1800/中 2100/重 2400 kcal/d（教材第4章 第4节）。'},
+{c:4,t:'single',q:'判定显著代谢适应的 RMR 比值标准是：',o:['实测/预测 < 1.1','实测/预测 < 0.9','实测/预测 < 0.7','实测/预测 > 1.0'],a:1,e:'RMR_meas/RMR_pred < 0.9 为显著代谢适应；长期缺口中 RMR 可下调 5–15%（教材第4章 第5节）。'},
+{c:4,t:'tf',q:'大众健身增肌期可以用体重 ×38–42 kcal/kg 作为每日能量起点估算。',o:['正确','错误'],a:0,e:'快算法：维持 ×30–35、减脂 ×25–28、增肌 ×38–42、高训练量日 ×35–45，2 周后按体重趋势调整（教材第4章 第5节）。'},
+{c:4,t:'calc',q:'某学员 RMR 估算 1600 kcal，静坐办公为主、每周 2 次轻训练，按 PAL 1.4 估算 TEE 约为：',o:['1600 kcal','2240 kcal','2880 kcal','3520 kcal'],a:1,e:'TEE ≈ RMR×PAL = 1600×1.4 = 2240 kcal/d（教材第4章 第3节）。'},
+
+/* ---- Ch05（12题） ---- */
+{c:5,t:'calc',q:'女学员：每日摄入 1600 kcal，运动消耗 600 kcal，FFM 42 kg。其 EA 为：',o:['约 23.8 kcal/kg FFM/d（临床 LEA 区间）','约 38.1 kcal/kg FFM/d（适应性区间）','约 45.2 kcal/kg FFM/d（最优区间）','约 52.4 kcal/kg FFM/d'],a:0,e:'EA = (1600−600)/42 = 1000/42 ≈ 23.8 < 30，属临床/问题性 LEA（教材第5章 第1节 案例）。'},
+{c:5,t:'single',q:'EA 最优区间（生理功能正常维持）的阈值是：',o:['≥25 kcal/kg FFM/d','≥30 kcal/kg FFM/d','≥45 kcal/kg FFM/d','≥60 kcal/kg FFM/d'],a:2,e:'≥45 最优；30–45 适应性 LEA（限期 ≤8 周+监测）；<30 临床/问题性 LEA（教材第5章 第1–2节）。'},
+{c:5,t:'single',q:'男性出现较一致生化异常的 EA 阈值约为：',o:['<15','<25（25–30 为待定灰区）','<35','<45'],a:1,e:'男性 <25 为生化异常较一致阈值，25–30 待定；女性/通用临床切点为 <30（教材第5章 第2节）。'},
+{c:5,t:'tf',q:'EA 处于 30–45 kcal/kg FFM/d 属于「适应性 LEA」，可以长期维持不管。',o:['正确','错误'],a:1,e:'30–45 短期可耐受，但须限期（≤8 周）恢复并监测，不能长期放任（教材第5章 第2节）。'},
+{c:5,t:'single',q:'LEAF-Q 问卷总分达到多少分为 LEA 筛查阳性？',o:['≥4 分','≥8 分','≥12 分','≥20 分'],a:1,e:'LEAF-Q 25 项（胃肠9/损伤8/月经8），≥8 分阳性，敏感性 78%、特异性 90%；男性用 LEAM-Q（教材第5章 第3节）。'},
+{c:5,t:'tf',q:'CAT2 评级为红色的学员，可在 1 个月内安排门诊即可。',o:['正确','错误'],a:1,e:'红色级须 48 小时内启动多学科团队（MDT）介入（教材第5章 第3节）。'},
+{c:5,t:'single',q:'DXA 骨密度 Z 值达到多少属于高风险、须 MDT 管理？',o:['Z < −1','Z < −2','Z < 0','Z < +1'],a:1,e:'Z < −1 启动干预；Z < −2 高风险 MDT，DXA 6 与 12 个月复查（教材第5章 第3节）。'},
+{c:5,t:'single',q:'RED-S 恢复期能量加量的建议节奏是：',o:['每天加 500 kcal','每 1–2 周增加 100–200 kcal/d','一次性加 1000 kcal','不需要加量，只需减少训练'],a:1,e:'目标 EA>45；每 1–2 周加 100–200 kcal/d；碳水 50–60%、蛋白 1.6–2.0 g/kg、脂肪 20–30%（教材第5章 第4节）。'},
+{c:5,t:'tf',q:'长期严重低摄入（EA <15–20）者恢复进食初期应注意补充磷、镁和维生素 B1，防再喂养综合征。',o:['正确','错误'],a:0,e:'严重 LEA 再喂养可诱发低磷/低镁/B1 缺乏，须补充并缓慢加量，严重者医疗监护（教材第5章 第4节）。'},
+{c:5,t:'single',q:'RED-S 恢复时间线中，骨密度恢复通常需要：',o:['1–2 周','1 个月','≥12 个月，且部分骨量丢失不可逆','3 年且完全可逆'],a:2,e:'月经 2–6 个月、T3 4–12 周、LH/E2 8–20 周、睾酮 3–6 个月、骨 ≥12 个月且部分不可逆（教材第5章 第4节）。'},
+{c:5,t:'single',q:'Refeed（补碳日）的正确安排是：',o:['每周 1–2 天，碳水增加 1.5–2 g/kg，增量 60–70% 来自碳水','每月一次随便吃的欺骗餐','连续一周高糖高脂','完全不限制热量'],a:0,e:'每周 1–2 天、碳水 +1.5–2 g/kg、增量 60–70% 来自碳水，目的是补糖原与改善依从性（教材第5章 第4节）。'},
+{c:5,t:'single',q:'RED-S 恢复期前 1–2 周的训练量调整建议是：',o:['保持原训练量','减至 50% 或休训，之后每 2 周递增 10–15%','训练量翻倍以增加食欲','完全卧床 3 个月'],a:1,e:'1–2 周减至 50% 或休训；3–6 周每 2 周增 10–15%，出现回退信号立即降档（教材第5章 第4节）。'},
+
+/* ---- Ch06（13题） ---- */
+{c:6,t:'single',q:'从化学本质看，食物中大分子营养的消化属于：',o:['缩合反应','水解反应','氧化磷酸化','转氨基作用'],a:1,e:'消化=水解（加水断键）；体内合成=缩合（脱水成键）（教材第6章 第1节）。'},
+{c:6,t:'single',q:'脂肪的能量密度是：',o:['4 kcal/g','7 kcal/g','9 kcal/g（37 kJ/g）','16 kcal/g'],a:2,e:'脂肪 37 kJ/g = 9 kcal/g；碳水与蛋白 17 kJ/g = 4 kcal/g（教材第6章 第1节）。'},
+{c:6,t:'single',q:'果糖在小肠上皮的主要转运体是：',o:['SGLT1','GLUT5','GLUT4','PepT1'],a:1,e:'SGLT1 运葡萄糖/半乳糖、GLUT5 运果糖、GLUT2 基底膜释出；PepT1 运二肽三肽（教材第6章 第2节）。'},
+{c:6,t:'tf',q:'东亚人群中成年后乳糖酶活性下降（乳糖不耐受）的比例高达 90% 以上。',o:['正确','错误'],a:0,e:'全球成人约 68% 乳糖酶非持久，东亚 90%+（教材第6章 第2节）。'},
+{c:6,t:'single',q:'蛋白质消化产物中，约多大比例以二肽/三肽形式经 PepT1 吸收？',o:['约 10%','约 30%','约 70%','100%'],a:2,e:'约 70% 以二肽/三肽经 PepT1 吸收，比游离氨基酸更高效（教材第6章 第3节）。'},
+{c:6,t:'single',q:'乳糜微粒在吸收后的运输路径是：',o:['直接进入门静脉先到肝脏','经淋巴系统、胸导管入血，绕过肝脏','经尿道排出','直接进入肌肉毛细血管'],a:1,e:'乳糜微粒粒径大，经淋巴胸导管入血绕过肝脏首过；MCT 可直接入门静脉（教材第6章 第4节）。'},
+{c:6,t:'tf',q:'丙酮酸脱氢酶（PDH）催化的丙酮酸→乙酰CoA 反应是可逆的，因此脂肪可以净变成糖。',o:['正确','错误'],a:1,e:'PDH 反应不可逆，脂肪酸碳骨架不能净生成葡萄糖（甘油除外）（教材第6章 第5节）。'},
+{c:6,t:'single',q:'1 分子葡萄糖彻底有氧氧化净生成的 ATP 约为：',o:['2 个','10 个','30–32 个','108 个'],a:2,e:'糖酵解净 2 ATP + TCA/氧化磷酸化，总计约 30–32 ATP；棕榈酸约 108 ATP（教材第6章 第5节）。'},
+{c:6,t:'single',q:'下列属于纯生酮氨基酸（不能净生糖）的是：',o:['丙氨酸','亮氨酸','谷氨酰胺','甘氨酸'],a:1,e:'亮氨酸、赖氨酸为纯生酮氨基酸；糖异生前体为乳酸、丙氨酸、甘油、谷氨酰胺（教材第6章 第5节）。'},
+{c:6,t:'single',q:'最大化启动肌肉蛋白合成的每餐亮氨酸阈值约为：',o:['0.5 g','1.0 g','2–2.5 g','5 g'],a:2,e:'亮氨酸阈值 2–2.5g/餐，对应蛋白 0.25–0.4 g/kg（约 20–40g，Morton 2018）（教材第6章 第6节）。'},
+{c:6,t:'single',q:'减脂期为最大限度保留肌肉，蛋白质摄入建议为：',o:['0.8–1.0 g/kg/d','1.2–1.4 g/kg/d','2.0–2.5 g/kg/d','3.5–4.0 g/kg/d'],a:2,e:'增肌 1.6–2.2、减脂保肌 2.0–2.5、生酮+高强度 2.2–3.0、保守 1.4–1.8 g/kg/d（教材第6章 第6节）。'},
+{c:6,t:'tf',q:'运动后肌肉 GLUT4 可以非胰岛素依赖地转位到细胞膜，胰岛素敏感性升高可持续 24–48 小时。',o:['正确','错误'],a:0,e:'运动后 GLUT4 非胰岛素依赖转位，胰岛素敏感性升高 24–48h（教材第6章 第7节）。'},
+{c:6,t:'single',q:'长期慢性应激时，哪种激素持续升高会促进肌肉蛋白质分解？',o:['胰岛素','皮质醇','胰高血糖素','胃泌素'],a:1,e:'皮质醇为慢性应激分解激素；肾上腺素经 cAMP-PKA 激活 HSL 促脂解；胰岛素促合成（教材第6章 第7节）。'}
+];
+
+/* ============ 模块三：SOP 决策卡（5张，A4 可打印） ============ */
+const SOPS = [
+{id:'sop1',title:'SOP-1 ｜ T0–T5 训练者分层判断流程',meta:'依据：McKay et al. 2022（证据等级 B）｜ 教材第1章 第2节',html:
+'<h4>一、分层标准速查</h4>'+
+'<table><tr><th>层级</th><th>名称</th><th>判定要点</th></tr>'+
+'<tr><td>T0</td><td>静坐少动</td><td>未达到 WHO 身体活动量（每周 150–300 分钟中等强度 或 75–150 分钟高强度有氧）</td></tr>'+
+'<tr><td>T1</td><td>休闲活跃</td><td>达到 WHO 活动量标准，但无系统性训练与竞技承诺</td></tr>'+
+'<tr><td>T2</td><td>训练/发展级</td><td>每周 ≥3 次专项训练，参加本地/地区级赛事或有明确成绩目标</td></tr>'+
+'<tr><td>T3</td><td>高度训练/全国级</td><td>系统化高负荷训练、全国级竞技（大众学员了解即可）</td></tr>'+
+'<tr><td>T4</td><td>精英/国际级</td><td>国际赛事代表级别（大众学员了解即可）</td></tr>'+
+'<tr><td>T5</td><td>世界级</td><td>奥运/世锦赛冠军级（大众学员了解即可）</td></tr></table>'+
+'<h4>二、判断流程</h4>'+
+'<div class="flow-box"><span class="flow-step">步骤1</span> 活动量是否达到 WHO 标准？<br>未达到 → <b>T0</b>；达到 → 进入步骤2。</div>'+
+'<div class="flow-box"><span class="flow-step">步骤2</span> 是否有每周 ≥3 次的专项训练 + 本地赛事/明确成绩承诺？<br>否（仅休闲活动）→ <b>T1</b>；是 → 进入步骤3。</div>'+
+'<div class="flow-box"><span class="flow-step">步骤3</span> 竞技水平定位：本地/地区 → <b>T2</b>；全国级 → <b>T3</b>；国际级 → <b>T4</b>；世界级（奥运/世锦赛冠军级）→ <b>T5</b>。</div>'+
+'<h4>三、各层级营养策略要点</h4>'+
+'<table><tr><th>层级</th><th>营养策略重点</th></tr>'+
+'<tr><td>T0–T1</td><td>建立规律三餐、足量蛋白质与蔬果、足量饮水、作息规律；先解决「吃得规律」而非精细计算</td></tr>'+
+'<tr><td>T2</td><td>训练日/休息日能量分配；训练前后碳水+蛋白；按体重趋势管理；RED-S 与低报筛查开始常规化</td></tr>'+
+'<tr><td>T3–T5</td><td>周期化营养、碳水上载与赛日策略、体成分精细调控、定期 RED-S 筛查（CAT2）；<b>大众学员了解即可</b>，需多学科团队支持</td></tr></table>'+
+'<div class="sop-note">边界提示：分层用于决定营养干预的精细程度，不用于评判学员「水平高低」。任何层级命中转介红线，立即按 SOP-3 处理。</div>'},
+
+{id:'sop2',title:'SOP-2 ｜ 营养主张证据判断链 + 社交媒体红旗清单',meta:'依据：教材第1章 第5节（证据金字塔、HEALM、社媒红旗10条）',html:
+'<h4>一、证据判断链（从弱到强，逐级追问）</h4>'+
+'<div class="flow-box"><span class="flow-step">① 机制</span> 生理/生化通路是否成立？（体外、动物、酶学——只说明「理论可能」）<br>'+
+'<span class="flow-step">② 急性代谢</span> 人体急性代谢反应研究是否支持？（短期生化指标变化）<br>'+
+'<span class="flow-step">③ RCT</span> 有无随机对照试验验证长期效果？（证据金字塔 II 级）<br>'+
+'<span class="flow-step">④ 队列</span> 大型前瞻队列/系统综述是否支持长期安全性与效果？（III 级；HEALM 中 n&gt;10000、随访&gt;10年 与中小 RCT 同级；NOS ≥7 分为高质量）<br>'+
+'<span class="flow-step">⑤ 立场声明</span> ACSM / IOC / ISSN 等专业组织立场声明是否采纳？（综合共识，注意版本时效）</div>'+
+'<h4>二、证据金字塔</h4>'+
+'<table><tr><th>等级</th><th>研究类型</th></tr>'+
+'<tr><td>I</td><td>系统综述 / Meta 分析</td></tr>'+
+'<tr><td>II</td><td>随机对照试验（RCT）</td></tr>'+
+'<tr><td>III</td><td>队列研究</td></tr>'+
+'<tr><td>IV</td><td>病例对照研究</td></tr>'+
+'<tr><td>V</td><td>专家意见 / 病例报告</td></tr></table>'+
+'<h4>三、社交媒体营养主张「红旗信号」清单（命中即存疑）</h4>'+
+'<ol>'+
+'<li>用个案、前后对比照代替系统证据</li>'+
+'<li>阴谋论口吻：「被隐藏的真相」「官方不让说」</li>'+
+'<li>把体外/动物实验结果直接当作人体结论</li>'+
+'<li>无剂量概念，宣称「多多益善」</li>'+
+'<li>声称适合所有人、无任何禁忌</li>'+
+'<li>承诺快速见效（几天/一周必瘦、暴涨肌肉）</li>'+
+'<li>未披露商业利益（带货、分销、自有品牌）</li>'+
+'<li>绝对化语言：100%、必须、根治、唯一</li>'+
+'<li>引用文献断章取义，给不出论文标题或 DOI</li>'+
+'<li>对主流共识（立场声明）作阴谋论解读</li>'+
+'</ol>'+
+'<div class="sop-note">教练三问：①证据是什么等级？②剂量是多少、与研究是否一致？③谁在说、有无利益披露？（教材第1章 第5节）</div>'},
+
+{id:'sop3',title:'SOP-3 ｜ RED-S / 医学转介红线自查',meta:'依据：教材第1章 第1节（四条转介指征）、第5章（CAT2 / LEAF-Q / LEA 信号）',html:
+'<h4>一、四条医学转介红线（命中任一即转介，不得自行处理）</h4>'+
+'<table><tr><th>红线</th><th>判定标准</th><th>动作</th></tr>'+
+'<tr><td class="redline">月经/生殖</td><td>月经紊乱 <b>超过 3 个周期</b>（或初潮延迟、闭经）</td><td>转妇科/内分泌</td></tr>'+
+'<tr><td class="redline">骨密度</td><td>DXA 骨密度 <b>低于年龄预期</b>：Z &lt; −1 启动干预；Z &lt; −2 高风险 MDT</td><td>转骨科/内分泌，6 与 12 个月复查 DXA</td></tr>'+
+'<tr><td class="redline">进食障碍</td><td>疑似或确诊进食障碍（EDE-Q 异常、强烈恐胖、催吐/泻药、回避进食）</td><td>转精神心理 + 临床营养 MDT</td></tr>'+
+'<tr><td class="redline">血糖/电解质</td><td>血糖异常，或严重电解质紊乱</td><td>立即转内科</td></tr></table>'+
+'<p><b>附加心脏红线：</b>静息心率 &lt;40 次/分，或新发心律失常 → 转心脏科（教材第5章 第3节）。</p>'+
+'<h4>二、LEA（低能量可得性）识别信号</h4>'+
+'<ul>'+
+'<li>EA &lt; 30 kcal/kg FFM/d（男 &lt;25 生化异常较一致）；30–45 为适应性 LEA，限期 ≤8 周</li>'+
+'<li>体重持续下降、怕冷、训练表现下滑、恢复变慢、反复感冒/伤病</li>'+
+'<li>胃肠不适、腹胀、食欲异常（LEAF-Q 胃肠维度 9 项）</li>'+
+'<li>女性 LEAF-Q ≥8 分阳性（敏感性 78%、特异性 90%）；男性用 LEAM-Q；进食行为用 EDE-Q</li>'+
+'<li>自报摄入 EI:BMR &lt; 1.35 且体重稳定 → 警惕低报或真实 LEA</li>'+
+'</ul>'+
+'<h4>三、处置流程（CAT2 三步）</h4>'+
+'<div class="flow-box"><span class="flow-step">第1步</span> 问卷筛查：LEAF-Q（女）/ LEAM-Q（男）。</div>'+
+'<div class="flow-box"><span class="flow-step">第2步</span> 多系统体征 + 生化（月经/激素、DXA、血常规、铁、电解质）。</div>'+
+'<div class="flow-box"><span class="flow-step">第3步</span> 评级：红/黄/绿/灰。<b class="redline">红色级：48 小时内启动 MDT</b>（医生+注册营养师+心理）。</div>'+
+'<div class="sop-note">转介话术（描述性、非评判）：「我注意到最近有几项身体信号（如月经/疲劳/体重变化），这些超出了营养咨询能处理的范围。为安全起见，建议先做一次医学评估，拿到结果后我再配合医生的建议调整饮食与训练。」（教材第5章 第3节）</div>'},
+
+{id:'sop4',title:'SOP-4 ｜ 膳食评估方法选择',meta:'依据：教材第2章（方法分级 A–D、误差数据、3天记录 SOP）',html:
+'<h4>一、方法分级与适用场景</h4>'+
+'<table><tr><th>级别</th><th>方法</th><th>精度/特点</th><th>适用</th></tr>'+
+'<tr><td>A</td><td>双标水 DLW</td><td>±5–7%，金标准，成本高</td><td>科研/验证，教练层不使用</td></tr>'+
+'<tr><td>B</td><td>3–7天称重记录 WFR；24h 多遍回顾 + 生物标志物</td><td>称重低报仍达 TEE 的 10–45%</td><td>临床/科研；教练可协助执行称重记录</td></tr>'+
+'<tr><td>C</td><td>3–7天估算食物日记 + 训练日记；图像日记</td><td>个体 CV：3天 ±15–20%，7天 ±10–15%（第4天起依从性骤降）</td><td><b>教练主力方法</b></td></tr>'+
+'<tr><td>D</td><td>FFQ；单次 24h 回顾</td><td>单次回顾需 3–5 次非连续日才近似习惯摄入；FFQ 只反映长期模式</td><td>初筛/大样本，不做精确能量计算</td></tr></table>'+
+'<h4>二、误差与校正备忘</h4>'+
+'<ul>'+
+'<li>自报摄入平均低估约 19%（约 668 kcal/d，区间 10–30%，Capling 2017，等级 B）</li>'+
+'<li>份量目测低估 20–50%；总误差可达 30–70%</li>'+
+'<li>高风险低报类别校正：油 +20–30%、坚果 +25–40%、酱料 +30–50%、含糖饮料 +15–25%</li>'+
+'<li>明显低报记录可保守校准：报告值 ÷ 0.80 再解读</li>'+
+'<li>低报筛查：EI:BMR &lt; 1.35（Black 2000，等级 B）；BMR = 500 + 22×FFM（Cunningham 1980）</li>'+
+'<li>AI 图像识别：理想 ±15–20%，中餐混合菜 30–40%；可穿戴估 ExEE ±10–25%；依从差距 25–30%</li>'+
+'</ul>'+
+'<h4>三、教练执行 SOP</h4>'+
+'<div class="flow-box"><span class="flow-step">首次</span> 连续 3 天记录：<b>2 个训练日 + 1 个休息日</b>，饮食日记与训练日记同步。</div>'+
+'<div class="flow-box"><span class="flow-step">解读</span> 查完整性 → EI:BMR 初筛 → 类别校正/÷0.80 → 看蛋白 g/kg、碳水匹配、蔬果水分；只反馈模式与习惯，不给个位 kcal 结论。</div>'+
+'<div class="flow-box"><span class="flow-step">跟进</span> 2–4 周执行复盘（依从性、障碍）；6–8 周同法正式复评。</div>'+
+'<div class="sop-note">训练者日间摄入变异系数 40–60%，训练日/休息日必须都覆盖；TFEQ-R18（认知克制/情绪性进食/非控制性进食）辅助识别行为风险。（教材第2章 第3–5节）</div>'},
+
+{id:'sop5',title:'SOP-5 ｜ 身体成分评估方法阶梯',meta:'依据：教材第3章（方法精度、标准化、MDC、评估频率）',html:
+'<h4>一、方法阶梯（精度由高到低）</h4>'+
+'<table><tr><th>阶梯</th><th>方法</th><th>精度/要点</th></tr>'+
+'<tr><td>1（科研参考）</td><td>四组分模型 4C</td><td>SEE ±1.5–2.5% BF；需 DXA+气体置换/水下称重+同位素联合</td></tr>'+
+'<tr><td>2（临床）</td><td>DXA；Bod Pod；水下称重</td><td>DXA CV 1–2%、系统偏差约 5%（高估 FFM 低估 FM）、品牌间差 3–5%、辐射 0.001–0.01 mSv、限高 200cm/重 120kg；Bod Pod CV 1–2%；水下称重 Siri：%BF=495/Bd−450</td></tr>'+
+'<tr><td>3（现场）</td><td>皮褶（Jackson-Pollock/ISAK）；BIA</td><td>皮褶：受训者 CV &lt;2%、未训练 &gt;5%、亚裔外推偏差 &gt;5%、BF&lt;8% 或 &gt;30% 失准；BIA：水合敏感 ±3–5%</td></tr>'+
+'<tr><td>4（粗筛）</td><td>Navy 围度法；BMI</td><td>Navy SEE 3.5–4.5%（男：腰−颈；女：腰+臀−颈，单位 cm）；BMI 不用于训练者体成分评估</td></tr></table>'+
+'<h4>二、标准化测量要求</h4>'+
+'<ul>'+
+'<li>晨起、空腹、排尿后；训练后 24–48 小时的休息日；女性固定月经周期同一阶段</li>'+
+'<li>纵向追踪：同一方法、同一设备（DXA 同品牌同机）、同一操作者</li>'+
+'<li>单日体重波动 ±3–5kg；脂肪每天净减约 20–30g（每周 140–210g）</li>'+
+'<li><b>真实减脂判定：</b>每周降 &gt;1kg 且持续 2 周以上；方法间结果差 3–7%，不可互比</li>'+
+'</ul>'+
+'<h4>三、MDC 与评估频率</h4>'+
+'<table><tr><th>项目</th><th>数值</th></tr>'+
+'<tr><td>MDC（最小可检测变化）</td><td>DXA 1–2% BF；皮褶 3–5%；检测 1kg FFM 变化需 16–25 人/组</td></tr>'+
+'<tr><td>竞技赛季 / 备赛期</td><td>8–12 周 / 4–6 周</td></tr>'+
+'<tr><td>大众训练者</td><td>12–16 周</td></tr>'+
+'<tr><td>青少年 / RED-S 高危</td><td>6 个月 / 4–6 周</td></tr></table>'+
+'<h4>四、安全边界与成分目标</h4>'+
+'<ul>'+
+'<li>低体脂预警：男 ≈5%（必需脂肪 3–5%）、女 ≈12–14%（必需脂肪 10–13%）</li>'+
+'<li>FFMI 自然男性 18–23、上限约 25、&gt;27 需谨慎；ALMI 肌少症阈值（EWGSOP2）男 &lt;7.0、女 &lt;5.5 kg/m²</li>'+
+'<li>增肌期增重 0.5–1.5kg/周（60–80% 应为肌肉）；减脂速度 ≤0.5–1.0% 体重/周，每减 1kg 脂肪 FFM 损失 &lt;0.1kg</li>'+
+'</ul>'+
+'<div class="sop-note">任何评估发现体脂逼近必需脂肪下限、月经/骨密度异常信号，立即转 SOP-3 红线流程。（教材第3章 第4–5节）</div>'}
+];
+
+/* ============ 顶部 Tab 与章节筛选 ============ */
+const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+let curTab = 'cards';
+
+$$('nav.tabs button').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    curTab = btn.dataset.tab;
+    $$('nav.tabs button').forEach(b=>b.classList.toggle('active',b===btn));
+    $$('section.tab-panel').forEach(p=>p.classList.toggle('active',p.id==='tab-'+curTab));
+  });
+});
+
+function renderChips(){
+  const row = $('#chipRow');
+  row.innerHTML = CHAPTERS.map(ch=>
+    `<button class="chip ${ch.id===curChapter?'active':''}" data-ch="${ch.id}">${ch.name}</button>`).join('');
+  $$('#chipRow .chip').forEach(b=>b.addEventListener('click',()=>{
+    curChapter = Number(b.dataset.ch);
+    renderChips(); renderCards(); resetQuiz();
+  }));
+}
+
+/* ============ 模块一：翻卡渲染 ============ */
+function chName(id){ return 'Ch'+String(id).padStart(2,'0'); }
+function renderCards(){
+  const list = FLASHCARDS.filter(c=>curChapter===0||c.c===curChapter);
+  $('#cardGrid').innerHTML = list.map(c=>`
+    <div class="flip">
+      <div class="flip-inner">
+        <div class="face front">
+          <div class="fhead"><span class="fch">${chName(c.c)}</span><span class="hint">点击翻面</span></div>
+          <div class="ftext">${c.f}</div>
+        </div>
+        <div class="face back">
+          <div class="fhead"><span class="fch">${chName(c.c)} 要点</span><span class="hint">点击返回</span></div>
+          <div class="ftext">${c.b}</div>
+        </div>
+      </div>
+    </div>`).join('');
+  $$('#cardGrid .flip').forEach(el=>el.addEventListener('click',()=>el.classList.toggle('on')));
+}
+
+/* ============ 模块二：自测 ============ */
+let quizQs = [], quizGraded = false;
+function resetQuiz(){
+  quizQs = []; quizGraded = false;
+  $('#quizArea').innerHTML = '';
+  $('#scoreBanner').style.display = 'none';
+  $('#quizStart').style.display = '';
+  $('#quizRetry').style.display = 'none';
+  $('#quizStart').textContent = curChapter===0 ? '载入全部章节自测题（'+QUIZ.length+'题）' : '载入本章自测题（'+QUIZ.filter(q=>q.c===curChapter).length+'题）';
+}
+function typeName(t){ return t==='tf'?'判断题':(t==='calc'?'计算题':'单选题'); }
+function renderQuiz(){
+  quizQs = curChapter===0 ? QUIZ.slice() : QUIZ.filter(q=>q.c===curChapter);
+  quizGraded = false;
+  $('#quizStart').style.display = 'none';
+  $('#quizRetry').style.display = '';
+  $('#scoreBanner').style.display = 'none';
+  $('#quizArea').innerHTML = quizQs.map((q,i)=>`
+    <div class="q-card" id="qc${i}">
+      <div class="q-title"><span class="qno">${i+1}.</span><span class="tag">${chName(q.c)}</span><span class="tag gold">${typeName(q.t)}</span>${q.q}</div>
+      <div class="q-opts">
+        ${q.o.map((opt,j)=>`<label class="q-opt"><input type="radio" name="qz${i}" value="${j}"> ${opt}</label>`).join('')}
+      </div>
+      <div class="q-ex"></div>
+    </div>`).join('') +
+    `<div style="text-align:center;margin:18px 0;"><button class="btn" id="quizSubmit">提交并查看解析</button></div>`;
+  $('#quizSubmit').addEventListener('click',gradeQuiz);
+}
+function gradeQuiz(){
+  if(quizGraded) return;
+  let answered = 0, correct = 0;
+  const wrong = [];
+  quizQs.forEach((q,i)=>{
+    const card = $('#qc'+i);
+    const sel = card.querySelector('input[name="qz'+i+'"]:checked');
+    const opts = card.querySelectorAll('.q-opt');
+    opts[q.a].classList.add('ok-opt');
+    let chosen = sel ? Number(sel.value) : -1;
+    if(chosen===q.a){ correct++; answered++; }
+    else {
+      if(chosen>=0){ answered++; opts[chosen].classList.add('bad-opt'); }
+      wrong.push({q,i,chosen});
+    }
+    card.classList.add('graded');
+    card.querySelectorAll('input').forEach(inp=>inp.disabled=true);
+    const v = chosen===q.a ? '<span class="q-verdict ok">回答正确</span>' : '<span class="q-verdict no">'+(chosen<0?'未作答':'回答错误')+'</span>';
+    card.querySelector('.q-ex').innerHTML = v + '<br><b>解析：</b>' + q.e + '<br><b>正确答案：</b>' + q.o[q.a];
+  });
+  quizGraded = true;
+  const pct = Math.round(correct/quizQs.length*100);
+  const banner = $('#scoreBanner');
+  banner.style.display = 'block';
+  banner.innerHTML = `<h3>本章得分：${correct} / ${quizQs.length}（${pct} 分）</h3>
+    <div>${pct>=85?'掌握扎实，可进入下一章学习。':pct>=60?'基本掌握，建议回顾错题对应的教材章节。':'建议重读对应章节后重新作答。'}</div>
+    <ul class="review-list">${wrong.length===0?'<li>全部答对，无错题。</li>' :
+      wrong.map(w=>`<li><b>第${w.i+1}题（${chName(w.q.c)} · ${typeName(w.q.t)}）</b>：${w.q.q}<br><span style="color:var(--bad);">你的选择：${w.chosen<0?'未作答':w.q.o[w.chosen]}</span> ｜ <span style="color:var(--ok);">正确：${w.q.o[w.q.a]}</span><br><span style="color:var(--ink-soft);">${w.q.e}</span></li>`).join('')}</ul>`;
+  banner.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+$('#quizStart').addEventListener('click',renderQuiz);
+$('#quizRetry').addEventListener('click',()=>{ renderQuiz(); window.scrollTo({top:$('#quizArea').offsetTop-80,behavior:'smooth'}); });
+
+/* ============ 模块三：SOP 渲染 ============ */
+function renderSOP(){
+  $('#sopArea').innerHTML = SOPS.map(s=>`
+    <div class="sop-sheet" id="${s.id}">
+      <h3>${s.title}</h3>
+      <div class="sop-meta">${s.meta} ｜ SNC 学员工具包 Day1（Ch01–06）</div>
+      ${s.html}
+    </div>`).join('');
+}
+
+/* ============ 模块四：计算器/工具 ============ */
+function buildTools(){
+  $('#toolArea').innerHTML = `
+  <!-- EA 计算器 -->
+  <div class="tool-panel active" id="tp-ea">
+    <div class="tool-card">
+      <h3>EA 能量可得性计算器</h3>
+      <div class="formula">公式：EA =（能量摄入 EI − 运动消耗 ExEE）÷ 去脂体重 FFM（kcal/kg FFM/d）｜ 阈值：≥45 最优 ｜ 30–45 适应性 LEA（限期 ≤8 周）｜ &lt;30 临床/问题性 LEA（教材第5章 第1–2节）</div>
+      <div class="form-grid">
+        <div class="field"><label>性别（用于男性阈值提示）</label>
+          <select id="ea-sex"><option value="f">女</option><option value="m">男</option></select></div>
+        <div class="field"><label>每日能量摄入 EI（kcal/d）</label><input id="ea-ei" type="number" placeholder="如 2000"></div>
+        <div class="field"><label>每日运动消耗 ExEE（kcal/d）</label><input id="ea-ex" type="number" placeholder="如 500"></div>
+        <div class="field"><label>去脂体重 FFM（kg）</label><input id="ea-ffm" type="number" step="0.1" placeholder="如 48"></div>
+      </div>
+      <button class="btn" id="ea-btn">计算 EA</button>
+      <div class="result" id="ea-res"></div>
+      <div class="disclaimer">边界提示：本工具用于教学与自我监测，不替代医学评估。EA &lt;30（男性 &lt;25）或伴随月经紊乱、骨密度异常、进食障碍、血糖/电解质异常、静息心率 &lt;40 等红旗信号时，须按教材流程转介医学评估（教材第5章 第3节）。</div>
+    </div>
+  </div>
+
+  <!-- RMR/TEE 估算器 -->
+  <div class="tool-panel" id="tp-rmr">
+    <div class="tool-card">
+      <h3>RMR / TEE 估算器（多公式对比）</h3>
+      <div class="formula">教材默认：Cunningham 1991　RMR = 21.6 × FFM + 370（需 FFM，更适合训练者）｜ TEE ≈ RMR × PAL（教材第4章 第2–3节）</div>
+      <div class="form-grid">
+        <div class="field"><label>性别</label><select id="r-sex"><option value="m">男</option><option value="f">女</option></select></div>
+        <div class="field"><label>年龄（岁）</label><input id="r-age" type="number" placeholder="如 30"></div>
+        <div class="field"><label>身高（cm）</label><input id="r-h" type="number" placeholder="如 170"></div>
+        <div class="field"><label>体重（kg）</label><input id="r-w" type="number" placeholder="如 65"></div>
+        <div class="field"><label>去脂体重 FFM（kg，选填；有则启用 Cunningham）</label><input id="r-ffm" type="number" step="0.1" placeholder="如 48"></div>
+        <div class="field"><label>PAL 身体活动水平</label><select id="r-pal">
+          <option value="1.25">卧床 1.2–1.3</option>
+          <option value="1.35" selected>静坐 1.3–1.4</option>
+          <option value="1.55">轻度活动 1.5–1.6</option>
+          <option value="1.70">中等活动 1.6–1.8</option>
+          <option value="1.90">高活动 1.8–2.0</option>
+          <option value="2.25">极高活动 2.0–2.5</option>
+          <option value="2.45">超高活动 2.3–2.6+（精英大训练量）</option>
+        </select></div>
+        <div class="field"><label>报告能量摄入（kcal/d，选填；用于 EI:BMR 低报筛查）</label><input id="r-ei" type="number" placeholder="如 1800"></div>
+        <div class="field"><label>快算法目标（kcal/kg 体重）</label><select id="r-goal">
+          <option value="">不使用快算法</option>
+          <option value="30,35">维持期 ×30–35</option>
+          <option value="25,28">减脂期 ×25–28</option>
+          <option value="38,42">增肌期 ×38–42</option>
+          <option value="35,45">高训练量日 ×35–45</option>
+        </select></div>
+      </div>
+      <button class="btn" id="r-btn">估算 RMR / TEE</button>
+      <div class="result" id="r-res"></div>
+      <div class="disclaimer">证据等级与局限：Cunningham 1991/1980 与 ten Haaf-Weijs 2014 以 FFM 为变量，更贴近训练者；Mifflin-St Jeor 与 Harris-Benedict 以总体重为变量，对高 FFM 训练者可能低估 RMR 约 5–15%；De Lorenzo 1999 源自会议摘要、仅男性，证据等级低，仅供参考。预测公式均为估算（间接测热 IC 测 RMR 精度 ±5–10%，DLW ±5%），结果用于设定起点，2 周后按体重趋势以 100–250 kcal/d 步幅调整。本工具不替代医学评估。（教材第4章 第2–5节）</div>
+    </div>
+  </div>
+
+  <!-- T 层级自评 -->
+  <div class="tool-panel" id="tp-tlevel">
+    <div class="tool-card">
+      <h3>T0–T5 训练者层级自评问卷</h3>
+      <div class="formula">依据 McKay et al. 2022（证据等级 B）｜ 教材第1章 第2节</div>
+      <div id="tl-form"></div>
+      <button class="btn" id="tl-btn">得出我的层级</button>
+      <div class="result" id="tl-res"></div>
+      <div class="disclaimer">层级用于决定营养策略的精细程度，不评判水平高低。T3 及以上的周期化营养内容标注「大众学员了解即可」。任何层级命中转介红线须按 SOP-3 处理；本问卷不替代医学评估。</div>
+    </div>
+  </div>
+
+  <!-- 红线自查 -->
+  <div class="tool-panel" id="tp-redline">
+    <div class="tool-card">
+      <h3>转介红线自查清单</h3>
+      <div class="formula">勾选学员当前符合的项目；命中任一「硬红线」即应启动医学转介（教材第1章 第1节、第5章 第3节）</div>
+      <div id="rl-list"></div>
+      <button class="btn" id="rl-btn">生成自查结论</button>
+      <div class="result" id="rl-res"></div>
+      <div class="disclaimer">本清单为风险识别辅助工具，不替代医学评估。对进食障碍、月经紊乱、骨密度异常等问题，教练不得自行处理或承诺疗效。</div>
+    </div>
+  </div>`;
+
+  // 子 tab 切换
+  $$('#toolTabs button').forEach(b=>b.addEventListener('click',()=>{
+    $$('#toolTabs button').forEach(x=>x.classList.toggle('active',x===b));
+    $$('.tool-panel').forEach(p=>p.classList.toggle('active',p.id==='tp-'+b.dataset.tool));
+  }));
+
+  calcEA(); calcRMR(); buildTLevel(); buildRedline();
+}
+
+/* ---- EA 计算器 ---- */
+function calcEA(){
+  $('#ea-btn').addEventListener('click',()=>{
+    const ei = parseFloat($('#ea-ei').value), ex = parseFloat($('#ea-ex').value),
+          ffm = parseFloat($('#ea-ffm').value), sex = $('#ea-sex').value;
+    const res = $('#ea-res');
+    if(!(ei>0)||!(ex>=0)||!(ffm>0)){ res.className='result show'; res.innerHTML='<div class="verdict-box yellow"><h4>输入不完整</h4>请填写 EI、ExEE 与 FFM（均为正数）。</div>'; return; }
+    const ea = (ei-ex)/ffm;
+    const target = 45*ffm + ex;
+    let cls,title,detail;
+    if(ea>=45){
+      cls='green'; title='EA ≈ '+ea.toFixed(1)+' kcal/kg FFM/d ｜ 最优区间（≥45）';
+      detail='当前能量可得性处于生理功能正常维持区间。保持规律饮食与训练配餐，建议每 6–8 周复评一次。';
+    }else if(ea>=30){
+      cls='yellow'; title='EA ≈ '+ea.toFixed(1)+' kcal/kg FFM/d ｜ 适应性 LEA（30–45）';
+      detail='身体可能处于可代偿的代谢下调状态。短期可耐受，但<b>限期不超过 8 周</b>并密切监测（晨起心率、睡眠、情绪、月经/体重趋势）；目标是把 EA 提升到 45 以上。达到 45 所需摄入约为 <b>'+Math.round(target)+' kcal/d</b>（可每 1–2 周增加 100–200 kcal/d 逐步到位）。';
+    }else{
+      cls='red'; title='EA ≈ '+ea.toFixed(1)+' kcal/kg FFM/d ｜ 临床/问题性 LEA（<30）';
+      detail='该水平与多系统功能受抑相关（代谢、月经、骨骼、免疫、血液、情绪等）。<b>应立即按 CAT2 流程评估</b>：女学员做 LEAF-Q（≥8 分阳性）、男学员 LEAM-Q，并核查转介红线。达到 EA 45 所需摄入约为 <b>'+Math.round(target)+' kcal/d</b>；恢复初期若 EA 曾低于 15–20，注意补磷、镁、维生素 B1 防再喂养综合征。';
+    }
+    let maleNote = sex==='m' ? '<p><b>男性阈值提示：</b>男性生化异常较一致的阈值为 EA &lt;25，25–30 为待定灰区；总体管理流程相同。</p>' : '';
+    res.className='result show';
+    res.innerHTML = '<div class="verdict-box '+cls+'"><h4>'+title+'</h4>'+detail+'</div>'+maleNote+
+      '<table><tr><th>项目</th><th>数值</th></tr>'+
+      '<tr><td>能量摄入 EI</td><td>'+Math.round(ei)+' kcal/d</td></tr>'+
+      '<tr><td>运动消耗 ExEE</td><td>'+Math.round(ex)+' kcal/d（自报/设备估算误差可达 10–25%）</td></tr>'+
+      '<tr><td>去脂体重 FFM</td><td>'+ffm+' kg</td></tr>'+
+      '<tr><td><b>EA 计算值</b></td><td><b>('+Math.round(ei)+'−'+Math.round(ex)+') ÷ '+ffm+' = '+ea.toFixed(1)+' kcal/kg FFM/d</b></td></tr>'+
+      '<tr><td>达到 EA 45 的目标摄入</td><td>45 × '+ffm+' + '+Math.round(ex)+' ≈ '+Math.round(target)+' kcal/d</td></tr></table>';
+  });
+}
+
+/* ---- RMR/TEE 估算器 ---- */
+function calcRMR(){
+  $('#r-btn').addEventListener('click',()=>{
+    const sex=$('#r-sex').value, age=parseFloat($('#r-age').value),
+          h=parseFloat($('#r-h').value), w=parseFloat($('#r-w').value),
+          ffm=parseFloat($('#r-ffm').value), pal=parseFloat($('#r-pal').value),
+          ei=parseFloat($('#r-ei').value), goal=$('#r-goal').value;
+    const res=$('#r-res');
+    if(!(age>0)||!(h>0)||!(w>0)){ res.className='result show'; res.innerHTML='<div class="verdict-box yellow"><h4>输入不完整</h4>请至少填写性别、年龄、身高、体重。</div>'; return; }
+    const hm=h/100, male=(sex==='m');
+    const rows=[];
+    let defaultRMR=null, defaultName='';
+    if(ffm>0){
+      const c91=21.6*ffm+370;
+      rows.push(['Cunningham 1991（教材默认）',Math.round(c91),'以 FFM 为核心变量，更适合训练者；需体成分数据']);
+      const c80=500+22*ffm;
+      rows.push(['Cunningham 1980',Math.round(c80),'常用于 EI:BMR 低报筛查（Black 2000 界值 1.35）']);
+      defaultRMR=c91; defaultName='Cunningham 1991';
+      const thFFM=19.7*ffm+413*(male?1:0)-0.07*age+57.2;
+      rows.push(['ten Haaf-Weijs 2014（FFM 版）',Math.round(thFFM),'近年针对运动人群验证，可交叉参照']);
+    }
+    const mif=male? 9.99*w+6.25*h-4.92*age+5 : 9.99*w+6.25*h-4.92*age-161;
+    rows.push(['Mifflin-St Jeor',Math.round(mif),'总体重公式；对高 FFM 训练者可能低估 5–15%']);
+    if(!defaultRMR){ defaultRMR=mif; defaultName='Mifflin-St Jeor（未填 FFM，退回体重公式）'; }
+    const hb=male? 66.47+13.75*w+5.003*h-6.76*age : 655.10+9.563*w+1.850*h-4.676*age;
+    rows.push(['Harris-Benedict 1919',Math.round(hb),'历史最久，对训练者偏差较大，仅作对比']);
+    const thBW=11.936*w+587.728*hm-8.129*age+191.027*(male?1:0)-29.279;
+    rows.push(['ten Haaf-Weijs 2014（体重版）',Math.round(thBW),'近年验证公式，可交叉参照']);
+    if(male){
+      const dl=-857+9.0*w+11.7*h;
+      rows.push(['De Lorenzo 1999（仅男）',Math.round(dl),'证据来自会议摘要，等级低，仅供参考']);
+    }
+    const tee=defaultRMR*pal;
+    let html='<p class="big">默认 RMR ≈ '+Math.round(defaultRMR)+' kcal/d（'+defaultName+'）</p>'+
+      '<p>TEE ≈ RMR × PAL('+pal+') ≈ <b>'+Math.round(tee)+' kcal/d</b>　（TEE = RMR + TEF + EAT + NEAT；TEF 约占 6–10%）</p>'+
+      '<table><tr><th>公式</th><th>RMR 估算（kcal/d）</th><th>说明 / 证据等级</th></tr>'+
+      rows.map(r=>'<tr><td>'+r[0]+'</td><td><b>'+r[1]+'</b></td><td>'+r[2]+'</td></tr>').join('')+'</table>';
+    if(ei>0){
+      const bmrForCheck = ffm>0 ? (500+22*ffm) : mif;
+      const ratio=ei/bmrForCheck;
+      html += '<div class="verdict-box '+(ratio<1.35?'red':'green')+'"><h4>EI:BMR 低报筛查：'+ratio.toFixed(2)+'</h4>'+
+        (ratio<1.35 ? '比值 < 1.35（Black 2000，等级 B）：该份摄入记录<b>提示可疑低报</b>，或存在真实 LEA。请核对漏记（油/坚果/酱料/饮料），必要时按报告值 ÷0.80 保守校准，并结合 EA 计算器评估。'
+                      : '比值 ≥1.35，未触发低报界值；仍需结合体重趋势与记录完整性判断。')+
+        '<br>（筛查用 BMR = '+(ffm>0?'Cunningham 1980：500+22×'+ffm:'Mifflin')+' ≈ '+Math.round(bmrForCheck)+' kcal/d）</div>';
+    }
+    if(goal){
+      const [lo,hi]=goal.split(',').map(Number);
+      html += '<p><b>快算法对照：</b>体重 '+w+' kg × '+lo+'–'+hi+' ≈ <b>'+Math.round(w*lo)+'–'+Math.round(w*hi)+' kcal/d</b>（起点估算，2 周后按体重趋势以 100–250 kcal/d 调整）。</p>';
+    }
+    html += '<p style="font-size:13px;color:var(--ink-soft);">测量精度参照：DLW ±5% ｜ 代谢舱 ±1–3% ｜ 间接测热 IC ±5–10% ｜ 便携 VO2 ±10–15% ｜ 心率 ±15–25% ｜ 加速度计 ±15–30% ｜ MET 查表 ±20–40%。中国居民 EER（2023）18–49 岁：男轻 2250/中 2600/重 3000，女轻 1800/中 2100/重 2400 kcal/d，系统训练者显著高于此。</p>';
+    res.className='result show'; res.innerHTML=html;
+  });
+}
+
+/* ---- T 层级自评 ---- */
+const TL_QS=[
+ {q:'1. 你目前每周的有氧活动量是否达到 WHO 建议（150–300 分钟中等强度，或 75–150 分钟高强度）？',o:['未达到','达到或超过']},
+ {q:'2. 你是否进行规律的专项训练（力量、跑步、球类、铁三等）？频率大约是？',o:['基本没有规律训练','偶尔训练，每周不足 3 次','每周 ≥3 次系统训练']},
+ {q:'3. 你是否参加正式比赛或有明确的成绩/备赛目标？',o:['不参加比赛，只为健康','参加本地/社区/地区级赛事','参加全国级赛事','参加国际级赛事','世界级（奥运/世锦赛冠军级）']},
+ {q:'4. 你对训练的投入程度更接近哪种？',o:['休闲活动，出点汗就行','规律训练，希望持续进步','高负荷系统训练，围绕成绩/备赛安排生活']},
+ {q:'5. 你每周结构化训练总时长大约是？',o:['不足 1 小时','1–3 小时','3–6 小时','6–10 小时','超过 10 小时']}
+];
+const TL_STRATEGY={
+ 0:{name:'T0 静坐少动',pts:['先建立规律活动：从步行、通勤运动开始，逐步达到 WHO 活动量','营养重点：规律三餐、足量蛋白质与蔬果、足量饮水、作息规律','不急于计算热量，先解决「吃得规律、动得起来」']},
+ 1:{name:'T1 休闲活跃',pts:['保持 WHO 活动量，可增加 2–3 次规律训练','营养重点：蛋白质均匀分配到三餐、训练日常规补水、蔬果充足','建立体重与饮食的自我观察习惯（每周称重均值）']},
+ 2:{name:'T2 训练/发展级',pts:['区分训练日/休息日能量分配；训练前后安排碳水+蛋白质','按体重趋势管理能量：维持约 ×30–35、减脂 ×25–28、增肌 ×38–42 kcal/kg','蛋白质 1.6–2.2 g/kg/d；开始常规 RED-S/低报筛查（EA 计算器、3天饮食记录）','训练负荷与饮食同步记录，6–8 周复评']},
+ 3:{name:'T3 高度训练/全国级',pts:['【大众学员了解即可】需要周期化营养：训练量周期与能量/碳水周期匹配','赛日策略、碳水上载、体成分精细调控需个体化','定期 CAT2 筛查（LEAF-Q/LEAM-Q），建议与注册营养师/医生协作']},
+ 4:{name:'T4 精英/国际级',pts:['【大众学员了解即可】全职训练环境下的个体化营养方案','多学科团队（教练+营养师+医生）支持，定期生化与体成分监测']},
+ 5:{name:'T5 世界级',pts:['【大众学员了解即可】极限精细化、赛制定制化营养，完全依托多学科团队']}
+};
+function buildTLevel(){
+  $('#tl-form').innerHTML = TL_QS.map((q,i)=>`
+    <div style="margin:12px 0;">
+      <div class="q-title"><span class="qno">${i+1}.</span>${q.q}</div>
+      ${q.o.map((o,j)=>`<label class="q-opt"><input type="radio" name="tl${i}" value="${j}"> ${o}</label>`).join('')}
+    </div>`).join('');
+  $('#tl-btn').addEventListener('click',()=>{
+    const a=[];
+    for(let i=0;i<TL_QS.length;i++){
+      const sel=document.querySelector('input[name="tl'+i+'"]:checked');
+      if(!sel){ $('#tl-res').className='result show'; $('#tl-res').innerHTML='<div class="verdict-box yellow"><h4>请完成全部 5 题</h4></div>'; return; }
+      a.push(Number(sel.value));
+    }
+    let level;
+    if(a[0]===0) level=0;
+    else if(a[1]!==2) level=1;
+    else {
+      if(a[2]===0) level = (a[3]>=1)?2:1;      // 每周≥3练但无赛事：系统训练归 T2 发展级，否则 T1
+      else level = Math.min(5, a[2]+1);          // 本地→T2, 全国→T3, 国际→T4, 世界→T5
+    }
+    const s=TL_STRATEGY[level];
+    let warn = level>=2 ? '<div class="verdict-box yellow"><h4>RED-S 筛查提示</h4>T2 及以上训练者建议常规使用 EA 计算器与 3 天饮食记录（2 训练日+1 休息日）监测能量可得性；女性可用 LEAF-Q（≥8 分阳性）。</div>' : '';
+    $('#tl-res').className='result show';
+    $('#tl-res').innerHTML = '<p class="big">你的层级：'+s.name+'</p>'+
+      '<div class="verdict-box '+(level>=3?'yellow':'green')+'"><h4>营养策略要点</h4><ul>'+s.pts.map(p=>'<li>'+p+'</li>').join('')+'</ul></div>'+warn+
+      '<p style="font-size:13px;color:var(--ink-soft);">判定逻辑：未达 WHO 活动量→T0；达标但无系统训练→T1；每周≥3次专项训练+本地赛事/成绩目标→T2；全国→T3、国际→T4、世界级→T5（教材第1章 第2节，McKay 2022，等级 B）。</p>';
+  });
+}
+
+/* ---- 转介红线自查 ---- */
+const RL_ITEMS=[
+ {hard:true,text:'女性月经紊乱超过 3 个周期（或闭经、初潮延迟）'},
+ {hard:true,text:'骨密度低于年龄预期（DXA Z < −1，或被告知骨量偏低/应力骨折）'},
+ {hard:true,text:'疑似或确诊进食障碍（强烈恐胖、催吐/滥用泻药、刻意回避进食、EDE-Q 异常）'},
+ {hard:true,text:'血糖异常，或严重电解质紊乱（医生告知过低钾/低钠/低镁等）'},
+ {hard:true,text:'静息心率 < 40 次/分，或出现新发心悸、心律失常'},
+ {hard:false,text:'EA < 30 kcal/kg FFM/d（男性 <25），或 EI:BMR < 1.35 但体重持续稳定'},
+ {hard:false,text:'近期持续怕冷、体重下降、训练表现下滑、恢复变慢、反复感冒或伤病'},
+ {hard:false,text:'长期胃肠不适、腹胀、食欲差（LEAF-Q 胃肠维度阳性可能）'},
+ {hard:false,text:'女性 LEAF-Q ≥8 分 / 男性 LEAM-Q 筛查阳性'},
+ {hard:false,text:'训练量很大但长期刻意严格控制饮食、对体重/食物高度焦虑'}
+];
+const RL_SCRIPT='「我注意到最近你身上有几项身体信号（比如月经/体重/疲劳/心率方面的变化），这些已经超出了营养咨询能够处理的范围。为了安全起见，我建议先去医院做一次相关评估（妇科/内分泌/骨科或内科），等有了医学结果，我再配合医生的建议来调整饮食和训练安排。在那之前，我们先把训练量适当降低、把饮食规律起来。」';
+function buildRedline(){
+  $('#rl-list').innerHTML = RL_ITEMS.map((it,i)=>`
+    <label class="checklist-item ${it.hard?'hard':'soft'}">
+      <input type="checkbox" id="rl${i}">
+      <span>${it.hard?'<b class="redline">【硬红线】</b> ':'【LEA 信号】'}${it.text}</span>
+    </label>`).join('');
+  $('#rl-btn').addEventListener('click',()=>{
+    const hard=[], soft=[];
+    RL_ITEMS.forEach((it,i)=>{ if($('#rl'+i).checked){ (it.hard?hard:soft).push(it.text); } });
+    const res=$('#rl-res');
+    let html='';
+    if(hard.length>0){
+      html='<div class="verdict-box red"><h4>命中硬红线 '+hard.length+' 项 —— 立即启动转介</h4>'+
+        '<ul>'+hard.map(t=>'<li>'+t+'</li>').join('')+'</ul>'+
+        '<p>按教材流程：<b>停止自行调整方案</b>；CAT2 评级为红色者须在 <b>48 小时内</b>启动多学科团队（MDT：医生+注册营养师+心理）；骨密度 Z &lt; −2 者 DXA 于 6 与 12 个月复查；训练量第 1–2 周减至 50% 或休训。</p></div>';
+    }else if(soft.length>0){
+      html='<div class="verdict-box yellow"><h4>命中 LEA 预警信号 '+soft.length+' 项 —— 启动 LEA 评估流程</h4>'+
+        '<ul>'+soft.map(t=>'<li>'+t+'</li>').join('')+'</ul>'+
+        '<p>建议：①用 EA 计算器量化能量可得性；②安排 3 天饮食记录（2 训练日+1 休息日）；③女性做 LEAF-Q、男性做 LEAM-Q；④2–4 周复盘，若 EA &lt;30 或信号加重，按转介流程处理。</p></div>';
+    }else{
+      html='<div class="verdict-box green"><h4>未命中红线信号</h4>继续保持规律饮食与训练；建议每 6–8 周常规复评 EA 与饮食记录。</div>';
+    }
+    if(hard.length>0){
+      html+='<h4 style="color:var(--bad);">建议使用的描述性转介话术（非评判、不贴标签）</h4><div class="script-box">'+RL_SCRIPT+'</div>';
+    }
+    res.className='result show'; res.innerHTML=html;
+  });
+}
+
+/* ============ 初始化 ============ */
+renderChips();
+renderCards();
+resetQuiz();
+renderSOP();
+buildTools();
+</script>
+</body>
+</html>

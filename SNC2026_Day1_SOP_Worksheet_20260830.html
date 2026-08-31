@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SNC2026 Day1 SOP 实操工作单（Ch01–06）</title>
+<style>
+:root{
+  --bg:#faf8f3; --card:#fffdf8; --paper:#ffffff;
+  --ink:#2a2925; --ink-soft:#6b675e;
+  --brand:#3f6a63; --accent:#9a6a3d; --line:#dcd5c6;
+  --ok:#4a6b58; --warn:#9a6a3d; --bad:#8f3b34;
+  --ok-bg:#e9f0eb; --ok-bd:#c2d4c9;
+  --warn-bg:#faf2e4; --warn-bd:#e3d0b2;
+  --bad-bg:#f8e9e7; --bad-bd:#e0c0bc;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:"Songti SC","STSong","SimSun","Noto Serif CJK SC",serif;
+  font-size:14.5px; line-height:1.7;
+}
+h1,h2,h3,h4,.sans,button,label,th,.tag,.field label,.toolbar,.sheet-tag,.verdict,.hint{
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC",system-ui,sans-serif;
+}
+/* ===== 顶部工具栏 ===== */
+header.topbar{
+  background:var(--card); border-bottom:2px solid var(--brand);
+  padding:18px 20px 12px; text-align:center;
+}
+header.topbar h1{margin:0 0 4px; font-size:21px; color:var(--brand); letter-spacing:1px;}
+header.topbar .sub{color:var(--ink-soft); font-size:12.5px; font-family:"PingFang SC",sans-serif;}
+.toolbar{
+  position:sticky; top:0; z-index:30; background:var(--bg);
+  border-bottom:1px solid var(--line);
+  padding:10px 14px; display:flex; flex-wrap:wrap; gap:8px; align-items:center;
+  justify-content:center;
+}
+.toolbar .tabs{display:flex; flex-wrap:wrap; gap:6px;}
+.toolbar button.tabbtn{
+  border:1px solid var(--line); background:var(--card); color:var(--ink-soft);
+  padding:7px 14px; border-radius:999px; font-size:13.5px; cursor:pointer;
+}
+.toolbar button.tabbtn.active{background:var(--brand); border-color:var(--brand); color:#fff;}
+.toolbar .tools{display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-left:8px;}
+.toolbar input[type=text]{
+  padding:7px 10px; border:1px solid var(--line); border-radius:6px;
+  font-size:13.5px; background:#fff; color:var(--ink); width:130px; font-family:"PingFang SC",sans-serif;
+}
+.toolbar button.act{
+  border:1px solid var(--brand); background:var(--brand); color:#fff;
+  padding:7px 14px; border-radius:6px; font-size:13.5px; cursor:pointer;
+}
+.toolbar button.act.ghost{background:transparent; color:var(--brand);}
+.toolbar .savehint{font-size:12px; color:var(--ink-soft); font-family:"PingFang SC",sans-serif;}
+/* ===== 工作单 ===== */
+main{max-width:215mm; margin:0 auto; padding:18px 14px 60px;}
+.sheet{display:none;}
+.sheet.active{display:block;}
+.sheet-inner{
+  background:var(--paper); border:1px solid var(--line); border-radius:6px;
+  padding:26px 30px 22px; box-shadow:0 2px 8px rgba(60,50,30,.07);
+}
+.sheet-title h2{
+  margin:0 0 4px; font-size:18.5px; color:var(--brand);
+  border-bottom:2px solid var(--brand); padding-bottom:8px;
+}
+.sheet-tag{font-size:12px; color:var(--accent); margin-bottom:14px;}
+h3.sec{
+  font-size:15px; color:var(--accent); margin:18px 0 8px;
+  border-left:4px solid var(--accent); padding-left:8px;
+}
+h4.sub{font-size:13.5px; color:var(--brand); margin:12px 0 6px;}
+p.note{font-size:13px; color:var(--ink-soft); margin:6px 0;}
+/* 会员信息抬头 */
+.member-bar{
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(170px,1fr));
+  gap:10px 16px; background:var(--card); border:1px solid var(--line);
+  border-radius:6px; padding:12px 14px; margin-bottom:6px;
+}
+.field{display:flex; flex-direction:column; font-size:12.5px;}
+.field label{color:var(--ink-soft); margin-bottom:2px;}
+.field input,.field select,.field textarea{
+  padding:6px 8px; border:1px solid var(--line); border-radius:4px;
+  font-size:14px; background:#fff; color:var(--ink); font-family:inherit;
+}
+.field textarea{resize:vertical; min-height:60px; font-size:13.5px;}
+.field.wide{grid-column:1/-1;}
+/* 勾选组件（打印安全：符号为纯文本） */
+.ck{
+  display:flex; align-items:flex-start; gap:8px; cursor:pointer;
+  padding:7px 10px; margin:5px 0; border:1px solid var(--line); border-radius:6px;
+  background:#fff; font-size:13.8px; line-height:1.6;
+}
+.ck input{position:absolute; opacity:0; width:1px; height:1px;}
+.ck .sym{
+  font-family:"PingFang SC",sans-serif; font-size:15px; color:var(--brand);
+  line-height:1.55; min-width:16px; user-select:none;
+}
+.ck.hard{border-left:4px solid var(--bad);}
+.ck.soft{border-left:4px solid var(--accent);}
+.ck.evi{border-left:4px solid var(--brand);}
+.ck .redtxt{color:var(--bad); font-weight:bold; font-family:"PingFang SC",sans-serif;}
+.ck .goldtxt{color:var(--warn); font-weight:bold; font-family:"PingFang SC",sans-serif;}
+.cklist{margin:6px 0;}
+/* 表格 */
+table.grid{width:100%; border-collapse:collapse; font-size:13px; margin:8px 0;}
+table.grid th,table.grid td{border:1px solid var(--line); padding:6px 8px; text-align:left; vertical-align:top;}
+table.grid th{background:#f1ede2; font-family:"PingFang SC",sans-serif; font-weight:600;}
+table.grid td input,table.grid td select{
+  width:100%; border:none; background:transparent; font-size:13px;
+  font-family:inherit; color:var(--ink); padding:2px 0;
+}
+table.grid td input:focus,table.grid td select:focus{outline:1px solid var(--brand); background:#fff;}
+tr.hl-ok td{background:var(--ok-bg);}
+tr.hl-warn td{background:var(--warn-bg);}
+tr.hl-bad td{background:var(--bad-bg);}
+/* 判定框 */
+.verdict{
+  border-radius:8px; padding:12px 16px; margin:12px 0; font-size:14px;
+  border:1px dashed var(--line); background:#faf8f3; color:var(--ink-soft);
+  font-family:"PingFang SC",sans-serif;
+}
+.verdict.green{background:var(--ok-bg); border:1px solid var(--ok-bd); color:#2c4a3a;}
+.verdict.yellow{background:var(--warn-bg); border:1px solid var(--warn-bd); color:#6e4d22;}
+.verdict.red{background:var(--bad-bg); border:1px solid var(--bad-bd); color:#7c2f29;}
+.verdict h4{margin:0 0 6px; font-size:15px;}
+.verdict ul{margin:6px 0 4px 18px; padding:0;}
+.verdict li{margin-bottom:4px;}
+.verdict table{width:100%; border-collapse:collapse; font-size:13px; margin:8px 0; background:rgba(255,255,255,.55);}
+.verdict th,.verdict td{border:1px solid var(--line); padding:5px 8px; text-align:left;}
+.verdict th{background:rgba(255,255,255,.7);}
+/* 流程框 */
+.flow{border:1px dashed var(--brand); border-radius:8px; padding:9px 14px; margin:7px 0;
+  background:#f6faf9; font-size:13.5px;}
+.flow .st{font-family:"PingFang SC",sans-serif; font-weight:600; color:var(--brand);}
+.script-box{
+  background:#f4efe3; border:1px dashed var(--accent); border-radius:8px;
+  padding:12px 16px; font-size:13.8px; margin:8px 0; position:relative;
+}
+.copy-btn{
+  position:absolute; top:8px; right:8px; border:1px solid var(--accent); background:transparent;
+  color:var(--accent); border-radius:4px; padding:3px 10px; font-size:12px; cursor:pointer;
+  font-family:"PingFang SC",sans-serif;
+}
+/* 结论与归档 */
+.concl-box{border:1px solid var(--line); border-radius:6px; padding:12px 14px; margin:10px 0; background:var(--card);}
+.concl-box .field{margin-bottom:10px;}
+.archive{
+  border:1.5px solid var(--brand); border-radius:6px; padding:12px 14px; margin:16px 0 8px;
+  background:#f7faf9;
+}
+.archive h3.sec{margin-top:4px;}
+.sheet-foot{
+  margin-top:16px; padding-top:10px; border-top:1px solid var(--line);
+  font-size:12px; color:var(--accent); font-family:"PingFang SC",sans-serif;
+}
+.sheet-foot .disc{color:var(--ink-soft); margin-top:3px;}
+.pill{display:inline-block; font-size:11.5px; padding:1px 8px; border-radius:4px;
+  background:#eef3f1; color:var(--brand); border:1px solid #cfddd8; margin:2px 4px 2px 0;
+  font-family:"PingFang SC",sans-serif;}
+.pill.gold{background:#f7f0e6; color:var(--accent); border-color:#e6d5bf;}
+.pill.red{background:#f7e9e7; color:var(--bad); border-color:#e3c6c2;}
+/* ===== 打印 ===== */
+@page{size:A4; margin:12mm;}
+@media print{
+  header.topbar,.toolbar{display:none !important;}
+  body{background:#fff; font-size:12px;}
+  main{max-width:100%; padding:0;}
+  .sheet{display:none !important;}
+  .sheet.active{display:block !important;}
+  .sheet-inner{border:none; box-shadow:none; padding:0;}
+  .verdict{break-inside:avoid;}
+  .ck,tr,.flow,.script-box,.archive{break-inside:avoid;}
+  .ck{background:#fff;}
+  input,textarea,select{color:#000 !important;}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar no-print">
+  <h1>SNC2026 · Day1 SOP 实操工作单</h1>
+  <div class="sub">面向大众健身力量训练人群的运动营养咨询执业工具 ｜ 覆盖教材第 1 册 Ch01–Ch06 ｜ 边走流程边填写，内置自动计算与判定，完成后可打印归档</div>
+</header>
+
+<div class="toolbar no-print">
+  <div class="tabs" id="tabBar">
+    <button class="tabbtn active" data-sheet="s1">SOP-1 会员分层</button>
+    <button class="tabbtn" data-sheet="s2">SOP-2 证据核查</button>
+    <button class="tabbtn" data-sheet="s3">SOP-3 RED-S 转介</button>
+    <button class="tabbtn" data-sheet="s4">SOP-4 膳食评估</button>
+    <button class="tabbtn" data-sheet="s5">SOP-5 体成分评估</button>
+  </div>
+  <div class="tools">
+    <input type="text" id="globalNick" class="nick" placeholder="会员昵称（同步各单）">
+    <button class="act" id="btnPrint">打印 / 保存当前工作单 PDF</button>
+    <button class="act ghost" id="btnClear">清空重填</button>
+    <span class="savehint" id="saveHint">内容自动保存在本机</span>
+  </div>
+</div>
+
+<main>
+
+<!-- ================= SOP-1 ================= -->
+<section class="sheet active" id="sheet-s1">
+<div class="sheet-inner">
+  <div class="sheet-title">
+    <h2>SOP-1 ｜ 会员分层评估工作单（T0–T5）</h2>
+    <div class="sheet-tag">教材定位：Ch01 §1.2 T0–T5 分层表（McKay et al. 2022，证据等级 B）</div>
+  </div>
+
+  <div class="member-bar">
+    <div class="field"><label>会员昵称</label><input type="text" class="nick" id="s1-nick"></div>
+    <div class="field"><label>评估日期</label><input type="date" id="s1-date"></div>
+    <div class="field"><label>年龄（岁）</label><input type="number" id="s1-age" min="10" max="100"></div>
+    <div class="field"><label>性别</label><select id="s1-sex"><option value="">请选择</option><option value="女">女</option><option value="男">男</option></select></div>
+    <div class="field wide"><label>训练目标（会员主诉）</label><input type="text" id="s1-goal" placeholder="如：增肌 / 减脂 / 半马备赛 / 健康管理"></div>
+  </div>
+
+  <h3 class="sec">一、五题决策树（按会员实际情况勾选）</h3>
+
+  <h4 class="sub">第 1 题　每周有氧活动量是否达到 WHO 建议？</h4>
+  <p class="note">WHO 标准：每周 150–300 分钟中等强度，或 75–150 分钟高强度有氧活动（或等效组合）。</p>
+  <div class="cklist">
+    <label class="ck"><input type="radio" name="s1q0" value="0"><span class="sym">○</span><span>未达到 WHO 活动量</span></label>
+    <label class="ck"><input type="radio" name="s1q0" value="1"><span class="sym">○</span><span>达到或超过 WHO 活动量</span></label>
+  </div>
+
+  <h4 class="sub">第 2 题　是否进行规律的专项训练（力量、跑步、球类、铁三等）？频率大约是？</h4>
+  <div class="cklist">
+    <label class="ck"><input type="radio" name="s1q1" value="0"><span class="sym">○</span><span>基本没有规律训练</span></label>
+    <label class="ck"><input type="radio" name="s1q1" value="1"><span class="sym">○</span><span>偶尔训练，每周不足 3 次</span></label>
+    <label class="ck"><input type="radio" name="s1q1" value="2"><span class="sym">○</span><span>每周 ≥3 次系统专项训练</span></label>
+  </div>
+
+  <h4 class="sub">第 3 题　是否参加正式比赛，或有明确的成绩 / 备赛目标？最高赛事水平是？</h4>
+  <div class="cklist">
+    <label class="ck"><input type="radio" name="s1q2" value="0"><span class="sym">○</span><span>不参加比赛，仅为健康 / 体型</span></label>
+    <label class="ck"><input type="radio" name="s1q2" value="1"><span class="sym">○</span><span>本地 / 社区 / 地区级赛事或明确成绩目标</span></label>
+    <label class="ck"><input type="radio" name="s1q2" value="2"><span class="sym">○</span><span>全国级赛事</span></label>
+    <label class="ck"><input type="radio" name="s1q2" value="3"><span class="sym">○</span><span>国际级赛事（代表国家 / 地区）</span></label>
+    <label class="ck"><input type="radio" name="s1q2" value="4"><span class="sym">○</span><span>世界级（奥运 / 世锦赛冠军级）</span></label>
+  </div>
+
+  <h4 class="sub">第 4 题　会员对训练的投入程度更接近哪种？</h4>
+  <div class="cklist">
+    <label class="ck"><input type="radio" name="s1q3" value="0"><span class="sym">○</span><span>休闲活动，出点汗即可</span></label>
+    <label class="ck"><input type="radio" name="s1q3" value="1"><span class="sym">○</span><span>规律训练，希望持续进步</span></label>
+    <label class="ck"><input type="radio" name="s1q3" value="2"><span class="sym">○</span><span>高负荷系统训练，生活围绕成绩 / 备赛安排</span></label>
+  </div>
+
+  <h4 class="sub">第 5 题　每周结构化训练总时长大约是？</h4>
+  <div class="cklist">
+    <label class="ck"><input type="radio" name="s1q4" value="0"><span class="sym">○</span><span>不足 1 小时</span></label>
+    <label class="ck"><input type="radio" name="s1q4" value="1"><span class="sym">○</span><span>1–3 小时</span></label>
+    <label class="ck"><input type="radio" name="s1q4" value="2"><span class="sym">○</span><span>3–6 小时</span></label>
+    <label class="ck"><input type="radio" name="s1q4" value="3"><span class="sym">○</span><span>6–10 小时</span></label>
+    <label class="ck"><input type="radio" name="s1q4" value="4"><span class="sym">○</span><span>超过 10 小时</span></label>
+  </div>
+
+  <h3 class="sec">二、自动判定</h3>
+  <div class="verdict" id="s1-verdict">完成上方 5 题后，此处自动给出 T0–T5 分层结论与营养策略精细度。</div>
+
+  <h3 class="sec">三、分层标准速查（Ch01 表 1.2）</h3>
+  <table class="grid">
+    <tr><th>层级</th><th>名称</th><th>判定要点</th><th>营养策略精细度</th></tr>
+    <tr><td>T0</td><td>静坐少动</td><td>未达到 WHO 身体活动推荐标准</td><td>以公共健康营养原则为主；增加身体活动优先于特异营养干预</td></tr>
+    <tr><td>T1</td><td>休闲活跃</td><td>达到 WHO 活动标准，无竞技承诺</td><td>维持均衡膳食；无需特异营养策略</td></tr>
+    <tr><td>T2</td><td>训练 / 发展级</td><td>每周 ≥3 次专项训练，参与本地赛事</td><td>食物优先；适当关注蛋白质与碳水化合物时机</td></tr>
+    <tr><td>T3</td><td>高度训练 / 全国级</td><td>专项化训练，竞技水平达国家赛事</td><td>精细化营养策略；宏量营养素周期化（大众学员了解即可）</td></tr>
+    <tr><td>T4</td><td>精英 / 国际级</td><td>代表国家参加国际赛事</td><td>全面营养支持；MDT；系统性 RED-S 筛查（大众学员了解即可）</td></tr>
+    <tr><td>T5</td><td>世界级</td><td>奥运或世界冠军，顶级排名</td><td>全方位个性化方案；专业团队支撑（大众学员了解即可）</td></tr>
+  </table>
+
+  <h3 class="sec">四、结论填写区</h3>
+  <div class="concl-box">
+    <div class="field wide"><label>分层结论（咨询师确认 / 修正）</label><input type="text" id="s1-c-level"></div>
+    <div class="field wide"><label>建议营养策略精细度与教育重点</label><textarea id="s1-c-strategy"></textarea></div>
+    <div class="field"><label>复评计划日期</label><input type="date" id="s1-c-review"></div>
+  </div>
+
+  <div class="archive">
+    <h3 class="sec">归档 / 复评区</h3>
+    <div class="member-bar" style="background:transparent; border:none; padding:0;">
+      <div class="field"><label>咨询师签名</label><input type="text" id="s1-a-sign"></div>
+      <div class="field"><label>归档日期</label><input type="date" id="s1-a-date"></div>
+      <div class="field"><label>下次复评日期</label><input type="date" id="s1-a-next"></div>
+      <div class="field wide"><label>备注</label><input type="text" id="s1-a-note"></div>
+    </div>
+  </div>
+
+  <div class="sheet-foot">
+    教材定位：Ch01 §1.2 T0–T5 训练者分层（McKay et al. 2022，证据等级 B）；WHO 身体活动推荐量。
+    <div class="disc">本记录用于营养教育与风险识别，不替代医学评估；命中转介红线须按流程转介（见 SOP-3）。</div>
+  </div>
+</div>
+</section>
+
+<!-- ================= SOP-2 ================= -->
+<section class="sheet" id="sheet-s2">
+<div class="sheet-inner">
+  <div class="sheet-title">
+    <h2>SOP-2 ｜ 营养主张证据核查工作单</h2>
+    <div class="sheet-tag">教材定位：Ch01 §1.5 循证营养学方法论基础（证据金字塔、HEALM、GRADE 简版、社媒红旗 10 条、认知偏差）</div>
+  </div>
+
+  <!-- ===== 文献信息输入（自动核查入口） ===== -->
+  <h3 class="sec" style="margin-top:4px;">零、文献信息输入（输入后自动核查并生成结论）</h3>
+  <div style="background:#f6faf9; border:1.5px solid var(--brand); border-radius:8px; padding:16px 18px; margin:8px 0 14px;">
+    <p class="note" style="margin:0 0 10px; color:var(--brand);"><b>输入文献标题与摘要 / 关键信息</b>（或主张原文），点击「自动核查」后系统自动分析研究类型、检测红旗信号与认知偏差，并生成证据权重判定与结论建议。自动勾选的可手动微调。</p>
+    <div class="field" style="margin-bottom:10px;">
+      <label style="font-weight:600; color:var(--brand);">文献标题 <span style="color:var(--bad);">*</span></label>
+      <input type="text" id="s2-auto-title" placeholder="粘贴论文标题或营养主张原文，如「Creatine supplementation increases muscle strength in adults: a systematic review」" style="font-size:14px; padding:8px 10px;">
+    </div>
+    <div class="field" style="margin-bottom:12px;">
+      <label style="font-weight:600; color:var(--brand);">摘要 / 关键信息</label>
+      <textarea id="s2-auto-abstract" rows="5" placeholder="粘贴论文摘要（Methods + Results 段落最有用）；没有摘要可直接粘贴关键发现段落、结论段、或主张原文。信息越充分，分析越准确。" style="font-size:13.5px; line-height:1.6;"></textarea>
+    </div>
+    <button id="s2-auto-btn" style="background:var(--brand); color:#fff; border:none; padding:9px 24px; border-radius:6px; font-size:14px; cursor:pointer; font-family:&quot;PingFang SC&quot;,sans-serif;">自动核查</button>
+    <span id="s2-auto-hint" style="margin-left:12px; font-size:12.5px; color:var(--ink-soft); font-family:&quot;PingFang SC&quot;,sans-serif;"></span>
+  </div>
+
+  <!-- ===== 核查报告 ===== -->
+  <div id="s2-auto-results" style="display:none;"></div>
+
+  <div class="member-bar">
+    <div class="field"><label>会员昵称</label><input type="text" class="nick" id="s2-nick"></div>
+    <div class="field"><label>评估日期</label><input type="date" id="s2-date"></div>
+    <div class="field wide"><label>主张来源（平台 / 博主 / 会员转述）</label><input type="text" id="s2-source" placeholder="如：某短视频平台博主 / 会员朋友圈转述 / 公众号文章"></div>
+    <div class="field wide"><label>链接 / 账号 / 文献线索（DOI、论文标题等）</label><input type="text" id="s2-link"></div>
+    <div class="field wide"><label>待核查主张原文（逐字记录会员转述或帖子原文）</label><textarea id="s2-claim" placeholder="如：「每天每公斤体重吃 4 克蛋白质，普通人也能快速增肌」"></textarea></div>
+  </div>
+
+  <h3 class="sec">一、证据链勾选（该主张目前能找到的最高质量证据，逐类勾选）</h3>
+  <p class="note">判断链顺序（由弱到强）：机制 → 急性代谢 → RCT → 队列 → 系统综述 / Meta → 权威立场声明。立场声明与系统综述 / Meta 权重最高；急性代谢研究不能单独支撑长期结论。</p>
+  <div class="cklist">
+    <label class="ck evi"><input type="checkbox" id="s2e1"><span class="sym">☐</span><span><b>机制研究</b>：体外细胞 / 动物实验 / 酶学通路（只说明「理论上可能」）</span></label>
+    <label class="ck evi"><input type="checkbox" id="s2e2"><span class="sym">☐</span><span><b>急性代谢研究</b>：人体短期代谢反应（如单次训练后急性 mTOR 激活、MPS 肌肉蛋白合成变化）</span></label>
+    <label class="ck evi"><input type="checkbox" id="s2e3"><span class="sym">☐</span><span><b>随机对照试验 RCT</b>：人体随机对照干预研究（证据金字塔 II 级）</span></label>
+    <label class="ck evi"><input type="checkbox" id="s2e4"><span class="sym">☐</span><span><b>队列 / 观察性研究</b>：前瞻或回顾性队列（III 级；HEALM 框架中 n&gt;10000、随访&gt;10 年的大型前瞻队列与中小型 RCT 同级，NOS ≥7 分为高质量）</span></label>
+    <label class="ck evi"><input type="checkbox" id="s2e5"><span class="sym">☐</span><span><b>系统综述 / Meta 分析</b>：对同类原始研究的系统检索与合并（证据金字塔 I 级）</span></label>
+    <label class="ck evi"><input type="checkbox" id="s2e6"><span class="sym">☐</span><span><b>权威立场声明</b>：IOC、ISSN、ACSM 等专业组织立场声明（当前领域共识，注意版本时效，如 IOC RED-S 2014→2018→2023）</span></label>
+  </div>
+
+  <h3 class="sec">二、社交媒体红旗清单（命中即存疑，逐条勾选）</h3>
+  <div class="cklist">
+    <label class="ck"><input type="checkbox" id="s2r1"><span class="sym">☐</span><span>用个案、前后对比照代替系统证据</span></label>
+    <label class="ck"><input type="checkbox" id="s2r2"><span class="sym">☐</span><span>阴谋论口吻：「被隐藏的真相」「官方不让说」「行业不愿让你知道」</span></label>
+    <label class="ck"><input type="checkbox" id="s2r3"><span class="sym">☐</span><span>把体外 / 动物实验结果直接当作人体结论</span></label>
+    <label class="ck"><input type="checkbox" id="s2r4"><span class="sym">☐</span><span>无剂量概念，宣称「多多益善」</span></label>
+    <label class="ck"><input type="checkbox" id="s2r5"><span class="sym">☐</span><span>声称适合所有人、无任何禁忌</span></label>
+    <label class="ck"><input type="checkbox" id="s2r6"><span class="sym">☐</span><span>承诺快速见效（几天 / 一周必瘦、暴涨肌肉）且无需改变其他生活习惯</span></label>
+    <label class="ck"><input type="checkbox" id="s2r7"><span class="sym">☐</span><span>未披露商业利益（带货、分销、自有品牌）</span></label>
+    <label class="ck"><input type="checkbox" id="s2r8"><span class="sym">☐</span><span>绝对化语言：100%、必须、根治、唯一、永远不会</span></label>
+    <label class="ck"><input type="checkbox" id="s2r9"><span class="sym">☐</span><span>引用文献断章取义，给不出论文标题或 DOI</span></label>
+    <label class="ck"><input type="checkbox" id="s2r10"><span class="sym">☐</span><span>对主流专业共识（立场声明）作阴谋论解读</span></label>
+  </div>
+
+  <h3 class="sec">三、认知偏差对照（该主张或论证过程涉嫌的偏差，勾选）</h3>
+  <div class="cklist">
+    <label class="ck"><input type="checkbox" id="s2b1"><span class="sym">☐</span><span><b>选择性引用（Cherry-picking）</b>：仅引用支持预设结论的研究，系统性忽略反驳证据</span></label>
+    <label class="ck"><input type="checkbox" id="s2b2"><span class="sym">☐</span><span><b>相关 ≠ 因果（Correlation vs. Causation）</b>：把观察性研究中的相关关系陈述为因果关系</span></label>
+    <label class="ck"><input type="checkbox" id="s2b3"><span class="sym">☐</span><span><b>自然主义谬误（Appeal to Nature）</b>：把「天然的」等同于「安全的」或「有效的」</span></label>
+    <label class="ck"><input type="checkbox" id="s2b4"><span class="sym">☐</span><span><b>单一研究泛化（Single Study Generalization）</b>：把一项初步研究（或个案）的结论泛化为普遍真理</span></label>
+    <label class="ck"><input type="checkbox" id="s2b5"><span class="sym">☐</span><span><b>基础率忽视（Base Rate Neglect）</b>：不交代基线发生率，用相对风险数字制造恐慌</span></label>
+  </div>
+
+  <h3 class="sec">四、GRADE 简版证据质量评估（教学参考）</h3>
+  <div style="background:#fdf8ee; border:1.5px solid #d4c5a0; border-radius:8px; padding:14px 18px; margin:0 0 10px;">
+    <p class="note" style="margin:0 0 10px; color:#8a7540; font-size:13px;"><b>⚠ 教学参考声明</b>：以下评估流程参照 GRADE（Grading of Recommendations Assessment, Development and Evaluation）框架简化设计，仅用于教学训练，帮助学员建立证据质量分级的思维框架。本工具产出的分级结果<b>不等同于</b>正式 GRADE 证据分级，不可作为科研结论、指南制定或系统综述的证据质量判定依据。正式 GRADE 评估需由经过培训的研究者逐条完成，详见 <a href="https://www.gradepro.org" target="_blank" style="color:var(--brand);">GRADEpro GDT</a>。</p>
+  </div>
+  <p class="note">根据第一节检出的最高证据类型确定起始等级，然后逐项判断是否存在降级或升级因素。每命中一个降级因素降一档，每命中一个升级因素升一档（观察性研究专属）。</p>
+
+  <h4 style="margin:10px 0 6px; font-size:14px; color:var(--brand); font-family:'PingFang SC',sans-serif;">Step 1 · 起始等级（根据第一节的最高证据类型自动填入，可手动修改）</h4>
+  <div class="cklist">
+    <label class="ck evi" style="cursor:pointer;"><input type="radio" name="s2-grade-start" value="high" id="s2-gs-high"><span class="sym">◉</span><span><b>高 High</b> — 系统综述 / Meta 分析，或多个高质量 RCT 一致支持</span></label>
+    <label class="ck evi" style="cursor:pointer;"><input type="radio" name="s2-grade-start" value="moderate" id="s2-gs-mod"><span class="sym">◉</span><span><b>中 Moderate</b> — 单个 RCT，或大型高质量队列研究（HEALM 框架下 NOS ≥7 分）</span></label>
+    <label class="ck evi" style="cursor:pointer;"><input type="radio" name="s2-grade-start" value="low" id="s2-gs-low"><span class="sym">◉</span><span><b>低 Low</b> — 观察性研究（队列、病例对照）、急性代谢研究</span></label>
+    <label class="ck evi" style="cursor:pointer;"><input type="radio" name="s2-grade-start" value="vlow" id="s2-gs-vlow"><span class="sym">◉</span><span><b>极低 Very Low</b> — 机制研究（体外/动物）、个案报告、专家意见</span></label>
+  </div>
+
+  <h4 style="margin:14px 0 6px; font-size:14px; color:var(--brand); font-family:'PingFang SC',sans-serif;">Step 2 · 降级因素（命中勾选，每勾选一项降一档）</h4>
+  <div class="cklist">
+    <label class="ck"><input type="checkbox" id="s2-gd1"><span class="sym">☐</span><span><b>偏倚风险（Risk of Bias）</b>：研究设计或执行存在重大方法学缺陷（如 RCT 未做分配隐藏、未实施盲法、失访率 &gt;20%）</span></label>
+    <label class="ck"><input type="checkbox" id="s2-gd2"><span class="sym">☐</span><span><b>不一致性（Inconsistency）</b>：同类研究结果方向不一致，I² &gt;50%，或不同研究效应量差异大且无法解释</span></label>
+    <label class="ck"><input type="checkbox" id="s2-gd3"><span class="sym">☐</span><span><b>间接性（Indirectness）</b>：研究人群、干预方式或结局指标与目标问题不直接对应（如用久坐人群数据外推到力量训练者）</span></label>
+    <label class="ck"><input type="checkbox" id="s2-gd4"><span class="sym">☐</span><span><b>不精确性（Imprecision）</b>：样本量小、置信区间宽、最优信息量（OIS）未满足，效应估计不稳定</span></label>
+    <label class="ck"><input type="checkbox" id="s2-gd5"><span class="sym">☐</span><span><b>发表偏倚（Publication Bias）</b>：漏斗图不对称、小样本阳性研究过多、灰色文献检索不充分</span></label>
+  </div>
+
+  <h4 style="margin:14px 0 6px; font-size:14px; color:var(--brand); font-family:'PingFang SC',sans-serif;">Step 3 · 升级因素（仅当起始等级为「低」或「中」时可勾选，每勾选一项升一档）</h4>
+  <div class="cklist">
+    <label class="ck"><input type="checkbox" id="s2-gu1"><span class="sym">☐</span><span><b>大效应量（Large Effect）</b>：效应量大且明确（如 RR &lt;0.5 或 RR &gt;2.0），且不太可能被混杂因素解释</span></label>
+    <label class="ck"><input type="checkbox" id="s2-gu2"><span class="sym">☐</span><span><b>剂量-反应关系（Dose-Response）</b>：存在明确的剂量-反应梯度，且方向与预期一致</span></label>
+    <label class="ck"><input type="checkbox" id="s2-gu3"><span class="sym">☐</span><span><b>混杂因素使效应更保守（Plausible Confounding）</b>：所有合理混杂因素的作用方向是减小观察到的效应，即真实效应可能更大</span></label>
+  </div>
+
+  <h4 style="margin:14px 0 6px; font-size:14px; color:var(--brand); font-family:'PingFang SC',sans-serif;">GRADE 评估结果</h4>
+  <div class="verdict" id="s2-grade-verdict" style="margin-bottom:6px;">完成上述勾选后，此处自动计算 GRADE 简版评级。</div>
+
+  <h3 class="sec">五、综合自动判定</h3>
+  <div class="verdict" id="s2-verdict">完成证据链与红旗清单勾选后，此处自动给出证据权重判定。</div>
+
+  <h3 class="sec">六、结论区</h3>
+  <div class="concl-box">
+    <div class="field wide"><label>该主张是否可对会员使用（自动判定，可补充）</label><textarea id="s2-c-use"></textarea></div>
+    <div class="field wide"><label>推荐表述口径（对会员的说法）</label><textarea id="s2-c-script">研究尚不充分时可以如实告知会员「目前证据还不充分」，但不能把初步研究夸大为确定结论。建议口径：「关于这个说法，目前只有机制 / 急性人体研究（或小样本研究），尚不能得出长期有效的结论；权威立场声明的现行建议是……。我们先按证据更充分的做法执行，等有更高质量证据再调整。」</textarea></div>
+    <div class="field wide"><label>咨询师备注</label><textarea id="s2-c-note"></textarea></div>
+  </div>
+
+  <div class="archive">
+    <h3 class="sec">归档 / 复评区</h3>
+    <div class="member-bar" style="background:transparent; border:none; padding:0;">
+      <div class="field"><label>咨询师签名</label><input type="text" id="s2-a-sign"></div>
+      <div class="field"><label>归档日期</label><input type="date" id="s2-a-date"></div>
+      <div class="field"><label>下次跟进日期</label><input type="date" id="s2-a-next"></div>
+      <div class="field wide"><label>备注</label><input type="text" id="s2-a-note"></div>
+    </div>
+  </div>
+
+  <div class="sheet-foot">
+    教材定位：Ch01 §1.5（证据金字塔 I–V 级、HEALM 框架、GRADE 简版评估、NOS 评分、社媒红旗 10 条、五类认知偏差）。
+    <div class="disc">本记录用于营养教育与风险识别，不替代医学评估；命中转介红线须按流程转介（见 SOP-3）。</div>
+  </div>
+</div>
+</section>
+
+<!-- ================= SOP-3 ================= -->
+<section class="sheet" id="sheet-s3">
+<div class="sheet-inner">
+  <div class="sheet-title">
+    <h2>SOP-3 ｜ RED-S 风险评估与转介工作单</h2>
+    <div class="sheet-tag">教材定位：Ch05 能量摄入不足 REDs（EA 阈值、IOC REDs CAT2、LEAF-Q / LEAM-Q、转介流程）；硬红线另见 Ch01 §1.1</div>
+  </div>
+
+  <div class="member-bar">
+    <div class="field"><label>会员昵称</label><input type="text" class="nick" id="s3-nick"></div>
+    <div class="field"><label>性别</label><select id="s3-sex"><option value="女">女</option><option value="男">男</option></select></div>
+    <div class="field"><label>年龄（岁）</label><input type="number" id="s3-age" min="10" max="100"></div>
+    <div class="field"><label>评估日期</label><input type="date" id="s3-date"></div>
+  </div>
+
+  <h3 class="sec">一、硬红线核查（命中任一即转介，不得自行处理）</h3>
+  <div class="cklist">
+    <label class="ck hard"><input type="checkbox" id="s3h1"><span class="sym">☐</span><span><span class="redtxt">【硬红线 1 · 生殖】</span>女性月经紊乱超过 3 个周期（闭经、初潮延迟）；男性性欲 / 晨勃明显下降、疑似低睾酮</span></label>
+    <label class="ck hard"><input type="checkbox" id="s3h2"><span class="sym">☐</span><span><span class="redtxt">【硬红线 2 · 骨骼】</span>骨密度 Z 值异常（Z &lt; −1 启动干预；Z &lt; −2 高风险 MDT），或已发生应力骨折 / 反复骨痛</span></label>
+    <label class="ck hard"><input type="checkbox" id="s3h3"><span class="sym">☐</span><span><span class="redtxt">【硬红线 3 · 进食障碍】</span>疑似或确诊进食障碍（强烈恐胖、催吐 / 滥用泻药、刻意回避进食、EDE-Q 异常）</span></label>
+    <label class="ck hard"><input type="checkbox" id="s3h4"><span class="sym">☐</span><span><span class="redtxt">【硬红线 4 · 代谢】</span>血糖异常，或严重电解质紊乱（医生告知低钾 / 低钠 / 低镁 / 低磷等）</span></label>
+    <label class="ck hard"><input type="checkbox" id="s3h5"><span class="sym">☐</span><span><span class="redtxt">【硬红线 5 · 心脏】</span>静息心率 &lt; 40 次 / 分，或新发心悸、心律失常、晕厥</span></label>
+  </div>
+
+  <h3 class="sec">二、LEA 预警信号核查</h3>
+  <div class="cklist">
+    <label class="ck soft"><input type="checkbox" id="s3l1"><span class="sym">☐</span><span><span class="goldtxt">【预警 1】</span>EA &lt; 30 kcal/kg FFM/d（男性 &lt; 25），或 EI:BMR &lt; 1.35 但体重持续稳定</span></label>
+    <label class="ck soft"><input type="checkbox" id="s3l2"><span class="sym">☐</span><span><span class="goldtxt">【预警 2】</span>近期持续怕冷、体重下降、训练表现下滑、恢复变慢、反复感冒或伤病</span></label>
+    <label class="ck soft"><input type="checkbox" id="s3l3"><span class="sym">☐</span><span><span class="goldtxt">【预警 3】</span>长期胃肠不适、腹胀、食欲差（LEAF-Q 胃肠维度 9 项可能阳性）</span></label>
+    <label class="ck soft"><input type="checkbox" id="s3l4"><span class="sym">☐</span><span><span class="goldtxt">【预警 4】</span>女性 LEAF-Q ≥ 8 分 / 男性 LEAM-Q 筛查阳性</span></label>
+    <label class="ck soft"><input type="checkbox" id="s3l5"><span class="sym">☐</span><span><span class="goldtxt">【预警 5】</span>训练量很大但长期刻意严格控制饮食，对体重 / 食物高度焦虑、害怕休息日、补偿性有氧</span></label>
+  </div>
+
+  <h3 class="sec">三、EA 与 EI:BMR 数据录入（自动计算）</h3>
+  <div class="member-bar">
+    <div class="field"><label>每日能量摄入 EI（kcal/d）</label><input type="number" id="s3-ei" placeholder="如 1600"></div>
+    <div class="field"><label>每日运动消耗 ExEE（kcal/d）</label><input type="number" id="s3-ex" placeholder="如 600"></div>
+    <div class="field"><label>去脂体重 FFM（kg）</label><input type="number" id="s3-ffm" step="0.1" placeholder="如 42"></div>
+    <div class="field"><label>LEAF-Q（女）/ LEAM-Q（男）总分</label><input type="number" id="s3-leaf" placeholder="0–25+"></div>
+  </div>
+  <p class="note">公式：EA =（EI − ExEE）÷ FFM（kcal/kg FFM/d）；阈值：≥45 最优 ｜ 30–45 适应性 LEA（限期 ≤8 周）｜ &lt;30 临床 / 问题性 LEA。男性出现较一致生化异常的阈值为 EA &lt;25，25–30 为待定灰区。BMR 按 Cunningham 1980：500 + 22 × FFM；EI:BMR &lt; 1.35 提示可疑低报（Black 2000，证据等级 B）。LEAF-Q 25 项（胃肠 9 / 损伤 8 / 月经 8），≥8 分阳性（敏感性 78%、特异性 90%）。</p>
+  <div class="verdict" id="s3-verdict">勾选红线 / 预警并录入能量数据后，此处自动给出 EA、EI:BMR 与总结论。</div>
+
+  <h3 class="sec">四、非评判性转介话术（命中硬红线时使用，可直接复制）</h3>
+  <div class="script-box">
+    <button class="copy-btn" id="s3-copy">复制话术</button>
+    <div id="s3-script">「我注意到最近你身上有几项身体信号（比如月经 / 体重 / 疲劳 / 心率方面的变化），这些已经超出了营养咨询能够处理的范围。为了安全起见，我建议先去医院做一次相关评估（妇科 / 内分泌 / 骨科或内科），等有了医学结果，我再配合医生的建议来调整饮食和训练安排。在那之前，我们先把训练量适当降低、把饮食规律起来。」</div>
+  </div>
+
+  <h3 class="sec">五、转介记录区</h3>
+  <div class="concl-box">
+    <div class="member-bar" style="background:transparent; border:none; padding:0;">
+      <div class="field"><label>转介日期</label><input type="date" id="s3-r-date"></div>
+      <div class="field"><label>转介科室 / 机构</label><input type="text" id="s3-r-dept" placeholder="如：运动医学 / 妇科内分泌 / 骨科 / 临床营养 MDT"></div>
+      <div class="field"><label>跟进日期</label><input type="date" id="s3-r-follow"></div>
+      <div class="field wide"><label>医学结果回填（诊断、检验检查、医嘱）</label><textarea id="s3-r-result" placeholder="医学评估结果返回后在此回填，咨询师据此配合调整饮食与训练"></textarea></div>
+    </div>
+  </div>
+
+  <div class="archive">
+    <h3 class="sec">归档 / 复评区</h3>
+    <div class="member-bar" style="background:transparent; border:none; padding:0;">
+      <div class="field"><label>咨询师签名</label><input type="text" id="s3-a-sign"></div>
+      <div class="field"><label>归档日期</label><input type="date" id="s3-a-date"></div>
+      <div class="field"><label>下次复评日期</label><input type="date" id="s3-a-next"></div>
+      <div class="field wide"><label>备注（训练量调整、DXA 复查安排等）</label><input type="text" id="s3-a-note"></div>
+    </div>
+  </div>
+
+  <div class="sheet-foot">
+    教材定位：Ch05（EA 三档阈值 45 / 30 / 男性 25 灰区；IOC REDs CAT2 三步流程；LEAF-Q ≥8；红色评级 48 小时内 MDT；训练量第 1–2 周减至 50% 或休训；Z &lt; −2 者 DXA 6 与 12 个月复查）；硬红线四条见 Ch01 §1.1。
+    <div class="disc">本记录用于营养教育与风险识别，不替代医学评估；命中转介红线须按流程转介。</div>
+  </div>
+</div>
+</section>
+
+<!-- ================= SOP-4 ================= -->
+<section class="sheet" id="sheet-s4">
+<div class="sheet-inner">
+  <div class="sheet-title">
+    <h2>SOP-4 ｜ 膳食评估执行工作单</h2>
+    <div class="sheet-tag">教材定位：Ch02 运动饮食评估（方法分级 A–D、误差数据、EI:BMR 1.35、3 天记录 SOP）</div>
+  </div>
+
+  <div class="member-bar">
+    <div class="field"><label>会员昵称</label><input type="text" class="nick" id="s4-nick"></div>
+    <div class="field"><label>评估日期</label><input type="date" id="s4-date"></div>
+    <div class="field wide"><label>评估目的</label><input type="text" id="s4-purpose" placeholder="如：初筛习惯摄入 / 减脂期能量核查 / RED-S 风险排查"></div>
+  </div>
+
+  <h3 class="sec">一、评估方法选择（按本次评估条件勾选，自动推荐 A–D 分级）</h3>
+  <div class="cklist">
+    <label class="ck"><input type="checkbox" id="s4m-a"><span class="sym">☐</span><span>科研 / 方法学验证，需要金标准参照或校验其他方法</span></label>
+    <label class="ck"><input type="checkbox" id="s4m-b"><span class="sym">☐</span><span>临床或小样本深度评估，可配合生物标志物（尿氮、血液等）</span></label>
+    <label class="ck"><input type="checkbox" id="s4m-c"><span class="sym">☐</span><span>教练日常带教、会员可自行执行（大众健身咨询默认场景）</span></label>
+    <label class="ck"><input type="checkbox" id="s4m-d"><span class="sym">☐</span><span>大样本初筛，或只需了解长期膳食模式</span></label>
+  </div>
+  <table class="grid" id="s4-method-table">
+    <tr><th>级别</th><th>方法</th><th>精度 / 误差</th><th>适用场景</th></tr>
+    <tr id="s4row-a"><td>A（金标准）</td><td>双标水法 DLW</td><td>测 TEE，精度 ±5–7%；无法提供营养素构成；成本极高</td><td>研究参照、校验其他方法；教练层不使用</td></tr>
+    <tr id="s4row-b"><td>B（研究级）</td><td>3–7 天称重记录 WFR；24h 多遍回顾 + 生物标志物</td><td>份量误差最小；称重记录低报仍达 TEE 的 10–45%；负担高、霍桑效应显著</td><td>小样本研究 / 个体深度评估</td></tr>
+    <tr id="s4row-c"><td>C（临床级）</td><td>3–7 天估算食物日记 + 训练日记；图像日记</td><td><b>教练主力方法</b>；份量目测低估 20–50%；自报平均低估约 19%（约 668 kcal/d，区间 10–30%，Capling 2017）；营养素计算总差距 30–70%</td><td>训练者临床评估主流选择，性价比最优</td></tr>
+    <tr id="s4row-d"><td>D（流调级）</td><td>FFQ 食物频率问卷；单次 24h 回顾；单一 App 记录</td><td>仅反映长期模式或调查当天；单次回顾需 3–5 次非连续日；App 不消除自报偏倚（AI 图像理想 ±15–20%，中餐混合菜 30–40%；可穿戴估 ExEE ±10–25%；依从差距 25–30%）</td><td>群体初筛，不做精确能量计算</td></tr>
+  </table>
+  <div class="verdict" id="s4m-verdict">勾选评估条件后，此处自动标注推荐方法级别。</div>
+
+  <h3 class="sec">二、3 天记录安排表（2 个训练日 + 1 个休息日）</h3>
+  <table class="grid">
+    <tr><th style="width:18%">日期</th><th style="width:16%">日类型</th><th style="width:30%">记录方式</th><th style="width:14%">完成情况</th><th>备注</th></tr>
+    <tr><td><input type="date" id="s4d1-date"></td><td><select id="s4d1-type"><option>训练日</option><option>休息日</option></select></td><td><input type="text" id="s4d1-way" placeholder="估算日记 / 拍照 / App"></td><td><select id="s4d1-done"><option>未完成</option><option>已完成</option></select></td><td><input type="text" id="s4d1-note"></td></tr>
+    <tr><td><input type="date" id="s4d2-date"></td><td><select id="s4d2-type"><option>训练日</option><option>休息日</option></select></td><td><input type="text" id="s4d2-way"></td><td><select id="s4d2-done"><option>未完成</option><option>已完成</option></select></td><td><input type="text" id="s4d2-note"></td></tr>
+    <tr><td><input type="date" id="s4d3-date"></td><td><select id="s4d3-type"><option>休息日</option><option>训练日</option></select></td><td><input type="text" id="s4d3-way"></td><td><select id="s4d3-done"><option>未完成</option><option>已完成</option></select></td><td><input type="text" id="s4d3-note"></td></tr>
+  </table>
+  <div class="verdict" id="s4d-verdict">选择三天的日类型后，此处自动核对是否满足「2 训练日 + 1 休息日」。</div>
+  <p class="note">训练者日间摄入变异系数 40–60%，训练日与休息日必须都覆盖；饮食日记须与训练日记同步记录。3 天记录个体变异系数约 ±15–20%；7 天可降至 ±10–15%，但第 4 天起依从性骤降、霍桑效应加剧。</p>
+
+  <h3 class="sec">三、漏记核查清单（回收记录后逐条核对，已核对打勾）</h3>
+  <div class="cklist">
+    <label class="ck"><input type="checkbox" id="s4miss1"><span class="sym">☐</span><span><b>烹调油</b>（最常漏记；经验校正 +20–30%）</span></label>
+    <label class="ck"><input type="checkbox" id="s4miss2"><span class="sym">☐</span><span><b>坚果 / 零食</b>（校正 +25–40%）</span></label>
+    <label class="ck"><input type="checkbox" id="s4miss3"><span class="sym">☐</span><span><b>酱料 / 沙拉酱 / 调味汁</b>（校正 +30–50%）</span></label>
+    <label class="ck"><input type="checkbox" id="s4miss4"><span class="sym">☐</span><span><b>饮料</b>（含糖饮料、奶茶、酒精；校正 +15–25%）</span></label>
+    <label class="ck"><input type="checkbox" id="s4miss5"><span class="sym">☐</span><span><b>加餐 / 零碎进食</b>（训练前后补剂、试吃、别人递的食物）</span></label>
+    <label class="ck"><input type="checkbox" id="s4miss6"><span class="sym">☐</span><span><b>外食 / 聚餐</b>（混合菜用油与份量最难估）</span></label>
+  </div>
+
+  <h3 class="sec">四、数据录入与自动计算（EI:BMR 低报筛查）</h3>
+  <div class="member-bar">
+    <div class="field"><label>3 天平均能量摄入 EI（kcal/d）</label><input type="number" id="s4-ei" placeholder="如 1500"></div>
+    <div class="field"><label>去脂体重 FFM（kg，优先）</label><input type="number" id="s4-ffm" step="0.1" placeholder="如 55"></div>
+    <div class="field"><label>体重（kg，无 FFM 时备用）</label><input type="number" id="s4-w" placeholder="如 65"></div>
+    <div class="field"><label>身高（cm，备用）</label><input type="number" id="s4-h" placeholder="如 170"></div>
+    <div class="field"><label>年龄（岁，备用）</label><input type="number" id="s4-age" placeholder="如 30"></div>
+    <div class="field"><label>性别（备用）</label><select id="s4-sex"><option value="男">男</option><option value="女">女</option></select></div>
+  </div>
+  <p class="note">BMR 优先用 Cunningham 1980：BMR = 500 + 22 × FFM（与 EI:BMR 筛查配套）；无 FFM 时退回 Mifflin-St Jeor 体重公式并标注局限。EI:BMR &lt; 1.35 提示可疑低报（Black 2000，证据等级 B）；对明显低报的记录可按报告值 ÷ 0.80 做保守校准（上调约 25%，为估计值而非精确测量）。</p>
+  <div class="verdict" id="s4c-verdict">录入 3 天平均 EI 与 FFM 后，此处自动计算 BMR、EI:BMR 比值并判定是否低报。</div>
+
+  <h3 class="sec">五、执行提示（霍桑效应与记录负担）</h3>
+  <div class="flow"><span class="st">提示 1</span> 记录行为本身会改变饮食（霍桑效应）：记录期间的摄入可能比平时更「规范」，解读时须说明这一偏差，不把记录期表现等同于长期习惯。</div>
+  <div class="flow"><span class="st">提示 2</span> 控制记录负担：3 天为精度与依从性的平衡点；WFR 需约 1 小时培训、每日约 30 分钟记录；记录负担过重会导致漏记与中途放弃。</div>
+  <div class="flow"><span class="st">提示 3</span> 解读顺序：查完整性 → EI:BMR 初筛 → 类别校正 / ÷0.80 → 看蛋白质 g/kg、碳水与训练匹配、蔬果水分；只反馈模式与习惯，不给精确到个位 kcal 的结论。</div>
+
+  <h3 class="sec">六、结论与建议区</h3>
+  <div class="concl-box">
+    <div class="field wide"><label>记录质量与低报判断</label><textarea id="s4-c-quality"></textarea></div>
+    <div class="field wide"><label>膳食模式反馈与建议（只给模式，不给个位 kcal 结论）</label><textarea id="s4-c-advice"></textarea></div>
+    <div class="field"><label>执行复盘日期（2–4 周）</label><input type="date" id="s4c-review1"></div>
+    <div class="field"><label>正式复评日期（6–8 周，同法）</label><input type="date" id="s4c-review2"></div>
+  </div>
+
+  <div class="archive">
+    <h3 class="sec">归档 / 复评区</h3>
+    <div class="member-bar" style="background:transparent; border:none; padding:0;">
+      <div class="field"><label>咨询师签名</label><input type="text" id="s4-a-sign"></div>
+      <div class="field"><label>归档日期</label><input type="date" id="s4-a-date"></div>
+      <div class="field"><label>下次复评日期</label><input type="date" id="s4-a-next"></div>
+      <div class="field wide"><label>备注</label><input type="text" id="s4-a-note"></div>
+    </div>
+  </div>
+
+  <div class="sheet-foot">
+    教材定位：Ch02（方法分级 A–D；DLW ±5–7%；份量低估 20–50%；总误差 30–70%；自报低估 19% / 约 668 kcal；EI:BMR 1.35；Cunningham 1980；÷0.80 校准；3 天记录 2 训练日 +1 休息日；2–4 周复盘、6–8 周复评）。
+    <div class="disc">本记录用于营养教育与风险识别，不替代医学评估；命中转介红线须按流程转介（见 SOP-3）。</div>
+  </div>
+</div>
+</section>
+
+<!-- ================= SOP-5 ================= -->
+<section class="sheet" id="sheet-s5">
+<div class="sheet-inner">
+  <div class="sheet-title">
+    <h2>SOP-5 ｜ 身体成分评估工作单</h2>
+    <div class="sheet-tag">教材定位：Ch03 身体成分评估（方法阶梯、MDC、标准化测量、评估频率、必需脂肪与 FFMI）</div>
+  </div>
+
+  <div class="member-bar">
+    <div class="field"><label>会员昵称</label><input type="text" class="nick" id="s5-nick"></div>
+    <div class="field"><label>测量日期</label><input type="date" id="s5-date"></div>
+    <div class="field"><label>性别</label><select id="s5-sex"><option value="男">男</option><option value="女">女</option></select></div>
+    <div class="field wide"><label>所用方法</label>
+      <select id="s5-method">
+        <option value="">请选择本次评估方法</option>
+        <option value="4c">四组分模型 4C（科研参考标准）</option>
+        <option value="dxa">DXA 双能 X 线吸收法</option>
+        <option value="bodpod">Bod Pod 空气置换法（ADP）</option>
+        <option value="uww">水下称重法（UWW）</option>
+        <option value="skinfold">皮褶厚度法（Jackson-Pollock / ISAK）</option>
+        <option value="bia">BIA 生物电阻抗法</option>
+        <option value="navy">Navy 围度法</option>
+        <option value="bmi">BMI（仅人群初筛）</option>
+      </select>
+    </div>
+  </div>
+
+  <h3 class="sec">一、方法阶梯（选中方法后自动显示精度、MDC 与建议频率）</h3>
+  <div class="verdict" id="s5m-verdict">请在抬头「所用方法」中选择本次评估方法，此处自动显示该方法的精度、最小检测变化（MDC）与建议测量频率。</div>
+
+  <h4 class="sub">评估频率速查（Ch03 表 3.5）</h4>
+  <table class="grid">
+    <tr><th>人群</th><th>推荐评估频率</th><th>备注</th></tr>
+    <tr><td>竞技运动员（赛季期）</td><td>每 8–12 周</td><td>重大比赛前 4–6 周加测</td></tr>
+    <tr><td>竞技运动员（备赛 / 减脂期）</td><td>每 4–6 周</td><td>DXA 每季度 1 次作为 EA 分母校正</td></tr>
+    <tr><td>大众健身人群</td><td>每 12–16 周</td><td>过于频繁增加心理压力</td></tr>
+    <tr><td>青少年运动员</td><td>每 6 个月（发育期）</td><td>频繁测量可能造成体像焦虑</td></tr>
+    <tr><td>RED-S 高风险训练者</td><td>每 4–6 周（联合 EA 监测）</td><td>DXA 每 6–12 个月</td></tr>
+  </table>
+
+  <h3 class="sec">二、数据录入与自动计算（FFM / FFMI）</h3>
+  <div class="member-bar">
+    <div class="field"><label>身高（cm）</label><input type="number" id="s5-h" placeholder="如 175"></div>
+    <div class="field"><label>体重（kg）</label><input type="number" id="s5-w" step="0.1" placeholder="如 70"></div>
+    <div class="field"><label>体脂率（%）</label><input type="number" id="s5-bf" step="0.1" placeholder="如 18"></div>
+  </div>
+  <p class="note">FFM = 体重 ×（1 − 体脂率）；FFMI = FFM(kg) ÷ 身高(m)²。另附 Kouri 1995 校正值 FFMI + 6.3 ×（1.80 − 身高 m）供参照：自然训练男性约 18–23、自然上限约 25、&gt;27 需谨慎解读（鉴别工具而非诊断依据）。必需脂肪：男性 3–5%、女性 10–13%；低体脂预警区间：男性 ≈5%、女性 ≈12–14%，低于此区间须结合月经 / 骨密度 / 疲劳等综合评估并转 SOP-3。</p>
+  <div class="verdict" id="s5c-verdict">录入身高、体重、体脂率后，此处自动计算 FFM、FFMI 并对照必需脂肪区间。</div>
+
+  <h3 class="sec">三、两次测量对比（变化是否超过 MDC）</h3>
+  <div class="member-bar">
+    <div class="field"><label>上次体脂率（%）</label><input type="number" id="s5-bf-prev" step="0.1"></div>
+    <div class="field"><label>本次体脂率（%，同上）</label><input type="number" id="s5-bf-now" step="0.1"></div>
+    <div class="field"><label>上次体重（kg，选填）</label><input type="number" id="s5-w-prev" step="0.1"></div>
+    <div class="field"><label>本次体重（kg，选填）</label><input type="number" id="s5-w-now" step="0.1"></div>
+  </div>
+  <div class="verdict" id="s5d-verdict">录入两次测量值后，此处自动判读变化是否超过所选方法的 MDC（超过才是真实变化，否则属测量误差）。</div>
+
+  <h3 class="sec">四、趋势记录表（同一方法、同一设备、同一操作者；晨起空腹排尿后、训练后 24–48 小时的休息日）</h3>
+  <table class="grid">
+    <tr><th>日期</th><th>体重（kg）</th><th>体脂率（%）</th><th>FFM（kg）</th><th>备注（月经周期阶段 / 训练状态 / 测量条件）</th></tr>
+    <tr><td><input type="date" id="s5t1-d"></td><td><input type="number" id="s5t1-w" step="0.1"></td><td><input type="number" id="s5t1-bf" step="0.1"></td><td><input type="number" id="s5t1-ffm" step="0.1"></td><td><input type="text" id="s5t1-note"></td></tr>
+    <tr><td><input type="date" id="s5t2-d"></td><td><input type="number" id="s5t2-w" step="0.1"></td><td><input type="number" id="s5t2-bf" step="0.1"></td><td><input type="number" id="s5t2-ffm" step="0.1"></td><td><input type="text" id="s5t2-note"></td></tr>
+    <tr><td><input type="date" id="s5t3-d"></td><td><input type="number" id="s5t3-w" step="0.1"></td><td><input type="number" id="s5t3-bf" step="0.1"></td><td><input type="number" id="s5t3-ffm" step="0.1"></td><td><input type="text" id="s5t3-note"></td></tr>
+    <tr><td><input type="date" id="s5t4-d"></td><td><input type="number" id="s5t4-w" step="0.1"></td><td><input type="number" id="s5t4-bf" step="0.1"></td><td><input type="number" id="s5t4-ffm" step="0.1"></td><td><input type="text" id="s5t4-note"></td></tr>
+    <tr><td><input type="date" id="s5t5-d"></td><td><input type="number" id="s5t5-w" step="0.1"></td><td><input type="number" id="s5t5-bf" step="0.1"></td><td><input type="number" id="s5t5-ffm" step="0.1"></td><td><input type="text" id="s5t5-note"></td></tr>
+    <tr><td><input type="date" id="s5t6-d"></td><td><input type="number" id="s5t6-w" step="0.1"></td><td><input type="number" id="s5t6-bf" step="0.1"></td><td><input type="number" id="s5t6-ffm" step="0.1"></td><td><input type="text" id="s5t6-note"></td></tr>
+  </table>
+  <p class="note">单日体重波动可达 ±3–5 kg（水分、糖原、肠内容物）；脂肪每天净减约 20–30 g（每周 140–210 g），每周下降 &gt;1 kg 且持续 2 周以上才可判为真实脂肪减少趋势；不同方法结果相差 3–7%，方法之间不可互比。</p>
+
+  <h3 class="sec">五、结论区</h3>
+  <div class="concl-box">
+    <div class="field wide"><label>方法局限声明（随所选方法自动生成，可补充）</label><textarea id="s5-c-limit"></textarea></div>
+    <div class="field wide"><label>判读结论（趋势方向 / 是否真实变化 / 体成分目标）</label><textarea id="s5-c-concl"></textarea></div>
+    <div class="field"><label>建议复测日期</label><input type="date" id="s5-c-next"></div>
+  </div>
+
+  <div class="archive">
+    <h3 class="sec">归档 / 复评区</h3>
+    <div class="member-bar" style="background:transparent; border:none; padding:0;">
+      <div class="field"><label>咨询师签名</label><input type="text" id="s5-a-sign"></div>
+      <div class="field"><label>归档日期</label><input type="date" id="s5-a-date"></div>
+      <div class="field"><label>下次测量日期</label><input type="date" id="s5-a-next"></div>
+      <div class="field wide"><label>备注（设备型号 / 操作者 / 标准化条件）</label><input type="text" id="s5-a-note"></div>
+    </div>
+  </div>
+
+  <div class="sheet-foot">
+    教材定位：Ch03（4C SEE ±1.5–2.5%；DXA / Bod Pod CV 1–2%；皮褶 ISAK CV &lt;2%、MDC 3–5%；BIA ±3–5% 水合敏感；Navy SEE 3.5–4.5%；BMI 不用于训练者；MDC：DXA 1–2%；频率 8–12 / 4–6 / 12–16 周、青少年 6 个月、RED-S 高危 4–6 周；必需脂肪男 3–5% 女 10–13%）。
+    <div class="disc">本记录用于营养教育与风险识别，不替代医学评估；命中转介红线须按流程转介（见 SOP-3）。</div>
+  </div>
+</div>
+</section>
+
+</main>
+
+<script>
+'use strict';
+/* ================= 工具函数 ================= */
+const $ = id => document.getElementById(id);
+const num = id => { const v = parseFloat($(id).value); return isNaN(v) ? null : v; };
+const checked = id => $(id).checked;
+function setVerdict(id, cls, html){ const el=$(id); el.className='verdict '+cls; el.innerHTML=html; }
+function radioVal(name){ const el=document.querySelector('input[name="'+name+'"]:checked'); return el ? Number(el.value) : null; }
+
+/* ================= Tab 切换 ================= */
+document.querySelectorAll('.tabbtn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.tabbtn').forEach(b=>b.classList.toggle('active',b===btn));
+    document.querySelectorAll('.sheet').forEach(s=>s.classList.toggle('active', s.id==='sheet-'+btn.dataset.sheet));
+    saveState();
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+});
+
+/* ================= 勾选符号同步（打印安全） ================= */
+function syncSymbols(){
+  document.querySelectorAll('.ck input[type="checkbox"]').forEach(inp=>{
+    const sym=inp.parentElement.querySelector('.sym');
+    if(sym) sym.textContent = inp.checked ? '☑' : '☐';
+  });
+  document.querySelectorAll('.ck input[type="radio"]').forEach(inp=>{
+    const sym=inp.parentElement.querySelector('.sym');
+    if(sym) sym.textContent = inp.checked ? '●' : '○';
+  });
+}
+
+/* ================= SOP-1 会员分层 ================= */
+const S1_STRATEGY = {
+  0:{name:'T0 静坐少动', cls:'yellow',
+    pts:['以<b>公共健康营养原则</b>为主：增加身体活动优先于特异营养干预','重点：规律三餐、足量蛋白质与蔬果、足量饮水、作息规律；先解决「吃得规律、动得起来」，不急于精细计算热量']},
+  1:{name:'T1 休闲活跃', cls:'green',
+    pts:['<b>维持均衡膳食</b>，无需特异营养策略','蛋白质均匀分配到三餐、训练日常规补水、蔬果充足；建立每周称重均值的自我观察习惯']},
+  2:{name:'T2 训练 / 发展级', cls:'green',
+    pts:['<b>食物优先</b>；适当关注<b>蛋白质与碳水化合物时机</b>（训练前后安排碳水 + 蛋白质）','区分训练日 / 休息日能量分配；按体重趋势管理（维持约 ×30–35、减脂 ×25–28、增肌 ×38–42 kcal/kg 起点）；蛋白质 1.6–2.2 g/kg/d','<b>RED-S 与低报筛查开始常规化</b>：EA 计算 + 3 天饮食记录（见 SOP-3 / SOP-4）；6–8 周复评']},
+  3:{name:'T3 高度训练 / 全国级', cls:'yellow',
+    pts:['精细化营养策略、<b>宏量营养素周期化</b>（训练量周期与能量 / 碳水周期匹配）、赛日策略与体成分精细调控','<b>【大众学员了解即可】</b>此类内容属竞技营养范畴，大众健身咨询中不主动展开','定期 CAT2 筛查（LEAF-Q / LEAM-Q），建议与注册营养师 / 医生协作']},
+  4:{name:'T4 精英 / 国际级', cls:'yellow',
+    pts:['<b>全面营养支持、MDT 多学科团队</b>（教练 + 注册营养师 + 医生）、系统性 RED-S 筛查','<b>【大众学员了解即可】</b>全职训练环境下的个体化营养方案，超出大众健身咨询范围']},
+  5:{name:'T5 世界级', cls:'yellow',
+    pts:['<b>全方位个性化方案、专业团队支撑</b>，极限精细化与赛制定制化营养','<b>【大众学员了解即可】</b>完全依托多学科团队']}
+};
+function calcS1(){
+  const a=[];
+  for(let i=0;i<5;i++){ const v=radioVal('s1q'+i); if(v===null){
+    setVerdict('s1-verdict','','完成上方 5 题后，此处自动给出 T0–T5 分层结论与营养策略精细度。'); return; } a.push(v); }
+  let level, path;
+  if(a[0]===0){ level=0; path='第 1 题未达 WHO 活动量 → T0'; }
+  else if(a[1]!==2){ level=1; path='达到 WHO 活动量，但无每周 ≥3 次系统专项训练 → T1'; }
+  else {
+    if(a[2]===0){ level = (a[3]>=1)?2:1; path='每周 ≥3 次专项训练但无赛事承诺：投入程度'+(a[3]>=1?'为「规律训练 / 高负荷」→ 归 T2 发展级':'为「休闲活动」→ T1'); }
+    else { level = Math.min(5, a[2]+1); const names={1:'本地 / 地区级',2:'全国级',3:'国际级',4:'世界级'};
+      path='每周 ≥3 次专项训练，赛事水平为「'+names[a[2]]+'」→ T'+level; }
+  }
+  const s=S1_STRATEGY[level];
+  let reds = level>=2 ? '<div class="flow"><span class="st">RED-S 筛查提示：</span>T2 及以上训练者建议常规使用 SOP-3（EA 计算、LEAF-Q / LEAM-Q）与 SOP-4（3 天饮食记录，2 训练日 + 1 休息日）监测能量可得性；T3 及以上每赛季至少一次正式 RED-S 风险评估。</div>' : '';
+  setVerdict('s1-verdict', s.cls,
+    '<h4>自动判定：'+s.name+'</h4>'+
+    '<p style="margin:4px 0;">判定路径：'+path+'（Ch01 §1.2，McKay et al. 2022，证据等级 B）</p>'+
+    '<p style="margin:6px 0 2px;"><b>该层营养策略精细度：</b></p><ul>'+s.pts.map(p=>'<li>'+p+'</li>').join('')+'</ul>'+reds);
+  if(!$('s1-c-level').value) $('s1-c-level').value = s.name;
+}
+
+/* ================= SOP-2 证据核查 ================= */
+
+/* 研究类型检测 */
+function detectStudyType(text){
+  const t=text.toLowerCase();
+  return {
+    s1:/(体外|in\s*vitro|动物实验|小鼠|mice|大鼠|rat|rats|细胞培养|cell\s*culture|酶学|通路|enzyme\s*pathway|信号通路|signal\s*path|分子机制|敲除|knockout|转基因|transgenic)/i.test(text),
+    s2:/(急性代谢|acute\s*(exercise|bout)|单次训练|single\s*bout|运动后|post[-\s]*exercise|mTOR|MPS|肌肉蛋白合成|muscle\s*protein\s*synthesis|磷酸化|phosphorylation|代谢反应|metabolic\s*response|短期.*干预|short[-\s]*term)/i.test(text),
+    s3:/(随机对照|randomized\s*controlled|RCT|盲法|blinded|double[-\s]*blind|安慰剂|placebo|随机分配|randomly\s*assign|交叉试验|crossover\s*trial|干预研究|intervention\s*study|临床试验.*随机|clinical\s*trial)/i.test(text),
+    s4:/(前瞻|prospective|回顾性|retrospective|队列\s*研究|cohort\s*study|观察性|observational|随访|follow[-\s]*up|流行病学|epidemiol|人群.*追踪|纵向|longitudinal|横断面|cross[-\s]*sectional)/i.test(text),
+    s5:/(系统综述|systematic\s*review|meta[\s-]*分析|meta[\s-]*analysis|荟萃分析|forest\s*plot|漏斗图|funnel\s*plot|异质性|heterogeneity|I\s*[²2]|PRISMA|文献检索|literature\s*search|纳入标准|inclusion\s*criter)/i.test(text),
+    s6:/(立场声明|position\s*stand|指南|guideline|共识声明|consensus\s*statement|IOC|ISSN|ACSM|ESPEN|WHO|AND|ADA|中国营养学会|美国运动医学)/i.test(text)
+  };
+}
+
+/* 社媒红旗检测 */
+function detectRedFlags(text){
+  return {
+    r1:/(个案|case\s*stud|前后对比|before[-\s]*after|成功案例|真实案例|亲身体验|testimonial)/i.test(text),
+    r2:/(隐藏的真相|被隐藏|官方不让说|行业不愿|内幕|阴谋|辟谣|颠覆.*认知|真相|你不知道的|被掩盖)/i.test(text),
+    r3:/(小鼠.*人|体外.*人体|动物.*人体|体外.*人体结论|大鼠.*增肌|小鼠.*减脂)/i.test(text),
+    r4:/(多多益善|越多越好|没有上限|随便吃|无限量|剂量无所谓|多少都没关系)/i.test(text),
+    r5:/(适合所有人|没有禁忌|无任何副作用|人人适用|谁都可以|零风险|完全安全|无毒副作用|绝无不良)/i.test(text),
+    r6:/(快速见效|一周必瘦|7天|30天.*效果|暴涨肌肉|快速增肌|立竿见影|几天.*瘦|一周.*见效|速效)/i.test(text),
+    r7:/(带货|分销|自有品牌|优惠券|折扣码|affiliate|佣金|限时|下单|购买链接|专属折扣|粉丝福利)/i.test(text),
+    r8:/(100%|必须|根治|唯一|永远不会|绝对有效|绝对安全|100%有效|必定|保证.*有效|万能|神药)/i.test(text),
+    r9:/(据说|听说|有人说|朋友说|据说研究表明|网传|有研究|没有DOI|未注明出处)/i.test(text),
+    r10:/(主流.*阴谋|被操纵|利益集团|大药厂.*隐瞒|学界.*造假|揭露.*真相|被掩盖.*真相)/i.test(text)
+  };
+}
+
+/* 认知偏差检测 */
+function detectBiases(title,abstract){
+  const text=(title+' '+abstract).toLowerCase();
+  return {
+    b1:/(一致|符合.*假设|支持.*观点|证实.*假说|证明.*正确|支持.*结论)(?!.*(?:局限|矛盾|相反|不一致))/i.test(text),
+    b2:/(相关.*导致|相关.*因果|与.*有关.*导致|观察到.*引起|关联.*造成|发现.*导致)/i.test(text),
+    b3:/(天然.*有效|天然.*安全|草本|古法|自然.*优于|无添加.*有效|纯天然|无化学)/i.test(text),
+    b4:/(首次|第一.*发现|开创性|首次证明|首次证实|first\s*time|pioneer|初步.*表明.*证明|一项.*研究.*证明|首次揭示)/i.test(text),
+    b5:/风险.*增加.*%(?!.*基线)/.test(text) && !/(绝对风险|基线.*%|发生率.*%| incidence)/i.test(text)
+  };
+}
+
+/* 主分析函数 */
+function analyzeS2(){
+  const title=$('s2-auto-title').value.trim();
+  if(!title){
+    $('s2-auto-hint').innerHTML='<span style="color:var(--bad)">请输入文献标题或主张原文</span>';
+    return;
+  }
+  const abstract=$('s2-auto-abstract').value.trim();
+  const text=title+'\n'+abstract;
+  const st=detectStudyType(text);
+  const rf=detectRedFlags(text);
+  const bi=detectBiases(title,abstract);
+  // 自动勾选
+  [1,2,3,4,5,6].forEach(i=>{
+    const el=$('s2e'+i); if(el) el.checked=!!st['s'+i];
+  });
+  [1,2,3,4,5,6,7,8,9,10].forEach(i=>{
+    const el=$('s2r'+i); if(el) el.checked=!!rf['r'+i];
+  });
+  [1,2,3,4,5].forEach(i=>{
+    const el=$('s2b'+i); if(el) el.checked=!!bi['b'+i];
+  });
+  // 同步符号
+  syncSymbols();
+  // 统计
+  const eviArr=[1,2,3,4,5,6].map(i=>checked('s2e'+i));
+  const rfCount=[1,2,3,4,5,6,7,8,9,10].filter(i=>checked('s2r'+i)).length;
+  const biasCount=[1,2,3,4,5].filter(i=>checked('s2b'+i)).length;
+  // 自动设置 GRADE 起始等级（按最高证据类型）
+  const gradeStartMap=[[0,'vlow'],[1,'vlow'],[3,'low'],[2,'moderate'],[4,'high'],[5,'high']];
+  for(let g=0;g<gradeStartMap.length;g++){
+    if(eviArr[gradeStartMap[g][0]]){
+      const radio=$('s2-gs-'+gradeStartMap[g][1]);
+      if(radio) radio.checked=true;
+      break;
+    }
+  }
+  // 生成报告
+  buildAutoReport(title,abstract,st,rf,bi,eviArr,rfCount,biasCount);
+  // 触发判定
+  calcGRADE();
+  calcS2();
+  // 填结论区
+  fillAutoConclusion(eviArr,rfCount,biasCount);
+  // 滚动到报告
+  $('s2-auto-results').scrollIntoView({behavior:'smooth',block:'start'});
+  $('s2-auto-hint').innerHTML='<span style="color:var(--ok)">分析完成 ✓ — 可手动微调下方勾选项</span>';
+}
+
+/* 构建核查报告 */
+function buildAutoReport(title,abstract,st,rf,bi,eviArr,rfCount,biasCount){
+  const panel=$('s2-auto-results');
+  panel.style.display='block';
+  let html='';
+  // 证据权重总结
+  const eviLabels=['机制研究','急性代谢','RCT','队列研究','系统综述/Meta','权威立场声明'];
+  const eviColors=['','','#e0c0bc','#e0c0bc','#e3d0b2','#c2d4c9','#c2d4c9'];
+  html+='<div style="background:var(--card); border:1.5px solid var(--brand); border-radius:8px; padding:16px 18px; margin:10px 0;">';
+  html+='<h4 style="margin:0 0 10px; color:var(--brand); font-size:15px; font-family:\"PingFang SC\",sans-serif;">文献核查报告</h4>';
+  html+='<p style="margin:0 0 8px; font-size:13px; color:var(--ink-soft);"><b style="color:var(--ink);">'+title+'</b>'+(abstract.length>60?' — '+abstract.substring(0,60).trim()+'…':'')+'</p>';
+  // 证据层级表
+  html+='<table style="width:100%; border-collapse:collapse; font-size:13px; margin:8px 0;">';
+  html+='<tr style="background:#f1ede2;"><th style="border:1px solid var(--line); padding:5px 8px; text-align:left; font-family:\"PingFang SC\",sans-serif;">证据层级</th><th style="border:1px solid var(--line); padding:5px 8px; text-align:center; width:80px; font-family:\"PingFang SC\",sans-serif;">检出</th></tr>';
+  eviArr.forEach((detected,i)=>{
+    const bg=detected?eviColors[i+1]:'#fff';
+    const txt=detected?'<span style="color:var(--ok); font-weight:bold;">✓ 检出</span>':'<span style="color:var(--ink-soft);">—</span>';
+    html+='<tr style="background:'+bg+';"><td style="border:1px solid var(--line); padding:5px 8px;">'+eviLabels[i]+'</td><td style="border:1px solid var(--line); padding:5px 8px; text-align:center;">'+txt+'</td></tr>';
+  });
+  html+='</table>';
+  // 判定
+  const hasTop=eviArr[4]||eviArr[5];
+  const hasMid=eviArr[2]||eviArr[3];
+  const acuteOnly=(eviArr[0]||eviArr[1])&&!hasTop&&!hasMid;
+  const anyEvi=eviArr.some(x=>x);
+  if(rfCount>0){
+    html+='<div class="verdict red"><h4>判定：命中社交媒体红旗 '+rfCount+' 条 —— 主张存疑</h4>';
+    html+='<p>命中红旗即应暂停采纳，追溯同行评审证据。</p></div>';
+  } else if(hasTop){
+    html+='<div class="verdict green"><h4>判定：证据权重高 —— 可按上层证据口径使用</h4>';
+    html+='<p>有'+(eviArr[5]?'权威立场声明':'')+(eviArr[5]&&eviArr[4]?' + ':'')+(eviArr[4]?'系统综述 / Meta':'')+'支持。使用时注明来源与版本时效。</p></div>';
+  } else if(hasMid){
+    html+='<div class="verdict yellow"><h4>判定：证据权重中等 —— 可谨慎引用，须说明局限</h4>';
+    html+='<p>有人体 RCT / 队列支持，尚缺系统综述或立场声明综合定级。不得表述为确定结论。</p></div>';
+  } else if(acuteOnly){
+    html+='<div class="verdict red"><h4>判定：证据权重不足 —— 不可作为长期结论</h4>';
+    html+='<p>仅见'+(eviArr[1]?'急性代谢':'')+(eviArr[0]&&eviArr[1]?' / ':'')+(eviArr[0]?'机制研究':'')+'，不能单独支撑长期结论。</p></div>';
+  } else if(!anyEvi && rfCount===0){
+    html+='<div class="verdict yellow"><h4>判定：未能自动识别证据层级</h4>';
+    html+='<p>输入信息不足以判定研究类型，请补充摘要或 Methods 段落，或在下方手动勾选。</p></div>';
+  }
+  // 红旗详情
+  const rfLabels=['用个案代替系统证据','阴谋论口吻','体外/动物结果当作人体结论','无剂量概念','声称适合所有人','承诺快速见效','未披露商业利益','绝对化语言','引用断章取义','对主流共识阴谋论解读'];
+  const rfHit=[1,2,3,4,5,6,7,8,9,10].filter(i=>rf['r'+i]);
+  if(rfHit.length>0){
+    html+='<div style="margin:10px 0; padding:10px 14px; background:var(--bad-bg); border:1px solid var(--bad-bd); border-radius:6px; font-size:13px;">';
+    html+='<b style="color:var(--bad);">红旗信号检出 '+rfHit.length+' 条：</b><ul style="margin:4px 0 0 16px; padding:0;">';
+    rfHit.forEach(i=>{ html+='<li>红旗 '+i+'：'+rfLabels[i-1]+'</li>'; });
+    html+='</ul></div>';
+  }
+  // 偏差详情
+  const biasLabels=['选择性引用 Cherry-picking','相关≠因果','自然主义谬误','单一研究泛化','基础率忽视'];
+  const biasHit=[1,2,3,4,5].filter(i=>bi['b'+i]);
+  if(biasHit.length>0){
+    html+='<div style="margin:10px 0; padding:10px 14px; background:var(--warn-bg); border:1px solid var(--warn-bd); border-radius:6px; font-size:13px;">';
+    html+='<b style="color:var(--warn);">认知偏差检出 '+biasHit.length+' 类：</b><ul style="margin:4px 0 0 16px; padding:0;">';
+    biasHit.forEach(i=>{ html+='<li>偏差 '+i+'：'+biasLabels[i-1]+'</li>'; });
+    html+='</ul></div>';
+  }
+  html+='</div>';
+  panel.innerHTML=html;
+}
+
+/* 自动填写结论区 */
+function fillAutoConclusion(eviArr,rfCount,biasCount){
+  const hasTop=eviArr[4]||eviArr[5];
+  const hasMid=eviArr[2]||eviArr[3];
+  const acuteOnly=(eviArr[0]||eviArr[1])&&!hasTop&&!hasMid;
+  const anyEvi=eviArr.some(x=>x);
+  // 是否可用
+  if(!$('s2-c-use').value || $('s2-c-use').value.indexOf('系统自动判定')>=0){
+    if(rfCount>0){
+      $('s2-c-use').value='系统自动判定：该主张命中 '+rfCount+' 条社媒红旗，不建议直接对会员使用。须追溯同行评审证据并与权威立场声明比对后再做判断。';
+    } else if(hasTop){
+      $('s2-c-use').value='系统自动判定：有上层证据（系统综述/Meta 或立场声明）支持，可按证据口径对会员使用，注明来源与版本时效。';
+    } else if(hasMid){
+      $('s2-c-use').value='系统自动判定：有 RCT / 队列研究支持但尚缺综合定级，可谨慎引用，须向会员说明证据仍在积累。';
+    } else if(acuteOnly){
+      $('s2-c-use').value='系统自动判定：仅有机制 / 急性代谢研究，不可作为长期结论对会员使用。';
+    } else if(!anyEvi){
+      $('s2-c-use').value='系统自动判定：输入信息不足以判定证据层级，请补充摘要或在下方手动勾选后重新判定。';
+    }
+  }
+  // 推荐话术
+  if(!$('s2-c-script').value || $('s2-c-script').value.indexOf('系统自动生成')>=0 || $('s2-c-script').value.indexOf('研究尚不充分时可以如实告知')>=0){
+    const title=$('s2-auto-title').value.trim();
+    if(rfCount>0){
+      $('s2-c-script').value='系统自动生成：「关于这个说法，我在核查中发现了 '+rfCount+' 项需要存疑的信号（如'+(checked('s2r8')?'绝对化表述':'夸大宣传')+'），目前缺乏充分的同行评审证据支持。建议我们先按主流专业共识的现行建议执行，等有更充分的证据再调整。」';
+    } else if(hasTop){
+      $('s2-c-script').value='系统自动生成：「关于这个说法，目前有系统综述 / Meta 分析（或权威机构立场声明）支持，证据权重较高。不过要注意研究的具体条件和适用范围，我会按目前证据最充分的做法来帮你安排。」';
+    } else if(hasMid){
+      $('s2-c-script').value='系统自动生成：「关于这个说法，目前已有一些人体研究支持，但证据还在积累阶段，还没有到系统综述或立场声明的综合定级。我们先按目前证据更充分的做法执行，后续有新证据再调整。」';
+    } else if(acuteOnly){
+      $('s2-c-script').value='系统自动生成：「关于这个说法，目前只有机制研究或短期人体代谢研究，从细胞实验到人体长期效果之间还需要更高质量的研究验证。权威立场声明的现行建议是……我们先按证据更充分的做法执行，等有更高质量证据再调整。」';
+    }
+  }
+}
+
+/* calcS2：根据勾选手动 / 自动判定 */
+function calcS2(){
+  const evi=[1,2,3,4,5,6].map(i=>checked('s2e'+i));
+  const rf=[1,2,3,4,5,6,7,8,9,10].filter(i=>checked('s2r'+i)).length;
+  const bias=[1,2,3,4,5].filter(i=>checked('s2b'+i)).length;
+  const anyEvi=evi.some(x=>x);
+  const hasTop=evi[4]||evi[5];
+  const hasMid=evi[2]||evi[3];
+  const acuteOnly=(evi[0]||evi[1])&&!hasTop&&!hasMid;
+  /* 获取 GRADE 评级 */
+  const gradeResult=calcGRADE();
+  const gradeMapLabel={high:'高 High',moderate:'中 Moderate',low:'低 Low',vlow:'极低 Very Low'};
+  const gradeBadge=gradeResult?'<p style="margin:4px 0; font-size:13px;">GRADE 简版评级（教学参考）：<b>'+gradeMapLabel[gradeResult]+'</b></p>':'';
+  if(!anyEvi && rf===0){ setVerdict('s2-verdict','','完成证据链与红旗清单勾选后，此处自动给出证据权重判定。'); return; }
+  let html='';
+  if(rf>0){
+    html+='<h4>判定：命中社交媒体红旗 '+rf+' 条 —— 主张存疑，暂停采纳</h4>'+
+      '<p>命中任一红旗信号即应暂停判断，追溯证据来源：核查是否有同行评审研究支持，并比对 IOC / ISSN / ACSM 等立场声明。红旗数量：<b>'+rf+'</b>；涉嫌认知偏差：<b>'+bias+'</b> 类。</p>'+gradeBadge;
+    setVerdict('s2-verdict','red',html);
+  } else if(hasTop){
+    html+='<h4>判定：证据权重高 —— 可按上层证据口径对会员使用</h4>'+
+      '<p>该主张有<b>'+(evi[5]?'权威立场声明':'')+(evi[5]&&evi[4]?' + ':'')+(evi[4]?'系统综述 / Meta 分析':'')+'</b>支持，处于证据链最高权重层。使用时须注明来源与版本时效（立场声明随证据更新，如 IOC RED-S 2014→2018→2023）。</p>'+gradeBadge;
+    if(bias>0) html+='<p>提示：论证过程涉嫌 '+bias+' 类认知偏差，传达时注意避免以偏概全。</p>';
+    setVerdict('s2-verdict','green',html);
+  } else if(hasMid){
+    html+='<h4>判定：证据权重中等 —— 可谨慎引用，须说明局限</h4>'+
+      '<p>目前有人体 RCT / 队列研究支持，但尚缺系统综述 / Meta 或立场声明的综合定级。可向会员说明「已有一些人体研究支持，但证据还在积累」，不得表述为确定结论；大型前瞻队列（n&gt;10000、随访&gt;10 年，NOS ≥7 分）在 HEALM 框架中与中小型 RCT 同级。</p>'+gradeBadge;
+    if(evi[1]) html+='<p>注意：其中急性代谢研究（如单次 mTOR / MPS 反应）只反映短期代谢，<b>不能单独支撑长期效果结论</b>。</p>';
+    if(bias>0) html+='<p>提示：涉嫌 '+bias+' 类认知偏差。</p>';
+    setVerdict('s2-verdict','yellow',html);
+  } else if(acuteOnly){
+    html+='<h4>判定：证据权重不足 —— 不可作为长期结论对会员使用</h4>'+
+      '<p>目前仅见<b>'+(evi[1]?'急性代谢研究（人体短期反应，如急性 mTOR 激活 / 单次 MPS 变化）':'')+(evi[0]&&evi[1]?' / ':'')+(evi[0]?'机制研究（体外 / 动物）':'')+'</b>。机制只说明「理论上可能」；急性代谢研究不能单独支撑长期结论，从细胞实验到人体长期效果之间尚需 RCT 与长期队列验证。</p>'+
+      '<p>教材口径：研究尚不充分可以如实告知会员，但不能把初步研究夸大为结论。</p>'+gradeBadge;
+    if(bias>0) html+='<p>提示：涉嫌 '+bias+' 类认知偏差。</p>';
+    setVerdict('s2-verdict','red',html);
+  } else {
+    setVerdict('s2-verdict','yellow','<h4>判定：证据信息不足</h4><p>未勾选任何证据层级，也未命中红旗。请先追溯该主张的原始文献，确认其证据链位置后再判定。</p>'+gradeBadge);
+  }
+}
+
+/* ===== GRADE 简版评估 ===== */
+function calcGRADE(){
+  const radios=document.getElementsByName('s2-grade-start');
+  let startVal='';
+  for(let i=0;i<radios.length;i++){if(radios[i].checked){startVal=radios[i].value;break;}}
+  const gradeMap={high:2,moderate:1,low:-1,vlow:-2};
+  const gradeLabel={high:'高 High',moderate:'中 Moderate',low:'低 Low',vlow:'极低 Very Low'};
+  const gradeIdx=['vlow','low','moderate','high'];
+  if(!startVal){
+    setVerdict('s2-grade-verdict','','请选择起始等级后，此处自动计算 GRADE 简版评级。');
+    return '';
+  }
+  const down=[1,2,3,4,5].filter(i=>checked('s2-gd'+i)).length;
+  const up=[1,2,3].filter(i=>checked('s2-gu'+i)).length;
+  let score=gradeMap[startVal]-down+up;
+  if(score>2) score=2; if(score<-2) score=-2;
+  const finalIdx=score+2;
+  const finalGrade=gradeIdx[finalIdx];
+  const finalLabel=gradeLabel[finalGrade];
+  // 升级因素合法性检查
+  let warn='';
+  if(up>0 && startVal==='high'){
+    warn='<p style="color:var(--warn); font-size:12.5px; margin:6px 0 0;">⚠ 升级因素仅适用于起始等级为「低」或「中」的观察性研究。起始等级为「高」时不应勾选升级因素，已忽略。</p>';
+    score=gradeMap[startVal]-down;
+    if(score<-2) score=-2;
+    const adjIdx=score+2;
+    const adjGrade=gradeIdx[adjIdx];
+    const adjLabel=gradeLabel[adjGrade];
+    const downLabels=['偏倚风险','不一致性','间接性','不精确性','发表偏倚'];
+    const downHit=[1,2,3,4,5].filter(i=>checked('s2-gd'+i));
+    let downStr=downHit.length>0?downHit.map(i=>downLabels[i-1]).join('、'):'无';
+    setVerdict('s2-grade-verdict','yellow',
+      '<h4>GRADE 简版评级：'+adjLabel+'</h4>'+
+      '<p>起始等级：<b>'+gradeLabel[startVal]+'</b> → 降级因素（'+down+'项）：'+downStr+' → 最终等级：<b>'+adjLabel+'</b></p>'+warn
+    );
+    return adjGrade;
+  }
+  if(up>0 && startVal==='vlow'){
+    warn='<p style="color:var(--warn); font-size:12.5px; margin:6px 0 0;">⚠ 升级因素仅适用于起始等级为「低」或「中」的观察性研究。起始等级为「极低」时不应勾选升级因素，已忽略。</p>';
+    score=gradeMap[startVal]-down;
+    if(score<-2) score=-2;
+    const adjIdx=score+2;
+    const adjGrade=gradeIdx[adjIdx];
+    const adjLabel=gradeLabel[adjGrade];
+    const downLabels=['偏倚风险','不一致性','间接性','不精确性','发表偏倚'];
+    const downHit=[1,2,3,4,5].filter(i=>checked('s2-gd'+i));
+    let downStr=downHit.length>0?downHit.map(i=>downLabels[i-1]).join('、'):'无';
+    setVerdict('s2-grade-verdict','yellow',
+      '<h4>GRADE 简版评级：'+adjLabel+'</h4>'+
+      '<p>起始等级：<b>'+gradeLabel[startVal]+'</b> → 降级因素（'+down+'项）：'+downStr+' → 最终等级：<b>'+adjLabel+'</b></p>'+warn
+    );
+    return adjGrade;
+  }
+  const downLabels=['偏倚风险','不一致性','间接性','不精确性','发表偏倚'];
+  const upLabels=['大效应量','剂量-反应关系','混杂因素使效应更保守'];
+  const downHit=[1,2,3,4,5].filter(i=>checked('s2-gd'+i));
+  const upHit=[1,2,3].filter(i=>checked('s2-gu'+i));
+  let downStr=downHit.length>0?downHit.map(i=>downLabels[i-1]).join('、'):'无';
+  let upStr=upHit.length>0?upHit.map(i=>upLabels[i-1]).join('、'):'无';
+  const colorMap={high:'green',moderate:'green',low:'yellow',vlow:'red'};
+  setVerdict('s2-grade-verdict',colorMap[finalGrade],
+    '<h4>GRADE 简版评级：'+finalLabel+'</h4>'+
+    '<p>起始等级：<b>'+gradeLabel[startVal]+'</b></p>'+
+    '<p>降级因素（'+down+'项）：'+downStr+'</p>'+
+    '<p>升级因素（'+up+'项）：'+upStr+'</p>'+
+    '<p>最终等级：<b>'+finalLabel+'</b></p>'+
+    '<p style="font-size:12px; color:var(--ink-soft); margin:6px 0 0;">⚠ 教学参考，不等同于正式 GRADE 证据分级，不可作为科研结论依据。</p>'
+  );
+  return finalGrade;
+}
+
+/* 自动核查按钮绑定 */
+(function(){
+  var btn=document.getElementById('s2-auto-btn');
+  if(btn) btn.addEventListener('click',analyzeS2);
+  /* GRADE 事件监听 */
+  var gradeRadios=document.getElementsByName('s2-grade-start');
+  for(var i=0;i<gradeRadios.length;i++){gradeRadios[i].addEventListener('change',function(){calcGRADE();calcS2();});}
+  [1,2,3,4,5].forEach(function(i){var el=document.getElementById('s2-gd'+i); if(el) el.addEventListener('change',function(){calcGRADE();calcS2();});});
+  [1,2,3].forEach(function(i){var el=document.getElementById('s2-gu'+i); if(el) el.addEventListener('change',function(){calcGRADE();calcS2();});});
+})();
+
+/* ================= SOP-3 RED-S ================= */
+function calcS3(){
+  const sex=$('s3-sex').value;
+  const hard=[1,2,3,4,5].filter(i=>checked('s3h'+i));
+  const soft=[1,2,3,4,5].filter(i=>checked('s3l'+i));
+  const ei=num('s3-ei'), ex=num('s3-ex'), ffm=num('s3-ffm'), leaf=num('s3-leaf');
+  let html='';
+  // EA 计算
+  let ea=null, eaBand=null;
+  if(ei!==null && ex!==null && ffm!==null && ffm>0){
+    ea=(ei-ex)/ffm;
+    if(ea>=45) eaBand='ok'; else if(ea>=30) eaBand='adapt'; else eaBand='low';
+  }
+  // EI:BMR
+  let bmr=null, ratio=null;
+  if(ei!==null && ffm!==null && ffm>0){ bmr=500+22*ffm; ratio=ei/bmr; }
+  const leafPos = leaf!==null && leaf>=8;
+  // 数值表
+  if(ea!==null || bmr!==null || leaf!==null){
+    html+='<table>';
+    if(ea!==null){
+      const bandTxt = eaBand==='ok'?'≥45 最优区间':(eaBand==='adapt'?'30–45 适应性 LEA（限期 ≤8 周）':'<30 临床 / 问题性 LEA');
+      html+='<tr><td>EA =（'+Math.round(ei)+'−'+Math.round(ex)+'）÷ '+ffm+'</td><td><b>'+ea.toFixed(1)+' kcal/kg FFM/d</b>（'+bandTxt+'）</td></tr>';
+      if(sex==='男'){
+        if(ea<25) html+='<tr><td>男性阈值口径</td><td><b style="color:#7c2f29;">EA &lt; 25：男性出现较一致生化异常的阈值，按高风险处理</b></td></tr>';
+        else if(ea<30) html+='<tr><td>男性阈值口径</td><td>EA 25–30：男性待定灰区（IOC 2023 仍沿用 &lt;30 统一临床切点），管理流程相同</td></tr>';
+      }
+    }
+    if(bmr!==null){
+      html+='<tr><td>BMR（Cunningham 1980：500+22×'+ffm+'）</td><td>'+Math.round(bmr)+' kcal/d</td></tr>';
+      html+='<tr><td>EI:BMR = '+Math.round(ei)+' ÷ '+Math.round(bmr)+'</td><td><b>'+ratio.toFixed(2)+'</b>'+(ratio<1.35?'（<b style="color:#7c2f29;">&lt; 1.35，提示可疑低报或真实 LEA</b>）':'（≥1.35，未触发低报界值）')+'</td></tr>';
+    }
+    if(leaf!==null){
+      html+='<tr><td>'+(sex==='男'?'LEAM-Q':'LEAF-Q')+' 总分</td><td>'+leaf+' 分'+(leafPos?'（<b style="color:#7c2f29;">≥8 分，筛查阳性</b>，敏感性 78%、特异性 90%）':'（&lt; 8 分，阴性）')+'</td></tr>';
+    }
+    html+='</table>';
+  }
+  // 总结论
+  if(hard.length>0){
+    let act='<ul>'+
+      '<li><b>48 小时内</b>启动多学科团队（MDT：医生 + 注册营养师 + 心理）介入，停止自行调整方案</li>'+
+      '<li>训练量第 <b>1–2 周减至既往 50% 或完全休训</b>（视医学严重度）；第 3–6 周以体征与生化回升为依据每 2 周递增 10–15%</li>';
+    if(hard.indexOf(2)>=0) act+='<li>骨密度红线：Z &lt; −1 启动干预；<b>Z &lt; −2 为高风险 MDT，DXA 于干预后 6 与 12 个月复查</b>；应力骨折侧免负重至临床愈合</li>';
+    act+='<li>使用下方非评判性话术告知会员，并在转介记录区登记</li></ul>';
+    setVerdict('s3-verdict','red',
+      '<h4>总结论：命中硬红线 '+hard.length+' 条 —— 立即启动医学转介</h4>'+
+      '<p>命中项目：'+hard.map(i=>'硬红线 '+i).join('、')+'。按 IOC REDs CAT2 红色评级处理。</p>'+html+act);
+  } else if(eaBand==='low' || (sex==='男'&&ea!==null&&ea<25) || leafPos || (ratio!==null&&ratio<1.35) || soft.length>0 || eaBand==='adapt'){
+    let reasons=[];
+    if(eaBand==='low') reasons.push('EA '+ea.toFixed(1)+' &lt; 30（临床 / 问题性 LEA）');
+    else if(eaBand==='adapt') reasons.push('EA '+ea.toFixed(1)+' 处于 30–45 适应性 LEA（限期 ≤8 周并监测）');
+    if(sex==='男'&&ea!==null&&ea<25) reasons.push('男性 EA &lt; 25 生化异常较一致阈值');
+    if(leafPos) reasons.push((sex==='男'?'LEAM-Q':'LEAF-Q')+' ≥8 分阳性');
+    if(ratio!==null&&ratio<1.35) reasons.push('EI:BMR '+ratio.toFixed(2)+' &lt; 1.35');
+    if(soft.length>0) reasons.push('LEA 预警信号 '+soft.length+' 条');
+    setVerdict('s3-verdict','yellow',
+      '<h4>总结论：LEA 预警 —— 启动 LEA 评估与监测流程</h4>'+
+      '<p>触发依据：'+reasons.join('；')+'。</p>'+html+
+      '<ul>'+
+      '<li><b>EA 量化：</b>完成 3 天饮食记录（2 训练日 + 1 休息日）+ 训练日记，计算 EA（见 SOP-4）</li>'+
+      '<li><b>问卷筛查：</b>女性 LEAF-Q、男性 LEAM-Q；阳性或临床怀疑时加用 EDE-Q</li>'+
+      '<li><b>能量恢复：</b>目标 EA ≥ 45；每 1–2 周增加 100–200 kcal/d；碳水 50–60%、蛋白质 1.6–2.0 g/kg、脂肪 20–30%</li>'+
+      '<li><b>2–4 周执行复盘</b>；若 EA &lt; 30、信号加重或出现硬红线，立即按转介流程处理</li>'+
+      '</ul>');
+  } else if(ea!==null||bmr!==null||leaf!==null||soft.length===0 && (ei!==null||leaf!==null)){
+    setVerdict('s3-verdict','green',
+      '<h4>总结论：未命中红线与预警信号</h4>'+html+
+      '<p>保持规律饮食与训练；建议每 6–8 周常规复评 EA 与饮食记录；高训练量赛季每赛季至少一次 LEAF-Q / LEAM-Q 筛查。</p>');
+  } else {
+    setVerdict('s3-verdict','','勾选红线 / 预警并录入能量数据后，此处自动给出 EA、EI:BMR 与总结论。');
+  }
+}
+/* 复制话术 */
+$('s3-copy').addEventListener('click',()=>{
+  const txt=$('s3-script').textContent.trim();
+  const done=()=>{ $('s3-copy').textContent='已复制'; setTimeout(()=>$('s3-copy').textContent='复制话术',1500); };
+  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(done).catch(()=>fallbackCopy(txt,done)); }
+  else fallbackCopy(txt,done);
+});
+function fallbackCopy(txt,done){
+  const ta=document.createElement('textarea'); ta.value=txt; document.body.appendChild(ta);
+  ta.select(); try{ document.execCommand('copy'); done(); }catch(e){} document.body.removeChild(ta);
+}
+
+/* ================= SOP-4 膳食评估 ================= */
+function calcS4(){
+  // 方法推荐
+  const conds={a:checked('s4m-a'), b:checked('s4m-b'), c:checked('s4m-c'), d:checked('s4m-d')};
+  ['a','b','c','d'].forEach(k=>{ const row=$('s4row-'+k); if(row) row.className=''; });
+  let mhtml='';
+  if(conds.a){ $('s4row-a').className='hl-bad'; mhtml+='<p><b>A 级 · DLW：</b>对应科研 / 校验需求。精度 ±5–7%，成本高、需同位素分析，教练层不使用，仅作研究参照。</p>'; }
+  if(conds.b){ $('s4row-b').className='hl-warn'; mhtml+='<p><b>B 级 · 称重记录 / 24h 多遍回顾 + 生物标志物：</b>对应临床深度评估。称重记录低报仍达 TEE 的 10–45%，负担高。</p>'; }
+  if(conds.c){ $('s4row-c').className='hl-ok'; mhtml+='<p><b>C 级 · 3–7 天估算食物日记 + 训练日记：</b>教练主力方法。须知晓份量低估 20–50%、自报平均低估约 19%（约 668 kcal/d）、营养素计算总差距 30–70%，结论只给模式不给个位 kcal。</p>'; }
+  if(conds.d){ $('s4row-d').className='hl-warn'; mhtml+='<p><b>D 级 · FFQ / 单次 24h 回顾 / 单一 App：</b>对应大样本初筛。单次回顾需 3–5 次非连续日；App 与 AI 图像不消除自报偏倚（中餐混合菜误差 30–40%）。</p>'; }
+  if(!mhtml){ $('s4row-c').className='hl-ok'; mhtml='<p>未勾选条件时默认：大众健身咨询场景推荐 <b>C 级（3 天估算食物日记 + 训练日记）</b>，为教练日常主力方法。</p>'; }
+  setVerdict('s4m-verdict','green',mhtml);
+  // 3 天构成
+  const types=[1,2,3].map(i=>$('s4d'+i+'-type').value);
+  const train=types.filter(t=>t==='训练日').length, rest=types.filter(t=>t==='休息日').length;
+  if(train===2 && rest===1){
+    setVerdict('s4d-verdict','green','<h4>记录构成符合要求</h4><p>3 天记录包含 <b>2 个训练日 + 1 个休息日</b>，可覆盖训练者日间摄入波动（CV 40–60%）。');
+  } else {
+    setVerdict('s4d-verdict','yellow','<h4>记录构成待调整</h4><p>当前为训练日 '+train+' 天、休息日 '+rest+' 天。标准安排为 <b>2 个训练日 + 1 个休息日</b>，请调整日类型。</p>');
+  }
+  // EI:BMR
+  const ei=num('s4-ei'), ffm=num('s4-ffm'), w=num('s4-w'), h=num('s4-h'), age=num('s4-age');
+  if(ei!==null && (ffm!==null || (w!==null&&h!==null&&age!==null))){
+    let bmr, src;
+    if(ffm!==null && ffm>0){ bmr=500+22*ffm; src='Cunningham 1980：500 + 22 × '+ffm; }
+    else { const male=$('s4-sex').value==='男'; bmr=male? 9.99*w+6.25*h-4.92*age+5 : 9.99*w+6.25*h-4.92*age-161; src='Mifflin-St Jeor 体重公式（无 FFM 退回，存在低估训练者 RMR 5–15% 的系统偏差）'; }
+    const ratio=ei/bmr, cal=ei/0.80;
+    if(ratio<1.35){
+      setVerdict('s4c-verdict','red',
+        '<h4>EI:BMR = '+ei+' ÷ '+Math.round(bmr)+' = '+ratio.toFixed(2)+' —— 提示可疑低报</h4>'+
+        '<p>BMR 按'+src+' ≈ <b>'+Math.round(bmr)+' kcal/d</b>；比值 &lt; 1.35（Black 2000，证据等级 B）。</p>'+
+        '<p>该份记录可能存在漏记 / 低报（训练者自报平均低估约 19%），或为真实 LEA（须结合体重趋势与 EA 判断）。</p>'+
+        '<ul><li>先核对漏记清单（油、坚果、酱料、饮料、零食、外食）及类别校正系数</li>'+
+        '<li>保守校准值：报告值 ÷ 0.80 = <b>'+Math.round(cal)+' kcal/d</b>（上调约 25%，为估计值而非精确测量）</li>'+
+        '<li>若体重稳定且训练量大，建议安排间接测热 RMR 实测或转 SOP-3 评估 LEA</li></ul>');
+    } else {
+      setVerdict('s4c-verdict','green',
+        '<h4>EI:BMR = '+ei+' ÷ '+Math.round(bmr)+' = '+ratio.toFixed(2)+' —— 未触发低报界值</h4>'+
+        '<p>BMR 按'+src+' ≈ <b>'+Math.round(bmr)+' kcal/d</b>；比值 ≥ 1.35。仍需结合记录完整性、体重趋势与训练日记综合判断。</p>');
+    }
+  } else {
+    setVerdict('s4c-verdict','','录入 3 天平均 EI 与 FFM 后，此处自动计算 BMR、EI:BMR 比值并判定是否低报。');
+  }
+}
+
+/* ================= SOP-5 体成分 ================= */
+const S5_METHODS={
+  '4c':{name:'四组分模型 4C', mdc:1.5, mdcTxt:'教材未单列 MDC；以 SEE ±1.5–2.5% 体脂为噪声参照',
+    info:'<b>精度：</b>SEE ±1.5–2.5% 体脂，CV &lt; 1%，活体测量最高精度标准；需 DXA + 气体置换 / 水下称重 + 同位素稀释联合测量。<br><b>MDC：</b>'+/* */'教材未单列 MDC，差值小于约 1.5% 体脂应视为噪声。<br><b>频率：</b>仅用于方法学验证与精英基线测量，不用于常规监测。<br><b>局限：</b>需至少三种独立测量手段，普通临床与运动实践几乎不可行。',
+    limit:'4C 为科研参考标准，本次结果若来自 4C 或经 4C 校准，精度最高；普通咨询场景极少获得。'},
+  'dxa':{name:'DXA 双能 X 线吸收法', mdc:1, mdcTxt:'MDC 约 1–2% 体脂',
+    info:'<b>精度：</b>重复测量 CV 1–2%，SEE ±2–3% 体脂；一次扫描同时获得体成分与骨密度；存在约 5% 系统偏差（高估 FFM、低估 FM）；品牌间相差 3–5% 不可互比；辐射 0.001–0.01 mSv；限高约 200 cm、限重约 120 kg。<br><b>MDC：</b>约 1–2% 体脂，两次差值小于此范围属测量噪声。<br><b>频率：</b>赛季 8–12 周、备赛 4–6 周；RED-S 高危者骨密度 DXA 每 6–12 个月。<br><b>局限：</b>纵向追踪须同一台机器、同品牌；育龄女性排除妊娠后使用。',
+    limit:'DXA 存在约 5% 系统偏差且品牌间差 3–5%，纵向比较必须使用同一台设备；本结果不构成诊断，骨密度异常须转医学评估。'},
+  'bodpod':{name:'Bod Pod 空气置换法（ADP）', mdc:2, mdcTxt:'教材未单列 MDC；以 CV 1–2% / SEE ±2–3% 为噪声参照',
+    info:'<b>精度：</b>CV 约 1–2%，SEE ±2–3% 体脂，与水下称重相当；测试约 5–10 分钟，对受试者配合要求低。<br><b>MDC：</b>教材未单列，差值小于约 2% 体脂应视为噪声。<br><b>频率：</b>赛季 8–12 周、备赛 4–6 周、大众 12–16 周。<br><b>局限：</b>肺内气体为公式估计而非实测；需穿紧身衣、排空膀胱，毛发与湿度、服装影响结果。',
+    limit:'Bod Pod 推算体脂使用 Siri 方程固定密度假设，与水下称重共享系统偏差来源；测试服规格与毛发状态须标准化。'},
+  'uww':{name:'水下称重法（UWW）', mdc:2, mdcTxt:'教材未单列 MDC；残余气估计对体脂影响约 ±1.5%',
+    info:'<b>精度：</b>CV 1–2%，SEE ±2–3% 体脂；阿基米德原理测体密度，Siri 方程 %BF = 495/Bd − 450。<br><b>MDC：</b>残余气量个体差异 ±500 mL，对体脂影响约 ±1.5%；差值小于约 2% 体脂应视为噪声。<br><b>频率：</b>同 DXA / ADP 档次；现代实践已基本被 ADP 取代。<br><b>局限：</b>需多次水下呼气称量，流程繁琐、依从性差。',
+    limit:'水下称重精度取决于残余气量估计；实际操作中建议优先以 Bod Pod 替代。'},
+  'skinfold':{name:'皮褶厚度法', mdc:3, mdcTxt:'MDC 约 3–5% 体脂（取决于操作者技能）',
+    info:'<b>精度：</b>经 ISAK 标准化培训操作者 CV &lt; 2%；未训练操作者误差 &gt; 5%；Jackson-Pollock 方程基于欧美人群，对亚裔外推偏差可 &gt; 5%；体脂 &lt; 8% 或 &gt; 30% 时方程失准。<br><b>MDC：</b>约 3–5% 体脂，两次差值小于此范围不能视为真实改变。<br><b>频率：</b>大众 12–16 周；须同一操作者、同一位点。<br><b>局限：</b>准确度依赖方程人群适用性与操作者技能。',
+    limit:'皮褶结果高度依赖操作者技能与方程适用性（亚裔外推偏差可 >5%）；极端体脂区间失准；纵向追踪必须固定同一操作者与测量位点。'},
+  'bia':{name:'BIA 生物电阻抗法', mdc:3, mdcTxt:'教材未单列 MDC；体脂波动 ±3–5%，差值小于 3% 不判读',
+    info:'<b>精度：</b>对水合状态极度敏感，体脂百分比估算波动 ±3–5%；多频 BIA 可估 TBW / ECW，CV 2–5%。<br><b>MDC：</b>教材未单列；脱水 / 水肿、餐后、饮酒、经期、训练后均显著改变读数，差值小于约 3–5% 体脂不判读为真实变化。<br><b>频率：</b>大众 12–16 周；标准化为晨起空腹排尿后、训练后 24–48 小时的休息日。<br><b>局限：</b>更适合群体趋势监测而非个体单次精确测量；品牌间不可互比。',
+    limit:'BIA 读数受水合状态影响极大（±3–5% 体脂波动）：脱水、餐后、经期、训练后、饮酒均会改变结果；本次测量须在晨起空腹排尿后、训练后 24–48 小时的休息日进行，否则仅供参考。'},
+  'navy':{name:'Navy 围度法', mdc:3.5, mdcTxt:'教材未单列 MDC；SEE 3.5–4.5% 体脂',
+    info:'<b>精度：</b>SEE 约 3.5–4.5%（验证样本 3.5–4.0%）；仅需卷尺，无创、配合度高。<br><b>MDC：</b>教材未单列，差值小于约 3.5% 体脂应视为噪声。<br><b>频率：</b>同一方法纵向追踪每 8–12 周最可靠。<br><b>局限：</b>公式基于美军男性（Hodgdon &amp; Beckett 1984），女性、非白人、青少年、体脂 &lt; 8% 或 &gt; 30% 偏差增大。',
+    limit:'Navy 公式开发人群为美军年轻男性，外推至女性 / 亚裔 / 青少年时偏差增大；仅适合无设备条件下的粗略筛查与纵向趋势参考。'},
+  'bmi':{name:'BMI', mdc:null, mdcTxt:'不适用',
+    info:'<b>精度：</b>BMI = 体重 kg ÷ 身高 m²，只反映身高体重关系，无法区分肌肉、脂肪与骨骼。<br><b>MDC：</b>不适用。<br><b>频率：</b>仅人群层面初筛。<br><b>局限：</b>IOC 共识明确：BMI 在训练者体脂和肌肉量评估中既不敏感也不特异，抗阻训练者常被误判为「超重 / 肥胖」，<b>不应用作训练者身体成分评估工具</b>。',
+    limit:'BMI 不用于训练者体成分评估，仅作一般医学筛查背景信息；肌肉发达人群的「超重」读数不能解释为体脂过高。'}
+};
+function calcS5(){
+  const m=$('s5-method').value;
+  // 方法信息
+  if(m && S5_METHODS[m]){
+    const d=S5_METHODS[m];
+    setVerdict('s5m-verdict','green','<h4>'+d.name+'</h4><p>'+d.info+'</p>');
+    if(!$('s5-c-limit').value) $('s5-c-limit').value = d.limit;
+  } else {
+    setVerdict('s5m-verdict','','请在抬头「所用方法」中选择本次评估方法，此处自动显示该方法的精度、最小检测变化（MDC）与建议测量频率。');
+  }
+  // FFM / FFMI
+  const sex=$('s5-sex').value;
+  const h=num('s5-h'), w=num('s5-w'), bf=num('s5-bf');
+  if(h!==null && w!==null && bf!==null && h>0){
+    const hm=h/100;
+    const ffm=w*(1-bf/100);
+    const ffmi=ffm/(hm*hm);
+    const kouri=ffmi+6.3*(1.80-hm);
+    const essLow=sex==='男'?3:10, essHigh=sex==='男'?5:13;
+    const warnLine=sex==='男'?5:12, warnHi=sex==='男'?5:14;
+    let cls='green', body='';
+    body+='<table>'+
+      '<tr><td>FFM = '+w+' ×（1 − '+bf+'%）</td><td><b>'+ffm.toFixed(1)+' kg</b></td></tr>'+
+      '<tr><td>FFMI = '+ffm.toFixed(1)+' ÷ '+hm.toFixed(2)+'²</td><td><b>'+ffmi.toFixed(1)+' kg/m²</b>（Kouri 身高校正值 '+kouri.toFixed(1)+'）</td></tr>'+
+      '<tr><td>必需脂肪区间（'+sex+'）</td><td>'+essLow+'–'+essHigh+'%；低体脂预警区间 '+(sex==='男'?'≈5%':'≈12–14%')+'</td></tr></table>';
+    if(bf<=warnHi){
+      cls='red';
+      body+='<p><b style="color:#7c2f29;">当前体脂 '+bf+'% 已处于 / 低于低体脂风险预警区间（'+(sex==='男'?'男性 ≈5%（必需脂肪 3–5%）':'女性 ≈12–14%（必需脂肪 10–13%）')+'）。</b>长期低于此水平与 HPG 轴抑制、骨量丢失、免疫下降相关；须结合月经 / 性功能、骨密度、疲劳与训练表现综合评估，并立即转 SOP-3 进行 RED-S 风险评估。</p>';
+    } else {
+      body+='<p>体脂 '+bf+'% 高于'+(sex==='男'?'男性':'女性')+'低体脂预警线（'+warnLine+'%）。FFMI 参照：自然训练男性 Kouri 校正值约 18–23、自然上限约 25、&gt;27 需谨慎解读（鉴别工具而非诊断依据，不适用于青少年与极端身高）。</p>';
+    }
+    setVerdict('s5c-verdict',cls,body);
+  } else {
+    setVerdict('s5c-verdict','','录入身高、体重、体脂率后，此处自动计算 FFM、FFMI 并对照必需脂肪区间。');
+  }
+  // 两次对比
+  const bfPrev=num('s5-bf-prev'), bfNow=num('s5-bf-now')!==null?num('s5-bf-now'):bf;
+  const wPrev=num('s5-w-prev'), wNow=num('s5-w-now');
+  if(bfPrev!==null && bfNow!==null && m && S5_METHODS[m] && S5_METHODS[m].mdc!==null){
+    const d=S5_METHODS[m];
+    const delta=bfNow-bfPrev;
+    const real=Math.abs(delta)>=d.mdc;
+    let body='<p>体脂率变化：'+bfPrev+'% → '+bfNow+'%，Δ = '+(delta>=0?'+':'')+delta.toFixed(1)+' 个百分点；所选方法（'+d.name+'）的 MDC 参照为 <b>'+d.mdcTxt+'</b>。</p>';
+    if(real){
+      body+='<p><b>变化幅度超过 MDC，可判读为真实变化方向</b>（'+(delta<0?'体脂下降':'体脂上升')+'）；仍需结合体重、FFM 与训练周期确认成分变化性质。</p>';
+      setVerdict('s5d-verdict','green','<h4>判读：超过 MDC —— 可视为真实变化</h4>'+body);
+    } else {
+      body+='<p><b style="color:#6e4d22;">变化幅度未超过 MDC，属测量误差 / 噪声范围，不构成「真实体脂变化」结论。</b>水分、糖原、肠内容物等短期波动即可造成该幅度差异。</p>';
+      setVerdict('s5d-verdict','yellow','<h4>判读：未超过 MDC —— 属测量噪声</h4>'+body);
+    }
+    if(wPrev!==null && wNow!==null){
+      const dw=wNow-wPrev;
+      $('s5d-verdict').innerHTML += '<p>体重变化：'+wPrev+' → '+wNow+' kg（Δ '+(dw>=0?'+':'')+dw.toFixed(1)+' kg）。单日体重波动可达 ±3–5 kg；每周下降 &gt;1 kg 且持续 2 周以上才可判为真实脂肪减少趋势。</p>';
+    }
+  } else if(bfPrev!==null || bfNow!==null){
+    setVerdict('s5d-verdict','yellow','<h4>判读：方法未确定</h4><p>请先在抬头选择本次评估方法（MDC 因方法而异），并录入两次体脂率。');
+  } else {
+    setVerdict('s5d-verdict','','录入两次测量值后，此处自动判读变化是否超过所选方法的 MDC（超过才是真实变化，否则属测量误差）。');
+  }
+}
+
+/* ================= 统一计算与保存 ================= */
+function calcAll(){ syncSymbols(); calcS1(); calcS2(); calcS3(); calcS4(); calcS5(); }
+
+const STORE_KEY='snc2026_sop_worksheet_day1_v1';
+let saveTimer=null;
+function collectState(){
+  const data={active:'s1', fields:{}};
+  const active=document.querySelector('.sheet.active');
+  if(active) data.active=active.id.replace('sheet-','');
+  document.querySelectorAll('input,textarea,select').forEach(el=>{
+    if(!el.id) return;
+    if(el.type==='checkbox'||el.type==='radio') data.fields[el.id]={t:el.type, c:el.checked};
+    else data.fields[el.id]={t:el.type, v:el.value};
+  });
+  return data;
+}
+function saveState(){
+  clearTimeout(saveTimer);
+  saveTimer=setTimeout(()=>{
+    try{ localStorage.setItem(STORE_KEY, JSON.stringify(collectState()));
+      const h=$('saveHint'); h.textContent='已自动保存 '+new Date().toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'});
+    }catch(e){}
+  },500);
+}
+function restoreState(){
+  let data=null;
+  try{ data=JSON.parse(localStorage.getItem(STORE_KEY)); }catch(e){}
+  if(!data || !data.fields) return;
+  Object.keys(data.fields).forEach(id=>{
+    const el=$(id); if(!el) return;
+    const f=data.fields[id];
+    if(f.t==='checkbox'||f.t==='radio') el.checked=!!f.c;
+    else el.value=f.v!=null?f.v:'';
+  });
+  if(data.active){
+    document.querySelectorAll('.tabbtn').forEach(b=>b.classList.toggle('active', b.dataset.sheet===data.active));
+    document.querySelectorAll('.sheet').forEach(s=>s.classList.toggle('active', s.id==='sheet-'+data.active));
+  }
+}
+
+/* 会员昵称同步 */
+document.querySelectorAll('.nick').forEach(el=>{
+  el.addEventListener('input',()=>{
+    document.querySelectorAll('.nick').forEach(o=>{ if(o!==el) o.value=el.value; });
+    saveState();
+  });
+});
+
+/* 全局事件绑定 */
+document.addEventListener('input',()=>{ calcAll(); saveState(); });
+document.addEventListener('change',()=>{ calcAll(); saveState(); });
+window.addEventListener('beforeunload',()=>{ clearTimeout(saveTimer);
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(collectState())); }catch(e){} });
+document.addEventListener('visibilitychange',()=>{ if(document.visibilityState==='hidden'){ clearTimeout(saveTimer);
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(collectState())); }catch(e){} } });
+
+/* 打印与清空 */
+$('btnPrint').addEventListener('click',()=>window.print());
+$('btnClear').addEventListener('click',()=>{
+  if(confirm('确定清空全部五张工作单的填写内容并重新开始？此操作不可撤销。')){
+    try{ localStorage.removeItem(STORE_KEY); }catch(e){}
+    document.querySelectorAll('input[type="text"],input[type="number"],input[type="date"],textarea').forEach(el=>el.value='');
+    document.querySelectorAll('input[type="checkbox"]').forEach(el=>el.checked=false);
+    document.querySelectorAll('input[type="radio"]').forEach(el=>el.checked=false);
+    document.querySelectorAll('select').forEach(el=>el.selectedIndex=0);
+    calcAll(); saveState();
+  }
+});
+
+/* 初始化 */
+restoreState();
+calcAll();
+</script>
+</body>
+</html>

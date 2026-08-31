@@ -1,0 +1,571 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SNC 运动健身营养咨询师 · 线上班（2026年9月1日）六天课程表</title>
+<style>
+  :root{
+    --bg:#F7F8FF;
+    --ink:#1F2433;
+    --ink-soft:#5A6072;
+    --card:#FFFFFF;
+    --line:#E6E8F5;
+    --brand:#5B6CFF;
+    --d1:#5B6CFF;
+    --d2:#2FA982;
+    --d3:#E85E9B;
+    --d4:#E8853A;
+    --d5:#7C5CFC;
+    --d6:#5E3FD1;
+    --break:#E8A93A;
+    --break-bg:#FFF6E3;
+    --radius:14px;
+    --shadow:0 2px 10px rgba(31,36,51,.06);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:Inter,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+    line-height:1.65;
+    font-size:15.5px;
+  }
+  a{color:var(--brand);}
+  header.hero{
+    background:linear-gradient(120deg,#5B6CFF 0%,#7A5BFF 45%,#E85E9B 100%);
+    color:#fff;
+    padding:52px 24px 44px;
+  }
+  .hero-inner{max-width:1080px;margin:0 auto;}
+  .hero .kicker{
+    display:inline-block;
+    font-size:13px;
+    letter-spacing:.14em;
+    background:rgba(255,255,255,.16);
+    border:1px solid rgba(255,255,255,.28);
+    padding:4px 14px;
+    border-radius:999px;
+    margin-bottom:16px;
+  }
+  .hero h1{margin:0 0 10px;font-size:31px;line-height:1.28;}
+  .hero p.sub{margin:0 0 24px;opacity:.92;font-size:16px;max-width:740px;}
+  .hero-meta{display:flex;flex-wrap:wrap;gap:10px;}
+  .hero-meta span{
+    background:rgba(255,255,255,.14);
+    border:1px solid rgba(255,255,255,.25);
+    border-radius:10px;
+    padding:7px 14px;
+    font-size:14px;
+  }
+  nav.toc{
+    position:sticky;top:0;z-index:20;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .toc-inner{
+    max-width:1080px;margin:0 auto;
+    display:flex;gap:6px;flex-wrap:wrap;
+    padding:10px 24px;
+  }
+  .toc-inner a{
+    text-decoration:none;color:var(--ink-soft);
+    font-size:13.5px;font-weight:600;
+    padding:6px 13px;border-radius:999px;
+  }
+  .toc-inner a:hover{background:#EEF0FF;color:var(--brand);}
+  main{max-width:1080px;margin:0 auto;padding:36px 24px 64px;}
+  section{margin-bottom:44px;}
+  h2.sec-title{font-size:23px;margin:0 0 6px;}
+  .sec-lead{color:var(--ink-soft);margin:0 0 22px;font-size:15px;}
+  /* overview cards */
+  .day-cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+  }
+  .day-card{
+    background:var(--card);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    padding:20px 18px;
+    border-top:5px solid var(--dc);
+    display:flex;flex-direction:column;gap:8px;
+  }
+  .day-card .badge{
+    align-self:flex-start;
+    color:#fff;background:var(--dc);
+    font-size:12.5px;font-weight:700;
+    padding:3px 12px;border-radius:999px;
+    letter-spacing:.05em;
+  }
+  .day-card h3{margin:0;font-size:16.5px;line-height:1.35;}
+  .day-card .range{font-size:13px;color:var(--ink-soft);}
+  .day-card .goal{font-size:13.5px;color:#3A4055;}
+  /* day sections */
+  .day-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin:0 0 4px;}
+  .day-head .d-tab{
+    color:#fff;font-weight:800;font-size:14px;letter-spacing:.08em;
+    padding:5px 16px;border-radius:999px;
+  }
+  .day-head h2{margin:0;font-size:23px;}
+  .day-meta{color:var(--ink-soft);font-size:14px;margin:0 0 16px;}
+  .half-tag{
+    display:inline-block;font-size:12px;font-weight:700;
+    padding:2px 10px;border-radius:6px;margin-left:8px;vertical-align:middle;
+  }
+  .half-theory{background:#FFF0E0;color:#C06A1E;}
+  .half-consult{background:#EFE9FF;color:#5E3FD1;}
+  .table-wrap{
+    background:var(--card);border-radius:var(--radius);
+    box-shadow:var(--shadow);overflow:hidden;
+  }
+  .table-scroll{overflow-x:auto;}
+  table.sched{width:100%;border-collapse:collapse;min-width:680px;}
+  table.sched th{
+    text-align:left;font-size:13px;color:var(--ink-soft);font-weight:700;
+    padding:12px 16px;background:#F3F4FC;
+    border-bottom:1px solid var(--line);white-space:nowrap;
+  }
+  table.sched td{
+    padding:12px 16px;border-bottom:1px solid var(--line);
+    vertical-align:top;font-size:14.5px;
+  }
+  table.sched tr:last-child td{border-bottom:none;}
+  td.time{
+    white-space:nowrap;font-variant-numeric:tabular-nums;
+    font-weight:700;width:128px;
+  }
+  td.unit{width:300px;}
+  .ch-tag{
+    display:inline-block;font-size:12px;font-weight:700;
+    padding:2px 9px;border-radius:6px;margin-bottom:5px;
+    background:rgba(91,108,255,.1);color:var(--brand);white-space:nowrap;
+  }
+  .u-title{font-weight:700;font-size:14.5px;line-height:1.4;}
+  .u-desc{font-size:13.5px;color:var(--ink-soft);margin-top:2px;}
+  td.method{width:104px;text-align:center;}
+  .m-tag{
+    display:inline-block;font-size:12.5px;font-weight:700;
+    padding:3px 10px;border-radius:999px;white-space:nowrap;
+  }
+  .m-lecture{background:#EEF0FF;color:#4A5AE8;}
+  .m-practice{background:#E6F7F1;color:#1E8C68;}
+  .m-case{background:#FFE9F3;color:#D14886;}
+  .m-workshop{background:#FFF3DC;color:#C8881F;}
+  tr.break-row td{
+    background:var(--break-bg);font-weight:700;color:var(--break);
+    text-align:center;letter-spacing:.05em;padding:9px 16px;font-size:14px;
+  }
+  tr.lunch-row td{
+    background:#F0F2FF;font-weight:700;color:#7A82A8;
+    text-align:center;letter-spacing:.05em;padding:9px 16px;font-size:14px;
+  }
+  tr.review-row td{background:#FAFBFF;}
+  /* day theming */
+  #day1 .d-tab{background:var(--d1);} #day1 .ch-tag{background:rgba(91,108,255,.1);color:var(--d1);} #day1 .m-lecture{background:rgba(91,108,255,.1);color:var(--d1);} #day1 .day-head h2{color:var(--d1);}
+  #day2 .d-tab{background:var(--d2);} #day2 .ch-tag{background:rgba(47,169,130,.12);color:var(--d2);} #day2 .m-lecture{background:rgba(47,169,130,.12);color:var(--d2);} #day2 .day-head h2{color:var(--d2);}
+  #day3 .d-tab{background:var(--d3);} #day3 .ch-tag{background:rgba(232,94,155,.1);color:var(--d3);} #day3 .m-lecture{background:rgba(232,94,155,.1);color:var(--d3);} #day3 .day-head h2{color:var(--d3);}
+  #day4 .d-tab{background:var(--d4);} #day4 .ch-tag{background:rgba(232,133,58,.12);color:var(--d4);} #day4 .m-lecture{background:rgba(232,133,58,.12);color:var(--d4);} #day4 .day-head h2{color:var(--d4);}
+  #day5 .d-tab{background:var(--d5);} #day5 .ch-tag{background:rgba(124,92,252,.1);color:var(--d5);} #day5 .m-lecture{background:rgba(124,92,252,.1);color:var(--d5);} #day5 .day-head h2{color:var(--d5);}
+  #day6 .d-tab{background:var(--d6);} #day6 .ch-tag{background:rgba(94,63,209,.1);color:var(--d6);} #day6 .m-lecture{background:rgba(94,63,209,.1);color:var(--d6);} #day6 .day-head h2{color:var(--d6);}
+  /* info cards */
+  .info-grid{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:16px;
+  }
+  .info-card{
+    background:var(--card);border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:20px 22px;
+  }
+  .info-card h3{margin:0 0 10px;font-size:16.5px;}
+  .info-card ul{margin:0;padding-left:18px;}
+  .info-card li{margin:7px 0;font-size:14.5px;color:#3A4055;}
+  .info-card .note{
+    margin-top:12px;background:#FFF6E3;border-left:4px solid var(--break);
+    border-radius:0 8px 8px 0;padding:10px 14px;font-size:13.5px;color:#6B5420;
+  }
+  .sr-caption{
+    position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+    overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;
+  }
+  a:focus-visible,button:focus-visible{
+    outline:3px solid var(--brand);outline-offset:2px;border-radius:6px;
+  }
+  footer{
+    max-width:1080px;margin:0 auto;padding:18px 24px 48px;
+    color:#9AA0B8;font-size:13px;border-top:1px solid var(--line);
+  }
+  @media (max-width:860px){
+    .day-cards{grid-template-columns:1fr;}
+    .info-grid{grid-template-columns:1fr;}
+    .hero h1{font-size:25px;}
+    main{padding:28px 16px 48px;}
+    .toc-inner{padding:10px 16px;}
+  }
+  @media (min-width:560px) and (max-width:980px){
+    .day-cards{grid-template-columns:repeat(2,1fr);}
+  }
+  @media print{
+    nav.toc{display:none;}
+    header.hero{background:#fff !important;color:var(--ink);padding:24px 0;}
+    .hero .kicker,.hero-meta span{background:#F3F4FC;color:var(--ink);border-color:var(--line);}
+    body{background:#fff;font-size:12.5px;}
+    .day-card,.info-card,.table-wrap{box-shadow:none;border:1px solid var(--line);}
+    section{break-inside:avoid-page;margin-bottom:24px;}
+    tr.break-row td,tr.lunch-row td{background:#F7F8FF !important;color:var(--ink-soft) !important;}
+    a{color:var(--ink);text-decoration:none;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <span class="kicker">3HFIT · SNC 运动健身营养咨询师培训</span>
+    <h1>SNC 运动健身营养咨询师<br>线上班（2026 年 9 月 1 日）· 六天课程表</h1>
+    <p class="sub">前四天半完成运动营养学理论（基础教材 25 章），第五天下午进入营养咨询实务（13 章），第六天全天工作坊与整合演练。每天 09:00–17:00，授课与练习交替，请按预习要求提前准备。</p>
+    <div class="hero-meta">
+      <span>开课：2026 年 9 月 1 日</span>
+      <span>每日 09:00–17:00</span>
+      <span>午休 12:00–13:00</span>
+      <span>茶歇 10:30 / 14:30</span>
+      <span>线上授课 · 能量站直播观看</span>
+      <span>教材：理论 25 章 + 咨询实务 13 章</span>
+    </div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="toc-inner">
+    <a href="#overview">六天总览</a>
+    <a href="#day1">Day 1</a>
+    <a href="#day2">Day 2</a>
+    <a href="#day3">Day 3</a>
+    <a href="#day4">Day 4</a>
+    <a href="#day5">Day 5</a>
+    <a href="#day6">Day 6</a>
+    <a href="#prep">预习与作业</a>
+    <a href="#exam">考核</a>
+    <a href="#online">线上上课须知</a>
+  </div>
+</nav>
+
+<main>
+
+<section id="overview">
+  <h2 class="sec-title">六天学习路径</h2>
+  <p class="sec-lead">Day 1–4 建立营养科学体系，Day 5 上午收尾特殊人群，下午转入咨询实务，Day 6 全天演练。教材共 8 个分册，按每日主题对应预习。</p>
+  <div class="day-cards">
+    <div class="day-card" style="--dc:var(--d1)">
+      <span class="badge">DAY 1</span>
+      <h3>科学基础与评估</h3>
+      <div class="range">第 1 册 · Ch01–06</div>
+      <div class="goal">学科边界与循证方法、饮食与身体成分评估、能量需求、RED-S、营养生化基础。</div>
+    </div>
+    <div class="day-card" style="--dc:var(--d2)">
+      <span class="badge">DAY 2</span>
+      <h3>营养素各论（上）</h3>
+      <div class="range">第 2 册前半 · Ch07–10</div>
+      <div class="goal">碳水、蛋白质、脂肪、水与电解质的机制、剂量与时机；下午方案计算工作坊。</div>
+    </div>
+    <div class="day-card" style="--dc:var(--d3)">
+      <span class="badge">DAY 3</span>
+      <h3>微量营养素与健身营养</h3>
+      <div class="range">第 2 册后半 + 第 3 册 · Ch11–15</div>
+      <div class="goal">铁、维生素矿物质、骨骼健康；抗阻训练与减脂保肌的完整营养方案。</div>
+    </div>
+    <div class="day-card" style="--dc:var(--d4)">
+      <span class="badge">DAY 4</span>
+      <h3>补剂、进食障碍与场景营养</h3>
+      <div class="range">第 4–6 册 · Ch16、21、22、23、25</div>
+      <div class="goal">补剂决策、进食障碍识别、比赛日与旅行营养、抗炎营养与恢复。</div>
+    </div>
+    <div class="day-card" style="--dc:var(--d5)">
+      <span class="badge">DAY 5</span>
+      <h3>特殊人群 + 咨询实务开篇</h3>
+      <div class="range">第 7 册 + 第 8 册开头</div>
+      <div class="goal">上午：女性、青少年、中老年、慢病、素食；下午：执业边界、评估建档、行为改变框架。</div>
+    </div>
+    <div class="day-card" style="--dc:var(--d6)">
+      <span class="badge">DAY 6</span>
+      <h3>咨询实务与整合演练</h3>
+      <div class="range">第 8 册 · 咨询 Ch04–13</div>
+      <div class="goal">补剂决策、方案库、12 周闭环、复杂场景分流；下午分组角色扮演完整咨询流程。</div>
+    </div>
+  </div>
+</section>
+
+<!-- DAY 1 -->
+<section id="day1">
+  <div class="day-head"><span class="d-tab">DAY 1</span><h2>科学基础与评估</h2></div>
+  <p class="day-meta">对应教材第 1 册（Ch01–06）· 全天目标：建立循证判断框架，掌握评估工具与能量计算，理解营养素代谢的生化底座</p>
+  <div class="table-wrap"><div class="table-scroll">
+  <table class="sched">
+    <caption class="sr-caption">Day 1 日程：科学基础与评估，09:00 至 17:00</caption>
+    <thead><tr><th scope="col">时间</th><th scope="col">内容</th><th scope="col">形式</th></tr></thead>
+    <tbody>
+      <tr><td class="time">09:00–09:15</td><td class="unit"><span class="ch-tag">开课</span><div class="u-title">课程导览与六天路线图</div><div class="u-desc">教材结构、考核要求、学员分组</div></td><td class="method"><span class="m-tag m-workshop">说明</span></td></tr>
+      <tr><td class="time">09:15–10:30</td><td class="unit"><span class="ch-tag">Ch01</span><div class="u-title">运动营养学的定义、边界与循证基础</div><div class="u-desc">学科边界、T0–T5 训练水平分层、证据判断链、执业资质与转介指征</div></td><td class="method"><span class="m-tag m-lecture">讲授</span></td></tr>
+      <tr class="break-row"><td colspan="3">☕ 茶歇 10:30–10:45</td></tr>
+      <tr><td class="time">10:45–11:25</td><td class="unit"><span class="ch-tag">Ch02</span><div class="u-title">运动饮食评估</div><div class="u-desc">膳食记录方法精度分级、低报识别、AI 评估工具的能力边界</div></td><td class="method"><span class="m-tag m-lecture">讲授</span></td></tr>
+      <tr><td class="time">11:25–12:00</td><td class="unit"><span class="ch-tag">Ch03</span><div class="u-title">身体成分评估</div><div class="u-desc">DXA、皮褶、BIA 的精度阶梯；FFM/LBM 概念；体脂参考区间</div></td><td class="method"><span class="m-tag m-lecture">讲授</span></td></tr>
+      <tr class="lunch-row"><td colspan="3">🍱 午餐 12:00–13:00</td></tr>
+      <tr><td class="time">13:00–13:45</td><td class="unit"><span class="ch-tag">Ch04</span><div class="u-title">运动人群能量需求</div><div class="u-desc">BMR/RMR、TEE 四组分、预测公式的适用边界</div></td><td class="method"><span class="m-tag m-lecture">讲授</span></td></tr>
+      <tr><td class="time">13:45–14:30</td><td class="unit"><span class="ch-tag">Ch05</span><div class="u-title">能量摄入不足：RED-S</div><div class="u-desc">能量可用性计算、多系统影响、识别与转介</div></td><td class="method"><span class="m-tag m-lecture">讲授</span></td></tr>
+      <tr class="break-row"><td colspan="3">☕ 茶歇 14:30–14:45</td></tr>
+      <tr><td class="time">14:45–16:15</td><td class="unit"><span class="ch-tag">Ch06</span><div class="u-title">营养生化基础（全天重头）</div><div class="u-desc">三大营养素代谢通路、ATP 供能系统、Fat:CHO 交叉点、代谢激素调控</div></td><td class="method"><span class="m-tag m-lecture">讲授</span></td></tr>
+      <tr class="review-row"><td class="time">16:15–17:00</td><td class="unit"><span class="ch-tag">复盘</span><div class="u-title">当日复盘与思考题研讨</div><div class="u-desc">章末思考题选讲，能量可用性计算作业说明</div></td><td class="method"><span class="m-tag m-workshop">研讨</span></td></tr>
+    </tbody>
+  </table>
+  </div></div>
+</section>
+
+<!-- DAY 2 -->
+<section id="day2">
+  <div class="day-head"><span class="d-tab">DAY 2</span><h2>营养素各论（上）：碳水、蛋白质、脂肪、水</h2></div>
+  <p class="day-meta">对应教材第 2 册前半（Ch07–10）· 全天目标：掌握四大宏量营养素与水的需求计算，下午完成第一次方案工作坊</p>
+  <div class="table-wrap"><div class="table-scroll">
+  <table class="sched">
+    <caption class="sr-caption">Day 2 日程：碳水、蛋白质、脂肪、水，09:00 至 17:00</caption>
+    <thead><tr><th scope="col">时间</th><th scope="col">内容</th><th scope="col">形式</th></tr></thead>
+    <tbody>
+      <tr><td class="time">09:00–09:15</td><td class="unit"><span class="ch-tag">回顾</span><div class="u-title">Day 1 要点回顾与作业讲评</div></td><td class="method"><span class="m-tag m-workshop">问答</span></td></tr>
+      <tr><td class="time">09:15–10:30</td><td class="unit"><span class="ch-tag">Ch07</span><div class="u-title">碳水化合物</div><div class="u-desc">糖原储备与转运、g/kg 分级推荐、训练前中后时机、Train Low 与生酮争议</div></td><td class="method"><span class="m-tag m-lecture">讲授</span></td></tr>
+      <tr class="break-row"><td colspan="3">☕ 茶歇 10:30–10:45</td></tr>
+      <tr><td class="time">10:45–12:00</td><td class="unit"><span class="ch-tag">Ch08</span><div class="u-title">蛋白质</div><div class="u-desc">MPS/MPB、亮氨酸阈值、1.6–2.2 g/kg 证据、单餐分配与合成代谢窗口</div></td><td class="method"><span class="m-tag m-lecture">讲授</span></td></tr>
+      <tr class="lunch-row"><td colspan="3">🍱 午餐 12:00–13:00</td></tr>
+      <tr><td class="time">13:00–13:50</td><td class="unit"><span class="ch-tag">Ch09</span><div class="u-title">脂肪</div><div class="u-desc">脂肪动员调控、总量下限、必需脂肪酸与 Omega-6:3 比例</div></td><td class="method"><span class="m-tag m-lecture">讲授</span></td></tr>
+      <tr><td class="time">13:50–14:30</td><td class="unit"><span class="ch-tag">Ch10</span><div class="u-title">水分平衡、产热调节与胃肠功能</div><div class="u-desc">脱水分级与表现影响、汗率个体化补水、运动胃肠问题</div></td><td class="method"><span class="m-tag m-lecture">讲授</span></td></tr>
+      <tr class="break-row"><td colspan="3">☕ 茶歇 14:30–14:45</td></tr>
+      <tr><td class="time">14:45–15:45</td><td class="unit"><span class="ch-tag">工作坊</span><div class="u-title">宏量营养素方案计算</div><div class="u-desc">给定训练者案例，现场完成碳水/蛋白/脂肪/水的克数与时机方案</div></td><td class="method"><span class="m-tag m-practice">练习</span></td></tr>
+      <tr class="review-row"><td class="time">15:45–17:00</td><td class="unit"><span class="ch-tag">复盘</span><div class="u-title">作业讲评与答疑</div><div class="u-desc">工作坊成果互评；布置 Day 3 预习</div></td><td class="method"><span class="m-tag m-workshop">研讨</span></td></tr>
+    </tbody>
+  </table>
+  </div></div>
+</section>
+
+<!-- DAY 3 -->
+<section id="day3">
+  <div class="day-head"><span class="d-tab">DAY 3</span><h2>微量营养素与健身人群营养</h2></div>
+  <p class="day-meta">对应教材第 2 册后半（Ch11–13）与第 3 册（Ch14–15）· 全天目标：补齐微量营养素短板，掌握增肌与减脂两套核心方案</p>
+  <div class="table-wrap"><div class="table-scroll">
+  <table class="sched">
+    <caption class="sr-caption">Day 3 日程：铁、维生素矿物质、骨骼、抗阻、减脂，09:00 至 17:00</caption>
+    <thead><tr><th scope="col">时间</th><th scope="col">内容</th><th scope="col">形式</th></tr></thead>
+    <tbody>
+      <tr><td class="time">09:00–09:15</td><td class="unit"><span class="ch-tag">回顾</span><div class="u-title">Day 2 回顾与导入</div></td><td class="method"><span class="m-tag m-workshop">问答</span></td></tr>
+      <tr><td class="time">09:15–09:55</td><td class="unit"><span class="ch-tag">Ch11</span><div class="u-title">训练人群铁代谢与贫血</div><div class="u-desc">铁缺乏三阶段、hepcidin 运动后抑制、假性贫血鉴别</div></td><td class="method"><span class="m-tag m-lecture">讲授</span></td></tr>
+      <tr><td class="time">09:55–10:30</td><td class="unit"><span class="ch-tag">Ch12</span><div class="u-title">维生素、矿物质与抗氧化剂</div><div class="u-desc">B 族辅因子、出汗丢失、抗氧化剂悖论（高剂量 VC/E 抵消适应）</div></td><td class="method"><span class="m-tag m-lecture">讲授</span></td></tr>
+      <tr class="break-row"><td colspan="3">☕ 茶歇 10:30–10:45</td></tr>
+      <tr><td class="time">10:45–11:30</td><td class="unit"><span class="ch-tag">Ch13</span><div class="u-title">骨骼健康：钙与维生素 D</div><div class="u-desc">骨重塑与负荷特异性、钙阈值营养素、维 D 状态评估</div></td><td class="method"><span class="m-tag m-lecture">讲授</span></td></tr>
+      <tr><td class="time">11:30–12:00</td><td class="unit"><span class="ch-tag">串讲</span><div class="u-title">微量营养素速查与答疑</div></td><td class="method"><span class="m-tag m-workshop">问答</span></td></tr>
+      <tr class="lunch-row"><td colspan="3">🍱 午餐 12:00–13:00</td></tr>
+      <tr><td class="time">13:00–13:50</td><td class="unit"><span class="ch-tag">Ch14</span><div class="u-title">抗阻训练营养策略</div><div class="u-desc">增力与肌肥大的蛋白-碳水-能量整合配置、恢复干预争议</div></td><td class="method"><span class="m-tag m-lecture">讲授</span></td></tr>
+      <tr><td class="time">13:50–14:45</td><td class="unit"><span class="ch-tag">Ch15</span><div class="u-title">减脂、体重管理与身体成分重组</div><div class="u-desc">3500 kcal 谬误、Hall 动态模型、减脂速率、蛋白上调、重组适用人群</div></td><td class="method"><span class="m-tag m-lecture">讲授</span></td></tr>
+      <tr class="break-row"><td colspan="3">☕ 茶歇 14:45–15:00</td></tr>
+      <tr><td class="time">15:00–16:15</td><td class="unit"><span class="ch-tag">工作坊</span><div class="u-title">增肌 / 减脂 / 保肌方案设计</div><div class="u-desc">三人一组完成一套带克数与复评指标的 12 周方案框架</div></td><td class="method"><span class="m-tag m-practice">练习</span></td></tr>
+      <tr class="review-row"><td class="time">16:15–17:00</td><td class="unit"><span class="ch-tag">复盘</span><div class="u-title">方案互评与作业布置</div></td><td class="method"><span class="m-tag m-workshop">研讨</span></td></tr>
+    </tbody>
+  </table>
+  </div></div>
+</section>
+
+<!-- DAY 4 -->
+<section id="day4">
+  <div class="day-head"><span class="d-tab">DAY 4</span><h2>补剂、进食障碍与场景营养</h2></div>
+  <p class="day-meta">对应教材第 4 册（Ch21、Ch16）、第 5 册（Ch22–23）、第 6 册（Ch25）· 全天目标：建立补剂甄别能力与红线意识，掌握比赛、旅行、抗炎场景框架</p>
+  <div class="table-wrap"><div class="table-scroll">
+  <table class="sched">
+    <caption class="sr-caption">Day 4 日程：补剂、进食障碍、比赛日、旅行、抗炎，09:00 至 17:00</caption>
+    <thead><tr><th scope="col">时间</th><th scope="col">内容</th><th scope="col">形式</th></tr></thead>
+    <tbody>
+      <tr><td class="time">09:00–09:15</td><td class="unit"><span class="ch-tag">回顾</span><div class="u-title">Day 3 方案作业讲评</div></td><td class="method"><span class="m-tag m-workshop">问答</span></td></tr>
+      <tr><td class="time">09:15–10:30</td><td class="unit"><span class="ch-tag">Ch21</span><div class="u-title">补剂与运动食品</div><div class="u-desc">IOC/AIS 证据分级框架、咖啡因、肌酸、β-丙氨酸、硝酸盐；污染与认证</div></td><td class="method"><span class="m-tag m-lecture">讲授</span></td></tr>
+      <tr class="break-row"><td colspan="3">☕ 茶歇 10:30–10:45</td></tr>
+      <tr><td class="time">10:45–11:25</td><td class="unit"><span class="ch-tag">Ch16</span><div class="u-title">进食行为与进食障碍</div><div class="u-desc">DSM-5-TR 五类障碍、高风险人群、教练识别职责与转介红线</div></td><td class="method"><span class="m-tag m-lecture">讲授</span></td></tr>
+      <tr><td class="time">11:25–12:00</td><td class="unit"><span class="ch-tag">Ch22</span><div class="u-title">比赛日营养</div><div class="u-desc">赛前正餐、「赛前 1 小时禁糖」重评、碳水负荷；竞技内容标注大众适用边界</div></td><td class="method"><span class="m-tag m-lecture">讲授</span></td></tr>
+      <tr class="lunch-row"><td colspan="3">🍱 午餐 12:00–13:00</td></tr>
+      <tr><td class="time">13:00–13:40</td><td class="unit"><span class="ch-tag">Ch23</span><div class="u-title">旅行与极端环境营养</div><div class="u-desc">时差进食节律、高温补水、高海拔食欲、旅行者胃肠风险</div></td><td class="method"><span class="m-tag m-lecture">讲授</span></td></tr>
+      <tr><td class="time">13:40–14:30</td><td class="unit"><span class="ch-tag">Ch25</span><div class="u-title">抗炎营养与运动恢复</div><div class="u-desc">急性与慢性炎症的区别、抗炎饮食模式、鱼油姜黄证据等级</div></td><td class="method"><span class="m-tag m-lecture">讲授</span></td></tr>
+      <tr class="break-row"><td colspan="3">☕ 茶歇 14:30–14:45</td></tr>
+      <tr><td class="time">14:45–16:00</td><td class="unit"><span class="ch-tag">工作坊</span><div class="u-title">补剂甄别与场景方案案例</div><div class="u-desc">带一款自己或客户在用的补剂，现场走证据分级与风险核查流程</div></td><td class="method"><span class="m-tag m-case">案例</span></td></tr>
+      <tr class="review-row"><td class="time">16:00–17:00</td><td class="unit"><span class="ch-tag">复盘</span><div class="u-title">应用篇复盘与次日安排</div><div class="u-desc">理论篇 25 章脉络串讲；说明 Day 5 转入咨询实务的准备事项</div></td><td class="method"><span class="m-tag m-workshop">研讨</span></td></tr>
+    </tbody>
+  </table>
+  </div></div>
+</section>
+
+<!-- DAY 5 -->
+<section id="day5">
+  <div class="day-head"><span class="d-tab">DAY 5</span><h2>特殊人群营养 + 咨询实务开篇</h2></div>
+  <p class="day-meta">上午对应教材第 7 册（Ch24、17–20），下午进入第 8 册（咨询 Ch01–03）· 上午讲五类人群营养要点，下午开始建立咨询执业能力</p>
+  <div class="table-wrap"><div class="table-scroll">
+  <table class="sched">
+    <caption class="sr-caption">Day 5 日程：上午特殊人群营养，下午咨询实务开篇，09:00 至 17:00</caption>
+    <thead><tr><th scope="col">时间</th><th scope="col">内容</th><th scope="col">形式</th></tr></thead>
+    <tbody>
+      <tr><td class="time">09:00–09:10</td><td class="unit"><span class="ch-tag">导入</span><div class="u-title">特殊人群学习框架 <span class="half-tag half-theory">理论收尾</span></div><div class="u-desc">五类人群的共同逻辑：生命周期 × 生理变化 × 营养窗口</div></td><td class="method"><span class="m-tag m-lecture">讲授</span></td></tr>
+      <tr><td class="time">09:10–09:45</td><td class="unit"><span class="ch-tag">Ch24</span><div class="u-title">女性全生命周期营养</div><div class="u-desc">激素周期与代谢、痛经、孕哺、围绝经期体成分变化</div></td><td class="method"><span class="m-tag m-lecture">讲授</span></td></tr>
+      <tr><td class="time">09:45–10:20</td><td class="unit"><span class="ch-tag">Ch17</span><div class="u-title">青少年训练者营养</div><div class="u-desc">PHV 生长突增窗口、能量充足优先、蛋白 1.2–1.6 g/kg 的证据边界</div></td><td class="method"><span class="m-tag m-lecture">讲授</span></td></tr>
+      <tr><td class="time">10:20–10:30</td><td class="unit"><span class="ch-tag">提问</span><div class="u-title">上午前半段答疑</div></td><td class="method"><span class="m-tag m-workshop">问答</span></td></tr>
+      <tr class="break-row"><td colspan="3">☕ 茶歇 10:30–10:45</td></tr>
+      <tr><td class="time">10:45–11:20</td><td class="unit"><span class="ch-tag">Ch18</span><div class="u-title">高龄与中老年训练者营养</div><div class="u-desc">合成代谢抵抗、PROT-AGE 立场、亮氨酸阈值上调</div></td><td class="method"><span class="m-tag m-lecture">讲授</span></td></tr>
+      <tr><td class="time">11:20–11:45</td><td class="unit"><span class="ch-tag">Ch19</span><div class="u-title">慢病人群营养（要点）</div><div class="u-desc">糖尿病运动血糖、高血压阈值、血脂争议；深化在 Day 6 咨询分流</div></td><td class="method"><span class="m-tag m-lecture">讲授</span></td></tr>
+      <tr><td class="time">11:45–12:00</td><td class="unit"><span class="ch-tag">Ch20</span><div class="u-title">素食与植物性饮食（要点）</div><div class="u-desc">B12 强制补充、植物蛋白亮氨酸补偿、铁锌钙缺口清单</div></td><td class="method"><span class="m-tag m-lecture">讲授</span></td></tr>
+      <tr class="lunch-row"><td colspan="3">🍱 午餐 12:00–13:00</td></tr>
+      <tr><td class="time">13:00–13:15</td><td class="unit"><span class="ch-tag">转入</span><div class="u-title">咨询实务导入 <span class="half-tag half-consult">咨询实务</span></div><div class="u-desc">理论知识如何装进一次真实咨询；下午起进入工作坊模式</div></td><td class="method"><span class="m-tag m-workshop">说明</span></td></tr>
+      <tr><td class="time">13:15–14:30</td><td class="unit"><span class="ch-tag">咨询 Ch01</span><div class="u-title">营养咨询的定义、范围与执业边界</div><div class="u-desc">5 分钟首轮分类决策树、七类红线、合规咨询与越界医疗的判定</div></td><td class="method"><span class="m-tag m-lecture">讲授</span></td></tr>
+      <tr class="break-row"><td colspan="3">☕ 茶歇 14:30–14:45</td></tr>
+      <tr><td class="time">14:45–16:00</td><td class="unit"><span class="ch-tag">咨询 Ch02</span><div class="u-title">营养评估工具与档案系统</div><div class="u-desc">24h 回顾 / FFQ / 3 日记录 SOP、五步问诊清单、NCP 档案模板</div></td><td class="method"><span class="m-tag m-practice">工具演练</span></td></tr>
+      <tr class="review-row"><td class="time">16:00–17:00</td><td class="unit"><span class="ch-tag">咨询 Ch03</span><div class="u-title">行为改变三层框架（上）</div><div class="u-desc">COM-B 模型与 BCW 干预函数；MI 动机式访谈演练在次日继续</div></td><td class="method"><span class="m-tag m-lecture">讲授</span></td></tr>
+    </tbody>
+  </table>
+  </div></div>
+</section>
+
+<!-- DAY 6 -->
+<section id="day6">
+  <div class="day-head"><span class="d-tab">DAY 6</span><h2>营养咨询实务与整合演练</h2></div>
+  <p class="day-meta">对应教材第 8 册（咨询 Ch04–13）· 全天目标：走完咨询方案库与闭环流程，下午分组完成一例完整咨询角色扮演</p>
+  <div class="table-wrap"><div class="table-scroll">
+  <table class="sched">
+    <caption class="sr-caption">Day 6 日程：咨询方案库、复评转介、整合演练，09:00 至 17:00</caption>
+    <thead><tr><th scope="col">时间</th><th scope="col">内容</th><th scope="col">形式</th></tr></thead>
+    <tbody>
+      <tr><td class="time">09:00–09:15</td><td class="unit"><span class="ch-tag">回顾</span><div class="u-title">Ch03 行为框架回顾</div></td><td class="method"><span class="m-tag m-workshop">问答</span></td></tr>
+      <tr><td class="time">09:15–10:00</td><td class="unit"><span class="ch-tag">咨询 Ch04</span><div class="u-title">营养补剂决策框架</div><div class="u-desc">面对产品与功效宣称的证据分级、提问顺序、说「不」的节点</div></td><td class="method"><span class="m-tag m-case">甄别演练</span></td></tr>
+      <tr><td class="time">10:00–10:30</td><td class="unit"><span class="ch-tag">咨询 Ch05+07</span><div class="u-title">减脂方案与增肌 / 重组方案</div><div class="u-desc">赤字幅度、蛋白上调、盈余与增重速率、重组适用人群的克数脚本</div></td><td class="method"><span class="m-tag m-lecture">串讲</span></td></tr>
+      <tr class="break-row"><td colspan="3">☕ 茶歇 10:30–10:45</td></tr>
+      <tr><td class="time">10:45–11:15</td><td class="unit"><span class="ch-tag">咨询 Ch06+12</span><div class="u-title">12 周咨询闭环与执业运营</div><div class="u-desc">首诊→接触点→复评→结案节奏；咨询协议、知情同意与档案合规</div></td><td class="method"><span class="m-tag m-workshop">模板讲解</span></td></tr>
+      <tr><td class="time">11:15–12:00</td><td class="unit"><span class="ch-tag">咨询 Ch08–10</span><div class="u-title">复杂场景分流地图</div><div class="u-desc">慢病灰区、孕产/儿少/围更/老年/RED-S 特殊人群、表现导向客户的分流逻辑</div></td><td class="method"><span class="m-tag m-lecture">串讲</span></td></tr>
+      <tr class="lunch-row"><td colspan="3">🍱 午餐 12:00–13:00</td></tr>
+      <tr><td class="time">13:00–13:45</td><td class="unit"><span class="ch-tag">咨询 Ch11</span><div class="u-title">复评决策树与转介路径（专项）</div><div class="u-desc">有效 / 停滞 / 倒退的判定标准；何时微调、何时大改、何时转介医生</div></td><td class="method"><span class="m-tag m-case">转介判断</span></td></tr>
+      <tr><td class="time">13:45–14:30</td><td class="unit"><span class="ch-tag">咨询 Ch13</span><div class="u-title">案例题库导读与演练分组</div><div class="u-desc">抽取演练案例、明确各组组长及交付清单</div></td><td class="method"><span class="m-tag m-workshop">准备</span></td></tr>
+      <tr class="break-row"><td colspan="3">☕ 茶歇 14:30–14:45</td></tr>
+      <tr><td class="time">14:45–16:15</td><td class="unit"><span class="ch-tag">整合演练</span><div class="u-title">分组演练：完整咨询角色扮演</div><div class="u-desc">在组长带领下，各组完成一例完整咨询流程的讨论与演练</div></td><td class="method"><span class="m-tag m-practice">演练</span></td></tr>
+      <tr class="review-row"><td class="time">16:15–17:00</td><td class="unit"><span class="ch-tag">收尾</span><div class="u-title">六天总收尾与结业说明</div><div class="u-desc">演练点评、结业考核要求、内测班反馈收集</div></td><td class="method"><span class="m-tag m-workshop">研讨</span></td></tr>
+    </tbody>
+  </table>
+  </div></div>
+</section>
+
+<!-- 预习与作业 -->
+<section id="prep">
+  <h2 class="sec-title">课前预习与晚间作业</h2>
+  <p class="sec-lead">教材共 48,000 余行，课堂只讲框架与难点，细节靠课前预习和晚间复盘。请按以下节奏准备。</p>
+  <div class="info-grid">
+    <div class="info-card">
+      <h3>开课前（8 月 31 日前）</h3>
+      <ul>
+        <li>预习第 1 册 Ch01–Ch03，重点看每章章末思考题</li>
+        <li>通读课程表，确认六天时间安排</li>
+        <li>准备一台可以打字和填写表格的电脑（演练环节需要在线填写档案模板）</li>
+        <li>准备纸笔或电子笔记，用于工作坊计算</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h3>Day 1 晚间</h3>
+      <ul>
+        <li>完成能量可用性（EA）计算作业</li>
+        <li>预习 Ch07 碳水、Ch08 蛋白质（全书最重头的两章）</li>
+      </ul>
+      <h3 style="margin-top:16px;">Day 2 晚间</h3>
+      <ul>
+        <li>完成宏量营养素方案计算作业</li>
+        <li>预习 Ch11–Ch15（铁、维矿、骨骼、抗阻、减脂）</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h3>Day 3 晚间</h3>
+      <ul>
+        <li>完善 12 周增肌/减脂方案框架作业</li>
+        <li>预习 Ch16、Ch21–Ch25（补剂、进食障碍、比赛日、旅行、抗炎）</li>
+        <li>带一款自己或客户在用的补剂到 Day 4 工作坊（包装照片或成分表即可）</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h3>Day 4 晚间</h3>
+      <ul>
+        <li>快速浏览第 7 册五类人群章节（Ch24、17–20）</li>
+        <li>预习第 8 册咨询 Ch01–Ch03（执业边界、评估工具、行为改变）</li>
+        <li>下载并打印档案模板（教务提前发放）</li>
+      </ul>
+      <h3 style="margin-top:16px;">Day 5 晚间</h3>
+      <ul>
+        <li>复习咨询 Ch01–Ch03 的决策树与五步问诊</li>
+        <li>准备一个你熟悉的真实或模拟客户背景，供 Day 6 演练使用</li>
+      </ul>
+      <div class="note">每天晚间建议至少预留 1.5–2 小时预习与作业。咨询篇（第 8 册）是工作坊手册，不需要通读，按老师指示的章节和工具表阅读即可。</div>
+    </div>
+  </div>
+</section>
+
+<!-- 考核 -->
+<section id="exam">
+  <h2 class="sec-title">作业与结业考核</h2>
+  <div class="info-grid">
+    <div class="info-card">
+      <h3>每日作业（占平时成绩）</h3>
+      <ul>
+        <li>Day 1：能量可用性计算</li>
+        <li>Day 2：宏量营养素与补水方案计算</li>
+        <li>Day 3：12 周增肌/减脂方案框架</li>
+        <li>Day 4：补剂证据分级报告（一款产品）</li>
+        <li>Day 5：首次咨询档案与五步问诊记录</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h3>结业考核</h3>
+      <ul>
+        <li>课后一周内，从案例题库独立完成一例完整咨询方案</li>
+        <li>交付内容：首轮分类与边界判断、评估档案、营养方案（含克数与时机）、12 周复评计划、转介判断</li>
+        <li>评分维度：证据引用准确性、红线与转介判断、方案可执行性、档案规范</li>
+        <li>Day 6 整合演练的观察员打分计入平时表现</li>
+      </ul>
+      <div class="note">所有方案引用的数字与推荐量须能对应到教材章节；无法核验的内容不得写入交付方案。</div>
+    </div>
+  </div>
+</section>
+
+<!-- 线上须知 -->
+<section id="online">
+  <h2 class="sec-title">线上上课须知</h2>
+  <div class="info-grid">
+    <div class="info-card">
+      <h3>时间与节奏</h3>
+      <ul>
+        <li>每日 09:00 准时进入线上会议室，09:00–17:00</li>
+        <li>午休 12:00–13:00；茶歇 10:30–10:45、14:30–14:45</li>
+        <li>授课时段建议保持专注、关闭无关页面</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h3>演练与分组</h3>
+      <ul>
+        <li>Day 2、3、4、5、6 均含工作坊或演练</li>
+        <li>演练环节在各组组长的带领下，进行小组讨论与练习</li>
+        <li>网络或设备问题及时在聊天区告知教务，不要缺席演练环节</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  SNC 运动健身营养咨询师 · 线上班（2026 年 9 月 1 日开课）六天课程表 · 理论基础教材 25 章 + 咨询实务 13 章 · 2026 年 9 月内测线上班（第一期）使用 · 每日 09:00–17:00，午休 12:00–13:00，茶歇 10:30 / 14:30
+</footer>
+
+<script>
+  document.querySelectorAll('nav.toc a[href^="#"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var t=document.querySelector(this.getAttribute('href'));
+      if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}
+    });
+  });
+</script>
+</body>
+</html>
