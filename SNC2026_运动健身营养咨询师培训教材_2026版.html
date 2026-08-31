@@ -26,7 +26,7 @@ h1,h2,h3,h4,h5,.sans,.toc-link,.part-name,.vol-name,.cover-title{
 a{color:var(--brand); text-decoration:none;}
 a:hover{text-decoration:underline;}
 a:focus-visible{outline:3px solid var(--brand); outline-offset:2px; border-radius:4px;}
-/<em> ---------- sidebar ---------- </em>/
+/* ---------- sidebar ---------- */
 #sidebar{
   position:fixed; top:0; left:0; bottom:0; width:288px;
   background:var(--paper); border-right:1px solid var(--line);
@@ -65,10 +65,10 @@ a:focus-visible{outline:3px solid var(--brand); outline-offset:2px; border-radiu
   box-shadow:0 3px 12px rgba(58,77,143,.35);
 }
 #sidebarMask{display:none; position:fixed; inset:0; background:rgba(20,24,40,.4); z-index:35;}
-/<em> ---------- main ---------- </em>/
+/* ---------- main ---------- */
 #main{margin-left:288px;}
 .wrap{max-width:880px; margin:0 auto; padding:0 40px;}
-/<em> ---------- cover ---------- </em>/
+/* ---------- cover ---------- */
 .cover{
   min-height:92vh; display:flex; flex-direction:column; justify-content:center;
   padding:90px 0 70px;
@@ -90,7 +90,7 @@ a:focus-visible{outline:3px solid var(--brand); outline-offset:2px; border-radiu
   font-size:13px; font-weight:700; color:var(--brand); background:var(--brand-soft);
   border:1px solid #D8D2C0; border-radius:999px; padding:8px 18px;
 }
-/<em> ---------- 前言 ---------- </em>/
+/* ---------- 前言 ---------- */
 .preface{padding:70px 0 30px; border-top:1px solid var(--line);}
 .preface h2,.toc-page h2{
   font-size:26px; font-weight:800; margin:0 0 22px; color:var(--ink);
@@ -112,7 +112,7 @@ a:focus-visible{outline:3px solid var(--brand); outline-offset:2px; border-radiu
   display:flex; gap:10px; padding:4px 0 4px 14px; font-size:14.5px; color:var(--ink-soft);
 }
 .toc-page .t-ch .n{color:var(--faint); font-family:Inter,sans-serif; font-size:12.5px; min-width:44px; padding-top:3px;}
-/<em> ---------- 分篇/分册 ---------- </em>/
+/* ---------- 分篇/分册 ---------- */
 .part-divider{
   min-height:88vh; display:flex; align-items:center; justify-content:center;
   margin:0 -40px; padding:60px 40px;
@@ -134,7 +134,7 @@ a:focus-visible{outline:3px solid var(--brand); outline-offset:2px; border-radiu
 .vol-name{font-size:15px; font-weight:800; color:var(--faint); letter-spacing:.1em;}
 .vol-title{font-size:30px; font-weight:900; color:var(--ink); margin:6px 0 14px;}
 .vol-chapters{font-family:Inter,"PingFang SC",sans-serif; font-size:13.5px; color:var(--ink-soft); line-height:1.8;}
-/<em> ---------- 章节 ---------- </em>/
+/* ---------- 章节 ---------- */
 .chapter{padding:44px 0 20px;}
 .chapter-head{
   margin:0 0 28px; padding-bottom:18px; border-bottom:3px solid var(--ink);
@@ -192,12 +192,12 @@ a:focus-visible{outline:3px solid var(--brand); outline-offset:2px; border-radiu
   display:block; text-align:right; font-family:Inter,"PingFang SC",sans-serif;
   font-size:12.5px; color:var(--faint); margin:34px 0 10px;
 }
-/<em> ---------- footer ---------- </em>/
+/* ---------- footer ---------- */
 .book-footer{
   border-top:1px solid var(--line); margin-top:60px; padding:30px 0 60px;
   font-family:Inter,"PingFang SC",sans-serif; font-size:13px; color:var(--faint); line-height:1.9;
 }
-/<em> ---------- responsive ---------- </em>/
+/* ---------- responsive ---------- */
 @media (max-width:1024px){
   #sidebar{transform:translateX(-100%); transition:transform .25s ease; box-shadow:0 0 30px rgba(0,0,0,.15);}
   #sidebar.open{transform:translateX(0);}
