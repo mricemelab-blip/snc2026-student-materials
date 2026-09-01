@@ -1,0 +1,1620 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SNC 运动健身营养咨询师线上班 · Day1 学员手册 · 组长批改版（2026年9月 · 第一期）</title>
+<style>
+:root{
+  --paper:#fffdf8;
+  --bg:#faf8f3;
+  --ink:#2a2925;
+  --ink-soft:#605e57;
+  --brand:#3f6a63;
+  --accent:#9a6a3d;
+  --line:#dcd5c6;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);
+  font-family:"Songti SC","STSong","SimSun","Noto Serif CJK SC",serif;
+  font-size:12pt;line-height:1.75;}
+h1,h2,h3,h4,h5,.sans,th,.tag,label,.ph,.rh,.ftitle,.lab,.chip{
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC",sans-serif;}
+
+/* ===== 屏幕上的 A4 纸张 ===== */
+.page{width:210mm;min-height:296mm;margin:8mm auto;background:var(--paper);
+  padding:15mm 14mm 16mm;box-shadow:0 2px 16px rgba(60,50,30,.14);position:relative;
+  border-top:3px solid var(--brand);}
+.page h2{font-size:19pt;color:var(--brand);margin:0 0 2mm;letter-spacing:1px;}
+.page .sub{color:var(--ink-soft);font-size:10.5pt;margin:0 0 5mm;
+  font-family:"PingFang SC","Microsoft YaHei",sans-serif;}
+.runhead{position:absolute;top:6mm;right:14mm;font-size:8.5pt;color:var(--ink-soft);
+  font-family:"PingFang SC","Microsoft YaHei",sans-serif;letter-spacing:.5px;}
+
+/* ===== 通用排版 ===== */
+p{margin:4px 0 8px;}
+.small{font-size:9.5pt;color:var(--ink-soft);}
+.note{background:#f4f0e4;border-left:4px solid var(--accent);padding:7px 12px;
+  margin:8px 0;font-size:10.5pt;line-height:1.7;}
+.block{margin:7mm 0 5mm;}
+.block h3{font-size:13pt;color:var(--brand);margin:6mm 0 2.5mm;
+  border-left:5px solid var(--brand);padding-left:8px;line-height:1.35;}
+.block h3 .ref{float:right;font-size:9pt;color:var(--ink-soft);font-weight:normal;
+  font-family:"PingFang SC","Microsoft YaHei",sans-serif;}
+.rh{font-size:10.5pt;color:var(--ink);font-weight:600;margin:3.5mm 0 1.5mm;}
+.rh::before{content:"▸ ";color:var(--accent);}
+ol,ul{margin:3px 0 8px;padding-left:1.6em;}
+li{margin:2px 0;}
+
+/* ===== 组长批改版：答案块 ===== */
+.ans{border-left:3px solid var(--accent);background:#f5f1e6;border-radius:0 5px 5px 0;
+  padding:6px 11px 7px;margin:2.5mm 0;font-size:10.6pt;line-height:1.7;}
+.ans .lab2{display:block;font-family:"PingFang SC","Microsoft YaHei",sans-serif;
+  font-size:9.5pt;font-weight:700;color:var(--accent);letter-spacing:1px;margin-bottom:1mm;}
+.ans .lab2::before{content:"◆ 标准答案 ｜ ";}
+.ans .src{display:block;margin-top:1.5mm;font-family:"PingFang SC","Microsoft YaHei",sans-serif;
+  font-size:8.6pt;color:var(--accent);text-align:right;}
+.ta{display:block;background:#f5f1e6;border-left:3px solid var(--accent);
+  border-radius:0 5px 5px 0;padding:4px 9px;margin:1mm 0;font-size:10.3pt;line-height:1.62;}
+.cite{font-family:"PingFang SC","Microsoft YaHei",sans-serif;font-size:8.6pt;color:var(--accent);}
+.akey{color:var(--accent);font-weight:700;font-family:"PingFang SC","Microsoft YaHei",sans-serif;}
+.okopt{color:var(--accent);font-weight:700;}
+.okopt::before{content:"【正确答案】";font-family:"PingFang SC","Microsoft YaHei",sans-serif;}
+.wrong-opt{color:var(--ink-soft);}
+.judge{font-family:"PingFang SC","Microsoft YaHei",sans-serif;font-weight:700;color:var(--accent);}
+/* 批改要点框 */
+.grade{margin:4.5mm 0 2mm;border:1.4px solid var(--brand);border-radius:6px;
+  background:#eef4f2;padding:7px 12px 9px;break-inside:avoid-page;}
+.grade .gt{font-family:"PingFang SC","Microsoft YaHei",sans-serif;font-weight:700;
+  color:var(--brand);font-size:10.5pt;margin-bottom:1.5mm;letter-spacing:1px;}
+.grade .gt::before{content:"■ ";}
+.grade ul{margin:0;padding-left:1.35em;}
+.grade li{font-size:10pt;margin:1mm 0;line-height:1.6;}
+/* 保密警示带 */
+.warn{background:#f7ece1;border:1.4px solid var(--accent);border-radius:6px;
+  padding:6px 12px;font-family:"PingFang SC","Microsoft YaHei",sans-serif;
+  font-size:10.5pt;color:#7a4f28;text-align:center;margin:3mm 0;font-weight:700;
+  letter-spacing:2px;break-inside:avoid-page;}
+.warn-sm{display:inline-block;background:#f7ece1;border:1px solid var(--accent);
+  border-radius:4px;padding:1px 8px;font-family:"PingFang SC","Microsoft YaHei",sans-serif;
+  font-size:9pt;color:#7a4f28;font-weight:700;letter-spacing:1px;}
+
+/* ===== 空框 / 框架图（答案版：框内直接呈现答案） ===== */
+.frame{border:1.6px dashed var(--line);border-radius:6px;padding:7px 10px 9px;
+  margin:3mm 0;background:rgba(255,255,255,.55);}
+.frame .ftitle{font-size:10pt;color:var(--brand);font-weight:700;margin-bottom:2mm;
+  letter-spacing:.5px;}
+.frame .ftitle .hint{float:right;font-weight:normal;color:var(--ink-soft);font-size:9pt;}
+.box-row{display:flex;gap:8px;margin:2mm 0;}
+.box-row .box{flex:1;border:1.2px solid var(--line);border-radius:5px;padding:5px 8px;
+  min-height:12mm;background:#fffdf8;}
+.box .bt{font-family:"PingFang SC","Microsoft YaHei",sans-serif;font-size:10pt;
+  font-weight:700;color:var(--ink);margin-bottom:1mm;}
+.box .bt small{color:var(--ink-soft);font-weight:normal;}
+.box .ta{margin:0.5mm 0;}
+
+/* 金字塔 */
+.pyr{margin:2mm auto;width:88%;}
+.pyr .lvl{margin:0 auto 1.5mm;border:1.2px solid var(--line);border-radius:4px;
+  padding:3px 8px;display:flex;align-items:center;gap:8px;min-height:11mm;
+  background:#fffdf8;}
+.pyr .lvl .lv{font-family:"PingFang SC","Microsoft YaHei",sans-serif;font-weight:700;
+  color:var(--brand);font-size:10.5pt;min-width:5.5em;}
+.pyr .lvl .lans{font-size:10.3pt;}
+
+/* 时间线 */
+.timeline{display:flex;gap:6px;margin:2mm 0;flex-wrap:wrap;}
+.timeline .node{flex:1;min-width:26mm;border:1.2px solid var(--line);border-radius:5px;
+  padding:4px 6px;background:#fffdf8;}
+.timeline .node .yr{font-family:"PingFang SC","Microsoft YaHei",sans-serif;font-weight:700;
+  color:var(--accent);font-size:10pt;text-align:center;border-bottom:1px dashed var(--line);
+  padding-bottom:1mm;margin-bottom:1mm;}
+.timeline .node .ta{font-size:9.6pt;padding:3px 6px;}
+
+/* ===== 表格 ===== */
+table.grid{width:100%;border-collapse:collapse;margin:2.5mm 0;font-size:10.5pt;}
+table.grid th,table.grid td{border:1px solid var(--line);padding:4px 7px;vertical-align:middle;}
+table.grid th{background:#f1ede2;font-weight:600;text-align:left;line-height:1.45;}
+table.grid td.lab{background:#f7f4ea;font-family:"PingFang SC","Microsoft YaHei",sans-serif;
+  font-weight:600;white-space:nowrap;color:var(--ink);}
+td .ta{margin:0;}
+
+/* 选项 */
+.opts{margin:2mm 0 3mm;padding-left:2mm;}
+.opts label{display:block;margin:1mm 6mm 1mm 0;font-size:11pt;
+  font-family:"Songti SC","SimSun",serif;}
+.qitem{margin:5mm 0;}
+.qitem .qno{font-family:"PingFang SC","Microsoft YaHei",sans-serif;font-weight:700;
+  color:var(--brand);}
+
+/* 封面 */
+.cover{min-height:268mm;display:flex;flex-direction:column;}
+.cover .band{margin:12mm 0 5mm;border-top:2px solid var(--brand);border-bottom:2px solid var(--brand);
+  padding:5mm 0;text-align:center;}
+.cover .kicker{font-family:"PingFang SC","Microsoft YaHei",sans-serif;color:var(--accent);
+  letter-spacing:4px;font-size:11pt;}
+.cover h1{font-size:30pt;color:var(--brand);margin:4mm 0 2mm;letter-spacing:2px;}
+.cover .day{font-size:15pt;color:var(--ink);margin-bottom:2mm;}
+.cover .theme{font-size:12.5pt;color:var(--ink-soft);}
+.cover .meta{margin:6mm auto;width:86%;}
+.cover .meta .line{display:flex;gap:8px;margin:3mm 0;align-items:baseline;
+  font-family:"PingFang SC","Microsoft YaHei",sans-serif;font-size:11pt;}
+.cover .meta .line span{white-space:nowrap;color:var(--ink);font-weight:600;}
+.cover .meta .line .fillans{flex:1;color:var(--ink-soft);}
+.cover .scope{margin:5mm 0;}
+.cover .scope .chip{display:inline-block;border:1px solid var(--line);border-radius:20px;
+  padding:2px 12px;margin:1.5mm 3px;font-size:10pt;color:var(--brand);background:#f7f4ea;}
+.cover .foot{margin-top:auto;font-size:9.5pt;color:var(--ink-soft);
+  border-top:1px solid var(--line);padding-top:3mm;}
+
+/* 六宫格 */
+.six{display:grid;grid-template-columns:1fr 1fr;gap:4mm;}
+.six .cell{border:1.4px solid var(--line);border-radius:6px;padding:4px 8px 6px;
+  background:#fffdf8;}
+.six .cell h4{margin:1mm 0 2mm;color:var(--brand);font-size:11pt;border-bottom:1px dashed var(--line);
+  padding-bottom:1mm;}
+.six .cell .ta{font-size:9.8pt;}
+.six .cell .dun{margin-top:1.5mm;font-size:9.5pt;color:var(--accent);
+  font-family:"PingFang SC","Microsoft YaHei",sans-serif;font-weight:600;}
+
+/* 打印 */
+@page{size:A4;margin:13mm 12mm;}
+@media print{
+  html,body{background:#fff;font-size:11pt;}
+  .page{width:auto;min-height:auto;margin:0;padding:0;box-shadow:none;
+    page-break-after:always;border-top:none;}
+  .page:last-child{page-break-after:auto;}
+  .runhead{top:4mm;right:12mm;}
+  table.grid th,.note,.frame .ftitle,.pyr .lvl,.box,.timeline .node,.six .cell,
+  table.grid td.lab,.cover .chip,.ans,.ta,.grade,.warn{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .block,.frame,table.grid,.six .cell,.ans,.grade,.warn{break-inside:avoid-page;}
+  a{color:inherit;text-decoration:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- ================= 封面 ================= -->
+<section class="page cover">
+  <div class="runhead">SNC 线上班 · 第一期 · Day1 学员手册 · <span class="warn-sm">组长批改版 · 请勿外传</span></div>
+  <div class="warn">组长批改版 · 仅供组长 / 助教批改使用 · 请勿外传或转发学员</div>
+  <div class="band">
+    <div class="kicker">SNC 运动健身营养咨询师 · 线上班</div>
+    <h1>Day 1 学员手册</h1>
+    <div class="day" style="color:var(--accent);font-weight:700;">组长批改版（标准答案与批改要点）</div>
+    <div class="day">2026 年 9 月 · 第一期（内测班）</div>
+    <div class="theme">今日主题：科学基础与评估</div>
+  </div>
+
+  <div class="meta">
+    <div class="line"><span>使用说明：</span><span class="fillans">本版与学员版页码、板块顺序完全一致；学员版每个填写位置均已填入标准答案。</span></div>
+    <div class="line"><span>答案样式：</span><span class="fillans">暖铜色左边框 + 浅米金底为标准答案块；块末小字为教材定位（章节号）。</span></div>
+    <div class="line"><span>批改要点：</span><span class="fillans">每个单元笔记末页设「批改要点」小框，供非讲师组长快速把握判分关键。</span></div>
+    <div class="line"><span>答案出处：</span><span class="fillans">全部答案取自教材 Ch01–Ch06 原文；教材无明确答案处标注「以课上讲授为准」。</span></div>
+  </div>
+
+  <div class="scope">
+    <p class="small" style="font-family:'PingFang SC','Microsoft YaHei',sans-serif;">今日覆盖教材章节：</p>
+    <span class="chip">Ch01 定义、边界与循证基础</span>
+    <span class="chip">Ch02 运动饮食评估</span>
+    <span class="chip">Ch03 身体成分评估</span>
+    <span class="chip">Ch04 运动人群能量需求</span>
+    <span class="chip">Ch05 能量摄入不足与 REDs</span>
+    <span class="chip">Ch06 营养生化基础</span>
+  </div>
+
+  <table class="grid" style="margin-top:3mm;">
+    <tr><th style="width:26%;">时间</th><th>日程</th></tr>
+    <tr><td class="lab">09:00–09:15</td><td>开场导览：课程定位、手册用法与今日路线</td></tr>
+    <tr><td class="lab">09:15–10:30</td><td>Ch01 定义、边界与循证基础</td></tr>
+    <tr><td class="lab">10:45–11:25</td><td>Ch02 运动饮食评估</td></tr>
+    <tr><td class="lab">11:25–12:00</td><td>Ch03 身体成分评估</td></tr>
+    <tr><td class="lab">13:00–13:45</td><td>Ch04 运动人群能量需求</td></tr>
+    <tr><td class="lab">13:45–14:30</td><td>Ch05 能量摄入不足与 REDs</td></tr>
+    <tr><td class="lab">14:45–16:15</td><td>Ch06 营养生化基础</td></tr>
+    <tr><td class="lab">16:15–17:00</td><td>复盘研讨：章末思考题、EA 计算作业、Ch07/Ch08 预习布置</td></tr>
+  </table>
+
+  <div class="foot">
+    本手册为 Day1 课程学员手册的组长批改版：所有空白区域已按课程教材 Ch01–Ch06 原文填入标准答案，
+    并在每个单元末尾附批改要点。标准答案仅用于组长与助教批改作业、组织研讨，请勿外传至学员或任何外部渠道；
+    学员手中仍为不含答案的空白版。批改时如发现学员答案与本版冲突，以教材原文与讲师当堂讲授为准。
+  </div>
+</section>
+
+<!-- ================= 使用说明 ================= -->
+<section class="page">
+  <div class="runhead">使用说明 ｜ <span class="warn-sm">组长批改版 · 请勿外传</span></div>
+  <h2>使用说明</h2>
+  <p class="sub">这本手册怎么陪学员度过 Day1（本版已附标准答案，供组长对照）</p>
+
+  <div class="warn">组长批改版 · 仅供组长 / 助教批改使用 · 请勿外传</div>
+
+  <p>这本手册是 Day1 全天课程的学习工作台，按照<strong>"课前 — 课中 — 课后"</strong>三个环节设计。
+  课前的预习单帮助学员带着自己的问题进入课堂；课中的笔记页已经印好讲师的讲授节奏、表格框架与关键图示的空框；
+  课后的复盘页用来检验学习效果。<strong>本批改版在每个学员填写位置均已按教材原文给出标准答案，组长批改时逐位对照即可。</strong></p>
+
+  <div class="block">
+    <h3>一、课前：先做预习单与前测</h3>
+    <p>建议在开课前一天完成，用时约 90 分钟。手册中为 Ch01–Ch06 各准备了一份课前预习单，每份包含三部分：
+    3 个引导问题、术语预填表（11–12 个术语）、1 个常见误区判断。另有前测 5 道选择题。</p>
+    <div class="ans"><span class="lab2">批改提示</span>
+    引导问题答案为开放性要点题，按要点给分，不要求与标准答案逐字一致；术语表以中文释义准确为得分点（英文已印好）；
+    6 个误区判断标准答案均为<strong>「错」</strong>，理由要点见各预习单订正区。前测标准答案：<span class="akey">1-B、2-B、3-B、4-C、5-C</span>，解析见下一页。
+    <span class="src">批改总览（依据教材 Ch01–Ch06）</span></div>
+  </div>
+
+  <div class="block">
+    <h3>二、课中：跟着节奏填骨架</h3>
+    <p>讲师按八个时段推进，笔记页与日程一一对应。关键表格、证据金字塔、T0–T5 分级金字塔、TEE 四组分、
+    EA 计算公式、三大代谢通路等框架图均留有空框，学员边听边填。</p>
+    <div class="ans"><span class="lab2">批改提示</span>
+    本版笔记页的空框、空表、空流程内均已填入教材标准内容；关键数字（如低报 19%、EI:BMR 截断值 1.35、
+    EA 阈值 45/30、ExEC 约 39%）必须与教材一致，数字错误按错处理。每个单元末页的<strong>「批改要点」</strong>框列出了该单元最高频的失分点。
+    <span class="src">批改总览（依据教材 Ch01–Ch06）</span></div>
+  </div>
+
+  <div class="block">
+    <h3>三、课后：复盘、后测与疑问登记</h3>
+    <p>课程结束后学员依次完成：当日复盘六宫格默写、后测 5 题（与前测同题）、错题与疑问登记。
+    后测标准答案与前测相同：<span class="akey">1-B、2-B、3-B、4-C、5-C</span>。</p>
+  </div>
+
+  <div class="note">
+    <strong>本版答案来源声明：</strong>所有标准答案、数字与术语释义均逐条取自课程教材 Ch01–Ch06 原文，
+    答案块末尾的小字标注了对应章节（如「教材 Ch05 §5.1.2」），关键数字附表号（如表 5.1）。
+    课堂练习中需代入讲师当堂数据的部分，已给出判分框架并标注「以课上讲授为准」。<br>
+    <strong>保密要求：</strong>本版仅供组长与助教批改、组织研讨使用，请勿外传学员；批改时请引导学员先独立订正，再对照本版。
+  </div>
+</section>
+
+<!-- ================= 前测 ================= -->
+<section class="page">
+  <div class="runhead">课前自测 · 前测 ｜ <span class="warn-sm">组长批改版 · 请勿外传</span></div>
+  <h2>课前自测（前测）· 标准答案</h2>
+  <p class="sub">5 道选择题 ｜ 标准答案：1-B ｜ 2-B ｜ 3-B ｜ 4-C ｜ 5-C</p>
+
+  <div class="qitem">
+    <p><span class="qno">第 1 题</span>　一位规律力量训练两年的会员，肌肉量明显高于常人，BMI 为 27.5，体脂率约 15%。
+    仅凭 BMI 把他判定为"超重、需要减脂"，这个判断：</p>
+    <div class="opts">
+      <label class="wrong-opt">A. 正确，BMI 是国际通用的超重与肥胖判定标准</label>
+      <label class="okopt">B. 错误，BMI 不区分肌肉与脂肪，对肌肉型训练者不适用</label>
+      <label class="wrong-opt">C. 要看他的腰围是否超标才能下结论</label>
+      <label class="wrong-opt">D. 只要体重长期稳定，就不存在任何问题</label>
+    </div>
+    <div class="ans"><span class="lab2">解析</span>BMI 只由身高体重计算，不区分肌肉与脂肪，对规律力量训练、肌肉量明显高于常人者会系统性高估其肥胖程度；
+    教材明确 BMI 属于"证据不足（粗估方法）"，不用于训练者的体成分评估。C 的腰围可作辅助但不改变 BMI 本身失效；D 与事实无关。
+    <span class="src">教材 Ch03 §3.2.4 证据不足（粗估方法）：BMI 与围度公式</span></div>
+  </div>
+
+  <div class="qitem">
+    <p><span class="qno">第 2 题</span>　一位会员连续记录了 7 天饮食，教练用 EI:BMR 比值对记录进行筛查，结果为 1.20。
+    对这个数值最恰当的理解是：</p>
+    <div class="opts">
+      <label class="wrong-opt">A. 会员在撒谎、态度不配合，应直接批评</label>
+      <label class="okopt">B. 记录提示存在可疑低报，需要进一步核实；它是定性筛查工具，不是测谎结论</label>
+      <label class="wrong-opt">C. 说明这位会员基础代谢很低，吃得少是正常的</label>
+      <label class="wrong-opt">D. 说明这份饮食记录非常精确，可以直接用于配餐</label>
+    </div>
+    <div class="ans"><span class="lab2">解析</span>Black（2000）截断值：EI:BMR 低于 1.35 提示可疑系统性低报。1.20 &lt; 1.35，说明记录值偏低、需要用体重趋势、
+    训练日志与生化指标进一步交叉核实；但该比值是<strong>定性筛查工具，不是测谎仪</strong>，低报主要是方法学误差（自报平均低估约 19%），
+    不能据此指责会员撒谎，更不能说明记录精确或 BMR 低。
+    <span class="src">教材 Ch02 §2.3.2 能量摄入的校验：EI:BMR 截断值</span></div>
+  </div>
+
+  <div class="qitem">
+    <p><span class="qno">第 3 题</span>　计算能量可利用性（Energy Availability, EA）时，公式中的分母应当使用：</p>
+    <div class="opts">
+      <label class="wrong-opt">A. 总体重（kg）</label>
+      <label class="okopt">B. 去脂体重 / 瘦体重 FFM（kg）</label>
+      <label class="wrong-opt">C. 身高（m）</label>
+      <label class="wrong-opt">D. 基础代谢率（kcal/d）</label>
+    </div>
+    <div class="ans"><span class="lab2">解析</span>EA =（EI − ExEE）÷ FFM（kg）。分母必须是去脂体重 FFM，因为 FFM 是代谢活跃组织、是能量需求的决定者；
+    脂肪组织代谢活性低，用体重做分母会随体脂率失真。这是本单元最核心的计算纪律。
+    <span class="src">教材 Ch05 §5.1.2 能量可用性的定义与计算</span></div>
+  </div>
+
+  <div class="qitem">
+    <p><span class="qno">第 4 题</span>　关于三大营养素在体内的相互转化，下列说法正确的是：</p>
+    <div class="opts">
+      <label class="wrong-opt">A. 储存的脂肪可以大量转变为葡萄糖，供给大脑使用</label>
+      <label class="wrong-opt">B. 碳水化合物吃多变胖，主要是靠碳水在体内变成脂肪</label>
+      <label class="okopt">C. 脂肪酸的碳骨架不能净转变为葡萄糖，丙酮酸脱氢酶（PDH）催化的反应不可逆</label>
+      <label class="wrong-opt">D. 蛋白质在任何情况下都不能转化为葡萄糖</label>
+    </div>
+    <div class="ans"><span class="lab2">解析</span>PDH 催化丙酮酸 → 乙酰 CoA 的反应不可逆，脂肪酸 β-氧化产物为乙酰 CoA，不能逆行净生成葡萄糖
+    （仅脂肪中甘油部分可经糖异生产少量糖，甘油仅占甘油三酯重量约 5%–10%）。A 错：脂肪酸不能大量变糖；
+    B 错：碳水过量致胖的主因是碳水氧化优先、脂肪氧化被抑制后膳食脂肪直接储存，DNL（从头脂肪生成）日常对脂肪储存贡献仅约 5%；
+    D 错：生糖氨基酸可经糖异生转化为葡萄糖。
+    <span class="src">教材 Ch06 §6.3.4 三大营养素互转图（核心图）；§6.3.5 相关结论</span></div>
+  </div>
+
+  <div class="qitem">
+    <p><span class="qno">第 5 题</span>　一项新研究发现：某补剂服用后，受试者运动后 mTOR 磷酸化水平显著升高，
+    急性肌肉蛋白合成（MPS）也上升。在判断"该补剂能否长期促进肌肥大"时，下列哪类证据的权重最高：</p>
+    <div class="opts">
+      <label class="wrong-opt">A. 这项机制研究本身，因为它解释了原理</label>
+      <label class="wrong-opt">B. 一位知名教练在社交媒体上分享的使用经验</label>
+      <label class="okopt">C. 汇总了多项随机对照试验的系统综述与 Meta 分析</label>
+      <label class="wrong-opt">D. 电商平台上该补剂的大量用户好评</label>
+    </div>
+    <div class="ans"><span class="lab2">解析</span>证据金字塔顶端（Ⅰ级）为系统综述与 Meta 分析，其权重高于单项 RCT（Ⅱ级）、专家意见与个案故事；
+    mTOR 磷酸化、急性 MPS 升高等机制/急性指标只说明生物学合理性，不能直接外推为长期肌肥大结局（"机制替代结局"是决策矩阵重点防范的错误）。
+    教练经验与用户好评属于个案/营销信号，权重最低。
+    <span class="src">教材 Ch01 §1.5.1 证据金字塔：研究设计的层级；§1.6 循证决策矩阵</span></div>
+  </div>
+
+  <div class="note">
+    批改要点：前测不计分，用于对照后测增益。凡学员前测第 3 题选 A（用体重）或第 4 题选 A/B，
+    说明 Ch05 EA 分母、Ch06 互转通路是其薄弱点，课中笔记对应板块重点检查。
+  </div>
+</section>
+
+<!-- ================= 课前预习单 Ch01 ================= -->
+<section class="page">
+  <div class="runhead">课前预习单（一）· Ch01 ｜ <span class="warn-sm">组长批改版 · 请勿外传</span></div>
+  <h2>课前预习单（一）· 标准答案</h2>
+  <p class="sub">Ch01 定义、边界与循证基础 ｜ 引导问题按要点给分，不要求逐字一致</p>
+
+  <div class="block">
+    <h3>A. 引导问题 · 参考答案</h3>
+    <p class="rh">问题 1：运动营养师、临床营养师、健身教练三者的工作边界？会员拿体检报告来配餐，什么情况必须转介？</p>
+    <div class="ans"><span class="lab2">答案要点</span>
+    运动营养师面向健康训练者与运动员，目标是运动表现与训练适应，提供个体化膳食评估、营养周期化、比赛日策略、RED-S 筛查与补剂评估；
+    临床营养师（MNT，医学营养治疗）面向疾病状态，在医院/诊所做疾病管理（如糖尿病血糖控制、进食障碍治疗）；健身教练（PT）仅限一般健康饮食教育，
+    不得推荐回避食物组、推荐补剂、提供疾病相关特异性营养建议或制定与膳食指南不一致的个体化饮食计划。
+    会员拿体检报告来配餐时，凡涉及疾病诊断与治疗、异常化验指标，均超出咨询边界；必须转介的红旗：月经紊乱超过 3 个周期、
+    骨密度低于年龄预期、疑似或确诊进食障碍、血糖异常或严重电解质紊乱。
+    <span class="src">教材 Ch01 §1.1.2 与相邻学科的关系；§1.1.4 多学科协作框架；§1.4.2 不同专业人员的角色与边界</span></div>
+
+    <p class="rh">问题 2：刷到"最新研究表明某补剂能显著增肌"的短视频，按什么步骤判断可不可信？</p>
+    <div class="ans"><span class="lab2">答案要点</span>
+    按循证决策路径追问：① 研究类型与证据等级——是系统综述/Meta、RCT，还是体外/动物实验或单项小样本研究，机制研究（如 mTOR、急性 MPS）只能说明生物学合理性，
+    不能外推长期肌肥大；② 人群与结局——受试者是否训练者、剂量与时长、结局是否是长期身体成分而非急性指标；③ 质量评价——RCT 用 RoB 2.0、观察性研究用 NOS、
+    系统综述用 AMSTAR 2.0；④ 是否有立场声明（IOC/ISSN/AND）背书；⑤ 识别营销红旗——用个案代替系统证据、阴谋论框架、混淆动物与人体结果、"多多益善"无剂量概念、
+    绝对化承诺。警惕选择性引用、相关当因果、自然主义谬误、单一研究泛化、基础率忽视五种认知偏差。
+    <span class="src">教材 Ch01 §1.5.1 证据金字塔；§1.5.3 批判性阅读工具；§1.5.4 认知偏差；§1.5.5 社交媒体识别框架</span></div>
+
+    <p class="rh">问题 3：专家意见和个人案例排在证据金字塔最底层，是否毫无用处？适合扮演什么角色？</p>
+    <div class="ans"><span class="lab2">答案要点</span>
+    不是毫无用处，而是决策权重最低。证据金字塔 Ⅴ 层为专家意见、病例报告与个案故事，在证据不完整（新问题、罕见场景、伦理上无法做 RCT 的营养问题）时，
+    立场声明可整合专家判断、提供方向性指引；个案故事适合用于提出假设、识别异常信号和沟通教学，但不能作为普适结论或处方依据。
+    以蛋白质时机为例：机制与急性研究提示"窗口"存在，但日总蛋白达标后窗口增益很小（Schoenfeld &amp; Aragon 2018），长期训练研究与 Meta 分析权重更高。
+    <span class="src">教材 Ch01 §1.5.1 证据金字塔；§1.6 循证决策矩阵（证据直接性）；Ch06 §6.5.2 边界说明</span></div>
+  </div>
+
+  <div class="block">
+    <h3>B. 术语预填表 · 标准答案</h3>
+    <table class="grid">
+      <tr><th style="width:17%;">缩写 / 术语</th><th style="width:43%;">英文全称</th><th>中文含义（标准答案）</th></tr>
+      <tr><td class="lab">MNT</td><td>Medical Nutrition Therapy</td><td class="ta">医学营养治疗：由临床营养师在医疗场景下、针对疾病状态实施的营养治疗与干预</td></tr>
+      <tr><td class="lab">LEA</td><td>Low Energy Availability</td><td class="ta">低能量可利用性：扣除运动消耗后留给身体生理功能的能量低于需求状态，是 REDs 的已知致因</td></tr>
+      <tr><td class="lab">RED-S / REDs</td><td>Relative Energy Deficiency in Sport</td><td class="ta">运动相对能量不足综合征：长期 LEA 导致的多系统功能损害（2023 IOC 改称为 REDs 综合征）</td></tr>
+      <tr><td class="lab">MDT</td><td>Multidisciplinary Team</td><td class="ta">多学科团队：由运动营养师、医生、心理师等组成的协同处理团队，REDs 高风险个案须转介</td></tr>
+      <tr><td class="lab">RD / RDN</td><td>Registered Dietitian / Registered Dietitian Nutritionist</td><td class="ta">注册营养师：美国 AND、加拿大 DC、英国 BDA/HCPC 管理的核心注册资质，具最宽营养执业范围</td></tr>
+      <tr><td class="lab">CISSN</td><td>Certified Sports Nutritionist (ISSN)</td><td class="ta">国际运动营养学会（ISSN）认证运动营养师：循证运动营养咨询与补剂评估，需本科及相关背景</td></tr>
+      <tr><td class="lab">T0–T5</td><td>Exercise participation classification framework (McKay et al., 2022)</td><td class="ta">训练者六层分类框架：T0 静坐者→T1 休闲活跃者→T2 训练/发展级→T3 高度训练/全国级→T4 精英/国际级→T5 世界级</td></tr>
+      <tr><td class="lab">RCT</td><td>Randomized Controlled Trial</td><td class="ta">随机对照试验：受试者随机分组、最大程度控制混杂，证据金字塔 Ⅱ 级，被视为临床研究金标准</td></tr>
+      <tr><td class="lab">SR / Meta</td><td>Systematic Review / Meta-analysis</td><td class="ta">系统综述 / Meta 分析：系统检索并合并多项研究结果，证据金字塔 Ⅰ 级，权重最高</td></tr>
+      <tr><td class="lab">GRADE</td><td>Grading of Recommendations Assessment, Development and Evaluation</td><td class="ta">证据质量与推荐强度分级系统：质量分高、中、低、极低四级；推荐分强推荐与弱推荐</td></tr>
+      <tr><td class="lab">EBN</td><td>Evidence-Based Nutrition</td><td class="ta">循证营养（学）：提出问题→检索与评价证据→结合对象与场景决策的营养实践方法</td></tr>
+      <tr><td class="lab">PICO</td><td>Population, Intervention, Comparison, Outcome</td><td class="ta">循证提问四要素：人群、干预、对照、结局，用于把临床/咨询问题结构化为可检索的研究问题</td></tr>
+    </table>
+    <p class="cite">教材 Ch01 §1.4.1 资质体系；§1.3.1 McKay 分层（表 1.2）；§1.5.1–§1.5.2；Ch05 §5.1、§5.5</p>
+  </div>
+
+  <div class="block">
+    <h3>C. 常见误区 · 标准答案</h3>
+    <div class="frame">
+      <div class="ftitle">误区陈述</div>
+      <p>「运动营养没什么特殊的，就是把健康饮食的建议搬到健身房和训练场上；反正凡是叫"营养师"的资质，能做的事情都一样。」</p>
+      <p class="judge">正确判断：错（×）</p>
+      <div class="ans"><span class="lab2">理由（标准解析）</span>
+      两层均错。① 运动营养不是健康饮食建议的搬运：公共健康营养输出人群层面普适推荐，运动营养输出个体层面、精确到宏量营养素克数与摄入时机的方案，
+      研究问题是"在特定运动场景中何种策略优化表现"；② 资质不通用：RD/RDN、CISSN、IOC Diploma、SENr、AccSD、中国注册营养师分属不同认证主体，
+      认证路径、法律属性与执业边界均不同，互不自动互认；健身教练的营养建议更有明确禁区。
+      <span class="src">教材 Ch01 §1.1.2 与相邻学科的关系；§1.4.1 资质体系（表 1.3）；§1.4.2 角色与边界</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 课前预习单 Ch02 ================= -->
+<section class="page">
+  <div class="runhead">课前预习单（二）· Ch02 ｜ <span class="warn-sm">组长批改版 · 请勿外传</span></div>
+  <h2>课前预习单（二）· 标准答案</h2>
+  <p class="sub">Ch02 运动饮食评估 ｜ 引导问题按要点给分</p>
+
+  <div class="block">
+    <h3>A. 引导问题 · 参考答案</h3>
+    <p class="rh">问题 1：让会员"自己记饮食"，最常见的误差来源（至少三类）？方向是估高还是估低？</p>
+    <div class="ans"><span class="lab2">答案要点</span>
+    误差来源至少三类：① 记忆偏差（回忆不全、漏记零食与加餐）；② 份量目视估算偏差（低估 20%–50%）；③ 记录行为本身的影响——霍桑效应（被观察而改变饮食）与依从差距（25%–30%），
+    称重记录低报也可达 TEE 的 10%–45%。方向是<strong>系统性低估</strong>：Capling 等 2017 年系统综述（11 项 DLW 对照研究）显示自报能量摄入平均低估约 19%（约 668 kcal/d，研究间 10%–30%），
+    在女性训练者、耐力与体重分级项目、高体型意识人群中更明显。低报是方法学误差而非态度问题。
+    <span class="src">教材 Ch02 §2.1.2 系统性低报的普遍性与人群特征；§2.1.3 测量层面的误差源；§2.5.1 方案与执行的差距</span></div>
+
+    <p class="rh">问题 2：双标水（DLW）为什么被称"金标准"？为什么无法给每位会员都做？</p>
+    <div class="ans"><span class="lab2">答案要点</span>
+    DLW 用同位素标记水（²H₂¹⁸O），通过尿液/唾液中两种同位素清除率之差计算 CO₂ 产量，进而推算自由生活状态下 1–2 周的总能量消耗（TEE），
+    不依赖主观报告、不干扰日常行为，精度约 ±5%–7%，是膳食与能量消耗评估的参照方法（A 级）。无法普及的原因：同位素与质谱检测成本高、需专业实验室、
+    周期长（约 1–2 周），只能得到总消耗、不能给出食物结构。日常实践用 B/C 级方法（3–7 天称重记录、估算日记、24h 回顾）并以体重趋势校准。
+    <span class="src">教材 Ch02 §2.2.1 方法分级框架（表 2.1）；Ch04 §4.2.1 双标水法</span></div>
+
+    <p class="rh">问题 3：女会员记录每天只吃约 1200 kcal 但几个月体重几乎不变，怀疑哪些环节？怎么核实？</p>
+    <div class="ans"><span class="lab2">答案要点</span>
+    可疑环节：① 自报低报（最常见，自报平均低估约 19%，油、坚果、酱料、饮料尤易漏）；② 份量估算误差；③ 记录期与非记录期饮食不一致（霍桑效应）；
+    ④ 活动量/NEAT 低于预期或代谢适应使消耗下降；⑤ 长期低摄入下的 LEA 与代谢下调（体重稳定不能排除 REDs）。核实方法：先算 EI:BMR（用 Cunningham 1980：BMR = 500 + 22 × FFM），
+    若 &lt; 1.35 提示可疑低报；再多源交叉验证——体重趋势、训练日志、尿氮法（蛋白，±10%–15%）等生化指标、饮食行为问卷（TFEQ-R18）；沟通以核实而非质问为原则。
+    <span class="src">教材 Ch02 §2.3.2 EI:BMR 截断值；§2.5.2 多源交叉验证；§2.7.2 自报偏差的识别与校准；Ch05 §5.7</span></div>
+  </div>
+
+  <div class="block">
+    <h3>B. 术语预填表 · 标准答案</h3>
+    <table class="grid">
+      <tr><th style="width:17%;">缩写 / 术语</th><th style="width:43%;">英文全称</th><th>中文含义（标准答案）</th></tr>
+      <tr><td class="lab">DLW</td><td>Doubly Labeled Water</td><td class="ta">双标水法：同位素示踪测自由生活 TEE 的参照方法，精度 ±5%–7%，成本高，方法分级 A 级</td></tr>
+      <tr><td class="lab">WFR</td><td>Weighed Food Record</td><td class="ta">称重食物记录：每餐食物称重记录，3–7 天为精度与依从的平衡点，方法分级 B 级</td></tr>
+      <tr><td class="lab">FFQ</td><td>Food Frequency Questionnaire</td><td class="ta">食物频率问卷：回顾长期膳食模式，不适合个体精确量化，方法分级 D 级</td></tr>
+      <tr><td class="lab">24h 回顾</td><td>24-hour Dietary Recall</td><td class="ta">24 小时膳食回顾：回忆前一天所吃食物，单次为 D 级，多次重复可升至 B 级</td></tr>
+      <tr><td class="lab">EI</td><td>Energy Intake</td><td class="ta">能量摄入：每日摄入食物的总能量（kcal/d），自报值存在系统性低报</td></tr>
+      <tr><td class="lab">ExEE</td><td>Exercise Energy Expenditure</td><td class="ta">运动能量消耗：训练/运动部分的能耗，是计算 EA 时从 EI 中扣除的部分</td></tr>
+      <tr><td class="lab">EA</td><td>Energy Availability</td><td class="ta">能量可利用性：EA =（EI − ExEE）÷ FFM，衡量扣除运动后留给生理功能的能量，单位 kcal·kg FFM⁻¹·d⁻¹</td></tr>
+      <tr><td class="lab">EI:BMR</td><td>Ratio of Energy Intake to Basal Metabolic Rate</td><td class="ta">能量摄入与基础代谢率比值：低报定性筛查指标，&lt; 1.35（Black 2000）提示可疑低报，不是测谎结论</td></tr>
+      <tr><td class="lab">霍桑效应</td><td>Hawthorne Effect</td><td class="ta">被观察者因知道自己在被记录/观察而改变行为（记录期吃得比平时少/更"干净"）</td></tr>
+      <tr><td class="lab">TFEQ-R18</td><td>Three-Factor Eating Questionnaire (R18)</td><td class="ta">三因素饮食问卷 18 题版：测认知限制性进食、无节制进食、情绪性进食三个维度</td></tr>
+      <tr><td class="lab">多源交叉验证</td><td>Multi-source cross-validation / triangulation</td><td class="ta">三角验证：饮食记录与体重趋势、训练日志、生化/行为指标互证，任何单一来源都不可全信</td></tr>
+      <tr><td class="lab">低报</td><td>Under-reporting（of energy intake）</td><td class="ta">低报：自报摄入系统性低于真实摄入，训练者平均约 19%（约 668 kcal/d），属测量误差非态度问题</td></tr>
+    </table>
+    <p class="cite">教材 Ch02 §2.1.2、§2.2.1（表 2.1）、§2.3.2、§2.5.2；Ch05 §5.1.2</p>
+  </div>
+
+  <div class="block">
+    <h3>C. 常见误区 · 标准答案</h3>
+    <div class="frame">
+      <div class="ftitle">误区陈述</div>
+      <p>「会员认真交来的饮食日记（自报记录）就等于他的真实摄入。如果记录算出来的热量和体重变化对不上，那就是执行力差、不配合。」</p>
+      <p class="judge">正确判断：错（×）</p>
+      <div class="ans"><span class="lab2">理由（标准解析）</span>
+      自报记录不等于真实摄入：双标水校验研究一致显示训练者自报能量摄入平均低估约 19%（约 668 kcal/d，研究间 10%–30%），
+      称重记录低报也可达 TEE 的 10%–45%，份量目视估算低估 20%–50%。这是记忆、份量估算与记录行为造成的<strong>系统性方法学误差</strong>，
+      不是撒谎或执行力问题。对不上时应做 EI:BMR 筛查与多源交叉验证，并以非质问方式沟通核实，而非批评会员。
+      <span class="src">教材 Ch02 §2.1.2 系统性低报；§2.1.3 测量层面误差；§2.3.2 EI:BMR 截断值</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 课前预习单 Ch03 ================= -->
+<section class="page">
+  <div class="runhead">课前预习单（三）· Ch03 ｜ <span class="warn-sm">组长批改版 · 请勿外传</span></div>
+  <h2>课前预习单（三）· 标准答案</h2>
+  <p class="sub">Ch03 身体成分评估 ｜ 引导问题按要点给分</p>
+
+  <div class="block">
+    <h3>A. 引导问题 · 参考答案</h3>
+    <p class="rh">问题 1：家用体脂秤（BIA）、皮褶厚度计、医院 DXA 测出的体脂率为何常对不上？以哪个为准、怎么解释？</p>
+    <div class="ans"><span class="lab2">答案要点</span>
+    对不上的原因：三者原理与假设不同、精度不同，且都受操作与状态影响。BIA 靠生物电阻抗推算，对水合状态极敏感（波动 ±3%–5%），个体偏差 ±4%–5%；
+    皮褶为间接推算，SEE 约 ±3%–4%，高度依赖操作者（ISAK 认证者 CV &lt; 2%，未训练者 &gt; 5%），Jackson-Pollock 公式对亚洲人偏差可 &gt; 5%；
+    DXA 为三组分方法、CV 约 1%–2%，但不同品牌间可差 3%–5%，还受机型与软件版本影响。不同方法/机型测同一人可相差 3%–7%，<strong>不可直接互比</strong>。
+    解释口径：追踪变化必须同方法、同机器、同时段、同身体状态（SOP）；纵向研究与关键判断以 DXA（或研究级 4C）为准，BIA/皮褶只作趋势参考，并先排除水分与糖原波动。
+    <span class="src">教材 Ch03 §3.2.2 DXA/Bod Pod；§3.2.3 皮褶与 BIA；§3.7.2 方法间不可互比；§3.7.1 短期波动</span></div>
+
+    <p class="rh">问题 2：FFM、LBM、MM 是同一回事吗？用错会影响哪些计算？</p>
+    <div class="ans"><span class="lab2">答案要点</span>
+    不是同一回事。FFM（去脂体重）严格扣除全部脂肪；LBM（瘦体重）概念上含约 2%–3% 必需脂肪，比 FFM 高约 1–2 kg；MM（骨骼肌量）仅指骨骼肌，
+    约为 FFM 的 50%–60%。用错直接影响下游：EA 公式分母必须是 FFM，用 LBM 代替 FFM 会使 EA 被<strong>高估约 1–2 kcal/kg/d</strong>（可能把临床 LEA 误判为安全）；
+    FFMI 用 FFM/身高²；增肌评估以 DXA ALM/ALMI 为主要指标。报告中必须注明用的是哪个指标及测量方法。
+    <span class="src">教材 Ch03 §3.1.2 FFM、LBM 与 MM 的概念辨析；Ch05 §5.1.2 EA 定义</span></div>
+
+    <p class="rh">问题 3：减脂会员每周测体脂率，这周掉 0.8%、下周涨 0.5%，应多久测一次、怎么测才算"有意义的变化"？</p>
+    <div class="ans"><span class="lab2">答案要点</span>
+    这种上下 1% 以内的波动在测量噪声内：DXA 体脂率 MDC 约 1%–2%BF、皮褶法约 3%–5%BF，小于 MDC 的变化不能判为真实改变；单日体重波动可达 ±3–5 kg
+    （糖原 1 g 结合 3–4 g 水）。建议：大众训练者每 12–16 周正式评估一次，趋势监测每 4–8 周一次；严格执行 SOP——同方法、同机器、同操作者、同时段、同水合/空腹状态；
+    看多点趋势线而非单次数值，变化须超过 MDC、结合训练目标判断，并先排除水分/糖原因素。
+    <span class="src">教材 Ch03 §3.6.1 单次评估与趋势监测；§3.6.2 评估频率；§3.7.1 短期波动与真实变化阈值</span></div>
+  </div>
+
+  <div class="block">
+    <h3>B. 术语预填表 · 标准答案</h3>
+    <table class="grid">
+      <tr><th style="width:17%;">缩写 / 术语</th><th style="width:43%;">英文全称</th><th>中文含义（标准答案）</th></tr>
+      <tr><td class="lab">4C</td><td>4-Compartment Model</td><td class="ta">四组分模型：将身体分为脂肪、骨骼矿物质、蛋白质、总水分四成分，假设最少、SEE 约 1.5%–2.5%BF，为体成分参照标准</td></tr>
+      <tr><td class="lab">FFM</td><td>Fat-Free Mass</td><td class="ta">去脂体重：体重扣除全部脂肪后的部分，是 EA 公式与 Cunningham 公式的指定变量</td></tr>
+      <tr><td class="lab">LBM</td><td>Lean Body Mass</td><td class="ta">瘦体重：概念上含约 2%–3% 必需脂肪，比 FFM 高约 1–2 kg，不可直接等同 FFM</td></tr>
+      <tr><td class="lab">MM</td><td>Skeletal Muscle Mass</td><td class="ta">骨骼肌量：仅指骨骼肌组织，约为 FFM 的 50%–60%，直接测量需 MRI/CT，实践用 DXA ALM 代理</td></tr>
+      <tr><td class="lab">ALM</td><td>Appendicular Lean Mass</td><td class="ta">四肢瘦软组织质量：DXA 区域分析输出，是骨骼肌量的金标准代理指标；除以身高²为 ALMI</td></tr>
+      <tr><td class="lab">DXA</td><td>Dual-energy X-ray Absorptiometry</td><td class="ta">双能 X 线吸收法：三组分基础上输出 FM/FFM/骨密度，CV 约 1%–2%，实践高精度参照</td></tr>
+      <tr><td class="lab">ADP（Bod Pod）</td><td>Air Displacement Plethysmography</td><td class="ta">空气置换体积描记法（Bod Pod）：测身体密度推算体脂，CV 约 1%–2%，受残余气假设与 Siri 固定密度影响</td></tr>
+      <tr><td class="lab">BIA</td><td>Bioelectrical Impedance Analysis</td><td class="ta">生物电阻抗分析：家用体脂秤原理，对水合状态敏感（波动 ±3%–5%），个体偏差 ±4%–5%，仅作趋势参考</td></tr>
+      <tr><td class="lab">Siri 方程</td><td>Siri Equation（body density → % body fat）</td><td class="ta">Siri 体脂方程：%BF = 495 / 体密度 Bd − 450，由体密度换算体脂率，假设去脂组织密度恒定</td></tr>
+      <tr><td class="lab">FFMI</td><td>Fat-Free Mass Index</td><td class="ta">去脂体重指数（Kouri 1995）：FFM(kg)/身高(m)² + 6.3×(1.80−身高m)，自然男性约 18–23、上限约 25、&gt;27 需谨慎，鉴别工具非诊断工具</td></tr>
+      <tr><td class="lab">MDC</td><td>Minimum Detectable Change</td><td class="ta">最小可检测变化：小于该幅度的波动属测量噪声；DXA 体脂率约 1%–2%BF、皮褶约 3%–5%BF</td></tr>
+      <tr><td class="lab">%BF</td><td>Percent Body Fat</td><td class="ta">体脂率：脂肪占体重的百分比；必需脂肪男约 3%–5%、女约 10%–13%</td></tr>
+    </table>
+    <p class="cite">教材 Ch03 §3.1.2、§3.2.1–§3.2.4、§3.3.1、§3.4.1、§3.7.1</p>
+  </div>
+
+  <div class="block">
+    <h3>C. 常见误区 · 标准答案</h3>
+    <div class="frame">
+      <div class="ftitle">误区陈述</div>
+      <p>「家用体脂秤每周称一次，读数掉了 1% 就说明减脂有效；在不同机构、不同机器上测出的体脂率，可以直接放在一起比较。」</p>
+      <p class="judge">正确判断：错（×）</p>
+      <div class="ans"><span class="lab2">理由（标准解析）</span>
+      两点均错。① 1% 的变化在 MDC 之内（DXA 体脂率 MDC 约 1%–2%BF，BIA/皮褶更大），加上水合与糖原导致的单日体重波动 ±3–5 kg，
+      周与周之间 0.5%–1% 的起伏是噪声，不代表减脂有效；② 不同方法、不同品牌机型测同一人可相差 3%–7%（DXA 品牌间差 3%–5%、Jackson-Pollock 对亚洲人偏差 &gt; 5%），
+      跨机构跨机器数字不可直接比较。正确做法是同方法、同机器、同条件下按 4–8 周（大众 12–16 周正式评估）看趋势，变化须超 MDC。
+      <span class="src">教材 Ch03 §3.7.1 短期波动与真实变化阈值；§3.7.2 方法间不可互比；§3.6.2 评估频率</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 课前预习单 Ch04 ================= -->
+<section class="page">
+  <div class="runhead">课前预习单（四）· Ch04 ｜ <span class="warn-sm">组长批改版 · 请勿外传</span></div>
+  <h2>课前预习单（四）· 标准答案</h2>
+  <p class="sub">Ch04 运动人群能量需求 ｜ 引导问题按要点给分</p>
+
+  <div class="block">
+    <h3>A. 引导问题 · 参考答案</h3>
+    <p class="rh">问题 1：BMR 和 RMR 在测量条件上有何不同？日常配餐该用哪个？</p>
+    <div class="ans"><span class="lab2">答案要点</span>
+    BMR（基础代谢率）条件最严格：过夜禁食 10–12 小时、实验室过夜、恒温 20–25℃ 清醒静卧；RMR（静息代谢率）条件较宽松：在家睡眠后送至实验室、
+    测前静息 15–30 分钟。两者数值差异通常 ≤5%–10%，方向不定。日常配餐实践中<strong>一律使用 RMR</strong>（BMR 条件在现实中几乎无法复现）；
+    有条件用间接量热实测，无条件用 Cunningham 1991（RMR = 21.6 × FFM + 370）估算。
+    <span class="src">教材 Ch04 §4.1.1 BMR 与 RMR：概念辨析与实践选择；§4.3.4 Cunningham 公式</span></div>
+
+    <p class="rh">问题 2：TEE 由哪几部分构成？"今天多烧 500 kcal 所以全天净亏 500 kcal"为何可能落空？</p>
+    <div class="ans"><span class="lab2">答案要点</span>
+    TEE = BMR/RMR + TEF（食物热效应）+ EAT（运动活动产热）+ NEAT（非运动活动产热）。"多烧多亏"落空的原因是身体存在<strong>运动能量补偿（ExEC）</strong>：
+    运动后其他组分代偿性下降——NEAT 减少、食欲上升、RMR/SMR 适应性下调。Knaan 等（2026，N=16 超重久坐成人单臂干预研究）显示平均 ExEC 约 39%（个体差异 CV 高达 116%），
+    即每 100 kcal 运动消耗约 39 kcal 被"节省"回来，SMR 约 −105 kcal/d、RMR 约 −87 kcal/d。因此不能假设运动 X kcal = 净缺口 X kcal；减脂应分阶段设缺口
+    （初始 −300 至 −500 kcal/d），并用体重趋势校准。
+    <span class="src">教材 Ch04 §4.1.2 TEE 的四组分结构；§4.5.2 Pontzer 约束 TEE 模型与运动能量补偿</span></div>
+
+    <p class="rh">问题 3：给肌肉量很高的力量训练者估算代谢，公式只问体重身高年龄、不考虑肌肉量，结果偏高还是偏低？</p>
+    <div class="ans"><span class="lab2">答案要点</span>
+    会<strong>低估</strong>。RMR 的主要决定者是代谢活跃的 FFM，Mifflin 等只用体重/身高/年龄的公式开发样本以普通人为主体，对高 FFM、肌肉量明显偏高的训练者
+    通常低估 RMR 约 5%–15%。因此训练者首选基于 FFM 的 Cunningham 1991（RMR = 21.6 × FFM + 370，约 28 kcal·kg FFM⁻¹·d⁻¹），配合 DXA 测得的 FFM；
+    无 FFM 数据才退而用 Mifflin，并标注可能低估、以体重趋势校准。
+    <span class="src">教材 Ch04 §4.3.3 Mifflin-St Jeor；§4.3.4 Cunningham（训练者首选）；§4.3.7 多公式对比</span></div>
+  </div>
+
+  <div class="block">
+    <h3>B. 术语预填表 · 标准答案</h3>
+    <table class="grid">
+      <tr><th style="width:17%;">缩写 / 术语</th><th style="width:43%;">英文全称</th><th>中文含义（标准答案）</th></tr>
+      <tr><td class="lab">BMR</td><td>Basal Metabolic Rate</td><td class="ta">基础代谢率：严格过夜禁食、实验室过夜、恒温静卧条件下测得的维持生命最低能耗</td></tr>
+      <tr><td class="lab">RMR</td><td>Resting Metabolic Rate</td><td class="ta">静息代谢率：睡眠后静息状态测得，条件较 BMR 宽松，实践配餐一律用 RMR</td></tr>
+      <tr><td class="lab">TEE</td><td>Total Energy Expenditure</td><td class="ta">总能量消耗：RMR + TEF + EAT + NEAT 四组分之和</td></tr>
+      <tr><td class="lab">TEF</td><td>Thermic Effect of Food</td><td class="ta">食物热效应：消化吸收代谢食物的能耗，约占 TEE 6%–10%（蛋白 20%–30%、糖 5%–10%、脂肪 3%–5%）</td></tr>
+      <tr><td class="lab">EAT</td><td>Exercise Activity Thermogenesis</td><td class="ta">运动活动产热：结构化训练/运动的能耗，变异最大，精英耐力每日可达 4000–8000 kcal</td></tr>
+      <tr><td class="lab">NEAT</td><td>Non-Exercise Activity Thermogenesis</td><td class="ta">非运动活动产热：日常走动、家务、姿势等非运动能耗，减脂期常代偿性下降</td></tr>
+      <tr><td class="lab">PAL</td><td>Physical Activity Level</td><td class="ta">身体活动水平系数：PAL = TEE/RMR，分卧床 1.2–1.3 至超高 2.3–2.6+ 七档</td></tr>
+      <tr><td class="lab">DLW</td><td>Doubly Labeled Water</td><td class="ta">双标水法：自由生活 TEE 的研究参照方法，精度约 ±5%</td></tr>
+      <tr><td class="lab">IC</td><td>Indirect Calorimetry</td><td class="ta">间接量热法：通过测 VO₂、VCO₂ 推算能耗与 RER，测 RMR 的临床参照方法（±5%–10%）</td></tr>
+      <tr><td class="lab">RER</td><td>Respiratory Exchange Ratio</td><td class="ta">呼吸交换率：VCO₂/VO₂；纯脂肪约 0.70、纯糖约 1.00、混合膳食约 0.82–0.87</td></tr>
+      <tr><td class="lab">MET</td><td>Metabolic Equivalent of Task</td><td class="ta">代谢当量：约 3.5 mL O₂/kg/min，查表估活动能耗，误差约 ±20%–40%，仅作粗估</td></tr>
+      <tr><td class="lab">CTEE / ExEC</td><td>Constrained TEE / Exercise Energy Compensation</td><td class="ta">约束性总能量消耗 / 运动能量补偿：运动增加后其他能耗组分代偿下降，Knaan 2026 ExEC 约 39%</td></tr>
+    </table>
+    <p class="cite">教材 Ch04 §4.1.1–§4.1.3、§4.2.3、§4.2.5（表 4.3）、§4.5.2</p>
+  </div>
+
+  <div class="block">
+    <h3>C. 常见误区 · 标准答案</h3>
+    <div class="frame">
+      <div class="ftitle">误区陈述</div>
+      <p>「基础代谢率和静息代谢率是一回事，可以混用；运动多烧掉的热量会百分之百变成热量缺口，所以减脂只要把运动消耗算清楚就行了。」</p>
+      <p class="judge">正确判断：错（×）</p>
+      <div class="ans"><span class="lab2">理由（标准解析）</span>
+      两点均错。① BMR 与 RMR 测量条件不同（BMR 需过夜禁食 10–12h、实验室过夜、恒温静卧；RMR 为睡眠后静息测），数值差 ≤5%–10% 且方向不定，
+      实践一律用 RMR，不可混用；② 运动消耗不会 100% 变成缺口：存在运动能量补偿（ExEC 约 39%），运动后 NEAT 下降、食欲上升、RMR/SMR 适应性下调，
+      减脂必须同时管理摄入、NEAT 与补偿，并以体重趋势校准，而非只算运动消耗。
+      <span class="src">教材 Ch04 §4.1.1 BMR/RMR 辨析；§4.5.2 Pontzer CTEE 与 ExEC；§4.5.1 能量限制下 RMR 下调</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 课前预习单 Ch05 ================= -->
+<section class="page">
+  <div class="runhead">课前预习单（五）· Ch05 ｜ <span class="warn-sm">组长批改版 · 请勿外传</span></div>
+  <h2>课前预习单（五）· 标准答案</h2>
+  <p class="sub">Ch05 能量摄入不足与 REDs ｜ 引导问题按要点给分</p>
+
+  <div class="block">
+    <h3>A. 引导问题 · 参考答案</h3>
+    <p class="rh">问题 1：EA 和"热量缺口"是同一概念吗？为什么用去脂体重而不是体重做分母？</p>
+    <div class="ans"><span class="lab2">答案要点</span>
+    不是同一概念。热量缺口 = 摄入 − 总消耗，关注体重变化；EA =（EI − ExEE）÷ FFM，关注扣除运动消耗后<strong>剩余给身体各项生理功能（代谢、生殖、骨骼、免疫）的能量</strong>，
+    单位 kcal·kg FFM⁻¹·d⁻¹。分母用 FFM 而非体重，因为 FFM 是代谢活跃组织、是能量需求的决定者；脂肪组织代谢活性低，若用体重做分母，体脂率不同的人即使生理可利用能量相同也会算出不同值，随体脂增减而失真。
+    <span class="src">教材 Ch05 §5.1.2 能量可用性的定义与计算；§5.1.1 能量平衡概念的局限</span></div>
+
+    <p class="rh">问题 2：LEA 只发生在女运动员身上、只表现为月经紊乱吗？男性和大众健身者长期吃不够会有哪些信号？</p>
+    <div class="ans"><span class="lab2">答案要点</span>
+    否。2014 年 IOC 已将 RED-S 扩展至男女及十余系统，LEA 是已知致因。男性同样受累，EA &lt; 25 可观察到睾酮下降（25–30 区间尚有争议），
+    男性敏感终点为睾酮、晨勃/性欲、骨标志物。多系统信号包括：神经内分泌（T3 降低 15%–25%、皮质醇升高、LH 脉冲紊乱）、骨（应力性骨折、骨密度 Z 值下降）、
+    心血管（静息心率过低，&lt;40 需转介）、免疫（IgA 下降、反复上呼吸道感染）、胃肠（腹胀、便秘、胃排空延迟）、心理与饮食行为（情绪低落、疲劳、DE/ED）、运动表现下滑。
+    大众健身者同样可发生（教材 §5.7 专节讨论大众场景）。
+    <span class="src">教材 Ch05 §5.1.4 性别差异；§5.3 REDs 的多系统影响；§5.3.7 男性 REDs 的循证澄清；§5.7 大众健身场景</span></div>
+
+    <p class="rh">问题 3：体重稳定能否说明能量摄入充足？会员半年体重没变但表现下滑、频繁感冒、情绪低落，会想到什么？</p>
+    <div class="ans"><span class="lab2">答案要点</span>
+    不能。体重稳定不能排除 LEA/REDs：长期能量不足时身体可通过代谢适应（RMR 下调、NEAT 下降、运动能量补偿）在更低体重调定点维持平衡，
+    体重被"稳住"但生理功能已被抑制（教材大众案例中女会员 EA≈23.8、体重稳定仍处临床 LEA 区间）。表现下滑、反复感染、情绪低落正对应 REDs 的多系统表现。
+    应：用 LEAF-Q（女）/LEAM-Q（男）筛查、估算 EA、查月经/性功能与应力性骨折史，必要时 CAT2 评级；阳性者按红黄绿灰分级，红色 48 小时内启动 MDT 转介，不可仅按"减脂平台"处理。
+    <span class="src">教材 Ch05 §5.7 大众健身场景中的 REDs 识别；§5.7.4 与"减脂平台期"的鉴别；§5.5 临床评估工具</span></div>
+  </div>
+
+  <div class="block">
+    <h3>B. 术语预填表 · 标准答案</h3>
+    <table class="grid">
+      <tr><th style="width:17%;">缩写 / 术语</th><th style="width:43%;">英文全称</th><th>中文含义（标准答案）</th></tr>
+      <tr><td class="lab">EA</td><td>Energy Availability</td><td class="ta">能量可利用性：EA =（EI − ExEE）/FFM，单位 kcal·kg FFM⁻¹·d⁻¹；≥45 最优、30–45 次优、&lt;30 临床/问题性 LEA</td></tr>
+      <tr><td class="lab">LEA</td><td>Low Energy Availability</td><td class="ta">低能量可利用性：EA 低于阈值状态；分适应性 LEA（30–45，短期可耐受须监测）与临床/问题性 LEA（&lt;30，需 MDT）</td></tr>
+      <tr><td class="lab">REDs</td><td>Relative Energy Deficiency in Sport</td><td class="ta">运动相对能量不足（综合征）：长期 LEA 导致的多系统功能损害；2023 IOC 改名 REDs 综合征，男女均可发生</td></tr>
+      <tr><td class="lab">Triad / FHA</td><td>Female Athlete Triad / Functional Hypothalamic Amenorrhea</td><td class="ta">女运动员三联征（能量不足/月经紊乱/骨密度下降三连续谱）/ 功能性下丘脑性闭经：能量不足抑制 HPG 轴所致闭经</td></tr>
+      <tr><td class="lab">CAT2</td><td>Clinical Assessment Tool (version 2, IOC)</td><td class="ta">IOC REDs 临床评估工具第二版：三步法（病史症状筛查→多系统体征生化→综合评级），红/黄/绿/灰四级</td></tr>
+      <tr><td class="lab">LEAF-Q</td><td>Low Energy Availability in Females Questionnaire</td><td class="ta">女性 LEA 筛查问卷（Melin 2014）：25 条目（胃肠 9/损伤 8/月经 8），≥8 分提示风险，敏感性 78%、特异性 90%</td></tr>
+      <tr><td class="lab">EDE-Q</td><td>Eating Disorder Examination Questionnaire</td><td class="ta">进食障碍检查问卷：评估进食障碍/饮食失调心理与行为，不能替代临床访谈，阳性转介心理师</td></tr>
+      <tr><td class="lab">MDT</td><td>Multidisciplinary Team</td><td class="ta">多学科团队：运动营养师+医生+心理师等协同；CAT2 红色评级须 48 小时内启动</td></tr>
+      <tr><td class="lab">Refeed</td><td>Refeed（planned energy / carbohydrate replenishment）</td><td class="ta">计划性补餐/补碳：恢复期每周 1–2 个高碳日，碳水占增量 60%–70%（约 +1.5–2 g/kg），缓解能量与糖原不足</td></tr>
+      <tr><td class="lab">HPG 轴</td><td>Hypothalamic–Pituitary–Gonadal axis</td><td class="ta">下丘脑–垂体–性腺轴：LEA 抑制其功能，导致 LH 脉冲紊乱、性激素下降、月经/性功能异常</td></tr>
+      <tr><td class="lab">代谢适应</td><td>Metabolic Adaptation</td><td class="ta">代谢适应：长期能量限制下 RMR 等组分代偿性下调（约 5%–15%）；可逆，"代谢损伤"是无证据的商业概念</td></tr>
+    </table>
+    <p class="cite">教材 Ch05 §5.1.2–§5.1.4（表 5.1）、§5.2、§5.5、§5.6；Ch04 §4.5</p>
+  </div>
+
+  <div class="block">
+    <h3>C. 常见误区 · 标准答案</h3>
+    <div class="frame">
+      <div class="ftitle">误区陈述</div>
+      <p>「RED-S／低能量可利用性是女运动员的专属问题；只要体重稳定、月经正常（或男性觉得自己"没问题"），就说明能量摄入足够，不用管。」</p>
+      <p class="judge">正确判断：错（×）</p>
+      <div class="ans"><span class="lab2">理由（标准解析）</span>
+      两点均错。① REDs 并非女性专属：2014 IOC 共识已将其扩展至男性与十余系统，男性 EA &lt; 25 可出现睾酮下降，敏感终点为睾酮、晨勃/性欲、骨标志物；
+      大众健身者同样可发生 LEA。② 体重稳定不等于摄入充足：代谢适应可在更低能耗水平维持体重稳定，掩盖长期 LEA；月经正常也只是 HPG 轴尚未失代偿，
+      骨、免疫、代谢等系统可能已受影响。应主动用 LEAF-Q/LEAM-Q、EA 估算与 CAT2 筛查，而非凭体重与自我感觉判断。
+      <span class="src">教材 Ch05 §5.1.4 性别差异；§5.3.7 男性 REDs；§5.7 大众场景（体重稳定仍可 LEA）；§5.7.4 与平台期鉴别</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 课前预习单 Ch06 ================= -->
+<section class="page">
+  <div class="runhead">课前预习单（六）· Ch06 ｜ <span class="warn-sm">组长批改版 · 请勿外传</span></div>
+  <h2>课前预习单（六）· 标准答案</h2>
+  <p class="sub">Ch06 营养生化基础 ｜ 引导问题按要点给分</p>
+
+  <div class="block">
+    <h3>A. 引导问题 · 参考答案</h3>
+    <p class="rh">问题 1：米饭、鸡胸肉、坚果分别经过哪些消化器官和关键酶、以什么形式吸收？脂肪吸收后走血液还是淋巴？</p>
+    <div class="ans"><span class="lab2">答案要点</span>
+    米饭（碳水）：口腔唾液 α-淀粉酶起始（入胃失活）→ 小肠胰 α-淀粉酶+刷状缘酶（麦芽糖酶、蔗糖酶-异麦芽糖酶、乳糖酶）→ 分解为单糖；
+    葡萄糖/半乳糖经 SGLT1（钠依赖主动转运）、果糖经 GLUT5 吸收，再由基底膜 GLUT2 进入门静脉。鸡胸肉（蛋白）：胃内 HCl（pH 1.5–3.5）变性+胃蛋白酶内切
+    → 小肠胰蛋白酶/糜蛋白酶/弹性蛋白酶/羧肽酶+刷状缘氨肽酶/二肽酶；约 70% 氨基酸以二肽/三肽形式经 PepT1 吸收入门静脉。坚果（脂肪）：胆汁盐乳化→
+    胰脂酶（辅脂酶协助）切 sn-1/sn-3 位→2-单酰甘油+2 游离脂肪酸→形成混合微胶粒（4–8 nm）→肠上皮内重新酯化为甘油三酯→组装乳糜微粒→
+    <strong>经淋巴（乳糜管→胸导管）入血，不走门静脉</strong>。
+    <span class="src">教材 Ch06 §6.2.1 碳水消化吸收；§6.2.2 蛋白质消化吸收；§6.2.3 脂肪消化吸收</span></div>
+
+    <p class="rh">问题 2：10 秒极限冲刺、400 米全力跑、全程马拉松主要靠什么途径供能？功率与续航为何差别大？</p>
+    <div class="ans"><span class="lab2">答案要点</span>
+    10 秒冲刺：磷酸原系统（ATP-PCr），PCr + ADP → Cr + ATP（肌酸激酶 CK 催化），无氧、即时、功率最高约 50–70 W/kg，但储量极少、主导约 5–10 秒，
+    组间休息 3–5 分钟恢复 PCr；400 米（约 30 秒–2 分钟）：糖酵解系统，肌糖原/葡萄糖无氧酵解，产乳酸与 H⁺，功率约 25–50 W/kg；
+    马拉松（&gt;2 分钟至数小时）：有氧氧化系统，糖与脂肪在线粒体经 TCA+氧化磷酸化供能，功率最低约 10–25 W/kg 但续航近乎无限。
+    功率与续航成反比：反应步骤越少、不需氧、底物就地可取则功率越高但储量越小；有氧途径产能效率高（1 葡萄糖彻底氧化约 30–32 ATP）但依赖氧运输与多步反应，功率受限。
+    <span class="src">教材 Ch06 §6.4.1 三大能量系统的功率-容量特征</span></div>
+
+    <p class="rh">问题 3："碳水吃多会变成脂肪存起来"和"饿肚子时脂肪能变成糖喂大脑"，从生化看对不对？哪步反应决定脂肪不能变回糖？</p>
+    <div class="ans"><span class="lab2">答案要点</span>
+    两句话作为主要机制都不对。① 碳水确实可经 DNL（从头脂肪生成，限速酶 ACC）变脂肪，但 DNL 日常对脂肪储存贡献仅约 5%（高碳水低脂过量约 10%–15%，
+    &gt;700 g/d 极端时 &gt;30%）；碳水吃多变胖的主因是碳水氧化优先、"挤占"并抑制脂肪氧化，使膳食脂肪直接储存，而非大量 DNL。
+    ② 脂肪酸不能净转变为葡萄糖：脂肪酸 β-氧化生成乙酰 CoA，而<strong>丙酮酸脱氢酶（PDH）催化丙酮酸→乙酰 CoA 的反应不可逆</strong>，乙酰 CoA 不能逆行生成丙酮酸/葡萄糖；
+    仅脂肪中的甘油可经糖异生产少量糖（甘油约占甘油三酯重量 5%–10%，100 g TG 仅产 4–8 g 葡萄糖），远不足以"大量喂大脑"。
+    <span class="src">教材 Ch06 §6.3.2 脂代谢总览（DNL）；§6.3.4 三大营养素互转图（PDH 不可逆）；§6.3.5 相关结论</span></div>
+  </div>
+
+  <div class="block">
+    <h3>B. 术语预填表 · 标准答案</h3>
+    <table class="grid">
+      <tr><th style="width:17%;">缩写 / 术语</th><th style="width:43%;">英文全称</th><th>中文含义（标准答案）</th></tr>
+      <tr><td class="lab">ATP</td><td>Adenosine Triphosphate</td><td class="ta">三磷酸腺苷：细胞能量"通货"，高能磷酸键水解释能供肌肉收缩等生命活动</td></tr>
+      <tr><td class="lab">PCr</td><td>Phosphocreatine</td><td class="ta">磷酸肌酸：磷酸原系统底物，经肌酸激酶将高能磷酸根转移给 ADP 再生成 ATP，支撑 5–10 秒极限运动</td></tr>
+      <tr><td class="lab">MPS</td><td>Muscle Protein Synthesis</td><td class="ta">肌肉蛋白质合成：抗阻训练+氨基酸（尤其亮氨酸）与胰岛素信号经 mTOR 通路促进，是增肌的分子基础</td></tr>
+      <tr><td class="lab">MPB</td><td>Muscle Protein Breakdown</td><td class="ta">肌肉蛋白质分解：长期能量不足/皮质醇升高时增强；净蛋白平衡 = MPS − MPB</td></tr>
+      <tr><td class="lab">DNL</td><td>De Novo Lipogenesis</td><td class="ta">从头脂肪生成：碳水过量时在肝/脂肪组织转为脂肪酸，限速酶 ACC（乙酰 CoA 羧化酶），日常贡献脂肪储存约 5%</td></tr>
+      <tr><td class="lab">GNG</td><td>Gluconeogenesis</td><td class="ta">糖异生：由非糖物质（乳酸、丙氨酸、甘油、谷氨酰胺等）在肝（部分在肾）合成葡萄糖</td></tr>
+      <tr><td class="lab">PDH</td><td>Pyruvate Dehydrogenase</td><td class="ta">丙酮酸脱氢酶：催化丙酮酸→乙酰 CoA，反应不可逆，决定脂肪酸碳骨架不能净变回糖</td></tr>
+      <tr><td class="lab">TCA</td><td>Tricarboxylic Acid Cycle（Krebs cycle）</td><td class="ta">三羧酸循环（克雷布斯循环）：在线粒体氧化乙酰 CoA，每轮产 3 NADH+1 FADH₂+1 GTP</td></tr>
+      <tr><td class="lab">β-氧化</td><td>Beta-oxidation</td><td class="ta">β-氧化：脂肪酸在线粒体逐轮切下 2 碳生成乙酰 CoA（棕榈酸 7 轮→8 乙酰 CoA，净约 108 ATP）</td></tr>
+      <tr><td class="lab">SGLT1</td><td>Sodium-Glucose Linked Transporter 1</td><td class="ta">钠-葡萄糖协同转运蛋白 1：小肠刷状缘以钠依赖主动转运吸收葡萄糖与半乳糖</td></tr>
+      <tr><td class="lab">PepT1</td><td>Peptide Transporter 1</td><td class="ta">二肽/三肽转运体 1：小肠约 70% 氨基酸以二肽三肽形式经其吸收（质子协同）</td></tr>
+      <tr><td class="lab">HSL</td><td>Hormone-Sensitive Lipase</td><td class="ta">激素敏感性脂肪酶：脂肪动员关键酶；儿茶酚胺经 cAMP-PKA 激活、胰岛素抑制</td></tr>
+    </table>
+    <p class="cite">教材 Ch06 §6.2.1–§6.2.3、§6.3.1–§6.3.4、§6.4.1、§6.5.1</p>
+  </div>
+
+  <div class="block">
+    <h3>C. 常见误区 · 标准答案</h3>
+    <div class="frame">
+      <div class="ftitle">误区陈述</div>
+      <p>「碳水化合物吃多变胖，主要是因为碳水在体内大量转化成脂肪；而饿肚子的时候，储存的脂肪可以大量变成葡萄糖供给大脑。」</p>
+      <p class="judge">正确判断：错（×）</p>
+      <div class="ans"><span class="lab2">理由（标准解析）</span>
+      两句作为"主要机制"均错。① DNL 日常仅贡献脂肪储存约 5%（高碳水过量 10%–15%）；碳水过量致胖主因是碳水优先氧化、抑制脂肪氧化，
+      使膳食脂肪直接储存。② 脂肪酸 β-氧化产物是乙酰 CoA，PDH 反应不可逆，乙酰 CoA 不能净生成葡萄糖；仅甘油部分可经糖异生产少量糖
+      （100 g 甘油三酯仅约 4–8 g 葡萄糖），无法"大量"供给大脑。饥饿时大脑主要靠酮体与少量糖异生供能。
+      <span class="src">教材 Ch06 §6.3.2 脂代谢总览；§6.3.4 互转图（PDH 不可逆）；§6.3.5 DNL 贡献与致胖机制</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 课中笔记 单元一 Ch01（第1页） ================= -->
+<section class="page">
+  <div class="runhead">课中笔记 · 单元一 ｜ Ch01 ｜ <span class="warn-sm">组长批改版 · 请勿外传</span></div>
+  <h2>课中笔记 · 单元一 · 标准答案</h2>
+  <p class="sub">Ch01 定义、边界与循证基础 ｜ 09:15–10:30</p>
+
+  <div class="block">
+    <h3>板块 1 · 运动营养的定义、服务对象与学科边界<span class="ref">教材 Ch01 §1.1</span></h3>
+    <div class="frame">
+      <div class="ftitle">边界三分区（标准答案）</div>
+      <div class="box-row">
+        <div class="box"><div class="bt">运动营养咨询可以独立做</div>
+          <div class="ta">健康训练者与运动员的膳食评估、个体化营养方案、训练/比赛日营养时机、宏量营养素与水分安排、RED-S 风险初筛与营养教育、补剂的循证评估（不推销）。</div></div>
+        <div class="box"><div class="bt">需要与医生 / 营养师协作</div>
+          <div class="ta">训练者合并慢性疾病（如糖尿病、血脂异常）、RED-S 阳性需 MDT、进食行为异常、青少年/孕产等特殊人群、骨密度异常——在临床稳定基础上叠加运动特异性策略。</div></div>
+        <div class="box"><div class="bt">必须转介、不得处理</div>
+          <div class="ta">疾病诊断与 MNT、用药调整、进食障碍诊治；红旗：月经紊乱超 3 个周期、骨密度低于年龄预期、疑似/确诊进食障碍、血糖异常或严重电解质紊乱。</div></div>
+      </div>
+      <p class="cite">教材 Ch01 §1.1.2 与相邻学科的关系；§1.1.4 多学科协作框架；§1.4.2 角色与边界</p>
+    </div>
+    <div class="ans"><span class="lab2">本板块核心结论（参考）</span>
+    运动营养以运动表现与训练适应为首要目标，输出个体化、精确到克数与时机的方案，区别于公共健康营养的人群普适建议与临床营养的疾病 MNT；
+    咨询者须守住"不诊断、不越权、会转介"的边界，红旗指征一律转介。
+    <span class="src">教材 Ch01 §1.1.1 学科定位；§1.1.4 多学科协作框架</span></div>
+  </div>
+
+  <div class="block">
+    <h3>板块 2 · 服务对象分级：McKay T0–T5 金字塔<span class="ref">教材 Ch01 §1.3.1（表 1.2，McKay et al., 2022）</span></h3>
+    <div class="frame">
+      <div class="ftitle">T0–T5 分级金字塔（标准答案）<span class="hint">越靠上训练量与专项化程度越高、人群越少</span></div>
+      <div class="pyr">
+        <div class="lvl" style="width:42%;"><span class="lv">T5</span><span class="lans"><strong>世界级</strong>：奥运或世界冠军、顶级排名，极少数，全方位个性化方案+专业团队</span></div>
+        <div class="lvl" style="width:52%;"><span class="lv">T4</span><span class="lans"><strong>精英 / 国际级</strong>：代表国家参加国际赛事，极少，全面营养支持+MDT+系统 RED-S 筛查</span></div>
+        <div class="lvl" style="width:62%;"><span class="lv">T3</span><span class="lans"><strong>高度训练 / 全国级</strong>：专项化训练、达国家赛事水平，较少，精细化营养、宏量营养素周期化</span></div>
+        <div class="lvl" style="width:72%;"><span class="lv">T2</span><span class="lans"><strong>训练 / 发展级</strong>：每周 ≥3 次专项训练、参与本地赛事，中等偏小，食物优先、关注蛋白与碳水时机</span></div>
+        <div class="lvl" style="width:82%;"><span class="lv">T1</span><span class="lans"><strong>休闲活跃者</strong>：达到 WHO 活动标准、无竞技承诺，基数较大，均衡膳食即可、无需特异策略</span></div>
+        <div class="lvl" style="width:92%;"><span class="lv">T0</span><span class="lans"><strong>静坐者</strong>：未达 WHO 身体活动推荐标准，基数最大，公共健康营养原则、增加活动优先于特异营养</span></div>
+      </div>
+      <p class="cite">教材 Ch01 §1.3.1 按运动水平分层（表 1.2，McKay et al., 2022，IJSPP）</p>
+    </div>
+    <div class="ans"><span class="lab2">本板块核心结论（参考）</span>
+    分级依据是训练量、专项化程度与赛事水平；T0/T1 以公共健康建议为主，从 T2 起营养策略精细化、T3 及以上须系统 RED-S 筛查；
+    T0/T1 不宜作为高水平表现研究的主要受试者。训练量是 T2 向 T3 过渡最关键的分水岭。
+    <span class="src">教材 Ch01 §1.3.1 McKay 分层（表 1.2）</span></div>
+  </div>
+</section>
+
+<!-- ================= 课中笔记 单元一 Ch01（第2页） ================= -->
+<section class="page">
+  <div class="runhead">课中笔记 · 单元一 ｜ Ch01 ｜ <span class="warn-sm">组长批改版 · 请勿外传</span></div>
+  <h2>课中笔记 · 单元一（续）· 标准答案</h2>
+  <p class="sub">Ch01 ｜ 资质 · 伦理</p>
+
+  <div class="block">
+    <h3>板块 3 · 资质体系与转介指征<span class="ref">教材 Ch01 §1.4.1（表 1.3）</span></h3>
+    <table class="grid">
+      <tr><th style="width:20%;">资质 / 缩写</th><th style="width:34%;">颁发或认可机构（标准答案）</th><th>执业范围与边界（标准答案）</th></tr>
+      <tr><td class="lab">RD / RDN</td><td class="ta">美国 AND、加拿大 DC、英国 BDA 与 HCPC</td><td class="ta">注册营养师，营养专业实践核心资质，含医学营养训练与临床实习，执业范围最宽；可识别并转介医学情况</td></tr>
+      <tr><td class="lab">CISSN</td><td class="ta">国际运动营养学会 ISSN</td><td class="ta">循证运动营养咨询与补剂评估；需本科及运动科学相关背景或认证</td></tr>
+      <tr><td class="lab">IOC Diploma</td><td class="ta">国际奥委会（IOC）相关体系</td><td class="ta">高阶运动营养文凭，远程学习、课程通常两年，面向已有营养/医学/生物/运动科学基础者</td></tr>
+      <tr><td class="lab">SENr</td><td class="ta">英国营养师协会 BDA（运动营养注册）</td><td class="ta">英国运动营养师注册，需营养/饮食学资质基础，面向运动人群营养实践</td></tr>
+      <tr><td class="lab">AccSD</td><td class="ta">澳大利亚 Sports Dietitians Australia（SDA）</td><td class="ta">认证运动营养师，须先具备 APD（执业营养师）资格再取得运动营养认证</td></tr>
+      <tr><td class="lab">中国注册营养师</td><td class="ta">中国营养学会</td><td class="ta">中国本土营养专业能力评价，营养咨询与健康管理；与欧美 RD/RDN 认证主体、法律属性不同，<strong>不互认</strong></td></tr>
+    </table>
+    <p class="cite">教材 Ch01 §1.4.1 运动营养师的资质体系（表 1.3）</p>
+    <div class="frame">
+      <div class="ftitle">必须转介的红旗指征（标准答案）</div>
+      <div class="ta">① 月经紊乱超过 3 个周期；② 骨密度低于年龄预期（或反复应力性骨折）；③ 疑似或确诊的进食障碍；④ 血糖异常或严重电解质紊乱。
+      上述情况不得自行处理，应在 MDT 框架下转介医生 / 临床营养师 / 心理师。</div>
+      <p class="cite">教材 Ch01 §1.1.4 多学科协作框架；Ch05 §5.5 临床评估工具</p>
+    </div>
+    <div class="ans"><span class="lab2">本板块核心结论（参考）</span>
+    各国资质认证主体、准入路径与执业边界不同、互不自动互认；运动营养师执业范围最宽但仍不含医学诊断；健身教练营养建议有明确禁区，遇红旗必须转介。
+    <span class="src">教材 Ch01 §1.4.1 资质体系；§1.4.2 角色与边界</span></div>
+  </div>
+
+  <div class="block">
+    <h3>板块 4 · 职业伦理四原则<span class="ref">教材 Ch01 §1.4.3</span></h3>
+    <div class="box-row">
+      <div class="box"><div class="bt">原则 ① <span class="akey">禁止越权医疗行为</span></div>
+        <div class="ta">不作医学诊断（不说"你有进食障碍/骨质疏松"），用描述性语言而非诊断性语言，发现异常建议就医。</div></div>
+      <div class="box"><div class="bt">原则 ② <span class="akey">禁止补剂推销</span></div>
+        <div class="ta">基于循证评价给补剂建议，不接受销售佣金、不为品牌背书、不在缺乏完整膳食评估时推荐补剂。</div></div>
+    </div>
+    <div class="box-row">
+      <div class="box"><div class="bt">原则 ③ <span class="akey">禁止身体形象评论</span></div>
+        <div class="ta">不对身体外观作主观评价；沟通聚焦功能性指标（表现、月经、能量、睡眠、恢复）与客观生化指标。</div></div>
+      <div class="box"><div class="bt">原则 ④ <span class="akey">知情同意与训练者自主权</span></div>
+        <div class="ta">充分说明收益、风险与替代选项；学员有权拒绝建议；拒绝转介但有医学风险时书面记录风险告知。</div></div>
+    </div>
+    <p class="cite">教材 Ch01 §1.4.3 伦理边界与专业守则（2023 IOC RED-S 共识、2018 IOC 补剂共识）</p>
+    <div class="ans"><span class="lab2">本板块核心结论（参考）</span>
+    四条伦理红线：不越权诊断、不推销补剂、不评论身体形象、尊重知情同意与自主权；保护训练者长期健康的义务高于短期参赛偏好。
+    <span class="src">教材 Ch01 §1.4.3 伦理边界与专业守则</span></div>
+  </div>
+</section>
+
+<!-- ================= 课中笔记 单元一 Ch01（第3页） ================= -->
+<section class="page">
+  <div class="runhead">课中笔记 · 单元一 ｜ Ch01 ｜ <span class="warn-sm">组长批改版 · 请勿外传</span></div>
+  <h2>课中笔记 · 单元一（续）· 标准答案</h2>
+  <p class="sub">Ch01 ｜ 循证方法</p>
+
+  <div class="block">
+    <h3>板块 5 · 循证实践与证据金字塔<span class="ref">教材 Ch01 §1.5.1–§1.5.2</span></h3>
+    <div class="frame">
+      <div class="ftitle">证据金字塔（五层，标准答案）<span class="hint">越靠上权重越高</span></div>
+      <div class="pyr">
+        <div class="lvl" style="width:40%;"><span class="lv">层级 Ⅰ</span><span class="lans"><strong>系统综述与 Meta 分析</strong>：系统检索、筛选、质量评价并统计合并同类研究，克服单样本局限</span></div>
+        <div class="lvl" style="width:53%;"><span class="lv">层级 Ⅱ</span><span class="lans"><strong>随机对照试验 RCT</strong>：随机分组控制混杂，临床研究金标准；营养 RCT 受双盲难、依从难、伦理限制</span></div>
+        <div class="lvl" style="width:66%;"><span class="lv">层级 Ⅲ</span><span class="lans"><strong>队列研究</strong>：前瞻性随访暴露组与非暴露组，大型队列（n&gt;10000、随访&gt;10年）外在效度高</span></div>
+        <div class="lvl" style="width:79%;"><span class="lv">层级 Ⅳ</span><span class="lans"><strong>病例对照研究</strong>：由结局回溯暴露，适合罕见结局，但易受回忆与选择偏倚影响</span></div>
+        <div class="lvl" style="width:92%;"><span class="lv">层级 Ⅴ</span><span class="lans"><strong>专家意见、病例报告与个案故事</strong>：权重最低，可提假设、作方向指引，不能作处方依据</span></div>
+      </div>
+      <p class="cite">教材 Ch01 §1.5.1 证据金字塔：研究设计的层级</p>
+    </div>
+    <div class="frame">
+      <div class="ftitle">GRADE 证据质量四级（标准答案）</div>
+      <div class="box-row">
+        <div class="box"><div class="bt">高（High）</div><div class="ta">真实效应接近估计效应，对结果有充分信心；可支撑强推荐。</div></div>
+        <div class="box"><div class="bt">中（Moderate）</div><div class="ta">真实效应可能接近估计效应，但仍有一定改变空间；多数情况可推荐。</div></div>
+        <div class="box"><div class="bt">低（Low）</div><div class="ta">真实效应可能与估计值存在实质差异；谨慎使用、个体化决策。</div></div>
+        <div class="box"><div class="bt">极低（Very Low）</div><div class="ta">任何估计都非常不确定；仅作方向性参考。推荐强度另分强推荐/弱推荐。</div></div>
+      </div>
+      <p class="cite">教材 Ch01 §1.5.2 证据质量与推荐强度分级系统（GRADE）</p>
+    </div>
+    <div class="ans"><span class="lab2">本板块核心结论（参考）</span>
+    循证三步：提出问题（PICO）→ 检索与评价证据 → 结合对象与场景决策。证据越靠近目标结局权重越高；高质量证据不一定强推荐、低质量证据也可能强推荐。
+    机制研究（mTOR、急性 MPS）只说明生物学合理性，不能直接外推长期结局。
+    <span class="src">教材 Ch01 §1.5.1–§1.5.2；§1.6 循证决策矩阵</span></div>
+  </div>
+
+  <div class="block">
+    <h3>板块 6 · 文献质量的批判性评价工具<span class="ref">教材 Ch01 §1.5.3</span></h3>
+    <table class="grid">
+      <tr><th style="width:18%;">评价工具</th><th style="width:32%;">适用的研究类型（标准答案）</th><th>主要评价 / 防范什么（标准答案）</th></tr>
+      <tr><td class="lab">CASP</td><td class="ta">通用批判性评价（涵盖多种研究设计的检查表）</td><td class="ta">研究问题清晰度、招募/选择偏倚、暴露或干预的标准化测量、结局盲法评估等；<strong>无评分系统</strong>，结论由评价者判断</td></tr>
+      <tr><td class="lab">RoB 2.0</td><td class="ta">随机对照试验（RCT）</td><td class="ta">五域偏倚：随机化过程、偏离预期干预、结局数据缺失、结局测量、选择性报告；每域评低/高风险或部分关注</td></tr>
+      <tr><td class="lab">ROBINS-I</td><td class="ta">非随机干预研究</td><td class="ta">七域：混杂因素、受试者选择、干预分类、偏离预期干预、数据缺失、结局测量、选择性报告</td></tr>
+      <tr><td class="lab">NOS</td><td class="ta">观察性研究（队列、病例对照）</td><td class="ta">选择、可比性、暴露/结局三维度评分，总分 <strong>9 分，通常 ≥7 分视为高质量</strong></td></tr>
+      <tr><td class="lab">AMSTAR</td><td class="ta">系统综述（AMSTAR 2.0）</td><td class="ta">方案预注册、双人独立筛选、灰色文献检索、纳入研究质量评价等，评系统综述方法学质量</td></tr>
+    </table>
+    <p class="cite">教材 Ch01 §1.5.3 批判性阅读工具</p>
+    <div class="ans"><span class="lab2">本板块核心结论（参考）</span>
+    先判断研究类型、再选对应工具：RCT 用 RoB 2.0、非随机干预用 ROBINS-I、观察性研究用 NOS（9 分制，≥7 高质量）、系统综述用 AMSTAR 2.0、CASP 为通用无评分检查表。
+    <span class="src">教材 Ch01 §1.5.3 批判性阅读工具</span></div>
+  </div>
+</section>
+
+<!-- ================= 课中笔记 单元一 Ch01（第4页） ================= -->
+<section class="page">
+  <div class="runhead">课中笔记 · 单元一 ｜ Ch01 ｜ <span class="warn-sm">组长批改版 · 请勿外传</span></div>
+  <h2>课中笔记 · 单元一（续）· 标准答案</h2>
+  <p class="sub">Ch01 ｜ 偏差识别 · 决策框架 · 课堂练习</p>
+
+  <div class="block">
+    <h3>板块 7 · 认知偏差与营销"红旗信号"<span class="ref">教材 Ch01 §1.5.4–§1.5.5</span></h3>
+    <div class="box-row">
+      <div class="box"><div class="bt">常见认知偏差（标准答案）</div>
+        <div class="ta">① 选择性引用（cherry-picking，只引支持证据）；② 相关性当因果性；③ 自然主义谬误（"天然=安全/有效"）；
+        ④ 单一研究泛化（把初步研究当普遍真理，忽视体外→动物→人体多道验证）；⑤ 基础率忽视（不谈基线发生率的相对风险）。</div></div>
+      <div class="box"><div class="bt">补剂 / 营销内容的红旗信号（标准答案）</div>
+        <div class="ta">用个案代替系统证据；诉诸"被隐藏的真相/行业不愿让你知道"的阴谋论；混淆体外/动物实验与人体结果；
+        缺乏剂量概念、声称"多多益善"；绝对化承诺与速效宣传；无同行评审来源、靠名人背书。</div></div>
+    </div>
+    <p class="cite">教材 Ch01 §1.5.4 营养学常见认知偏差；§1.5.5 社交媒体营养信息识别框架</p>
+    <div class="ans"><span class="lab2">本板块核心结论（参考）</span>
+    方法工具不能替代对认知偏差的警惕；看到主张先找反驳证据、区分相关与因果、要求人体目标结局数据与剂量信息，遇到红旗信号直接存疑。
+    <span class="src">教材 Ch01 §1.5.4–§1.5.5</span></div>
+  </div>
+
+  <div class="block">
+    <h3>板块 8 · SNC 四层决策矩阵<span class="ref">教材 Ch01 §1.6（表 1.5）</span></h3>
+    <div class="frame">
+      <div class="ftitle">四层决策矩阵（标准答案）</div>
+      <div class="ta"><strong>第一层 · 问题类型：</strong>先判断是基础生理、评估方法、表现优化、健康风险还是行为执行问题——不同问题匹配不同研究类型，健康风险问题必须纳入医学共识与转介标准。</div>
+      <div class="ta"><strong>第二层 · 证据直接性：</strong>证据是否直接测量目标结局；机制/急性研究只标"机制合理或方向性证据"，人体干预、系统综述、立场声明权重更高。</div>
+      <div class="ta"><strong>第三层 · 目标人群边界：</strong>证据来自什么人群（训练水平、性别、项目、年龄），能否外推到当前对象；T0/T1 数据不能直接用于 T3+。</div>
+      <div class="ta"><strong>第四层 · 执行成本与安全边界：</strong>方案依从成本、监测条件与风险；高风险（REDs、进食障碍、疾病）触发协作或转介，防止"机制替代结局"和"共识替代判断"两类错误。</div>
+      <p class="cite">教材 Ch01 §1.6 3HFIT SNC 循证决策矩阵（表 1.5）</p>
+    </div>
+    <div class="ans"><span class="lab2">本板块核心结论（参考）</span>
+    单独一篇研究不能构成处方、单独背共识也不能替代个体化判断；按"问题类型→证据直接性→人群边界→执行与安全成本"四层依次判断，再决定独立处理、协作或转介。
+    <span class="src">教材 Ch01 §1.6 循证决策矩阵</span></div>
+  </div>
+
+  <div class="block">
+    <h3>课堂练习 · 边界判断（评分框架）<span class="ref">教材 Ch01 · 章末案例</span></h3>
+    <div class="frame">
+      <div class="ftitle">判分要点（案例由讲师当堂投放，此处为评分框架）</div>
+      <div class="ta">① <strong>T 分层正确</strong>：按训练量/专项化/赛事水平对照 McKay 表 1.2 定级（每周 ≥3 次专项+本地赛= T2；国家赛事= T3；国际= T4）。</div>
+      <div class="ta">② <strong>能独立做</strong>：健康训练者的膳食评估、宏量与时机安排、RED-S 初筛教育——写具体而非泛泛。</div>
+      <div class="ta">③ <strong>协作 / 转介</strong>：出现四条红旗（月经紊乱超 3 周期、骨密度低于年龄预期、疑似/确诊进食障碍、血糖异常或严重电解质紊乱）必须转介医生/临床营养师/心理师（MDT）；不得作诊断性陈述。</div>
+      <div class="ta">④ 过程分：要求写出判断依据（问题类型→证据→人群→安全边界），只给结论不给过程扣分。具体案例信息以课上讲授为准。</div>
+      <p class="cite">教材 Ch01 §1.1.4、§1.3.1（表 1.2）、§1.6；案例细节以课上讲授为准</p>
+    </div>
+  </div>
+
+  <div class="grade">
+    <div class="gt">批改要点 · 单元一 Ch01（组长速查）</div>
+    <ul>
+      <li>T0–T5 顺序与分级依据必须正确：T0 静坐者→T5 世界级；每周 ≥3 次专项训练是 T2 的分水岭，T3+ 才需系统 RED-S 筛查。</li>
+      <li>转介红旗四条要答全：月经紊乱超 3 个周期、骨密度低于年龄预期、疑似/确诊进食障碍、血糖异常或严重电解质紊乱；写成"诊断疾病"即越权，算错。</li>
+      <li>证据金字塔顶端是系统综述/Meta（Ⅰ），RCT 为 Ⅱ；机制研究（mTOR/MPS 急性指标）不能直接推出长期肌肥大。</li>
+      <li>评价工具配对：RoB 2.0→RCT 五域、ROBINS-I→非随机七域、NOS→观察性 9 分制（≥7 高质量）、AMSTAR 2.0→系统综述、CASP 无评分。</li>
+      <li>资质不互认：RD/RDN 与中国注册营养师不能等同；伦理四原则中"禁止越权诊断、禁止补剂推销"是高频漏点。</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= 课中笔记 单元二 Ch02（第1页） ================= -->
+<section class="page">
+  <div class="runhead">课中笔记 · 单元二 ｜ Ch02 ｜ <span class="warn-sm">组长批改版 · 请勿外传</span></div>
+  <h2>课中笔记 · 单元二 · 标准答案</h2>
+  <p class="sub">Ch02 运动饮食评估 ｜ 10:45–11:25</p>
+
+  <div class="block">
+    <h3>板块 1 · 为什么"吃了什么"这么难测准<span class="ref">教材 Ch02 §2.1</span></h3>
+    <div class="frame">
+      <div class="ftitle">关键数字（标准答案）</div>
+      <table class="grid">
+        <tr><td class="lab" style="width:46%;">自报能量摄入平均低估</td><td class="ta"><strong>19</strong>%（约 <strong>668</strong> kcal/d；研究间范围 <strong>10</strong>%–<strong>30</strong>%）——Capling 2017，11 项 DLW 对照研究</td></tr>
+        <tr><td class="lab">称重记录低报可达 TEE 的</td><td class="ta"><strong>10</strong>% – <strong>45</strong>%（Larson-Meyer 2018，个体差异大）</td></tr>
+        <tr><td class="lab">份量目视估算低估</td><td class="ta"><strong>20</strong>% – <strong>50</strong>%</td></tr>
+        <tr><td class="lab">执行（依从）差距</td><td class="ta"><strong>25</strong>% – <strong>30</strong>%</td></tr>
+      </table>
+      <p class="cite">教材 Ch02 §2.1.2 系统性低报（Capling 2017）；§2.1.3 测量层面误差源；§2.5.1 方案与执行的差距</p>
+    </div>
+    <div class="ans"><span class="lab2">本板块核心结论（参考）</span>
+    膳食自报存在<strong>系统性、方向性低估</strong>：记忆、份量估算、记录行为（霍桑效应、依从差距）三重误差叠加，低报集中于女性、耐力与体重分级项目、高体型意识人群；
+    低报是方法学误差而非态度问题，不能据记录值直接配餐或指责会员。
+    <span class="src">教材 Ch02 §2.1.2 系统性低报的普遍性与人群特征；§2.1.3 测量层面的误差源</span></div>
+  </div>
+
+  <div class="block">
+    <h3>板块 2 · 膳食评估方法的精度分级（A–D）<span class="ref">教材 Ch02 §2.2.1（表 2.1）</span></h3>
+    <table class="grid">
+      <tr><th style="width:8%;">级别</th><th style="width:30%;">代表方法（标准答案）</th><th style="width:22%;">精度范围（标准答案）</th><th>优点与局限（标准答案）</th></tr>
+      <tr><td class="lab">A</td><td class="ta">双标水 DLW（研究参照）</td><td class="ta">±5%–7%</td><td class="ta">自由生活 TEE 客观测量、不依赖自报；但成本高、需质谱实验室、周期 1–2 周，只得总消耗不得食物结构，无法普及</td></tr>
+      <tr><td class="lab">B</td><td class="ta">3–7 天称重食物记录 WFR；多次 24h 回顾</td><td class="ta">3 天 CV ±15%–20%；7 天 ±10%–15%</td><td class="ta">精度与可行性的平衡点；但负担重、第 4 天后依从骤降、仍有低报，需培训称重与份量估计</td></tr>
+      <tr><td class="lab">C</td><td class="ta">3–7 天估算食物日记 + 训练日记 / 图像日记（AI 识别）</td><td class="ta">AI 理想 ±15%–20%；中餐场景 30%–40%</td><td class="ta">现场最常用、依从较好；依赖份量估算与数据库，中餐混合菜肴是 AI 识别难点，油/酱料易漏</td></tr>
+      <tr><td class="lab">D</td><td class="ta">食物频率问卷 FFQ；单次 24h 回顾</td><td class="ta">定性/群体水平，日间变异系数 40%–60%</td><td class="ta">低成本、看长期模式与群体筛查；不适合个体精确量化与配餐，单次 24h 不能代表日常</td></tr>
+    </table>
+    <p class="cite">教材 Ch02 §2.2.1 方法分级框架（表 2.1）；§2.4.2 AI 图像识别；尿氮法 ±10%–15%（§2.3.3）</p>
+    <div class="ans"><span class="lab2">本板块核心结论（参考）</span>
+    精度与可行性互换：A 级 DLW 做研究参照，现场以 B 级 3–4 天 WFR 为平衡点、C 级估算+图像日记最常用，D 级只作模式筛查；
+    任何自报方法都要用体重趋势等外部锚点校准。
+    <span class="src">教材 Ch02 §2.2.1 方法分级框架；§2.7.1 评估方法的实操选择</span></div>
+  </div>
+</section>
+
+<!-- ================= 课中笔记 单元二 Ch02（第2页） ================= -->
+<section class="page">
+  <div class="runhead">课中笔记 · 单元二 ｜ Ch02 ｜ <span class="warn-sm">组长批改版 · 请勿外传</span></div>
+  <h2>课中笔记 · 单元二（续）· 标准答案</h2>
+  <p class="sub">Ch02 ｜ 记录流程 · 低报筛查</p>
+
+  <div class="block">
+    <h3>板块 3 · 现场可行的记录方案<span class="ref">教材 Ch02 §2.4、§2.7.1</span></h3>
+    <table class="grid">
+      <tr><th style="width:30%;">要点</th><th>标准答案</th></tr>
+      <tr><td class="lab">精度与可行性的平衡点</td><td class="ta"><strong>3–4</strong> 天 WFR（含 1 个周末日；3 天 CV ±15%–20%，7 天 ±10%–15% 但第 4 天后依从骤降）</td></tr>
+      <tr><td class="lab">估算日记建议天数</td><td class="ta">3–7 天，覆盖训练日与休息日、含周末；配合训练日记对齐 ExEE</td></tr>
+      <tr><td class="lab">AI 图像识别理想误差</td><td class="ta">理想条件 ±15%–20%；中餐混合菜肴场景误差 30%–40%</td></tr>
+      <tr><td class="lab">24h 回顾与 FFQ 的定位</td><td class="ta">单次 24h/FFQ 为 D 级，作长期模式与群体筛查；多次重复 24h 可升至 B 级；不直接用于个体配餐</td></tr>
+      <tr><td class="lab">尿氮法验证蛋白摄入的误差</td><td class="ta">±10%–15%（24 小时尿氮，生物标志物，需完整留尿配合）</td></tr>
+    </table>
+    <p class="cite">教材 Ch02 §2.4.2 AI 图像识别与可穿戴；§2.3.3 特定营养素验证（尿氮）；§2.7.1 实操选择</p>
+    <div class="ans"><span class="lab2">本板块核心结论（参考）</span>
+    现场首选 3–4 天称重/估算记录（覆盖训练日、休息日与周末），辅以图像与训练日记；AI 识别对中餐要打折；生物标志物（尿氮）可校验蛋白；记录天数并非越多越好，依从在第 4 天后明显下降。
+    <span class="src">教材 Ch02 §2.7.1 评估方法的实操选择；§2.4 新型工具与数字化评估</span></div>
+  </div>
+
+  <div class="block">
+    <h3>板块 4 · 低报筛查：EI:BMR 比值<span class="ref">教材 Ch02 §2.3.2</span></h3>
+    <div class="frame">
+      <div class="ftitle">计算流程框架（标准答案）</div>
+      <div class="box-row">
+        <div class="box"><div class="bt">步骤 ①</div><div class="ta">取得报告能量摄入 EI：取 3–7 天记录的日均 kcal（训练日/休息日加权）。</div></div>
+        <div class="box"><div class="bt">步骤 ②</div><div class="ta">估算 BMR：用 Cunningham 1980，BMR = 500 + 22 × FFM(kg)（需体成分 FFM）。</div></div>
+      </div>
+      <div class="box-row">
+        <div class="box"><div class="bt">步骤 ③</div><div class="ta">计算比值：EI:BMR = EI ÷ BMR。</div></div>
+        <div class="box"><div class="bt">步骤 ④</div><div class="ta">判读与动作：&lt;1.35 提示可疑低报→不指责，用体重趋势/训练日志/尿氮交叉核实并校准。</div></div>
+      </div>
+      <table class="grid" style="margin-top:2mm;">
+        <tr><td class="lab" style="width:42%;">判读阈值（Black 2000）</td><td class="ta">EI:BMR ＜ <strong>1.35</strong> → 提示<strong>可疑（系统性）低报</strong>；属定性筛查，不是测谎结论</td></tr>
+        <tr><td class="lab">所用 BMR 估算（Cunningham 1980）</td><td class="ta">BMR ＝ <strong>500 + 22 × FFM（kg）</strong></td></tr>
+      </table>
+      <p class="cite">教材 Ch02 §2.3.2 能量摄入的校验：EI:BMR 截断值（Black 2000；Goldberg 1991）</p>
+    </div>
+    <div class="ans"><span class="lab2">本板块核心结论（参考）</span>
+    EI:BMR 是成本最低的低报定性筛查：低于 1.35 提示记录可能系统性低估，触发进一步核实而非直接定性"撒谎"；
+    它不能反推真实摄入，也不能用于配餐，必须与体重趋势等多源证据联合解读。
+    <span class="src">教材 Ch02 §2.3.2 EI:BMR 截断值；§2.7.2 自报偏差的识别与校准</span></div>
+  </div>
+</section>
+
+<!-- ================= 课中笔记 单元二 Ch02（第3页） ================= -->
+<section class="page">
+  <div class="runhead">课中笔记 · 单元二 ｜ Ch02 ｜ <span class="warn-sm">组长批改版 · 请勿外传</span></div>
+  <h2>课中笔记 · 单元二（续）· 标准答案</h2>
+  <p class="sub">Ch02 ｜ 交叉验证 · 复评 · 课堂练习</p>
+
+  <div class="block">
+    <h3>板块 5 · 多源交叉验证与复评节奏<span class="ref">教材 Ch02 §2.5.2、§2.6</span></h3>
+    <div class="frame">
+      <div class="ftitle">交叉验证的四个维度（标准答案）</div>
+      <div class="box-row">
+        <div class="box"><div class="bt">维度 ① 主观记录</div><div class="ta">饮食记录/24h 回顾本身：核对漏记高频项（油、坚果、酱料、饮料、零食）、记录日代表性。</div></div>
+        <div class="box"><div class="bt">维度 ② 行为指标</div><div class="ta">训练日志与活动量（ExEE、步数/NEAT）、饮食行为问卷（TFEQ-R18）、依从性与霍桑效应。</div></div>
+      </div>
+      <div class="box-row">
+        <div class="box"><div class="bt">维度 ③ 生化 / 客观指标</div><div class="ta">24h 尿氮（蛋白，±10%–15%）等生物标志物；必要时 DXA/体成分趋势、血液指标。</div></div>
+        <div class="box"><div class="bt">维度 ④ 表现与身体结果</div><div class="ta">体重趋势（最终校准锚点）、训练表现、围度/体成分变化方向是否与记录自洽。</div></div>
+      </div>
+      <p class="cite">教材 Ch02 §2.5.2 多源交叉验证；§2.7.2 自报偏差的识别与校准</p>
+    </div>
+    <table class="grid">
+      <tr><td class="lab" style="width:34%;">TFEQ-R18 测的三个维度</td><td class="ta"><strong>认知限制性进食、无节制进食、情绪性进食</strong>（三因素饮食问卷 18 题版）</td></tr>
+      <tr><td class="lab">建议复评间隔</td><td class="ta">执行复盘 <strong>2–4 周</strong>一次；正式复评 <strong>6–8 周</strong>一次（用体重趋势与记录一致性校准方案）</td></tr>
+    </table>
+    <p class="cite">教材 Ch02 §2.5.1 依从度评估；§2.5.2 多源交叉验证；§2.8 SOP</p>
+    <div class="ans"><span class="lab2">本板块核心结论（参考）</span>
+    任何单一来源都不可全信：饮食记录须与行为、生化、结果四类指标互证；体重趋势是最终校准锚点。低报校准可参考 Capling 合并低估约 19%（保守取 20%，报告值 ÷ 0.80 粗估），但须声明是估计值、个体误差很大。
+    <span class="src">教材 Ch02 §2.5.2 多源交叉验证；§2.7.2 偏差校准</span></div>
+  </div>
+
+  <div class="block">
+    <h3>课堂练习 · EI:BMR 计算与判读（评分框架）<span class="ref">教材 Ch02 · 章末练习</span></h3>
+    <div class="frame">
+      <div class="ftitle">判分要点（会员数据由讲师当堂投放，此处给流程与判分标准）</div>
+      <table class="grid">
+        <tr><td class="lab" style="width:30%;">记录总摄入 EI</td><td class="ta">取记录日均 kcal（训练日/休息日加权）；<strong>数据以课上讲授为准</strong></td></tr>
+        <tr><td class="lab">体重 / FFM</td><td class="ta">FFM 优先取 DXA；无 DXA 时注明估算来源；<strong>数据以课上讲授为准</strong></td></tr>
+        <tr><td class="lab">BMR 估算（公式代入）</td><td class="ta">BMR = 500 + 22 × FFM（Cunningham 1980）；须写出代入过程，如 FFM=44 → 500+22×44=1468 kcal</td></tr>
+        <tr><td class="lab">EI:BMR 比值</td><td class="ta">EI ÷ BMR；&lt;1.35 判"可疑低报"（定性筛查，非测谎）；教材示例 1930/1468=1.31 → 可疑低报</td></tr>
+      </table>
+      <div class="ta">后续动作得分点：不质问会员；用体重趋势、训练日志、尿氮等交叉核实；关注油/坚果/酱料/饮料漏记；必要时以 ÷0.80 粗校并声明不确定性；若同时存在月经紊乱/表现下滑等，联动 Ch05 REDs 筛查。</div>
+      <p class="cite">教材 Ch02 §2.3.2 EI:BMR 截断值；§2.9 低报校准与多源证据整合（教材示例 EI:BMR=1.31）</p>
+    </div>
+  </div>
+
+  <div class="grade">
+    <div class="gt">批改要点 · 单元二 Ch02（组长速查）</div>
+    <ul>
+      <li>核心数字必对：自报平均低估 19%（约 668 kcal/d，范围 10%–30%）；EI:BMR 截断值 1.35；BMR 用 Cunningham 1980（500+22×FFM）。</li>
+      <li>EI:BMR 是"定性筛查、不是测谎"：答成"会员撒谎/不配合"或"记录很精确"均错；低报是方法学误差。</li>
+      <li>方法分级 A–D 对应：DLW（±5%–7%）／3–7 天 WFR·多次 24h／估算+图像日记（AI 中餐 30%–40%）／FFQ·单次 24h。</li>
+      <li>记录天数平衡点是 3–4 天 WFR（第 4 天后依从骤降）；尿氮法误差 ±10%–15%；TFEQ-R18 三维度为认知限制/无节制/情绪性进食。</li>
+      <li>复评节奏：2–4 周执行复盘、6–8 周正式复评；体重趋势是最终校准锚点。</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= 课中笔记 单元三 Ch03（第1页） ================= -->
+<section class="page">
+  <div class="runhead">课中笔记 · 单元三 ｜ Ch03 ｜ <span class="warn-sm">组长批改版 · 请勿外传</span></div>
+  <h2>课中笔记 · 单元三 · 标准答案</h2>
+  <p class="sub">Ch03 身体成分评估 ｜ 11:25–12:00</p>
+
+  <div class="block">
+    <h3>板块 1 · 身体成分的组分模型演进<span class="ref">教材 Ch03 §3.1.1、§3.2.1</span></h3>
+    <div class="frame">
+      <div class="ftitle">组分模型演进框架（标准答案）</div>
+      <div class="box-row">
+        <div class="box"><div class="bt">二组分模型（2C）</div><div class="ta">脂肪（FM）＋ 去脂体重（FFM）；假设 FFM 密度/水合恒定，最简单、假设最多，BIA/皮褶/Bod Pod 多基于此。</div></div>
+        <div class="box"><div class="bt">三组分模型（3C）</div><div class="ta">脂肪 ＋ 去脂固体（蛋白质+骨矿物质）＋ 总水分；减少水合假设误差，是 DXA 输出的概念基础。</div></div>
+      </div>
+      <div class="box" style="margin-top:2mm;">
+        <div class="bt">四组分模型（4C）的四个成分</div>
+        <div class="box-row">
+          <div class="box"><div class="bt">成分 ①</div><div class="ta">脂肪</div></div>
+          <div class="box"><div class="bt">成分 ②</div><div class="ta">骨骼矿物质</div></div>
+          <div class="box"><div class="bt">成分 ③</div><div class="ta">蛋白质</div></div>
+          <div class="box"><div class="bt">成分 ④</div><div class="ta">总水分</div></div>
+        </div>
+        <p class="small" style="margin:1mm 0 0;">4C 模型体脂率 SEE：<strong>1.5%–2.5%BF</strong>（假设最少，为体成分参照标准）</p>
+      </div>
+      <p class="cite">教材 Ch03 §3.1.1 体成分模型的演进；§3.2.1 高一致性参考标准：四组分模型</p>
+    </div>
+    <div class="ans"><span class="lab2">本板块核心结论（参考）</span>
+    组分越多、假设越少、精度越高：2C（FM+FFM）→3C（脂肪+去脂固体+总水分）→4C（脂肪+骨矿物质+蛋白质+总水分，SEE 1.5%–2.5%BF）；4C 为研究参照，DXA 是实践中的高精度替代。
+    <span class="src">教材 Ch03 §3.1.1；§3.2.1</span></div>
+  </div>
+
+  <div class="block">
+    <h3>板块 2 · FFM、LBM、MM 辨析<span class="ref">教材 Ch03 §3.1.2</span></h3>
+    <table class="grid">
+      <tr><th style="width:14%;">术语</th><th style="width:34%;">定义与包含 / 扣除什么（标准答案）</th><th>用在哪些计算里（标准答案）</th></tr>
+      <tr><td class="lab">FFM<br>去脂体重</td><td class="ta">严格扣除全部脂肪后的体重（含水、蛋白、骨矿物质等），代谢活跃组织</td><td class="ta">EA 公式分母（Ch05）；Cunningham RMR 公式；FFMI</td></tr>
+      <tr><td class="lab">LBM<br>瘦体重</td><td class="ta">概念上含约 2%–3% 必需脂肪，比 FFM 高约 1–2 kg；部分文献与 FFM 混用但不等同</td><td class="ta">部分公式用词；报告须注明，不可直接替代 FFM</td></tr>
+      <tr><td class="lab">MM<br>骨骼肌量</td><td class="ta">仅指骨骼肌组织，约为 FFM 的 50%–60%；直接测量需 MRI/CT，实践用 DXA ALM 代理</td><td class="ta">增肌评估以 ALM/ALMI 为主要指标</td></tr>
+    </table>
+    <p class="small">用 LBM 代替 FFM 计算 EA 时，EA 会被 <strong class="akey">高</strong> 估约 <strong class="akey">1–2</strong> kcal/kg/d（因分母偏大，可能把临床 LEA 误判为安全）。</p>
+    <p class="cite">教材 Ch03 §3.1.2 FFM、LBM 与 MM 的概念辨析；Ch05 §5.1.2</p>
+    <div class="ans"><span class="lab2">本板块核心结论（参考）</span>
+    FFM 严格去脂、LBM 含少量必需脂肪（差约 1–2 kg）、MM 仅骨骼肌（约 FFM 的 50%–60%）；EA 分母必须用 FFM，用 LBM 会高估 EA 约 1–2 kcal/kg/d。报告须注明指标与测量方法。
+    <span class="src">教材 Ch03 §3.1.2 术语辨析；§3.1.3 肌肉量的生物学价值</span></div>
+  </div>
+</section>
+
+<!-- ================= 课中笔记 单元三 Ch03（第2页） ================= -->
+<section class="page">
+  <div class="runhead">课中笔记 · 单元三 ｜ Ch03 ｜ <span class="warn-sm">组长批改版 · 请勿外传</span></div>
+  <h2>课中笔记 · 单元三（续）· 标准答案</h2>
+  <p class="sub">Ch03 ｜ 测量方法 · 公式</p>
+
+  <div class="block">
+    <h3>板块 3 · 测量方法精度分级<span class="ref">教材 Ch03 §3.2（表 3.1）</span></h3>
+    <table class="grid">
+      <tr><th style="width:16%;">方法</th><th style="width:24%;">原理（标准答案）</th><th style="width:22%;">精度 / CV（标准答案）</th><th>优点与局限（标准答案）</th></tr>
+      <tr><td class="lab">DXA</td><td class="ta">双能 X 线，区分骨/软组织，输出 FM、FFM、骨密度</td><td class="ta">CV 1%–2%；品牌间差 3%–5%（QDR4500A 系统偏差约 5%）</td><td class="ta">实践高精度参照、同时测骨密度；受机型/软件影响，不可跨品牌直接比较</td></tr>
+      <tr><td class="lab">Bod Pod（ADP）</td><td class="ta">空气置换测身体体积→密度→体脂</td><td class="ta">CV 1%–2%</td><td class="ta">快速、重复性好；受残余气假设与 Siri 固定密度假设影响</td></tr>
+      <tr><td class="lab">皮褶厚度</td><td class="ta">多点皮褶推算体密度（如 Jackson-Pollock）</td><td class="ta">SEE ±3%–4%；ISAK 操作者 CV &lt;2%，未训练者 &gt;5%；JP 对亚洲人偏差 &gt;5%</td><td class="ta">便宜便携；高度依赖操作者技术与公式人群适用性</td></tr>
+      <tr><td class="lab">BIA 体脂秤</td><td class="ta">生物电阻抗推算水分与 FFM</td><td class="ta">个体偏差 ±4%–5%；水合敏感波动 ±3%–5%</td><td class="ta">家用方便、成本低；受饮水/进食/排便影响大，仅作同条件趋势参考</td></tr>
+      <tr><td class="lab">BMI</td><td class="ta">体重(kg)/身高(m)²，人群超重肥胖筛查</td><td class="ta">——（人群筛查指标，不区分肌肉脂肪）</td><td class="ta">不用于训练者体成分评估；肌肉型者被系统性误判为超重</td></tr>
+      <tr><td class="lab">Navy 公式</td><td class="ta">围度（腰围、颈围等）估算体脂</td><td class="ta">SEE 3.5%–4.5%</td><td class="ta">零设备粗估；人群特异性限制明显，仅作现场快速参考</td></tr>
+    </table>
+    <p class="cite">教材 Ch03 §3.2.2 DXA/Bod Pod；§3.2.3 皮褶与 BIA；§3.2.4 BMI 与围度公式（表 3.1）</p>
+    <div class="ans"><span class="lab2">本板块核心结论（参考）</span>
+    精度梯队：4C &gt; DXA≈Bod Pod（CV 1%–2%）&gt; 皮褶（SEE ±3%–4%，看人）&gt; BIA（±4%–5%，水合敏感）&gt; Navy（3.5%–4.5%）；BMI 不用于训练者。不同方法/机型不可互比。
+    <span class="src">教材 Ch03 §3.2 评估方法：按精度分级（表 3.1）；§3.7.2 方法间不可互比</span></div>
+  </div>
+
+  <div class="block">
+    <h3>板块 4 · 两个常用公式<span class="ref">教材 Ch03 §3.4.1</span></h3>
+    <div class="box-row">
+      <div class="box">
+        <div class="bt">Siri 方程（体密度 Bd → %BF）</div>
+        <p class="small" style="margin:1mm 0;">%BF ＝ <strong>495 / Bd − 450</strong>（Bd 为体密度 g/cm³）</p>
+        <p class="small" style="margin:1mm 0;">用途与前提假设：</p>
+        <div class="ta">由水下称重/Bod Pod 测得的体密度换算体脂率；假设去脂组织密度恒定（约 1.10 g/cm³），个体水合/骨密度偏离假设时产生误差。</div>
+      </div>
+      <div class="box">
+        <div class="bt">FFMI（去脂体重指数，Kouri 1995）</div>
+        <p class="small" style="margin:1mm 0;">FFMI ＝ <strong>FFM(kg) / 身高(m)² ＋ 6.3 × (1.80 − 身高 m)</strong></p>
+        <p class="small" style="margin:1mm 0;">自然训练男性参考范围 <strong>18–23</strong>；上限约 <strong>25</strong>；超过 <strong>27</strong> 需谨慎。它是 <strong>鉴别（非诊断/分类）</strong>工具，样本量 n=157。</p>
+        <p class="small" style="margin:1mm 0;">Casey Butt 公式的定位：<strong>健身行业经验工具，不作为正式评估依据</strong>。</p>
+      </div>
+    </div>
+    <p class="small">ALMI 肌少症阈值（EWGSOP2 2019）：男 ＜ <strong class="akey">7.0</strong> kg/m²　女 ＜ <strong class="akey">5.5</strong> kg/m²。</p>
+    <p class="cite">教材 Ch03 §3.4.1 FFMI 公式与自然增肌上限（Kouri 1995）；§3.4.2 Casey Butt；§3.7.3 ALMI</p>
+    <div class="ans"><span class="lab2">本板块核心结论（参考）</span>
+    Siri：%BF=495/Bd−450；FFMI=FFM/身高²+6.3×(1.80−身高)，自然男性 18–23、上限约 25、&gt;27 谨慎，是统计鉴别工具而非用药指控依据（n=157，证据等级 C）；ALMI 肌少症阈值男 7.0、女 5.5 kg/m²。
+    <span class="src">教材 Ch03 §3.4.1；§3.4.3 Navy；§3.7.3 DXA 区域分析</span></div>
+  </div>
+</section>
+
+<!-- ================= 课中笔记 单元三 Ch03（第3页） ================= -->
+<section class="page">
+  <div class="runhead">课中笔记 · 单元三 ｜ Ch03 ｜ <span class="warn-sm">组长批改版 · 请勿外传</span></div>
+  <h2>课中笔记 · 单元三（续）· 标准答案</h2>
+  <p class="sub">Ch03 身体成分评估 ｜ 安全下限 · 追踪判读 · 课堂练习</p>
+
+  <div class="block">
+    <h3>板块 5 · 必需脂肪与低体脂预警<span class="ref">教材 Ch03 §3.3</span></h3>
+    <table class="grid">
+      <tr><th style="width:30%;"></th><th>男性</th><th>女性</th></tr>
+      <tr><td class="lab">必需脂肪（维持生理功能）</td><td class="ta"><strong class="akey">3%–5%</strong> 体重（细胞膜、神经髓鞘、类固醇激素合成所必需）</td><td class="ta"><strong class="akey">10%–13%</strong> 体重（另含乳房组织约 1%–3%、骨盆脂肪垫等生殖相关脂肪库）</td></tr>
+      <tr><td class="lab">低体脂预警区间（非诊断阈值）</td><td class="ta">约 <strong class="akey">5%</strong>（对应必需脂肪约 3%）；长期低于此水平出现 T3 下降、皮质醇升高、HPG 轴抑制、免疫受损</td><td class="ta">约 <strong class="akey">12%–14%</strong>（对应必需脂肪约 10%–12%）；长期低于 14% 与月经功能障碍、骨密度下降呈三联征式级联</td></tr>
+    </table>
+    <p class="cite">教材 Ch03 §3.3.1 必需脂肪与储脂；§3.3.2 低体脂风险预警区间（男 ≈5%、女 ≈12%–14%，证据等级 C）</p>
+    <div class="ans"><span class="lab2">本板块核心结论（参考）</span>
+    必需脂肪男 3%–5%、女 10%–13%；低体脂预警下界男约 5%、女约 12%–14%，是风险预警区间而非诊断阈值或推荐目标。精英运动员的极低体脂是选材极端端，不可移植为一般训练者目标；低于预警区间须结合月经功能、骨密度、疲劳、表现与 EA 综合评估。
+    <span class="src">教材 Ch03 §3.3.2；§3.3.3 竞技体脂的认知偏差</span></div>
+  </div>
+
+  <div class="block">
+    <h3>板块 6 · MDC、测量频率与趋势判读<span class="ref">教材 Ch03 §3.6、§3.10</span></h3>
+    <p class="rh">① 最小可检测变化（MDC）：小于它的波动都是噪声　② 标准化 SOP：同机、同时段、同状态　③ 看趋势不看点</p>
+    <table class="grid">
+      <tr><td class="lab" style="width:44%;">MDC：DXA 体脂率</td><td class="ta"><strong class="akey">1%–2%</strong> %BF</td></tr>
+      <tr><td class="lab">MDC：皮褶法体脂率</td><td class="ta"><strong class="akey">3%–5%</strong> %BF（取决于操作者技能）</td></tr>
+      <tr><td class="lab">检出 1 kg FFM 变化所需样本量（研究视角）</td><td class="ta">每组 <strong class="akey">16–25</strong> 人（α=0.05、Power=0.80；体成分 CV 约 2%–5%）</td></tr>
+      <tr><td class="lab">大众训练者建议评估频率</td><td class="ta">每 <strong class="akey">12–16</strong> 周（竞技运动员每 4–12 周；过频增加心理压力）</td></tr>
+      <tr><td class="lab">单日体重波动范围</td><td class="ta">± <strong class="akey">3–5</strong> kg（糖原 1 g 结合 <strong class="akey">3–4</strong> g 水；训练日出汗、钠、月经周期叠加，绝大多数是水分而非脂肪）</td></tr>
+      <tr><td class="lab">不同方法 / 机型测同一人可相差</td><td class="ta"><strong class="akey">3%–7%</strong>（不同方法/品牌不可互比；DXA 品牌间差 3%–5%）</td></tr>
+    </table>
+    <p class="cite">教材 Ch03 §3.6.2 MDC 与噪声来源；§3.6.3 评估频率（表 3.7）；§3.7.2 方法间差异 3%–7%</p>
+    <div class="frame">
+      <div class="ftitle">趋势判读四原则（标准答案）</div>
+      <div class="ta">
+      ① <strong>同法比较</strong>：DXA/BIA/皮褶/围度/Navy 模型不同，不能跨方法连趋势线；正式报告须注明方法、设备、操作者、测量状态与距上次训练时间。<br>
+      ② <strong>超过 MDC 才算数</strong>：如 DXA 的 FFM 变化仅 0.4 kg（误差与水分波动可达 1 kg 以上），不能判"增肌成功"或"肌肉流失"。<br>
+      ③ <strong>结合训练目标</strong>：增肌期看体重均值/围度/训练容量/FFM；减脂期看体重下降速度、腰围、力量保留与 REDs 信号；重塑期看体重稳定下腰围下降。<br>
+      ④ <strong>先排除水分和糖原变化</strong>：碳水、钠、月经周期、训练后炎症水肿均可改变短期体重与 BIA 估算；抗阻训练后 24–48 小时瘦体重估算可假性上升。
+      </div>
+      <p class="cite">教材 Ch03 §3.10 纵向趋势判读与处方转化（四原则）</p>
+    </div>
+    <div class="ans"><span class="lab2">本板块核心结论（参考）</span>
+    体成分只有在纵向趋势中才有处方价值：MDC 以内的波动是噪声（DXA 1%–2%BF、皮褶 3%–5%BF）；大众每 12–16 周复评一次；单日体重 ±3–5 kg 基本是水；不同方法相差 3%–7% 不可互比。报告用区间不用单值，先排水分糖原、再看是否超 MDC、最后结合训练目标解释。
+    <span class="src">教材 Ch03 §3.6 标准化追踪；§3.10 趋势判读四原则</span></div>
+  </div>
+
+  <div class="block">
+    <h3>课堂练习 · 身体成分数据判读（评分框架）<span class="ref">教材 Ch03 · 章末案例</span></h3>
+    <p class="small">讲师当堂投放一位会员两次测量的数据（可能涉及不同机器、水合状态差异）。以下为判分要点；案例具体数值<strong>以课上讲授为准</strong>。</p>
+    <div class="frame">
+      <div class="ftitle">判分要点（四问各占分）</div>
+      <table class="grid">
+        <tr><td class="lab" style="width:30%;">① 变化是否超过 MDC</td><td class="ta">按方法取 MDC：DXA 体脂 1%–2%BF、FFM 约 1 kg；皮褶 3%–5%BF。未超 MDC 一律判"不能确认真实变化"。</td></tr>
+        <tr><td class="lab">② 两次测量是否可比</td><td class="ta">同机/同操作者/同时段/同状态（空腹、排便、距训练 24–48h、水合一致）才可比；跨方法或跨品牌（差 3%–7%）不可直接比较，数字差异可能只是方法差。</td></tr>
+        <tr><td class="lab">③ 如何向会员解释</td><td class="ta">用区间而非单值；说明短期波动主要是水分/糖原（1 g 糖原结合 3–4 g 水）；不把单次数字当裁判，避免制造焦虑。</td></tr>
+        <tr><td class="lab">④ 下一次测量如何安排</td><td class="ta">同一台机器、同一 SOP；大众间隔 12–16 周；若体脂接近预警区（男 ≈5%、女 ≈12%–14%）或伴月经紊乱/应力性骨折，联动 Ch05 REDs 筛查与 DXA 骨密度。</td></tr>
+      </table>
+      <p class="cite">教材 Ch03 §3.6 MDC 与 SOP；§3.7 报告规范；§3.10 趋势判读</p>
+    </div>
+  </div>
+
+  <div class="grade">
+    <div class="gt">批改要点 · 单元三 Ch03（组长速查）</div>
+    <ul>
+      <li>FFM、LBM、MM 不可混用：FFM 严格去脂；LBM 含 2%–3% 必需脂肪、高约 1–2 kg；MM 仅骨骼肌（约 FFM 的 50%–60%）。用 LBM 代 FFM 算 EA 会<strong>高估约 1–2 kcal/kg/d</strong>，可能把临床 LEA 误判为安全。</li>
+      <li>BMI 不用于训练者体成分评估（肌肉型者被系统性误判超重）；凡答"靠 BMI 判断减脂需求"按错。</li>
+      <li>FFMI 公式 = FFM/身高²＋6.3×(1.80−身高)；自然男性 18–23、上限约 25、&gt;27 谨慎；它是 n=157 的统计<strong>鉴别工具</strong>，不是用药诊断依据。ALMI 阈值男 7.0、女 5.5 kg/m²。</li>
+      <li>MDC 数字必对：DXA 1%–2%BF、皮褶 3%–5%BF；大众复评 12–16 周；单日体重 ±3–5 kg、糖原 1 g 结合 3–4 g 水；方法间差 3%–7% 不可互比。MDC 以内的"变化"答成真实增肌/减脂按错。</li>
+      <li>低体脂预警：男 ≈5%、女 ≈12%–14%（必需脂肪男 3%–5%、女 10%–13%），是预警区间不是目标体脂；Siri 方程 %BF=495/Bd−450。</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= 课中笔记 单元四 Ch04（第1页） ================= -->
+<section class="page">
+  <div class="runhead">课中笔记 · 单元四 ｜ Ch04 ｜ <span class="warn-sm">组长批改版 · 请勿外传</span></div>
+  <h2>课中笔记 · 单元四 · 标准答案</h2>
+  <p class="sub">Ch04 运动人群能量需求 ｜ 13:00–13:45</p>
+
+  <div class="block">
+    <h3>板块 1 · BMR 与 RMR：一个字母之差<span class="ref">教材 Ch04 §4.1.1</span></h3>
+    <p class="rh">① 测量条件的严格程度不同　② 数值差异有多大、方向不定　③ 实践中用哪个</p>
+    <table class="grid">
+      <tr><th style="width:18%;"></th><th>BMR 基础代谢率</th><th>RMR 静息代谢率</th></tr>
+      <tr><td class="lab">测量条件</td><td class="ta">过夜禁食 10–12 小时；当晨在安静恒温（20–25 ℃）环境中清醒静卧；无身体活动与情绪应激；<strong>受试者在实验室过夜</strong>以排除运输应激</td><td class="ta">在家睡眠后由交通工具送至实验室；测量前<strong>静息 15–30 分钟</strong>；其余空腹、安静条件相同；不要求在测量环境过夜</td></tr>
+      <tr><td class="lab">两者差异</td><td colspan="2" class="ta">差异通常不超过 <strong class="akey">5%–10%</strong>，且<strong>方向不固定</strong>（RMR 有时略高——清醒精神紧张；有时略低——实验室温控优于居家）</td></tr>
+      <tr><td class="lab">实践选用</td><td colspan="2" class="ta">实践与文献中所称"代谢率"几乎一律指 <strong>RMR</strong>；BMR 严苛条件在常规实践中无法实现。RED-S 高风险者优先间接量热实测 RMR，无条件实测时须注明所用预测公式</td></tr>
+    </table>
+    <p class="cite">教材 Ch04 §4.1.1 BMR 与 RMR 的测量条件（Compher 系统评价）</p>
+    <div class="ans"><span class="lab2">本板块核心结论（参考）</span>
+    BMR 要求实验室过夜、禁食 10–12h、恒温 20–25℃ 静卧；RMR 仅要求居家睡眠后送实验室、测前静息 15–30 分钟。两者差 ≤5%–10% 且方向不定；实践一律用 RMR。在代谢极低（严重 LEA）或极高（精英力量）个体中，10% 可对应数百千卡，EA 计算不可忽视。
+    <span class="src">教材 Ch04 §4.1.1 基础代谢率与静息代谢率</span></div>
+  </div>
+
+  <div class="block">
+    <h3>板块 2 · TEE 的四组分<span class="ref">教材 Ch04 §4.1.2（表 4.1）</span></h3>
+    <div class="frame">
+      <div class="ftitle">TEE 四组分框架（标准答案）</div>
+      <div class="box-row">
+        <div class="box"><div class="bt">组分 ①：RMR 静息代谢率</div><div class="ta">维持基本生命活动的能量；静坐人群占 TEE 60%–80%，是最大组分</div></div>
+        <div class="box"><div class="bt">组分 ②：TEF 食物热效应</div><div class="ta">进食引起的代谢增量（蠕动、酶分泌、转运、合成储存）；占 TEE 6%–10%，蛋白&gt;糖&gt;脂肪</div></div>
+      </div>
+      <div class="box-row">
+        <div class="box"><div class="bt">组分 ③：EAT 运动活动产热</div><div class="ta">结构化训练/运动的消耗；一般 10%–15%，精英耐力运动员可达 30%–60%，变异最大</div></div>
+        <div class="box"><div class="bt">组分 ④：NEAT 非运动活动产热</div><div class="ta">日常走动、家务、职业活动、姿态维持等；占 5%–20%，个体差异大</div></div>
+      </div>
+      <p class="small" style="margin:1.5mm 0 0;">TEE ＝ <strong>RMR ＋ TEF ＋ EAT ＋ NEAT</strong></p>
+    </div>
+    <table class="grid">
+      <tr><td class="lab" style="width:40%;">RMR 占 TEE 比例（静坐人群）</td><td class="ta"><strong class="akey">60%–80%</strong>（精英男子耐力运动员可低至 <strong class="akey">38%–47%</strong>，女子约 42%）</td></tr>
+      <tr><td class="lab">TEF 占 TEE</td><td class="ta"><strong class="akey">6%–10%</strong>；按营养素：蛋白质 <strong>20%–30%</strong>、碳水 <strong>5%–10%</strong>、脂肪 <strong>3%–5%</strong></td></tr>
+    </table>
+    <p class="cite">教材 Ch04 §4.1.2 TEE 的四组分（表 4.1）；§4.1.3 TEF 宏量营养素差异</p>
+    <div class="ans"><span class="lab2">本板块核心结论（参考）</span>
+    TEE=RMR+TEF+EAT+NEAT。RMR 是静坐者最大组分（60%–80%），但在精英耐力运动员中可被稀释到 38%–47%；EAT 变异最大（10%–15% 至 30%–60%，精英耐力日消耗可达 4000–8000 kcal）；TEF 6%–10% 且蛋白最高；NEAT 5%–20% 易被忽略。运动员的能量评估必须按训练日/休息日分开。
+    <span class="src">教材 Ch04 §4.1.2 总能量消耗的构成；§4.1.3 PAL</span></div>
+  </div>
+</section>
+
+<!-- ================= 课中笔记 单元四 Ch04（第2页） ================= -->
+<section class="page">
+  <div class="runhead">课中笔记 · 单元四 ｜ Ch04 ｜ <span class="warn-sm">组长批改版 · 请勿外传</span></div>
+  <h2>课中笔记 · 单元四（续）· 标准答案</h2>
+  <p class="sub">Ch04 ｜ PAL · 测量方法</p>
+
+  <div class="block">
+    <h3>板块 3 · PAL 身体活动水平系数<span class="ref">教材 Ch04 §4.1.3（表 4.2）</span></h3>
+    <p class="rh">① PAL ＝ TEE / RMR　② 七档活动水平　③ 训练日与休息日不是同一个 PAL</p>
+    <table class="grid">
+      <tr><th style="width:26%;">活动水平</th><th style="width:22%;">PAL 系数（标准答案）</th><th>典型场景 / 例子（标准答案）</th></tr>
+      <tr><td class="lab">卧床</td><td class="ta"><strong class="akey">1.2–1.3</strong></td><td class="ta">住院人群、卧床或极静坐</td></tr>
+      <tr><td class="lab">静坐</td><td class="ta"><strong class="akey">1.3–1.4</strong></td><td class="ta">办公为主、极少活动</td></tr>
+      <tr><td class="lab">轻度活动</td><td class="ta"><strong class="akey">1.5–1.6</strong></td><td class="ta">日常步行、一般活跃人群</td></tr>
+      <tr><td class="lab">中度活动</td><td class="ta"><strong class="akey">1.6–1.8</strong></td><td class="ta">每周 3–5 次运动、休闲健身者</td></tr>
+      <tr><td class="lab">高度活动</td><td class="ta"><strong class="akey">1.8–2.0</strong></td><td class="ta">每日训练 1–2 次、大多数竞技运动员</td></tr>
+      <tr><td class="lab">极高活动</td><td class="ta"><strong class="akey">2.0–2.5</strong></td><td class="ta">每日 2–3 次训练、精英耐力/赛季高负荷</td></tr>
+      <tr><td class="lab">超高活动</td><td class="ta"><strong class="akey">2.3–2.6+</strong></td><td class="ta">马拉松/环法级别极端耐力；单日可突破 2.5</td></tr>
+    </table>
+    <p class="small">训练日与休息日的 TEE 可相差 <strong class="akey">500–1500</strong> kcal/d，须分开估算 PAL。TEF 因营养素不同：蛋白 <strong>20%–30%</strong>、糖 <strong>5%–10%</strong>、脂肪 <strong>3%–5%</strong>。</p>
+    <p class="cite">教材 Ch04 §4.1.3 PAL 系数参考范围（表 4.2）；训练日/休息日差距 500–1500 kcal/d</p>
+    <div class="ans"><span class="lab2">本板块核心结论（参考）</span>
+    PAL=TEE/RMR，TEE≈RMR×PAL，七档从卧床 1.2–1.3 到超高 2.3–2.6+。用周均 PAL 掩盖训练日峰值会低估高负荷日需求、增加 LEA 风险；训练日与休息日必须分开算（差 500–1500 kcal/d）。TEF 蛋白 20%–30% &gt; 糖 5%–10% &gt; 脂肪 3%–5%，但不能把 TEF 当抵消热量的工具。
+    <span class="src">教材 Ch04 §4.1.3；§4.1.2 TEF</span></div>
+  </div>
+
+  <div class="block">
+    <h3>板块 4 · 能量消耗的测量方法与精度<span class="ref">教材 Ch04 §4.2（表 4.3）</span></h3>
+    <table class="grid">
+      <tr><th style="width:24%;">方法</th><th style="width:22%;">精度（标准答案）</th><th>现场可用性与备注（标准答案）</th></tr>
+      <tr><td class="lab">双标水 DLW</td><td class="ta"><strong class="akey">±5%</strong></td><td class="ta">自由生活条件下最高精度、不干扰日常，测 3 天–3 周平均 TEE；昂贵，作其他方法的参照标准</td></tr>
+      <tr><td class="lab">房间量热</td><td class="ta"><strong class="akey">±1%–3%</strong></td><td class="ta">实验室金标准、精度最高；环境封闭、无法测真实训练场景、成本高</td></tr>
+      <tr><td class="lab">间接量热（测 RMR）</td><td class="ta"><strong class="akey">±5%–10%</strong></td><td class="ta">面罩/通风罩测 VO₂、VCO₂；RMR 测 20–30 分钟，RED-S 高风险者首选实测</td></tr>
+      <tr><td class="lab">便携 VO₂ 设备</td><td class="ta"><strong class="akey">±10%–15%</strong></td><td class="ta">可在跑台/功率机上实时测运动消耗，建立个体化心率—VO₂ 曲线；设备漂移与佩戴姿势影响</td></tr>
+      <tr><td class="lab">心率推算</td><td class="ta"><strong class="akey">±15%–25%</strong></td><td class="ta">成本低、可连续监测；低强度区心率—能耗关系不敏感，情绪/温度/咖啡因干扰</td></tr>
+      <tr><td class="lab">加速度计</td><td class="ta"><strong class="akey">±15%–30%</strong></td><td class="ta">便携、适合大样本；测不到上肢、负重、骑行与上坡，易低估</td></tr>
+      <tr><td class="lab">MET 查表</td><td class="ta"><strong class="akey">±20%–40%</strong></td><td class="ta">零设备现场粗估；不区分个体体重、效率与强度，误差最大，仅作初步参考</td></tr>
+    </table>
+    <div class="frame">
+      <div class="ftitle">间接量热两个关键式子 / 数值（标准答案）</div>
+      <p class="small" style="margin:1mm 0;">Weir 公式：kcal/min ＝ <strong>3.941 × VO₂(L/min) ＋ 1.106 × VCO₂(L/min)</strong>（稳态条件：连续 5–15 分钟 RER 波动 &lt;5%）</p>
+      <p class="small" style="margin:1mm 0;">RER 参考值：纯脂肪 <strong>0.70</strong>、纯糖 <strong>1.00</strong>、混合膳食 <strong>0.82–0.87</strong>。</p>
+    </div>
+    <p class="cite">教材 Ch04 §4.2.1 间接量热与 Weir 公式；§4.2.2 方法精度对比（表 4.3）</p>
+    <div class="ans"><span class="lab2">本板块核心结论（参考）</span>
+    精度梯队：房间量热 ±1%–3% &gt; DLW ±5%（自由生活金标准）&gt; 间接量热 ±5%–10% &gt; 便携 VO₂ ±10%–15% &gt; 心率 ±15%–25% &gt; 加速度计 ±15%–30% &gt; MET ±20%–40%。Weir 公式用 VO₂ 与 VCO₂ 算能耗；RER 0.70=纯脂肪、1.00=纯糖、0.82–0.87=混合，可判读燃料使用。
+    <span class="src">教材 Ch04 §4.2 能量消耗的测量</span></div>
+  </div>
+</section>
+
+<!-- ================= 课中笔记 单元四 Ch04（第3页） ================= -->
+<section class="page">
+  <div class="runhead">课中笔记 · 单元四 ｜ Ch04 ｜ <span class="warn-sm">组长批改版 · 请勿外传</span></div>
+  <h2>课中笔记 · 单元四（续）· 标准答案</h2>
+  <p class="sub">Ch04 ｜ RMR 估算 · 代谢适应</p>
+
+  <div class="block">
+    <h3>板块 5 · RMR 估算公式：怎么选<span class="ref">教材 Ch04 §4.3</span></h3>
+    <p class="rh">① 首选：基于 FFM 的 Cunningham 1991　② 没有体成分数据：Mifflin　③ 现场快速估：快算法</p>
+    <div class="frame">
+      <div class="ftitle">公式填空（标准答案）</div>
+      <table class="grid">
+        <tr><td class="lab" style="width:34%;">Cunningham 1991（默认首选）</td><td class="ta">RMR ＝ <strong>21.6 × FFM(kg) ＋ 370</strong>（≈ 28 kcal·kg FFM⁻¹·d⁻¹）</td></tr>
+        <tr><td class="lab">Cunningham 1980</td><td class="ta">BMR ＝ <strong>500 ＋ 22 × FFM(kg)</strong>（FFM 每增 1 kg，RMR 增约 22 kcal/d；作敏感性分析参照，不作默认输出）</td></tr>
+        <tr><td class="lab">Mifflin（男）</td><td class="ta">RMR ＝ <strong>9.99 × 体重kg ＋ 6.25 × 身高cm − 4.92 × 年龄 ＋ 5</strong></td></tr>
+        <tr><td class="lab">Mifflin（女，常数项不同）</td><td class="ta">RMR ＝ <strong>9.99 × 体重kg ＋ 6.25 × 身高cm − 4.92 × 年龄 − 161</strong></td></tr>
+        <tr><td class="lab">现场快算法（kcal/kg/d）</td><td class="ta">维持 <strong>30–35</strong> ／减脂 <strong>25–28</strong> ／增肌 <strong>38–42</strong>（不区分体成分，仅作快速起点）</td></tr>
+      </table>
+    </div>
+    <p class="small">非 FFM 公式（Mifflin/HB）对高肌肉量训练者可能 <strong class="akey">低</strong> 估约 <strong class="akey">5%–15%</strong>（肌肉越高低估越多，业余健美/力量者可超 10%–15%，约 200–300 kcal/d）。
+    中国成人 EER（18–49 岁，2023 版 DRIs）：男性轻/中/重体力 <strong>2250 / 2600 / 3000 kcal/d</strong>；女性 <strong>1800 / 2100 / 2400 kcal/d</strong>（比 FAO/WHO 国际值约低 5%–10%）。</p>
+    <p class="cite">教材 Ch04 §4.3.2 Cunningham 1991/1980；§4.3.3 Mifflin-St Jeor；§4.3.5 快算法；§4.1.1 中国 EER</p>
+    <div class="ans"><span class="lab2">本板块核心结论（参考）</span>
+    有 FFM 首选 Cunningham 1991（21.6×FFM+370）；无 FFM 退用 Mifflin（男 +5、女 −161）并标注对高肌肉量者低估 5%–15%；快算法（维持 30–35、减脂 25–28、增肌 38–42）不区分体成分，对肌肉型者可低估 650–950 kcal/d 致隐性 LEA。任何估算都须用体重趋势校准；多公式落差通常 200–400 kcal/d、TEE 落差 500–800 kcal/d。
+    <span class="src">教材 Ch04 §4.3 RMR 预测公式与选择流程；§4.6 快算法</span></div>
+  </div>
+
+  <div class="block">
+    <h3>板块 6 · 代谢适应与"约束模型"<span class="ref">教材 Ch04 §4.4、§4.5</span></h3>
+    <p class="rh">① 运动消耗不是"多烧多亏"：身体会补偿　② Pontzer 约束性总能量消耗（CTEE）　③ "代谢损伤"说法的性质</p>
+    <table class="grid">
+      <tr><td class="lab" style="width:44%;">代谢适应时 RMR 的下调幅度</td><td class="ta"><strong class="akey">5%–15%</strong>（短期 1–4 周降 5%–10%，长期 &gt;8 周接近 15%；机制：T3 下降、瘦素骤降、交感张力下调、做功效率提高）（RMR实测/RMR预测 ＜ <strong class="akey">0.9</strong> 视为显著适应）</td></tr>
+      <tr><td class="lab">Knaan 2026（N=16，超重久坐成人单臂干预研究）：运动能量补偿 ExEC</td><td class="ta">约 <strong class="akey">39%</strong>（个体差异极大，CV 高达 116%）；即每 100 kcal 运动消耗约 39 kcal 被其他组分"节省"回来</td></tr>
+      <tr><td class="lab">同研究：睡眠代谢率 SMR 变化</td><td class="ta">− <strong class="akey">105</strong> kcal/d；RMR − <strong class="akey">87</strong> kcal/d（累计 ExEE 约 18465 kcal 的 12 周监督步行干预）</td></tr>
+      <tr><td class="lab">"代谢损伤"</td><td class="ta"><strong>商业健身话语，无可靠医学证据</strong>；代谢适应是循证、可逆的适应性现象，能量恢复后数周至数月逐步回归基线</td></tr>
+      <tr><td class="lab">减脂热量缺口设置与调整步幅</td><td class="ta">初始 − <strong class="akey">300 至 500</strong> kcal/d（目标每周减 0.5–1 kg）；持续 <strong>8–12 周</strong>后评估体重与 RMR 再调整；体重停滞 4 周以上且表现下降，考虑周期性 refeed（恢复热量 1–2 周）或重评 EA</td></tr>
+    </table>
+    <p class="cite">教材 Ch04 §4.4.2 代谢适应幅度与判定（RMR比 &lt;0.9）；§4.5.2 Knaan 2026 ExEC≈39%（Communications Medicine，NCT04460040）</p>
+    <div class="ans"><span class="lab2">本板块核心结论（参考）</span>
+    长期能量限制下 RMR 下调 5%–15%，RMR实测/预测 &lt;0.9 判显著适应；这是可逆适应而非"代谢损伤"。Knaan 2026 示 ExEC≈39%（CV 116%），运动消耗不等于净缺口，且其样本为超重久坐者、外推训练者须谨慎。减脂初始缺口 −300 至 −500 kcal/d、8–12 周评估；竞技运动员低 EA 的纠正优先于体成分优化。
+    <span class="src">教材 Ch04 §4.4 代谢适应；§4.5 约束模型与运动补偿</span></div>
+  </div>
+</section>
+
+<!-- ================= 课中笔记 单元四 Ch04（第4页） ================= -->
+<section class="page">
+  <div class="runhead">课中笔记 · 单元四 ｜ Ch04 ｜ <span class="warn-sm">组长批改版 · 请勿外传</span></div>
+  <h2>课中笔记 · 单元四（续）· 标准答案</h2>
+  <p class="sub">Ch04 ｜ 燃料分区 · 能量系统 · 课堂练习</p>
+
+  <div class="block">
+    <h3>板块 7 · 燃料分区与三大能量系统概览<span class="ref">教材 Ch04 §4.7</span></h3>
+    <table class="grid">
+      <tr><th style="width:24%;">分区 / 系统</th><th style="width:30%;">强度区间（标准答案）</th><th>主导燃料或底物（标准答案）</th></tr>
+      <tr><td class="lab">脂肪主导区</td><td class="ta">＜ <strong class="akey">50%–55% VO₂max</strong>（安静时约 60%–70% 能耗来自脂肪）</td><td class="ta">游离脂肪酸（脂肪组织动员 + 肌内甘油三酯 IMTG）</td></tr>
+      <tr><td class="lab">混合区</td><td class="ta">约 <strong class="akey">55%–70% VO₂max</strong></td><td class="ta">脂肪与碳水混合供能，碳水比例随强度上升</td></tr>
+      <tr><td class="lab">糖主导区</td><td class="ta">＞ <strong class="akey">70%–75% VO₂max</strong>（交叉点以上）</td><td class="ta">肌糖原/血糖为主（糖氧化响应快、单位氧产 ATP 高）</td></tr>
+      <tr><td class="lab">FATmax 区间</td><td class="ta"><strong class="akey">45%–65% VO₂max</strong>（个体差异大；脂肪氧化速率峰值）</td><td class="ta">脂肪氧化比例最高，节约糖原；耐力基础训练常设此区（MLSS 以下 10%–15% VO₂max）</td></tr>
+    </table>
+    <p class="small">三大能量系统（Ch06 详讲）：磷酸原系统（5–10 秒）／糖酵解系统（30 秒–2 分钟）／有氧氧化系统（&gt;2 分钟至数小时）。</p>
+    <p class="cite">教材 Ch04 §4.7.5 燃料选择与 Fat:CHO 交叉（FATmax 45%–65% VO₂max，van Loon 2001、Romijn 1993）</p>
+    <div class="ans"><span class="lab2">本板块核心结论（参考）</span>
+    随强度升高燃料由脂肪转向碳水：&lt;50%–55% VO₂max 脂肪主导、55%–70% 混合、&gt;70%–75% 糖主导；FATmax 在 45%–65% VO₂max。交叉机制：肾上腺素同时激活 HSL 与糖原磷酸化酶，但糖氧化响应更快、单位氧 ATP 更高；训练适应（线粒体密度、CPT-I、IMTG）把交叉点右移。
+    <span class="src">教材 Ch04 §4.7.5 交叉现象与机制</span></div>
+  </div>
+
+  <div class="block">
+    <h3>课堂练习 · 给一位训练者估 TEE（评分框架）<span class="ref">教材 Ch04 · 章末练习</span></h3>
+    <p class="small">讲师当堂投放会员的体重、身高、年龄、FFM 与一周训练安排。以下为判分要点；会员数据<strong>以课上讲授为准</strong>。</p>
+    <div class="frame">
+      <div class="ftitle">判分要点（四步 + 校准）</div>
+      <table class="grid">
+        <tr><td class="lab" style="width:34%;">选用公式与理由</td><td class="ta">有 FFM（DXA）→ Cunningham 1991（21.6×FFM+370）；无 FFM → Mifflin（男 +5/女 −161）并注明高肌肉量者可能低估 5%–15%；只写快算法不给限定条件的酌情扣分。</td></tr>
+        <tr><td class="lab">RMR 代入计算</td><td class="ta">须写出完整代入（如 FFM=60 → 21.6×60+370=1666 kcal/d）；单位正确。</td></tr>
+        <tr><td class="lab">PAL 取值与理由（训练日/休息日分开）</td><td class="ta">按表 4.2 七档取值并说明依据（如每日训练 1–2 次取 1.8–2.0）；<strong>训练日与休息日必须分开</strong>（差 500–1500 kcal/d），只用一个周均 PAL 的扣要点分。</td></tr>
+        <tr><td class="lab">TEE 结果</td><td class="ta">TEE = RMR × PAL；训练日、休息日分别给出；声明为估算值（公式落差可达 500–800 kcal/d）。</td></tr>
+      </table>
+      <div class="ta">不确定度与校准得分点：明确估算不确定度（±10% 量级）；准备用两个现场数据校准——① 体重 2–4 周趋势（最终校准锚点）；② 训练日志/训练表现与饥饿、疲劳等主观信号；RED-S 风险信号（月经、表现下滑）联动 Ch05 筛查；高风险者建议间接量热实测 RMR。</div>
+      <p class="cite">教材 Ch04 §4.3 公式选择流程；§4.1.3 PAL 训练日/休息日；§4.8 能量评估 SOP（体重趋势校准）</p>
+    </div>
+  </div>
+
+  <div class="grade">
+    <div class="gt">批改要点 · 单元四 Ch04（组长速查）</div>
+    <ul>
+      <li>BMR ≠ RMR：BMR 需实验室过夜+禁食 10–12h+恒温静卧；RMR 居家睡眠后测前静息 15–30 分钟；差异 ≤5%–10% 方向不定；<strong>实践一律用 RMR</strong>。</li>
+      <li>公式选择：有 FFM 首选 <strong>Cunningham 1991：RMR=21.6×FFM+370</strong>；Cunningham 1980 为 500+22×FFM（Ch02 EI:BMR 用此式）；Mifflin 男 +5、女 −161。非 FFM 公式对高肌肉量者低估 5%–15%。</li>
+      <li>TEE=RMR+TEF+EAT+NEAT；RMR 静坐占 60%–80%（精英耐力可低至 38%–47%）；TEF 6%–10%（蛋白 20%–30%、糖 5%–10%、脂肪 3%–5%）；PAL 七档 1.2–1.3 至 2.3–2.6+，<strong>训练日/休息日必须分开</strong>（差 500–1500 kcal/d）。</li>
+      <li>ExEC ≈ <strong>39%</strong>（Knaan 2026，N=16 超重久坐者，CV 116%；SMR −105、RMR −87）：运动消耗不是 100% 变缺口；"代谢损伤"无证据、代谢适应可逆（RMR 下调 5%–15%，RMR比 &lt;0.9 判定）。</li>
+      <li>减脂缺口初始 −300 至 −500 kcal/d、8–12 周评估；FATmax=45%–65% VO₂max、糖主导 &gt;70%–75%；Weir 公式 3.941×VO₂+1.106×VCO₂，RER 0.70 脂肪 / 1.00 糖。</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= 课中笔记 单元五 Ch05（第1页） ================= -->
+<section class="page">
+  <div class="runhead">课中笔记 · 单元五 ｜ Ch05 ｜ <span class="warn-sm">组长批改版 · 请勿外传</span></div>
+  <h2>课中笔记 · 单元五 · 标准答案</h2>
+  <p class="sub">Ch05 能量摄入不足与 REDs ｜ 13:45–14:30</p>
+
+  <div class="block">
+    <h3>板块 1 · 能量可利用性（EA）：概念与公式<span class="ref">教材 Ch05 §5.1.2</span></h3>
+    <p class="rh">① EA 与"热量缺口"不是一回事：它衡量扣除运动消耗后留给生理功能的能量　② 分母必须是 FFM</p>
+    <div class="frame">
+      <div class="ftitle">EA 计算公式（标准答案）</div>
+      <p style="text-align:center;font-size:13pt;margin:3mm 0;">
+      EA ＝（<strong class="akey">EI</strong> − <strong class="akey">ExEE</strong>）÷ <strong class="akey">FFM(kg)</strong>
+      </p>
+      <table class="grid">
+        <tr><th style="width:20%;">符号</th><th style="width:30%;">含义</th><th>单位 / 备注</th></tr>
+        <tr><td class="lab">EI</td><td class="ta">能量摄入（Energy Intake）</td><td class="ta">kcal/d；应基于 7 天称重食物记录或经验证数字工具，不用 24h 回顾（自报普遍偏低，Knaan 2026 平均偏差 583 kcal/d）</td></tr>
+        <tr><td class="lab">ExEE</td><td class="ta">运动能量消耗（Exercise Energy Expenditure）</td><td class="ta">kcal/d；只计训练相对增量（扣除同时段静息消耗），用心率-VO₂ 或加速度计法；EPOC 与非训练日活动按周平均</td></tr>
+        <tr><td class="lab">FFM</td><td class="ta">去脂体重（Fat-Free Mass）</td><td class="ta">kg；高风险者正式评估用 DXA 或多组分模型（BIA/皮褶误差 ±5%–10%，对应 EA 偏差 2–5 kcal/kg/d）</td></tr>
+      </table>
+      <p class="small" style="margin:1mm 0 0;">EA 的单位：<strong class="akey">kcal·kg FFM⁻¹·d⁻¹</strong>（每公斤去脂体重每天可利用千卡）；为什么分母用 FFM 而不是体重：<strong>FFM 是代谢活跃组织（器官、肌肉），EA 衡量的是供给这些组织的剩余能量；脂肪组织代谢率低，计入分母会稀释结果</strong>。</p>
+    </div>
+    <p class="cite">教材 Ch05 §5.1.1 能量平衡框架的局限（体重稳定≠EA 充足）；§5.1.2 EA 操作定义与三变量测量要求</p>
+    <div class="ans"><span class="lab2">本板块核心结论（参考）</span>
+    EA=(EI−ExEE)/FFM，单位 kcal·kg FFM⁻¹·d⁻¹。它回答"扣掉运动后还剩多少能量给生理功能"，与热量缺口（体重视角）是两套框架：训练者可数月体重稳定但月经、骨形成、RMR 已被下调。分母必须是 FFM（DXA 优先）；三变量误差叠加，EA 是估算值而非精确测量。
+    <span class="src">教材 Ch05 §5.1.2；§5.1.3 Loucks 实验设计</span></div>
+  </div>
+
+  <div class="block">
+    <h3>板块 2 · Loucks 阈值：多少算"够"<span class="ref">教材 Ch05 §5.1.3（表 5.1）</span></h3>
+    <table class="grid">
+      <tr><th style="width:22%;">EA 区间（kcal/kg FFM/d）</th><th style="width:26%;">分级名称（标准答案）</th><th>身体状态与处置原则（标准答案）</th></tr>
+      <tr><td class="lab">≥ 45</td><td class="ta"><strong>最优区</strong>（Optimal EA）</td><td class="ta">接近能量平衡，HPG 轴与代谢指标（LH 脉冲、T3、IGF-1、骨标志物）稳定；恢复干预的目标区间（再加 5–10 安全边际）</td></tr>
+      <tr><td class="lab">30 – 45</td><td class="ta"><strong>次优 / 适应性 LEA</strong>（IOC 2023：适应性 LEA）</td><td class="ta">减脂期控制良好、监测到位时可<strong>短期耐受</strong>；须设明确时限（如 ≤8 周）与监测计划，以功能终点（月经、表现、骨标志物）而非 EA 数字判定</td></tr>
+      <tr><td class="lab">＜ 30</td><td class="ta"><strong>临床 / 问题性 LEA</strong>（Clinical/Problematic LEA）</td><td class="ta">LH 脉冲频率下降、T3 降低、IGF-1 降低、骨形成受抑；即使暂无症状也属高风险，<strong>需转介医学评估、MDT 介入</strong></td></tr>
+    </table>
+    <p class="small">阈值存在个体差异，约 ± <strong class="akey">5</strong> kcal（住院实验连续约 5 天的群体均值）；男性在 EA ＜ <strong class="akey">25</strong> 时可观察到睾酮下降（25–30 区间尚有争议，IOC 2023 男女统一沿用 &lt;30）；
+    男性最敏感的三个终点：<strong>睾酮（晨起）、晨勃频率、性欲</strong>（另加骨形成标志物）。</p>
+    <p class="cite">教材 Ch05 §5.1.3 Loucks 阈值实验（45/30/20/10 四档、连续 5 天住院）；§5.1.4 性别差异（男性 &lt;25 阈值与敏感终点）；表 5.1 EA 三档</p>
+    <div class="ans"><span class="lab2">本板块核心结论（参考）</span>
+    三档：≥45 最优、30–45 适应性 LEA（短期可耐受、限期监测）、&lt;30 临床/问题性 LEA（需 MDT）。阈值来自 Loucks 住院实验（5 天、年轻女性），个体差 ±5；男性切点更低更慢，&lt;25 出现睾酮/晨勃/骨形成异常，25–30 争议未决。判 LEA 看功能终点，不唯 EA 数字。
+    <span class="src">教材 Ch05 §5.1.3；§5.1.4；IOC 2023 适应性/问题性 LEA 二分</span></div>
+  </div>
+</section>
+
+<!-- ================= 课中笔记 单元五 Ch05（第2页） ================= -->
+<section class="page">
+  <div class="runhead">课中笔记 · 单元五 ｜ Ch05 ｜ <span class="warn-sm">组长批改版 · 请勿外传</span></div>
+  <h2>课中笔记 · 单元五（续）· 标准答案</h2>
+  <p class="sub">Ch05 ｜ 概念演进 · 影响 · 筛查</p>
+
+  <div class="block">
+    <h3>板块 3 · 从女运动员三联征到 REDs：概念演进<span class="ref">教材 Ch05 §5.2</span></h3>
+    <div class="frame">
+      <div class="ftitle">时间线（标准答案）</div>
+      <div class="timeline">
+        <div class="node"><div class="yr">1992</div><div class="ta">ACSM 首版 <strong>Female Athlete Triad（女运动员三联征）</strong>立场声明：命名能量摄入不足、月经紊乱、骨质疏松三者并发（源于女子长跑/体操/芭蕾高频应力性骨折的临床观察；Drinkwater JAMA 系列）</div></div>
+        <div class="node"><div class="yr">2007</div><div class="ta">Nattiv、Loucks 等修订版：三联征重定义为<strong>三个相互关联的连续谱</strong>——能量可用性谱、月经功能谱、骨健康谱（沿谱独立移动、相互影响）</div></div>
+        <div class="node"><div class="yr">2014</div><div class="ta">IOC 首版 <strong>RED-S</strong> 共识（Mountjoy）：扩展至男性；受影响系统拓展到代谢、心血管、免疫、胃肠、心理、生长发育等十余个系统；LEA 定为已知致因。同年 Triad Coalition 发布 <strong>CRA 评分卡</strong>（De Souza）</div></div>
+        <div class="node"><div class="yr">2018</div><div class="ta">IOC 更新：补充非精英、非女性、残疾训练者证据；发布 <strong>RED-S CAT 第一版</strong>；明确 LEA 分"短期可耐受"与"长期病理性"两类</div></div>
+        <div class="node"><div class="yr">2023</div><div class="ta">IOC 最全面修订：英文名改为 <strong>REDs 综合征</strong>；引入<strong>适应性 LEA / 问题性 LEA 二分</strong>；发布 <strong>REDs CAT2 三步法</strong>；各系统红/黄/绿/灰四级分层；提出 REDs Physiological Model</div></div>
+        <div class="node"><div class="yr">2025</div><div class="ta"><strong>Triad Coalition Update</strong>：保留三联征命名与 CRA 评分卡（整合 DXA Z 值、应力性骨折史、闭经时长），吸收 REDs 多系统论述。两套框架<strong>并行互补</strong>（REDs CAT2 多系统筛查 → 女性加做 Triad CRA 细化；冲突时取更保守一侧）</div></div>
+      </div>
+    </div>
+    <div class="frame">
+      <div class="ftitle">LEA 影响的多系统（标准答案：系统 + 典型表现）</div>
+      <div class="ta">
+      ① <strong>神经内分泌</strong>：HPG 轴（LH 脉冲↓、闭经/睾酮↓）、HPT 轴（T3 早期降 15%–25%、rT3↑）、HPA 轴（晨起皮质醇↑、昼夜节律变浅）；② <strong>骨骼</strong>：骨形成受抑、骨吸收↑，Z&lt;−1 开始干预、Z&lt;−2 高风险需 MDT，应力性骨折；③ <strong>心血管</strong>：静息心率↓（&lt;40 次/分转介）、心律失常风险；④ <strong>免疫</strong>：分泌型 IgA↓、反复 URTI、口腔溃疡；⑤ <strong>胃肠</strong>：胃排空延迟、腹胀、便秘、训练中胃肠不耐受（LEAF-Q 胃肠维度）；⑥ <strong>心理/行为</strong>：情绪低落、训练兴趣丧失、DE/ED（限制-暴食循环、害怕休息日）；⑦ <strong>男性生殖</strong>：晨勃减少、性欲↓、睾酮↓（Vogt 案例 EA≈8 时睾酮 21.4→6.5 nmol/L）；⑧ 生长发育（青少年）、代谢（RMR↓）与运动表现下降。
+      </div>
+      <p class="cite">教材 Ch05 §5.3 LEA 的多系统影响；§5.3.1 神经内分泌三轴（T3 降 15%–25%）</p>
+    </div>
+    <div class="ans"><span class="lab2">本板块核心结论（参考）</span>
+    演进主线：1992 Triad 三病并发 → 2007 三连续谱 → 2014 IOC RED-S（扩男性、扩系统、LEA 致因）+CRA → 2018 CAT 第一版与短期/长期二分 → 2023 REDs 综合征+CAT2+适应性/问题性 LEA+红黄绿灰 → 2025 Triad 更新与 REDs 并行。LEA 经神经内分泌中枢链条波及十余系统，体重稳定不能排除 REDs。
+    <span class="src">教材 Ch05 §5.2 框架演进；§5.3 多系统影响</span></div>
+  </div>
+
+  <div class="block">
+    <h3>板块 4 · 筛查与评估工具<span class="ref">教材 Ch05 §5.5</span></h3>
+    <table class="grid">
+      <tr><th style="width:20%;">工具 / 手段</th><th style="width:40%;">用途与关键条目（标准答案）</th><th>判读标准（标准答案）</th></tr>
+      <tr><td class="lab">CAT2（IOC 三步法）</td><td class="ta">Stellingwerff 2023 发布。第一步病史症状筛查（LEAF-Q/LEAM-Q + 月经/性功能史、骨折史、胃肠症状、体重变化）→ 第二步多系统体征与生化检查 → 第三步综合评级</td><td class="ta"><strong>红色</strong>（高风险）：≥1 系统红或多系统黄，立即 MDT、暂停或显著降负荷；<strong>黄色</strong>：1–2 系统黄、无红，干预+加强监测；<strong>绿色</strong>：无黄/红，常规监测；<strong>灰色</strong>：信息不足，补查后再评</td></tr>
+      <tr><td class="lab">LEAF-Q</td><td class="ta">Melin 2014，女性 LEA 风险筛查问卷；<strong>25 个条目</strong>三维度：胃肠功能 9 项、损伤史 8 项、月经功能 8 项（男性用 LEAM-Q）</td><td class="ta">总分 <strong class="akey">≥8 分</strong>提示 LEA 风险；敏感性 <strong>78%</strong>、特异性 <strong>90%</strong>；阳性自动进入 CAT2 第二步</td></tr>
+      <tr><td class="lab">EDE-Q</td><td class="ta">进食障碍标准化问卷（约束饮食、暴食、清泻、体重担忧）；训练者版本可用于运动场景</td><td class="ta">评 DE/ED 方向，<strong>不能替代临床访谈确诊</strong>；总分/子项升高转介心理师</td></tr>
+      <tr><td class="lab">DXA（骨密度）</td><td class="ta">测腰椎/全髋 BMD 与体成分；<strong>闭经超过 6 个月或应力性骨折强制安排</strong>（闭经超 3 个月或反复应力性骨折即应安排）</td><td class="ta">Z 值 &lt;−1 开始干预；&lt;−2 高风险需 MDT；干预后 6 与 12 个月各复查一次</td></tr>
+    </table>
+    <p class="small">CAT2 颜色评级：<strong>红 / 黄 / 绿 / 灰</strong>四级（红=≥1 系统红或多系统黄；黄=1–2 系统黄；绿=无信号；灰=信息不足）。红色评级的处置时限：<strong class="akey">48 小时</strong>内启动 MDT。高 ExEE 项目（耐力、举重、摔跤、健美）每赛季至少一次 CAT2 初筛；三工具结果不一致时以更高风险方向决策。</p>
+    <p class="cite">教材 Ch05 §5.5.1 CAT2 三步法与四级评级；§5.5.2 LEAF-Q（25 条目、≥8 分、78%/90%）、EDE-Q、DXA 指征</p>
+    <div class="ans"><span class="lab2">本板块核心结论（参考）</span>
+    筛查链：LEAF-Q/LEAM-Q 初筛（≥8 分阳性，敏感性 78%/特异性 90%）→ CAT2 第二步多系统体征生化 → 红黄绿灰综合评级；红色 48 小时内启动 MDT。EDE-Q 管 DE/ED 方向、阳性转心理师但不替代访谈；DXA 管骨（闭经超 6 个月或应力性骨折强制，Z&lt;−1 干预、Z&lt;−2 MDT）。工具冲突时按更高风险处理。
+    <span class="src">教材 Ch05 §5.5 筛查与评估工具</span></div>
+  </div>
+</section>
+
+<!-- ================= 课中笔记 单元五 Ch05（第3页） ================= -->
+<section class="page">
+  <div class="runhead">课中笔记 · 单元五 ｜ Ch05 ｜ <span class="warn-sm">组长批改版 · 请勿外传</span></div>
+  <h2>课中笔记 · 单元五（续）· 标准答案</h2>
+  <p class="sub">Ch05 ｜ 干预恢复 · 课堂练习</p>
+
+  <div class="block">
+    <h3>板块 5 · 干预与恢复：怎么吃回来、怎么练回来<span class="ref">教材 Ch05 §5.6</span></h3>
+    <p class="rh">① 恢复目标与加量节奏　② Refeed 的设计　③ 训练阶梯　④ 恢复时窗：各系统快慢不同，骨最慢</p>
+    <table class="grid">
+      <tr><td class="lab" style="width:34%;">EA 恢复目标</td><td class="ta">EA 提升至 <strong class="akey">＞45</strong> kcal/kg FFM/d 并维持；实际目标比阈值再加 <strong>5–10</strong> 安全边际</td></tr>
+      <tr><td class="lab">能量加量节奏</td><td class="ta">每 <strong class="akey">1–2</strong> 周增加 <strong class="akey">100–200</strong> kcal/d（避免过快引发胃肠不耐受）</td></tr>
+      <tr><td class="lab">恢复期宏量营养素</td><td class="ta">碳水占比 <strong class="akey">50%–60%</strong>；蛋白 <strong class="akey">1.6–2.0</strong> g/kg/d；脂肪占比 <strong class="akey">20%–30%</strong></td></tr>
+      <tr><td class="lab">Refeed 日</td><td class="ta">每周 <strong>1–2 个</strong> refeed day；碳水占增量能量 <strong>60%–70%</strong>（碳水驱动瘦素与 T3 回升），碳水增加 <strong>1.5–2 g/kg</strong>，蛋白维持 1.6–2.0、脂肪维持基线，训练量同步下调；不是"放纵日"，有暴食史者需心理师协同</td></tr>
+      <tr><td class="lab">训练阶梯（前 1–2 周）</td><td class="ta">第 1–2 周减至 <strong>50% 既往负荷或完全休训</strong>（视医学严重度，红色评级停训至关键系统恢复）；第 3–6 周每 2 周递增 <strong>10%–15%</strong>（看 T3/P1NP/月经/RPE）；第 7–12 周以功能终点而非比赛日程决策</td></tr>
+      <tr><td class="lab">严重 LEA 再喂养防范</td><td class="ta">EA ＜15–20 者恢复初期补 <strong>磷、镁、维生素 B1</strong>，监测电解质与心电图，防再喂养综合征（低磷血症、心律失常）；静息心率 &lt;40 或新发心律失常立即转介心脏科</td></tr>
+    </table>
+    <div class="frame">
+      <div class="ftitle">恢复时窗表（标准答案）</div>
+      <table class="grid">
+        <tr><th style="width:34%;">指标</th><th>恢复时窗（标准答案）</th></tr>
+        <tr><td class="lab">体重 / 体脂</td><td class="ta"><strong class="akey">4–8 周</strong>（体重与瘦素回升先于 LH 脉冲恢复）</td></tr>
+        <tr><td class="lab">T3（甲状腺激素）</td><td class="ta"><strong class="akey">4–12 周</strong>（月经未恢复但体重已回升时，查 T3 与 P1NP 作先行指标）</td></tr>
+        <tr><td class="lab">LH / 雌二醇</td><td class="ta"><strong class="akey">8–20 周</strong></td></tr>
+        <tr><td class="lab">月经恢复</td><td class="ta"><strong class="akey">2–6 个月</strong>（最晚的功能终点之一；每 4–6 周随访至连续 2 个自然周期；男性晨起睾酮 3–6 个月）</td></tr>
+        <tr><td class="lab">骨密度</td><td class="ta"><strong class="akey">≥12 个月</strong>，且部分骨量永久丢失；DXA 在 6 与 12 个月复查，Z&lt;−1 者制定不少于 12 个月恢复计划（最慢终点）</td></tr>
+      </table>
+    </div>
+    <p class="cite">教材 Ch05 §5.6.1 能量恢复目标与节奏；§5.6.2 Refeed；§5.6.3 训练阶梯；§5.6.4 恢复时窗（Drinkwater 纵向研究、2025 Triad Update）</p>
+    <div class="ans"><span class="lab2">本板块核心结论（参考）</span>
+    恢复基石是把 EA 拉回 ＞45（加 5–10 边际）：每 1–2 周 +100–200 kcal，碳水 50%–60%、蛋白 1.6–2.0 g/kg、脂肪 20%–30%；Refeed 每周 1–2 个、碳水为主（60%–70%）。训练先砍到 50% 或休训再按 10%–15% 阶梯递增。时窗：体重 4–8 周、T3 4–12 周、LH/雌二醇 8–20 周、月经 2–6 个月、骨 ≥12 个月且部分不可逆——骨是最慢终点。
+    <span class="src">教材 Ch05 §5.6 干预与恢复</span></div>
+  </div>
+
+  <div class="block">
+    <h3>课堂练习 · 大众会员 EA 计算与处置（标准答案）<span class="ref">教材 Ch05 §5.7</span></h3>
+    <p class="small">案例：规律健身女会员，每日摄入约 1600 kcal，日均运动消耗约 600 kcal，FFM 约 42 kg。</p>
+    <div class="frame">
+      <div class="ftitle">计算与处置（标准答案）</div>
+      <div class="ta">
+      <strong>第一步 · 代入计算：</strong>EA ＝（EI − ExEE）÷ FFM ＝（<strong>1600 − 600</strong>）÷ <strong>42</strong> ＝ 1000 ÷ 42 ≈ <strong class="akey">23.8 kcal·kg FFM⁻¹·d⁻¹</strong>。<br>
+      <strong>第二步 · 阈值分级：</strong>23.8 ＜ 30，处于<strong class="akey">临床 / 问题性 LEA 区间</strong>（≥45 最优、30–45 适应性、＜30 临床）。即使她体重短期稳定也不能排除 REDs——RMR、NEAT 与生殖轴可能已下调维持体重表象（教材 §5.7 原文同一案例）。<br>
+      <strong>第三步 · 需要向她确认的信息：</strong>月经周期（是否延长/经量减少/停经）、应力性骨折或局部骨性疼痛史、近期训练表现与疲劳/睡眠、反复感冒或胃肠症状、饮食行为（害怕碳水/休息日、暴食-补偿）；1600 与 600 的数据来源与记录天数（自报 EI 平均偏差可达 583 kcal/d）。<br>
+      <strong>第四步 · 教练三步边界动作（§5.7.2）：</strong>① <strong>暂停继续压低热量</strong>——不建议再减碳水、加有氧或用燃脂补剂，先评估 EA/训练量/恢复；② <strong>建立最小可行评估</strong>——7 日饮食+7 日训练记录、体重均值、月经/性功能信号、睡眠疲劳评分，估算 EA 区间（用于判断转介而非诊断，数据差时按更保守判断）；③ <strong>转介与训练调整</strong>——出现停经超 3 个月、应力性骨折、静息心率异常/晕厥、明显进食障碍行为即转介运动医学/妇科内分泌/心理师/注册营养人员；同时下调训练量、取消额外有氧、恢复休息日。能量恢复按 §5.6：目标 EA＞45、每 1–2 周 +100–200 kcal、碳水 50%–60%。
+      </div>
+      <p class="cite">教材 Ch05 §5.7 大众健身场景 REDs 识别（原文案例：1600 kcal、600 kcal、FFM 42 kg → EA≈23.8）；§5.7.2 教练端三步处理边界；§5.6 恢复方案</p>
+    </div>
+  </div>
+
+  <div class="grade">
+    <div class="gt">批改要点 · 单元五 Ch05（组长速查）</div>
+    <ul>
+      <li><strong>EA 分母必须是 FFM（kg），不是体重</strong>：EA=(EI−ExEE)/FFM，单位 kcal·kg FFM⁻¹·d⁻¹；分母写体重或用 LBM 均按错（LBM 代 FFM 高估 1–2）。</li>
+      <li>三档阈值不能混：≥45 最优、30–45 适应性 LEA（短期可耐受、限期 ≤8 周监测）、＜30 临床/问题性 LEA（需 MDT）；个体差 ±5；男性 ＜25 才见睾酮下降（25–30 争议），男性敏感终点为睾酮/晨勃/性欲/骨标志物。</li>
+      <li>时间线年份与框架对应：1992 ACSM Triad 首版 → 2007 三连续谱 → 2014 IOC RED-S（扩男性+十余系统）与 CRA 评分卡 → 2018 CAT 第一版 → 2023 REDs 综合征+CAT2+红黄绿灰 → 2025 Triad Update 并行。</li>
+      <li>CAT2 红色 = ≥1 系统红或多系统黄，<strong>48 小时内启动 MDT</strong>；LEAF-Q 25 条目（胃肠9/损伤8/月经8）≥8 分阳性（敏感性 78%/特异性 90%）；EDE-Q 不替代临床访谈；闭经超 6 个月或应力性骨折强制 DXA（Z&lt;−1 干预、Z&lt;−2 MDT）。</li>
+      <li>课堂案例标准答案：EA=(1600−600)/42≈<strong>23.8</strong> → ＜30 临床 LEA；<strong>体重稳定不能排除 REDs</strong>。恢复：目标 EA＞45、每 1–2 周 +100–200 kcal、碳水 50%–60%/蛋白 1.6–2.0；骨恢复 ≥12 个月为最慢终点，月经 2–6 个月。</li>
+    </ul>
+  </div>
+</section>
+
+</body>
+</html>
