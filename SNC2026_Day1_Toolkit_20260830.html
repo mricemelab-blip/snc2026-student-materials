@@ -933,8 +933,7 @@ function buildTools(){
       <div class="result" id="tw-res"></div>
       <div class="disclaimer">证据等级与局限：2023 年系统综述显示 ten Haaf-Weijs 体重版（年龄+体重+身高+性别）在运动员中总体精度最好，约 80% 预测值落在实测 ±10% 以内；<b>体重版女性系数本教材未给出原文，此处不列出数值，避免编造</b>，女性建议使用 FFM 版或 RMR/TEE 估算器中的 Mifflin/Cunningham 交叉参照。De Lorenzo 1999 仅男性、源自会议摘要，证据等级低，仅作对照。教学辅助，不替代医学评估。</div>
     </div>
-  </div>`;
-
+  </div>
 
   <!-- LEAF-Q -->
   <div class="tool-panel" id="tp-leafq">
@@ -971,6 +970,8 @@ function buildTools(){
       边界提示：EDE-Q 为进食障碍风险筛查工具，不用于确诊。阳性结果须转介精神心理 + 临床营养 MDT 评估（教材第5章 第3节）。本工具为教学辅助，不替代医学评估。</div>
     </div>
   </div>
+`;
+
   // 子 tab 切换
   $$('#toolTabs button').forEach(b=>b.addEventListener('click',()=>{
     $$('#toolTabs button').forEach(x=>x.classList.toggle('active',x===b));
