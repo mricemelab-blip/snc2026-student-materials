@@ -237,6 +237,17 @@ footer{text-align:center; color:var(--ink-soft); font-size:12.5px; padding:24px 
     <button data-tool="rmr">RMR / TEE 估算器</button>
     <button data-tool="tlevel">T 层级自评问卷</button>
     <button data-tool="redline">转介红线自查清单</button>
+    <button data-tool="navy">Navy 围度法体脂</button>
+    <button data-tool="ffmi">FFMI 去脂指数</button>
+    <button data-tool="casey">Casey 增肌潜力</button>
+    <button data-tool="met">MET 运动消耗</button>
+    <button data-tool="weir">Weir 间接量热</button>
+    <button data-tool="tee">TEE 四组分拆解</button>
+    <button data-tool="eertfl">体重趋势反推</button>
+    <button data-tool="thw">tH-W 体重版RMR</button>
+    <button data-tool="leafq">LEAF-Q 女性LEA问卷</button>
+    <button data-tool="leamq">LEAM-Q 男性LEA问卷</button>
+    <button data-tool="edeq">EDE-Q 进食障碍问卷</button>
   </div>
   <div id="toolArea"></div>
 </section>
@@ -775,8 +786,191 @@ function buildTools(){
       <div class="result" id="rl-res"></div>
       <div class="disclaimer">本清单为风险识别辅助工具，不替代医学评估。对进食障碍、月经紊乱、骨密度异常等问题，教练不得自行处理或承诺疗效。</div>
     </div>
+  </div>
+
+  <!-- Navy 围度法体脂 -->
+  <div class="tool-panel" id="tp-navy">
+    <div class="tool-card">
+      <h3>Navy 围度法体脂率计算器（Hodgdon &amp; Beckett 1984，美军体能标准公式）</h3>
+      <div class="formula">公式（原始回归以英寸(in)为单位，输入 cm 后工具自动 ÷2.54 换算）：<br>男：BF% = 86.010 × log10(腰围 − 颈围) − 70.041 × log10(身高) + 36.76<br>女：BF% = 163.205 × log10(腰围 + 臀围 − 颈围) − 97.684 × log10(身高) − 78.387（教材第3章）</div>
+      <div class="form-grid">
+        <div class="field"><label>性别</label><select id="nv-sex"><option value="m">男</option><option value="f">女</option></select></div>
+        <div class="field"><label>身高（cm）</label><input id="nv-h" type="number" step="0.1" placeholder="如 178"></div>
+        <div class="field"><label>体重（kg，用于脂肪量/瘦体重）</label><input id="nv-w" type="number" step="0.1" placeholder="如 75"></div>
+        <div class="field"><label>颈围（cm，喉结下方水平）</label><input id="nv-neck" type="number" step="0.1" placeholder="如 38"></div>
+        <div class="field"><label id="nv-waist-lbl">腰围（cm，肚脐水平）</label><input id="nv-waist" type="number" step="0.1" placeholder="如 85"></div>
+        <div class="field" id="nv-hip-wrap"><label>臀围（cm，臀部最丰满处，女性填）</label><input id="nv-hip" type="number" step="0.1" placeholder="如 95"></div>
+      </div>
+      <button class="btn" id="nv-btn">计算体脂率</button>
+      <div class="result" id="nv-res"></div>
+      <div class="disclaimer">证据等级与局限：公式开发人群为美军人员，标准估计误差（Standard Error of Estimate, SEE）约 ±3.5–4.5% 体脂；对女性、亚裔、青少年、极瘦或极壮个体偏差可能增大。围度误差约 0.5 cm 即可带来约 1% 体脂偏差——务必同一卷尺、同一时段（晨起空腹）、同一测量者，连续监测趋势比单次数值更有意义。围度法不能替代双能 X 线吸收法（DXA）等专业体成分测量（教材第3章）。教学辅助，不替代医学评估。</div>
+    </div>
+  </div>
+
+  <!-- FFMI -->
+  <div class="tool-panel" id="tp-ffmi">
+    <div class="tool-card">
+      <h3>FFMI 去脂体重指数计算器（Fat-Free Mass Index）</h3>
+      <div class="formula">公式：去脂体重 FFM = 体重 × (1 − 体脂率/100)；FFMI = FFM ÷ 身高(m)²；归一化 FFMI = FFMI + 6.3 × (1.80 − 身高m)（Kouri 1995，教材第3章 第4节；PMID 8580417）</div>
+      <div class="form-grid">
+        <div class="field"><label>身高（cm）</label><input id="ff-h" type="number" step="0.1" placeholder="如 175"></div>
+        <div class="field"><label>体重（kg）</label><input id="ff-w" type="number" step="0.1" placeholder="如 75"></div>
+        <div class="field"><label>体脂率（%）</label><input id="ff-bf" type="number" step="0.1" placeholder="如 15"></div>
+        <div class="field"><label>体脂率来源</label><select id="ff-src"><option>DXA 双能X线</option><option>皮褶厚度</option><option>BIA 生物电阻抗</option><option>Navy 围度法</option><option>其他估算</option></select></div>
+      </div>
+      <button class="btn" id="ff-btn">计算 FFMI</button>
+      <div class="result" id="ff-res"></div>
+      <div class="disclaimer">证据等级与局限：自然上限参照来自 Kouri et al. 1995 对 157 名男性运动员的观测（非用药者归一化 FFMI 上限约 25），样本量有限、来自 1990 年代、以男性为主。FFMI 是<b>筛查指标而非药检</b>；不同体成分方法（尤其 BIA、围度法、皮褶）的误差会直接传导至 FFMI。本工具不作任何「自然/非自然」定性结论，超出区间时应优先排查测量误差（体脂率低估是最常见原因）。教学辅助，不替代医学评估。</div>
+    </div>
+  </div>
+
+  <!-- Casey Butt -->
+  <div class="tool-panel" id="tp-casey">
+    <div class="tool-card">
+      <h3>Casey Butt 自然增肌潜力计算器（补充工具，教材未收录）</h3>
+      <div class="formula">公式（Casey Butt《Your Muscular Potential》第4版，非线性式；cm 自动换算为英寸 in=cm/2.54）：<br>最大瘦体重 LBM_max(lbs) = 身高(in)^1.5 × [ √腕围(in)/22.6670 + √踝围(in)/17.0104 ] × (1 + 目标体脂率/224)；再 ×0.4536 换算为 kg<br>该体脂率下总体重 = LBM_max ÷ (1 − BF%/100)；女性 ×0.68（经验外推，证据弱）</div>
+      <div class="form-grid">
+        <div class="field"><label>性别</label><select id="cb-sex"><option value="m">男</option><option value="f">女</option></select></div>
+        <div class="field"><label>身高（cm）</label><input id="cb-h" type="number" step="0.1" placeholder="如 178"></div>
+        <div class="field"><label>腕围（cm，尺骨茎突远端最细处；男参考 16.5–20.3）</label><input id="cb-wrist" type="number" step="0.1" placeholder="如 17.5"></div>
+        <div class="field"><label>踝围（cm，踝骨上方最细处；男参考 20.3–25.4）</label><input id="cb-ankle" type="number" step="0.1" placeholder="如 22"></div>
+        <div class="field"><label>目标体脂率（%，默认 10）</label><input id="cb-bf" type="number" step="0.5" placeholder="10"></div>
+        <div class="field"><label>当前体重（kg，选填，用于算达成度）</label><input id="cb-cw" type="number" step="0.1" placeholder="选填"></div>
+        <div class="field"><label>当前体脂率（%，选填）</label><input id="cb-cbf" type="number" step="0.1" placeholder="选填"></div>
+      </div>
+      <button class="btn" id="cb-btn">估算增肌潜力</button>
+      <div class="result" id="cb-res"></div>
+      <div class="disclaimer">证据等级与局限：模型基于约 300 名 1947–2010 年自然健美冠军数据回归，属<b>统计上限估计而非个人承诺</b>；男性专属，女性 ×0.68 系数源自 Janssen 2000 骨骼肌性别差异的近似外推，证据弱；腕围/踝围为骨架大小的代理指标，测量位置需严格统一。可与 Kouri 归一化 FFMI ≈25 的自然上限交叉参照。<b>教材未收录此公式，标注「补充工具」。</b>教学辅助，不替代医学评估。</div>
+    </div>
+  </div>
+
+  <!-- MET -->
+  <div class="tool-panel" id="tp-met">
+    <div class="tool-card">
+      <h3>MET 运动消耗计算器（ExEE, Exercise Energy Expenditure）</h3>
+      <div class="formula">公式：ExEE = MET × 体重(kg) × 时间(h)（1 MET ≈ 1 kcal/kg/h）；净运动消耗 = (MET − 1) × 体重 × 时间（教材第4章 第2节）</div>
+      <div class="form-grid">
+        <div class="field"><label>体重（kg）</label><input id="mt-w" type="number" step="0.1" placeholder="如 70"></div>
+        <div class="field"><label>MET 值</label><input id="mt-met" type="number" step="0.1" placeholder="如 6.0"></div>
+        <div class="field"><label>MET 常用值快捷选择</label><select id="mt-preset"><option value="">— 选择后自动填入 —</option><option value="1.0">静坐/躺着 1.0</option><option value="3.5">快走（5–6km/h）3.5</option><option value="7.0">慢跑（8–9km/h）7.0</option><option value="6.0">中高强度力量训练 6.0</option><option value="8.0">高强度力量训练 8.0</option><option value="8.0">骑行（中高速）8.0</option><option value="8.0">游泳（中速持续）8.0</option><option value="6.5">篮球（比赛）6.5</option></select></div>
+        <div class="field"><label>时长（h，可填小数，如 0.75=45分钟）</label><input id="mt-t" type="number" step="0.05" placeholder="如 1"></div>
+        <div class="field"><label>力量训练净消耗修正</label><label style="flex-direction:row;align-items:center;gap:6px;margin-top:6px;"><input type="checkbox" id="mt-x105" style="width:auto;"> 勾选：按 ×1.05 计入抗阻训练后过量氧耗（EPOC）净附加</label></div>
+      </div>
+      <button class="btn" id="mt-btn">计算运动消耗</button>
+      <div class="result" id="mt-res"></div>
+      <div class="disclaimer">证据等级与局限：MET 查表法精度约 ±20–40%；MET 表来自一般人群，训练有素者同强度实际能耗偏低（运动经济性更好）；力量训练的 MET 估算偏差最大（间歇、休息、动作选择差异大）。手表/MET 数字仅作起点估算，2–4 周体重趋势才是锚点（教材第4章 第2节）。教学辅助，不替代医学评估。</div>
+    </div>
+  </div>
+
+  <!-- Weir -->
+  <div class="tool-panel" id="tp-weir">
+    <div class="tool-card">
+      <h3>Weir 公式间接量热计算器（Indirect Calorimetry）</h3>
+      <div class="formula">公式（Weir 1949，稳态有氧）：EE(kcal/min) = 3.941 × VO₂(L/min) + 1.106 × VCO₂(L/min)；呼吸交换率 RER = VCO₂ ÷ VO₂（教材第4章 第2节）</div>
+      <div class="form-grid">
+        <div class="field"><label>摄氧量 VO₂（L/min，稳态）</label><input id="wr-vo2" type="number" step="0.01" placeholder="如 2.50"></div>
+        <div class="field"><label>二氧化碳排出量 VCO₂（L/min，稳态）</label><input id="wr-vco2" type="number" step="0.01" placeholder="如 2.15"></div>
+        <div class="field"><label>测量时长（min，默认 1 仅输出 kcal/min）</label><input id="wr-min" type="number" step="1" placeholder="如 30"></div>
+        <div class="field"><label>体重（kg，选填；用于 ml/kg/min 相对摄氧量）</label><input id="wr-w" type="number" step="0.1" placeholder="选填"></div>
+      </div>
+      <button class="btn" id="wr-btn">计算能耗与 RER</button>
+      <div class="result" id="wr-res"></div>
+      <div class="disclaimer">证据等级与局限：仅适用于<b>稳态有氧</b>条件；力量训练（非稳态、憋气）不适用；便携式 VO₂ 设备精度约 ±10–15%。RER 反映全身底物氧化比例（RQ/RER），不反映局部组织供能；&gt;1.00 可见于高强度 CO₂ 缓冲、脂肪净生成或测量误差，不能简单解读为「纯燃脂」。教学辅助，不替代医学评估。</div>
+    </div>
+  </div>
+
+  <!-- TEE 四组分 -->
+  <div class="tool-panel" id="tp-tee">
+    <div class="tool-card">
+      <h3>TEE 四组分拆解计算器（Total Energy Expenditure）</h3>
+      <div class="formula">TEE = RMR + TEF + EAT + NEAT（教材第4章 第1节）；TEF 简法 = 摄入 EI × 10%（范围 6–10%）；TEF 精法 = 蛋白g×4×25% + 碳水g×4×7.5% + 脂肪g×9×3%；身体活动水平 PAL = TEE ÷ RMR</div>
+      <div class="form-grid">
+        <div class="field"><label>静息代谢率 RMR（kcal/d，可用「RMR/TEE 估算器」先算）</label><input id="te-rmr" type="number" placeholder="如 1650"></div>
+        <div class="field"><label>每日能量摄入 EI（kcal/d，用于 TEF 简法）</label><input id="te-ei" type="number" placeholder="如 2400"></div>
+        <div class="field"><label>蛋白质（g/d，选填，TEF 精法）</label><input id="te-p" type="number" step="0.1" placeholder="选填"></div>
+        <div class="field"><label>碳水（g/d，选填，TEF 精法）</label><input id="te-c" type="number" step="0.1" placeholder="选填"></div>
+        <div class="field"><label>脂肪（g/d，选填，TEF 精法）</label><input id="te-f" type="number" step="0.1" placeholder="选填"></div>
+        <div class="field"><label>运动消耗 EAT（kcal/d，可用「MET 运动消耗」算训练日）</label><input id="te-eat" type="number" placeholder="如 400"></div>
+        <div class="field"><label>非运动产热 NEAT（kcal/d，常见 300–500）</label><input id="te-neat" type="number" placeholder="如 400"></div>
+      </div>
+      <button class="btn" id="te-btn">拆解 TEE</button>
+      <div class="result" id="te-res"></div>
+      <div class="disclaimer">关键提示与局限：<b>训练日与非训练日必须分开算</b>（差距可达 500–1500 kcal），用单一日均值会同时误导增肌与减脂判断。TEF 精法取各营养素热效应中值（蛋白 25%、碳水 7.5%、脂肪 3%），实际个体有差异；<b>TEF 不能当减脂工具</b>（高蛋饮食提升的 TEF 量级有限且随摄入总量浮动）。NEAT 是波动最大的组分，减脂期常自发下降。教学辅助，不替代医学评估。</div>
+    </div>
+  </div>
+
+  <!-- 体重趋势反推 -->
+  <div class="tool-panel" id="tp-eertfl">
+    <div class="tool-card">
+      <h3>体重趋势能量平衡反推器（校准工具）</h3>
+      <div class="formula">日均能量差 = 体重变化(kg) × 7700 ÷ 天数 d（1 kg 脂肪组织 ≈ 7700 kcal，粗糙系数）；反推实际 TEE ≈ EI − 日均能量差；实测 PAL = 反推 TEE ÷ RMR；EI:BMR = EI ÷ RMR（&lt;1.35 提示低报，Black 2000 Goldberg 界值）（教材第4章 第2节）</div>
+      <div class="form-grid">
+        <div class="field"><label>连续监测天数（d，建议 ≥14）</label><input id="eb-d" type="number" step="1" placeholder="14"></div>
+        <div class="field"><label>期初体重（kg，晨起空腹 7 日均值）</label><input id="eb-w1" type="number" step="0.1" placeholder="如 80.0"></div>
+        <div class="field"><label>期末体重（kg，同上）</label><input id="eb-w2" type="number" step="0.1" placeholder="如 79.0"></div>
+        <div class="field"><label>同期平均每日摄入 EI（kcal/d，称重记录均值）</label><input id="eb-ei" type="number" placeholder="如 2200"></div>
+        <div class="field"><label>RMR（kcal/d，可用「RMR/TEE 估算器」先算）</label><input id="eb-rmr" type="number" placeholder="如 1650"></div>
+      </div>
+      <button class="btn" id="eb-btn">反推实际 TEE</button>
+      <div class="result" id="eb-res"></div>
+      <div class="disclaimer">证据等级与局限：需 2–4 周窗口，体重取晨起空腹 7 日均值以平滑水分波动；7700 kcal/kg 是近似系数（脂肪组织含脂质约 7700 kcal/kg，但体重变化混有水分、糖原、瘦体重）；减重早期糖原-水流失会高估缺口，增肌初期水钠潴留会掩盖真实盈余。EI:BMR 界值来自 Black 2000（等级 B）。<b>这是校准工具不是处方工具</b>——用于核对记录真实性与公式估算偏差，再回头调整目标摄入。教学辅助，不替代医学评估。</div>
+    </div>
+  </div>
+
+  <!-- ten Haaf-Weijs 体重版 RMR 补充 -->
+  <div class="tool-panel" id="tp-thw">
+    <div class="tool-card">
+      <h3>ten Haaf-Weijs 体重版 RMR 补充计算器（训练者专用）</h3>
+      <div class="formula">体重版（ten Haaf &amp; Weijs 2014，PLoS One，100% 训练者样本）：男 REE = 11.936 × 体重 + 5.666 × 身高cm − 10.131 × 年龄 + 259.738；FFM 版（不分性别）：REE = 22.771 × FFM + 484.264；对照 De Lorenzo 1999（仅男）：RMR = −857 + 9.0 × 体重 + 11.7 × 身高cm（教材第4章 第3节）</div>
+      <div class="form-grid">
+        <div class="field"><label>性别</label><select id="tw-sex"><option value="m">男</option><option value="f">女</option></select></div>
+        <div class="field"><label>年龄（岁）</label><input id="tw-age" type="number" placeholder="如 30"></div>
+        <div class="field"><label>体重（kg）</label><input id="tw-w" type="number" step="0.1" placeholder="如 80"></div>
+        <div class="field"><label>身高（cm）</label><input id="tw-h" type="number" step="0.1" placeholder="如 180"></div>
+        <div class="field"><label>去脂体重 FFM（kg，选填；填了同时给 FFM 版）</label><input id="tw-ffm" type="number" step="0.1" placeholder="选填，如 70"></div>
+      </div>
+      <button class="btn" id="tw-btn">估算 RMR</button>
+      <div class="result" id="tw-res"></div>
+      <div class="disclaimer">证据等级与局限：2023 年系统综述显示 ten Haaf-Weijs 体重版（年龄+体重+身高+性别）在运动员中总体精度最好，约 80% 预测值落在实测 ±10% 以内；<b>体重版女性系数本教材未给出原文，此处不列出数值，避免编造</b>，女性建议使用 FFM 版或 RMR/TEE 估算器中的 Mifflin/Cunningham 交叉参照。De Lorenzo 1999 仅男性、源自会议摘要，证据等级低，仅作对照。教学辅助，不替代医学评估。</div>
+    </div>
   </div>`;
 
+
+  <!-- LEAF-Q -->
+  <div class="tool-panel" id="tp-leafq">
+    <div class="tool-card">
+      <h3>LEAF-Q — Low Energy Availability in Females Questionnaire — 女性低能量可用性问卷</h3>
+      <div class="formula">Melin et al. 2014｜25 个条目，三个维度：损伤/应力性骨折（8 项）、胃肠道功能（4 项）、月经功能（13 项）｜总分 ≥8 分 = LEA 筛查阳性｜敏感性 78%、特异性 90%｜仅作为筛查工具，不能替代临床诊断</div>
+      <div id="leafq-form"></div>
+      <div class="result" id="leafq-res"></div>
+      <div class="disclaimer">来源文献：Melin A, Tornberg ÅB, Skouby S, et al. The LEAF questionnaire: a screening tool for the identification of female athletes at risk for the female athlete triad. <i>Br J Sports Med</i>. 2014;48(7):540–545. doi:10.1136/bjsports-2013-093240<br>
+      边界提示：本问卷为教学辅助筛查工具，不替代医学评估。阳性结果须转介医生/注册营养师进行多学科评估（CAT2 流程）。</div>
+    </div>
+  </div>
+
+  <!-- LEAM-Q -->
+  <div class="tool-panel" id="tp-leamq">
+    <div class="tool-card">
+      <h3>LEAM-Q — Low Energy Availability in Males Questionnaire — 男性低能量可用性问卷</h3>
+      <div class="formula">Lundy et al. 2022｜多维度筛查：头晕、胃肠功能、体温调节、损伤/生病、疲劳、体能、睡眠、恢复、能量水平、性欲｜唯一经验证的有效筛查域：性欲（低性欲 = 筛查阳性）｜内部一致性 α = 0.71｜仅作为筛查工具，不能替代临床诊断</div>
+      <div id="leamq-form"></div>
+      <div class="result" id="leamq-res"></div>
+      <div class="disclaimer">来源文献：Lundy B, Torstveit MK, Sundgot-Borgen J, et al. Screening for Low Energy Availability in Male Athletes: Attempted Validation of LEAM-Q. <i>Nutrients</i>. 2022;14(9):1873. doi:10.3390/nu14091873（原始开发）；IOC REDs CAT2 (2023) 推荐用于男性 LEA 筛查。<br>
+      边界提示：<b>LEAM-Q 目前仅性欲维度有验证界值，其余维度为症状自评，供临床参考。</b>阳性结果须按 CAT2 流程转介医学评估。本问卷为教学辅助，不替代医学评估。</div>
+    </div>
+  </div>
+
+  <!-- EDE-Q -->
+  <div class="tool-panel" id="tp-edeq">
+    <div class="tool-card">
+      <h3>EDE-Q — Eating Disorder Examination Questionnaire — 进食障碍检查问卷</h3>
+      <div class="formula">Fairburn &amp; Beglin 1994 / EDE-Q 6.0｜28 个条目，回顾过去 28 天｜四个维度子量表：饮食限制 Restraint（Q1–5，5 项）、进食关注 Eating Concern（Q7/9/19–21，5 项）、体型关注 Shape Concern（Q6/8/10–11/23/26–28，8 项）、体重关注 Weight Concern（Q8/12/22/24–25，5 项）｜另含 6 项行为频率题（Q13–18：暴食/催吐/泻药/强迫运动）不计入子量表分｜全局分 = 四子量表均值的平均｜IOC REDs CAT2 界值：&gt;2.30（女）/ &gt;1.68（男）为进食障碍风险阳性｜仅作为筛查工具，不能替代临床诊断</div>
+      <div id="edeq-form"></div>
+      <div class="result" id="edeq-res"></div>
+      <div class="disclaimer">来源文献：Fairburn CG, Beglin SJ. Assessment of eating disorders: interview or self-report questionnaire? <i>Int J Eat Disord</i>. 1994;16:363–370. EDE-Q 6.0 版见 Fairburn (2008) <i>Cognitive Behavior Therapy and Eating Disorders</i>, Guilford Press. 界值参考：IOC REDs CAT2 (2023) 女性 &gt;2.30、男性 &gt;1.68。<br>
+      边界提示：EDE-Q 为进食障碍风险筛查工具，不用于确诊。阳性结果须转介精神心理 + 临床营养 MDT 评估（教材第5章 第3节）。本工具为教学辅助，不替代医学评估。</div>
+    </div>
+  </div>
   // 子 tab 切换
   $$('#toolTabs button').forEach(b=>b.addEventListener('click',()=>{
     $$('#toolTabs button').forEach(x=>x.classList.toggle('active',x===b));
@@ -784,6 +978,8 @@ function buildTools(){
   }));
 
   calcEA(); calcRMR(); buildTLevel(); buildRedline();
+  calcNavy(); calcFFMI(); calcCasey(); calcMET(); calcWeir(); calcTEE(); calcEERTFL(); calcTHW();
+  buildLEAFQ(); buildLEAMQ(); buildEDEQ();
 }
 
 /* ---- EA 计算器 ---- */
@@ -959,6 +1155,691 @@ function buildRedline(){
     res.className='result show'; res.innerHTML=html;
   });
 }
+
+/* ---- Navy 围度法体脂 ---- */
+function calcNavy(){
+  const sexSel=$('#nv-sex'), hipWrap=$('#nv-hip-wrap'), waistLbl=$('#nv-waist-lbl');
+  function syncSex(){
+    const female = sexSel.value==='f';
+    hipWrap.style.display = female ? '' : 'none';
+    waistLbl.textContent = female ? '腰围（cm，腰部最窄处）' : '腰围（cm，肚脐水平）';
+  }
+  sexSel.addEventListener('change',syncSex); syncSex();
+  $('#nv-btn').addEventListener('click',()=>{
+    const res=$('#nv-res');
+    const warn=(t)=>{ res.className='result show'; res.innerHTML='<div class="verdict-box yellow"><h4>输入有误</h4>'+t+'</div>'; };
+    const sex=sexSel.value, female=(sex==='f');
+    const h=parseFloat($('#nv-h').value), w=parseFloat($('#nv-w').value),
+          neck=parseFloat($('#nv-neck').value), waist=parseFloat($('#nv-waist').value),
+          hip=parseFloat($('#nv-hip').value);
+    if(!(h>0)||!(w>0)||!(neck>0)||!(waist>0)){ warn('请填写身高、体重、颈围、腰围（均为正数）。'); return; }
+    if(female && !(hip>0)){ warn('女性需填写臀围。'); return; }
+    if(waist<=neck){ warn('腰围必须大于颈围（男：腰围−颈围 &gt; 0），请检查测量位置与数值。'); return; }
+    if(female && (waist+hip<=neck)){ warn('腰围+臀围必须大于颈围，请检查数值。'); return; }
+    // Hodgdon & Beckett 1984 线性回归式原始单位为英寸，cm 输入自动 ÷2.54 换算
+    const hin=h/2.54, nin=neck/2.54, win=waist/2.54, hipin=hip/2.54;
+    let bf;
+    if(female){ bf=163.205*Math.log10(win+hipin-nin)-97.684*Math.log10(hin)-78.387; }
+    else { bf=86.010*Math.log10(win-nin)-70.041*Math.log10(hin)+36.76; }
+    if(!(bf>2&&bf<50)){ warn('计算结果 BF%='+bf.toFixed(1)+' 超出合理范围，请检查输入数值。'); return; }
+    const fatKg=w*bf/100, ffm=w-fatKg, hm=h/100, ffmi=ffm/(hm*hm);
+    let rangeNote='';
+    if(female){ if(bf<16||bf>42) rangeNote='<div class="verdict-box yellow"><h4>超出公式验证区间提示</h4>女性 16–42% 区间内最可靠；当前结果在该区间外，围度法误差可能进一步增大。</div>'; }
+    else { if(bf<10||bf>35) rangeNote='<div class="verdict-box yellow"><h4>超出公式验证区间提示</h4>男性 10–35% 区间内最可靠；当前结果在该区间外，围度法误差可能进一步增大。</div>'; }
+    res.className='result show';
+    res.innerHTML='<p class="big">体脂率 BF% ≈ '+bf.toFixed(1)+'%</p>'+
+      '<table><tr><th>项目</th><th>数值</th></tr>'+
+      '<tr><td>脂肪量（体重×BF%）</td><td>'+fatKg.toFixed(1)+' kg</td></tr>'+
+      '<tr><td>瘦体重 FFM（体重−脂肪量）</td><td>'+ffm.toFixed(1)+' kg</td></tr>'+
+      '<tr><td>FFMI 参考值（FFM÷身高m²，未归一化）</td><td>'+ffmi.toFixed(1)+'（可到「FFMI 去脂指数」做归一化与区间判定）</td></tr></table>'+rangeNote;
+  });
+}
+
+/* ---- FFMI ---- */
+function calcFFMI(){
+  $('#ff-btn').addEventListener('click',()=>{
+    const res=$('#ff-res');
+    const h=parseFloat($('#ff-h').value), w=parseFloat($('#ff-w').value), bf=parseFloat($('#ff-bf').value);
+    if(!(h>0)||!(w>0)||!(bf>=0)||bf>=100){ res.className='result show'; res.innerHTML='<div class="verdict-box yellow"><h4>输入有误</h4>请填写身高、体重（正数）与体脂率（0–100）。</div>'; return; }
+    const hm=h/100, ffm=w*(1-bf/100), ffmi=ffm/(hm*hm), nff=ffmi+6.3*(1.80-hm);
+    let cls,title,detail;
+    if(nff<17){ cls='yellow'; title='归一化 FFMI ≈ '+nff.toFixed(1)+' ｜ 低于一般训练者范围（&lt;17）';
+      detail='去脂体重水平低于常见训练者。若系统训练 1 年以上仍在此区间，优先核查体脂率是否被高估（导致 FFM 被低估）、训练量/蛋白质摄入是否不足。'; }
+    else if(nff<18){ cls='green'; title='归一化 FFMI ≈ '+nff.toFixed(1)+' ｜ 入门训练者（17–18）';
+      detail='处于训练新手常见区间，增肌空间大，按教材增肌期能量与蛋白质建议执行即可。'; }
+    else if(nff<23){ cls='green'; title='归一化 FFMI ≈ '+nff.toFixed(1)+' ｜ 自然训练者常见区间（18–23）';
+      detail='绝大多数长期自然训练者落在此区间，跨度大，可结合训练年限与围度变化评估增肌进度。'; }
+    else if(nff<25){ cls='yellow'; title='归一化 FFMI ≈ '+nff.toFixed(1)+' ｜ 接近自然上限（23–25）';
+      detail='Kouri 1995 观测中自然训练者群体上限约 25（n=157）。接近该区间者增肌速度通常显著放缓，优先保证训练质量与恢复，而非继续堆热量。'; }
+    else if(nff<=27){ cls='yellow'; title='归一化 FFMI ≈ '+nff.toFixed(1)+' ｜ 超过自然训练者群体观测上限（25–27）';
+      detail='超过 Kouri 1995 非用药者群体上限。<b>先核查测量误差</b>：体脂率是否被低估（BIA/围度法常见）、身高体重是否准确；测量复核后仍在此区间，建议由专业人员解读。'; }
+    else { cls='red'; title='归一化 FFMI ≈ '+nff.toFixed(1)+' ｜ 超出自然训练者观测范围（&gt;27）';
+      detail='<b>优先排查测量误差</b>——体脂率低估是最常见原因（如 BIA 低估体脂→FFM 虚高→FFMI 虚高）。建议以 DXA 复核体成分后再评估。本工具不作任何「自然/非自然」定性结论。'; }
+    res.className='result show';
+    res.innerHTML='<div class="verdict-box '+cls+'"><h4>'+title+'</h4>'+detail+'</div>'+
+      '<table><tr><th>项目</th><th>数值</th></tr>'+
+      '<tr><td>去脂体重 FFM = '+w+' × (1 − '+bf+'/100)</td><td>'+ffm.toFixed(1)+' kg</td></tr>'+
+      '<tr><td>FFMI = FFM ÷ '+hm.toFixed(2)+'²</td><td>'+ffmi.toFixed(1)+'</td></tr>'+
+      '<tr><td><b>归一化 FFMI（校正至 1.80m 身高）</b></td><td><b>'+nff.toFixed(1)+'</b></td></tr>'+
+      '<tr><td>体脂率来源</td><td>'+$('#ff-src').value+'（方法误差直接传导至 FFMI）</td></tr></table>';
+  });
+}
+
+/* ---- Casey Butt ---- */
+function calcCasey(){
+  $('#cb-btn').addEventListener('click',()=>{
+    const res=$('#cb-res');
+    const warn=(t)=>{ res.className='result show'; res.innerHTML='<div class="verdict-box yellow"><h4>输入有误</h4>'+t+'</div>'; };
+    const female=$('#cb-sex').value==='f';
+    const h=parseFloat($('#cb-h').value), wrist=parseFloat($('#cb-wrist').value), ankle=parseFloat($('#cb-ankle').value);
+    let bf=parseFloat($('#cb-bf').value); if(!(bf>=0)) bf=10;
+    if(!(h>0)||!(wrist>0)||!(ankle>0)){ warn('请填写身高、腕围、踝围（均为正数）。'); return; }
+    if(!(bf>=0&&bf<60)){ warn('目标体脂率请填写 0–60 之间的数值。'); return; }
+    const cw=parseFloat($('#cb-cw').value), cbf=parseFloat($('#cb-cbf').value);
+    const hasCur=(cw>0)&&(cbf>=0)&&(cbf<100);
+    if(($('#cb-cw').value||$('#cb-cbf').value) && !hasCur){ warn('当前体重与当前体脂率需同时填写且为合理数值，才计算达成度。'); return; }
+    const hin=h/2.54, win=wrist/2.54, ain=ankle/2.54;
+    let lbmLbs=Math.pow(hin,1.5)*(Math.sqrt(win)/22.6670+Math.sqrt(ain)/17.0104)*(1+bf/224);
+    if(female) lbmLbs*=0.68;
+    const lbmKg=lbmLbs*0.4536;
+    const totalKg=lbmKg/(1-bf/100);
+    let rows='<tr><td><b>最大瘦体重 LBM_max</b></td><td><b>'+lbmKg.toFixed(1)+' kg</b>（'+lbmLbs.toFixed(0)+' lbs）</td></tr>'+
+      '<tr><td>目标体脂 '+bf.toFixed(0)+'% 下总体重</td><td>'+totalKg.toFixed(1)+' kg</td></tr>';
+    let extra='';
+    if(hasCur){
+      const curFFM=cw*(1-cbf/100);
+      const pct=curFFM/lbmKg*100, remain=lbmKg-curFFM;
+      rows+='<tr><td>当前瘦体重 FFM（'+cw+' kg × (1 − '+cbf+'/100)）</td><td>'+curFFM.toFixed(1)+' kg</td></tr>'+
+        '<tr><td>潜力达成度（当前 FFM ÷ LBM_max）</td><td>'+pct.toFixed(1)+'%</td></tr>'+
+        '<tr><td>剩余可增瘦体重空间</td><td>'+(remain>0?remain.toFixed(1)+' kg':'已达/超过模型估计上限（注意该模型为统计上限，个体可浮动）')+'</td></tr>';
+      extra='<p style="font-size:13.5px;">达成度解读：&lt;70% 增肌空间充足；70–90% 进入慢速区；&gt;90% 接近该骨架下的统计上限，后续以进步速度而非模型数值为准。</p>';
+    } else {
+      extra='<p style="font-size:13.5px;color:var(--ink-soft);">填写当前体重与体脂率后，可额外输出潜力达成度与剩余可增瘦体重。</p>';
+    }
+    const sexNote = female ? '<div class="verdict-box yellow"><h4>女性结果说明</h4>女性使用男性模型 ×0.68 经验系数（源自 Janssen 2000 骨骼肌性别差异的近似外推），<b>证据弱</b>，结果仅作粗略参照。</div>' : '';
+    res.className='result show';
+    res.innerHTML='<p class="big">估计最大瘦体重 ≈ '+lbmKg.toFixed(1)+' kg</p>'+
+      '<table><tr><th>项目</th><th>数值</th></tr>'+rows+'</table>'+sexNote+extra;
+  });
+}
+
+/* ---- MET 运动消耗 ---- */
+function calcMET(){
+  $('#mt-preset').addEventListener('change',function(){ if(this.value) $('#mt-met').value=this.value; });
+  $('#mt-btn').addEventListener('click',()=>{
+    const res=$('#mt-res');
+    const w=parseFloat($('#mt-w').value), met=parseFloat($('#mt-met').value), t=parseFloat($('#mt-t').value);
+    if(!(w>0)||!(met>0)||!(t>0)){ res.className='result show'; res.innerHTML='<div class="verdict-box yellow"><h4>输入有误</h4>请填写体重、MET 值与时长（均为正数）。</div>'; return; }
+    const total=met*w*t, perMin=total/(t*60), net=(met-1)*w*t;
+    const x105=$('#mt-x105').checked;
+    let adj='';
+    if(x105){
+      const netAdj=net*1.05, totalAdj=w*t+netAdj;
+      adj='<tr><td>力量训练修正后净消耗（净 ×1.05 计 EPOC）</td><td>'+Math.round(netAdj)+' kcal</td></tr>'+
+          '<tr><td><b>修正后总消耗（RMR 部分 + 修正净消耗）</b></td><td><b>约 '+Math.round(totalAdj)+' kcal</b></td></tr>';
+    }
+    res.className='result show';
+    res.innerHTML='<p class="big">运动总消耗 ≈ '+Math.round(total)+' kcal</p>'+
+      '<table><tr><th>项目</th><th>数值</th></tr>'+
+      '<tr><td>计算式</td><td>'+met+' MET × '+w+' kg × '+t+' h</td></tr>'+
+      '<tr><td>总消耗 ExEE（含静息部分）</td><td>'+Math.round(total)+' kcal</td></tr>'+
+      '<tr><td>每分钟消耗</td><td>'+perMin.toFixed(1)+' kcal/min</td></tr>'+
+      '<tr><td>净运动消耗（(MET−1)×体重×时间，扣除静息）</td><td>'+Math.round(net)+' kcal（'+((met-1)*w).toFixed(1)+' kcal/h）</td></tr>'+
+      adj+'</table>'+
+      '<p style="font-size:13px;color:var(--ink-soft);">注：MET 总消耗已包含该时段的静息能耗；做每日能量平衡（EA = EI − ExEE）时，教材口径下 ExEE 使用总消耗或净消耗需全期保持同一口径。</p>';
+  });
+}
+
+/* ---- Weir 间接量热 ---- */
+function calcWeir(){
+  $('#wr-btn').addEventListener('click',()=>{
+    const res=$('#wr-res');
+    const vo2=parseFloat($('#wr-vo2').value), vco2=parseFloat($('#wr-vco2').value);
+    if(!(vo2>0)||!(vco2>0)){ res.className='result show'; res.innerHTML='<div class="verdict-box yellow"><h4>输入有误</h4>请填写稳态 VO₂ 与 VCO₂（L/min，均为正数）。</div>'; return; }
+    const ee=3.941*vo2+1.106*vco2, rer=vco2/vo2;
+    const mins=parseFloat($('#wr-min').value), bw=parseFloat($('#wr-w').value);
+    let cls,title,detail;
+    if(rer<0.70){ cls='red'; title='RER = '+rer.toFixed(2)+' ｜ 低于 0.70：警示';
+      detail='生理稳态下 RER 一般不低于 0.70。请优先排查测量误差（面罩漏气、气体校准、非稳态）；也可见于深度酮症/长时间禁食状态，需结合测量背景判断。'; }
+    else if(rer<0.80){ cls='green'; title='RER = '+rer.toFixed(2)+' ｜ 脂肪主导供能（0.70–0.80）';
+      detail='底物氧化以脂肪为主（RER 0.70 ≈ 纯脂肪），常见于低强度稳态有氧或空腹/低碳水状态。'; }
+    else if(rer<=0.90){ cls='green'; title='RER = '+rer.toFixed(2)+' ｜ 混合膳食稳态（0.80–0.90）';
+      detail='糖脂混合供能，0.82–0.87 为餐后/混合膳食典型稳态区间。'; }
+    else if(rer<=1.00){ cls='yellow'; title='RER = '+rer.toFixed(2)+' ｜ 碳水主导供能（0.90–1.00）';
+      detail='底物氧化以碳水为主（RER 1.00 ≈ 纯碳水），常见于较高强度、糖原充足或餐后状态。'; }
+    else { cls='red'; title='RER = '+rer.toFixed(2)+' ｜ 高于 1.00：警示';
+      detail='可见于高强度运动 CO₂ 缓冲（乳酸代谢）、脂肪净生成（过量碳水餐后）或测量误差；不能解读为「燃脂效率高」。请核查稳态条件与设备校准。'; }
+    let rows='<tr><td>能耗 EE = 3.941×'+vo2+' + 1.106×'+vco2+'</td><td><b>'+ee.toFixed(2)+' kcal/min</b></td></tr>';
+    if(mins>0) rows+='<tr><td>该时段总能耗（× '+mins+' min）</td><td><b>'+Math.round(ee*mins)+' kcal</b></td></tr>';
+    if(bw>0) rows+='<tr><td>相对摄氧量 VO₂ = '+vo2+' L/min ×1000 ÷ '+bw+' kg</td><td>'+(vo2*1000/bw).toFixed(1)+' ml/kg/min</td></tr>';
+    res.className='result show';
+    res.innerHTML='<p class="big">EE ≈ '+ee.toFixed(2)+' kcal/min</p>'+
+      '<div class="verdict-box '+cls+'"><h4>'+title+'</h4>'+detail+'</div>'+
+      '<table><tr><th>项目</th><th>数值</th></tr>'+rows+'</table>';
+  });
+}
+
+/* ---- TEE 四组分 ---- */
+function calcTEE(){
+  $('#te-btn').addEventListener('click',()=>{
+    const res=$('#te-res');
+    const warn=(t)=>{ res.className='result show'; res.innerHTML='<div class="verdict-box yellow"><h4>输入有误</h4>'+t+'</div>'; };
+    const rmr=parseFloat($('#te-rmr').value);
+    if(!(rmr>0)){ warn('请填写 RMR（可先用「RMR/TEE 估算器」计算）。'); return; }
+    const ei=parseFloat($('#te-ei').value), eat=parseFloat($('#te-eat').value), neat=parseFloat($('#te-neat').value);
+    if(!(ei>=0)||!(eat>=0)||!(neat>=0)){ warn('请填写 EI、EAT、NEAT（RMR 之外可为 0，但不能留空或为负）。'); return; }
+    const p=parseFloat($('#te-p').value), c=parseFloat($('#te-c').value), f=parseFloat($('#te-f').value);
+    const hasMacro=(p>=0)&&(c>=0)&&(f>=0);
+    let tef, tefNote;
+    if(hasMacro){
+      tef=p*4*0.25 + c*4*0.075 + f*9*0.03;
+      tefNote='精法（蛋白 '+p+'g×4×25% + 碳水 '+c+'g×4×7.5% + 脂肪 '+f+'g×9×3%，取各营养素热效应中值）';
+    } else {
+      tef=ei*0.10;
+      tefNote='简法（EI '+ei+' × 10%，TEF 实际范围 6–10%）';
+    }
+    const tee=rmr+tef+eat+neat, pal=tee/rmr;
+    const pct=(v)=>(v/tee*100).toFixed(1)+'%';
+    let cls,title;
+    if(pal<1.4){ cls='yellow'; title='PAL = '+pal.toFixed(2)+' ｜ 静坐（&lt;1.4）'; }
+    else if(pal<1.6){ cls='green'; title='PAL = '+pal.toFixed(2)+' ｜ 轻度活动（1.4–1.6）'; }
+    else if(pal<1.8){ cls='green'; title='PAL = '+pal.toFixed(2)+' ｜ 中等活动（1.6–1.8）'; }
+    else if(pal<=2.0){ cls='yellow'; title='PAL = '+pal.toFixed(2)+' ｜ 高活动（1.8–2.0）'; }
+    else { cls='yellow'; title='PAL = '+pal.toFixed(2)+' ｜ 极高活动（&gt;2.0）'; }
+    res.className='result show';
+    res.innerHTML='<p class="big">TEE ≈ '+Math.round(tee)+' kcal/d</p>'+
+      '<table><tr><th>组分</th><th>kcal/d</th><th>占 TEE</th><th>说明</th></tr>'+
+      '<tr><td>RMR 静息代谢</td><td>'+Math.round(rmr)+'</td><td>'+pct(rmr)+'</td><td>基础维持</td></tr>'+
+      '<tr><td>TEF 食物热效应</td><td>'+Math.round(tef)+'</td><td>'+pct(tef)+'</td><td>'+tefNote+'</td></tr>'+
+      '<tr><td>EAT 运动消耗</td><td>'+Math.round(eat)+'</td><td>'+pct(eat)+'</td><td>结构化训练</td></tr>'+
+      '<tr><td>NEAT 非运动产热</td><td>'+Math.round(neat)+'</td><td>'+pct(neat)+'</td><td>通勤/家务/走动/姿势</td></tr>'+
+      '<tr><td><b>TEE 合计</b></td><td><b>'+Math.round(tee)+'</b></td><td><b>100%</b></td><td></td></tr></table>'+
+      '<div class="verdict-box '+cls+'"><h4>'+title+'</h4>训练日与非训练日请<b>分别计算</b>（差距可达 500–1500 kcal）；TEF 不能当减脂工具。</div>';
+  });
+}
+
+/* ---- 体重趋势能量平衡反推 ---- */
+function calcEERTFL(){
+  $('#eb-btn').addEventListener('click',()=>{
+    const res=$('#eb-res');
+    const warn=(t)=>{ res.className='result show'; res.innerHTML='<div class="verdict-box yellow"><h4>输入有误</h4>'+t+'</div>'; };
+    const d=parseFloat($('#eb-d').value), w1=parseFloat($('#eb-w1').value), w2=parseFloat($('#eb-w2').value),
+          ei=parseFloat($('#eb-ei').value), rmr=parseFloat($('#eb-rmr').value);
+    if(!(d>0)||!(w1>0)||!(w2>0)||!(ei>0)||!(rmr>0)){ warn('请完整填写天数、期初/期末体重、EI、RMR（均为正数）。'); return; }
+    if(d<7){ warn('监测窗口建议 ≥14 天（至少 7 天），窗口太短会被水分波动主导。'); return; }
+    const dw=w2-w1;
+    const gap=dw*7700/d;               // 日均能量差（减重为负）
+    const tee=ei-gap;                  // 反推实际 TEE
+    const pal=tee/rmr, ratio=ei/rmr;
+    const dir = dw<0 ? '下降 '+Math.abs(dw).toFixed(1)+' kg' : (dw>0?'上升 '+dw.toFixed(1)+' kg':'基本持平');
+    let ratioBox;
+    if(ratio<1.35){
+      ratioBox='<div class="verdict-box red"><h4>EI:BMR = '+ratio.toFixed(2)+' ｜ 低于 Black 2000 界值 1.35，提示低报可能</h4>该摄入水平在自由生活人群中难以长期维持——请核对漏记（油、坚果、酱料、饮料、外食），或确认真实存在严重能量不足（此时应结合 RED-S 信号评估）。</div>';
+    } else {
+      ratioBox='<div class="verdict-box green"><h4>EI:BMR = '+ratio.toFixed(2)+' ｜ 未触发低报界值（≥1.35）</h4>记录的摄入水平在可信区间内，仍需结合称重记录完整度判断。</div>';
+    }
+    res.className='result show';
+    res.innerHTML='<p class="big">'+d+' 天体重'+dir+' ｜ 反推 TEE ≈ '+Math.round(tee)+' kcal/d</p>'+
+      '<table><tr><th>项目</th><th>数值</th></tr>'+
+      '<tr><td>体重变化</td><td>'+dw.toFixed(1)+' kg（'+(dw<0?'减重':'增重')+'）</td></tr>'+
+      '<tr><td>日均能量差 = '+dw.toFixed(1)+'×7700÷'+d+'</td><td>'+(gap<0?'缺口约 ':'盈余约 ')+Math.abs(Math.round(gap))+' kcal/d</td></tr>'+
+      '<tr><td><b>反推实际 TEE ≈ EI − 日均能量差 = '+Math.round(ei)+' − ('+Math.round(gap)+')</b></td><td><b>'+Math.round(tee)+' kcal/d</b></td></tr>'+
+      '<tr><td>实测 PAL = 反推 TEE ÷ RMR</td><td>'+pal.toFixed(2)+'</td></tr></table>'+ratioBox+
+      '<p style="font-size:13px;color:var(--ink-soft);">用法：把反推 TEE 与公式估算 TEE 对比——若公式明显低估/高估，以趋势反推值为锚，按 100–250 kcal/d 步幅调整摄入目标。</p>';
+  });
+}
+
+/* ---- ten Haaf-Weijs 体重版 RMR 补充 ---- */
+function calcTHW(){
+  $('#tw-btn').addEventListener('click',()=>{
+    const res=$('#tw-res');
+    const warn=(t)=>{ res.className='result show'; res.innerHTML='<div class="verdict-box yellow"><h4>输入有误</h4>'+t+'</div>'; };
+    const sex=$('#tw-sex').value, male=(sex==='m');
+    const age=parseFloat($('#tw-age').value), w=parseFloat($('#tw-w').value), h=parseFloat($('#tw-h').value);
+    const ffm=parseFloat($('#tw-ffm').value);
+    if(!(age>0)||!(w>0)||!(h>0)){ warn('请填写年龄、体重、身高（均为正数）。'); return; }
+    let rows='';
+    let bwVal=null;
+    if(male){
+      bwVal=11.936*w+5.666*h-10.131*age+259.738;
+      rows+='<tr><td><b>ten Haaf-Weijs 2014 体重版（男）</b><br>11.936×'+w+' + 5.666×'+h+' − 10.131×'+age+' + 259.738</td><td><b>'+Math.round(bwVal)+' kcal/d</b></td><td>2023 系统综述：运动员中约 80% 预测值落在实测 ±10% 内</td></tr>';
+    } else {
+      rows+='<tr><td>ten Haaf-Weijs 2014 体重版（女）</td><td colspan="2">体重版女性系数本教材未给出原文，<b>不列出数值（避免编造）</b>；请使用下方 FFM 版，或到「RMR/TEE 估算器」用 Mifflin / Cunningham 交叉参照</td></tr>';
+    }
+    if(ffm>0){
+      const ffmV=22.771*ffm+484.264;
+      rows+='<tr><td><b>ten Haaf-Weijs 2014 FFM 版（不分性别）</b><br>22.771×'+ffm+' + 484.264</td><td><b>'+Math.round(ffmV)+' kcal/d</b></td><td>精度与 Cunningham 相当甚至略优；FFM 质量决定可靠度（DXA 为佳）</td></tr>';
+    } else {
+      rows+='<tr><td>ten Haaf-Weijs FFM 版</td><td colspan="2">填写 FFM 后输出：22.771×FFM + 484.264（FFM 建议来自 DXA）</td></tr>';
+    }
+    if(male){
+      const dl=-857+9.0*w+11.7*h;
+      rows+='<tr><td>De Lorenzo 1999（仅男，对照）<br>−857 + 9.0×'+w+' + 11.7×'+h+'</td><td>'+Math.round(dl)+' kcal/d</td><td>源自会议摘要、仅男性，证据等级低</td></tr>';
+    }
+    const lead = male ? '<p class="big">体重版 REE ≈ '+Math.round(bwVal)+' kcal/d</p>'
+                      : '<p class="big">请填写 FFM 获取 FFM 版结果</p>';
+    res.className='result show';
+    res.innerHTML=lead+
+      '<table><tr><th>公式</th><th>RMR 估算</th><th>说明 / 证据等级</th></tr>'+rows+'</table>'+
+      '<p style="font-size:13px;color:var(--ink-soft);">提示：有可靠 FFM 时 FFM 版通常更贴近训练者实测；本卡为补充工具，完整多公式对比请用「RMR/TEE 估算器」。</p>';
+  });
+}
+
+
+/* ============ LEAF-Q 女性低能量可用性问卷 ============ */
+function buildLEAFQ(){
+  const sec = $('#leafq-form');
+  if(!sec) return;
+  sec.innerHTML = `
+  <div style="margin-bottom:14px;padding:12px 16px;background:var(--gold-soft);border-radius:8px;font-family:'PingFang SC',sans-serif;font-size:14px;">
+    <b>说明：</b>本问卷评估女性运动员/运动者是否存在低能量可用性（LEA）相关的生理症状。请根据<b>近期</b>的实际情况如实作答。
+  </div>
+  <h4 style="color:var(--brand);margin:16px 0 10px;font-family:'PingFang SC',sans-serif;">A. 损伤与应力性骨折（8 分制）</h4>
+  <div class="form-grid" style="grid-template-columns:1fr;">
+    <div class="field"><label>A. 过去 12 个月内，你是否经历过应力性骨折/骨损伤？</label>
+      <select id="lq-a"><option value="">请选择</option><option value="0">否，完全没有（0 分）</option><option value="1">是，发生过 1–2 次（1 分）</option><option value="2">是，发生过 3–4 次（2 分）</option><option value="3">是，发生过 5 次或更多（3 分）</option></select></div>
+    <div class="field"><label>A1. 若有，缺训多少天？</label>
+      <select id="lq-a1"><option value="">请选择 / 不适用</option><option value="0">不适用（未发生）（0 分）</option><option value="1">1–7 天（1 分）</option><option value="2">8–14 天（2 分）</option><option value="3">15–21 天（3 分）</option><option value="4">22 天或更多（4 分）</option></select></div>
+    <div class="field"><label>A2. 应力性骨折的部位？（选最高风险部位计分）</label>
+      <select id="lq-a2"><option value="">请选择 / 不适用</option><option value="0">不适用（未发生）（0 分）</option><option value="1">其他部位（1 分）</option><option value="2">股骨颈 / 全髋 / 骶骨 / 骨盆（2 分，高风险部位）</option></select></div>
+    <div class="field"><label>A3. 目前是否因损伤正在缺训？</label>
+      <select id="lq-a3"><option value="">请选择</option><option value="0">否 / 不适用（0 分）</option><option value="1">是（1 分）</option></select></div>
+  </div>
+
+  <h4 style="color:var(--brand);margin:16px 0 10px;font-family:'PingFang SC',sans-serif;">B. 胃肠道功能（9 分制）</h4>
+  <div class="form-grid" style="grid-template-columns:1fr;">
+    <div class="field"><label>B. 非经期时，你是否感到腹部胀气或膨胀？</label>
+      <select id="lq-b"><option value="">请选择</option><option value="0">很少或从不（0 分）</option><option value="1">每周 1–2 次（1 分）</option><option value="2">每周数次（2 分）</option><option value="3">每天数次（3 分）</option></select></div>
+    <div class="field"><label>C. 非经期相关的情况下，你是否感到痉挛或胃痛？</label>
+      <select id="lq-c"><option value="">请选择</option><option value="0">很少或从不（0 分）</option><option value="1">每周 1–2 次（1 分）</option><option value="2">每周数次（2 分）</option><option value="3">每天数次（3 分）</option></select></div>
+    <div class="field"><label>D. 你平均多久排便一次？</label>
+      <select id="lq-d"><option value="">请选择</option><option value="0">每天一次（0 分）</option><option value="1">一天数次（1 分）</option><option value="2">隔天一次（2 分）</option><option value="3">每周两次（3 分）</option><option value="4">每周一次或更少（4 分）</option></select></div>
+    <div class="field"><label>E. 你通常的粪便形态？</label>
+      <select id="lq-e"><option value="">请选择</option><option value="0">正常（0 分）</option><option value="1">偏稀/水样（1 分）</option><option value="2">硬且干（2 分）</option></select></div>
+  </div>
+
+  <h4 style="color:var(--brand);margin:16px 0 10px;font-family:'PingFang SC',sans-serif;">C. 月经功能（8 分制）</h4>
+  <div class="form-grid" style="grid-template-columns:1fr;">
+    <div class="field"><label>C1. 你目前是否使用口服避孕药？</label>
+      <select id="lq-c1" onchange="leafqUpdate()"><option value="">请选择</option><option value="no">否</option><option value="yes">是</option></select></div>
+    <div class="field" id="lq-c1r-wrap" style="display:none;"><label>C1r. 使用口服避孕药的主要原因？</label>
+      <select id="lq-c1r"><option value="">请选择</option><option value="0">避孕 / 减轻痛经 / 减少出血 / 调节周期配合比赛（0 分）</option><option value="1">否则月经会停止（1 分）</option></select></div>
+    <div class="field"><label>C2. 你几岁来初潮？</label>
+      <select id="lq-c2"><option value="">请选择</option><option value="0">11 岁或以下（0 分）</option><option value="0b">12–14 岁（0 分）</option><option value="1">15 岁或以上（1 分）</option><option value="0c">记不清（0 分）</option><option value="8">从未月经来潮（8 分）</option></select></div>
+    <div class="field"><label>C3. 过去 3 个月是否有月经？</label>
+      <select id="lq-c3" onchange="leafqUpdate()"><option value="">请选择</option><option value="0">是（0 分）</option><option value="1">否 / 不确定（1 分）</option></select></div>
+    <div class="field" id="lq-c3x-wrap" style="display:none;"><label>C3x. 末次月经距今多久？</label>
+      <select id="lq-c3x"><option value="">请选择</option><option value="0">0–4 周前（0 分）</option><option value="1">1–2 个月前（1 分）</option><option value="2">3–4 个月前（2 分）</option><option value="1b">5–6 个月前（1 分）</option><option value="3">6 个月以上（3 分）</option><option value="4">12 个月以上（4 分）</option><option value="0p">怀孕中，暂不来月经（0 分）</option></select></div>
+    <div class="field"><label>C4. 你的月经周期通常是否规律？</label>
+      <select id="lq-c4"><option value="">请选择 / 不适用</option><option value="0">是，大多数时候规律（0 分）</option><option value="1">否，大多不规律（1 分）</option></select></div>
+    <div class="field"><label>C5. 一个典型周期持续多少天（出血天数）？</label>
+      <select id="lq-c5"><option value="">请选择 / 不适用</option><option value="0">3–8 天或 9 天以上（0 分）</option><option value="1">仅 1–2 天（1 分）</option></select></div>
+    <div class="field"><label>C6. 你通常每个周期用多少片卫生巾/棉条？</label>
+      <select id="lq-c6"><option value="">请选择 / 不适用</option><option value="0">12 片以上（0 分）</option><option value="1">9–11 片（1 分）</option><option value="2">6–8 片（2 分）</option><option value="3">3–5 片（3 分）</option><option value="4">0–2 片（4 分）</option></select></div>
+    <div class="field"><label>C7. 口服避孕药是否改变了你的出血模式？</label>
+      <select id="lq-c7"><option value="">请选择 / 不适用</option><option value="0">出血减少/天数减少 / 出血增多/天数增多 / 无变化 / 未使用（0 分）</option><option value="1">月经停止（1 分）</option></select></div>
+    <div class="field"><label>C8. 过去是否曾经连续 3 个月以上没有月经（排除怀孕）？</label>
+      <select id="lq-c8"><option value="">请选择</option><option value="0">否，从未发生（0 分）</option><option value="1">是，曾经发生过（1 分）</option><option value="2">是，目前仍在持续（2 分）</option></select></div>
+    <div class="field"><label>C9. 运动后是否出现过月经异常变化？</label>
+      <select id="lq-c9" onchange="leafqUpdate()"><option value="">请选择</option><option value="0">否（0 分）</option><option value="1">是（1 分）</option></select></div>
+    <div class="field" id="lq-c9x-wrap" style="display:none;"><label>C9x. 若有，具体变化？</label>
+      <select id="lq-c9x"><option value="">请选择</option><option value="0">出血增多 / 天数增多（0 分）</option><option value="1">出血减少 / 天数减少 / 月经停止（1 分）</option></select></div>
+  </div>
+  <button class="btn" id="leafq-btn" style="margin-top:14px;">计算 LEAF-Q 总分</button>`;
+  $('#leafq-btn').addEventListener('click', scoreLEAFQ);
+}
+
+function leafqUpdate(){
+  const c1=$('#lq-c1').value;
+  const c1r=$('#lq-c1r-wrap');
+  if(c1r) c1r.style.display = c1==='yes' ? '' : 'none';
+  const c3=$('#lq-c3').value;
+  const c3x=$('#lq-c3x-wrap');
+  if(c3x) c3x.style.display = c3==='1' ? '' : 'none';
+  const c9=$('#lq-c9');
+  if(c9){
+    const c9x=$('#lq-c9x-wrap');
+    if(c9x) c9x.style.display = c9.value==='1' ? '' : 'none';
+  }
+}
+
+function scoreLEAFQ(){
+  const res=$('#leafq-res');
+  const gv=(id)=>{const el=$(id);if(!el)return '';const v=el.value;return v===''||v===' '?'':v;};
+  const pn=(v)=>{const n=parseFloat(v);return isNaN(n)?0:n;};
+  // Section A: Injury
+  const secA=pn(gv('#lq-a'))+pn(gv('#lq-a1'))+pn(gv('#lq-a2'))+pn(gv('#lq-a3'));
+  // Section B: GI
+  const secB=pn(gv('#lq-b'))+pn(gv('#lq-c'))+pn(gv('#lq-d'))+pn(gv('#lq-e'));
+  // Section C: Menstrual
+  const c2raw=gv('#lq-c2');
+  let c2=0;
+  if(c2raw==='1') c2=1; else if(c2raw==='8') c2=8;
+  const c5raw=gv('#lq-c5');
+  let c5=0; if(c5raw==='1') c5=1;
+  const c7raw=gv('#lq-c7');
+  let c7=0; if(c7raw==='1') c7=1;
+  const secC=pn(gv('#lq-c1r'))+c2+pn(gv('#lq-c3'))+pn(gv('#lq-c3x'))+pn(gv('#lq-c4'))+c5+pn(gv('#lq-c6'))+c7+pn(gv('#lq-c8'))+pn(gv('#lq-c9'))+pn(gv('#lq-c9x'));
+  const total=secA+secB+secC;
+
+  let cls,title,detail;
+  if(total>=8){
+    cls='red';
+    title='LEAF-Q 总分 = '+total+' 分 ｜ 筛查阳性（≥8 分）';
+    detail='提示存在低能量可用性（LEA）相关生理症状风险。<b>建议按 CAT2 流程转介医学评估</b>：进一步检查月经/激素、骨密度（DXA）、血常规、铁、电解质等。';
+  }else{
+    cls='green';
+    title='LEAF-Q 总分 = '+total+' 分 ｜ 筛查阴性（<8 分）';
+    detail='当前未发现明显的 LEA 相关生理症状。但如有其他红旗信号（体重持续下降、怕冷、表现下滑等），仍需保持警惕。';
+  }
+  const secANote = secA>=2 ? ' ⚠️' : '';
+  const secBNote = secB>=2 ? ' ⚠️' : '';
+  const secCNote = secC>=4 ? ' ⚠️' : '';
+
+  res.className='result show';
+  res.innerHTML='<div class="verdict-box '+cls+'"><h4>'+title+'</h4>'+detail+'</div>'+
+    '<table><tr><th>维度</th><th>得分</th><th>维度阈值提示</th></tr>'+
+    '<tr><td>A. 损伤/应力性骨折（8 项）</td><td>'+secA+' 分</td><td>≥2 分提示伤病风险'+secANote+'</td></tr>'+
+    '<tr><td>B. 胃肠道功能（9 项）</td><td>'+secB+' 分</td><td>≥2 分提示胃肠异常'+secBNote+'</td></tr>'+
+    '<tr><td>C. 月经功能（8 项）</td><td>'+secC+' 分</td><td>≥4 分提示月经异常'+secCNote+'</td></tr>'+
+    '<tr><td><b>总分</b></td><td><b>'+total+' 分</b></td><td><b>≥8 分 = LEA 筛查阳性</b></td></tr></table>'+
+    '<p style="font-size:13px;color:var(--ink-soft);margin-top:10px;">验证性能：敏感性 78%、特异性 90%（Melin et al., 2014）。测试-重测信度 r = 0.79（两周间隔）。<br>各维度阈值为各维度内"有风险"的经验切值，总分 ≥8 为整体阳性界值。</p>';
+}
+
+/* ============ LEAM-Q 男性低能量可用性问卷 ============ */
+function buildLEAMQ(){
+  const sec=$('#leamq-form');
+  if(!sec) return;
+  sec.innerHTML=`
+  <div style="margin-bottom:14px;padding:12px 16px;background:var(--gold-soft);border-radius:8px;font-family:'PingFang SC',sans-serif;font-size:14px;">
+    <b>说明：</b>本问卷评估男性运动员/运动者是否存在低能量可用性（LEA）相关的生理症状。请根据<b>近期</b>的实际情况如实作答。<br>
+    <b style="color:var(--bad);">重要：</b>LEAM-Q 目前<b>仅性欲维度有验证界值</b>，其余维度为症状自评，供临床参考，尚无经验证的切分值。
+  </div>
+
+  <h4 style="color:var(--brand);margin:12px 0 8px;font-family:'PingFang SC',sans-serif;">A. 头晕</h4>
+  <div class="form-grid" style="grid-template-columns:1fr;">
+    <div class="field"><label>A1. 站起来时是否感到头晕或眼前发黑？</label>
+      <select id="lm-a1"><option value="">请选择</option><option value="0">从不（0 分）</option><option value="1">偶尔（1 分）</option><option value="2">经常（2 分）</option><option value="3">几乎每次站起来都有（3 分）</option></select></div>
+  </div>
+
+  <h4 style="color:var(--brand);margin:12px 0 8px;font-family:'PingFang SC',sans-serif;">B. 胃肠道功能</h4>
+  <div class="form-grid" style="grid-template-columns:1fr;">
+    <div class="field"><label>B1. 你是否经常感到腹部胀气？</label>
+      <select id="lm-b1"><option value="">请选择</option><option value="0">很少或从不（0 分）</option><option value="1">每周 1–2 次（1 分）</option><option value="2">每周数次（2 分）</option><option value="3">每天数次（3 分）</option></select></div>
+    <div class="field"><label>B2. 你是否感到痉挛或胃痛（非运动引起）？</label>
+      <select id="lm-b2"><option value="">请选择</option><option value="0">很少或从不（0 分）</option><option value="1">每周 1–2 次（1 分）</option><option value="2">每周数次（2 分）</option><option value="3">每天数次（3 分）</option></select></div>
+    <div class="field"><label>B3. 你平均多久排便一次？</label>
+      <select id="lm-b3"><option value="">请选择</option><option value="0">每天一次（0 分）</option><option value="1">隔天一次（1 分）</option><option value="2">每周两次（2 分）</option><option value="3">每周一次或更少（3 分）</option></select></div>
+    <div class="field"><label>B4. 你通常的粪便形态？</label>
+      <select id="lm-b4"><option value="">请选择</option><option value="0">正常（0 分）</option><option value="1">偏稀/水样（1 分）</option><option value="2">硬且干（2 分）</option></select></div>
+  </div>
+
+  <h4 style="color:var(--brand);margin:12px 0 8px;font-family:'PingFang SC',sans-serif;">C. 静息体温调节</h4>
+  <div class="form-grid" style="grid-template-columns:1fr;">
+    <div class="field"><label>C1. 你是否比别人更容易感到怕冷？</label>
+      <select id="lm-c1"><option value="">请选择</option><option value="0">否（0 分）</option><option value="1">是，偶尔（1 分）</option><option value="2">是，经常（2 分）</option></select></div>
+  </div>
+
+  <h4 style="color:var(--brand);margin:12px 0 8px;font-family:'PingFang SC',sans-serif;">D. 损伤与生病（影响训练/比赛）</h4>
+  <div class="form-grid" style="grid-template-columns:1fr;">
+    <div class="field"><label>D1. 过去 6 个月内你受过几次急性伤？</label>
+      <select id="lm-d1"><option value="">请选择</option><option value="0">0 次（0 分）</option><option value="1">1 次（1 分）</option><option value="2">2 次（2 分）</option><option value="3">3 次或以上（3 分）</option></select></div>
+    <div class="field"><label>D2. 过去 6 个月内是否因伤缺训？</label>
+      <select id="lm-d2"><option value="">请选择</option><option value="0">否（0 分）</option><option value="1">是（1 分）</option></select></div>
+    <div class="field"><label>D3. 过去 3 个月内患过几次影响训练的疾病/感冒？</label>
+      <select id="lm-d3"><option value="">请选择</option><option value="0">0 次（0 分）</option><option value="1">1 次（1 分）</option><option value="2">2 次（2 分）</option><option value="3">3 次或以上（3 分）</option></select></div>
+  </div>
+
+  <h4 style="color:var(--brand);margin:12px 0 8px;font-family:'PingFang SC',sans-serif;">E. 疲劳（嗜睡/注意力困难）</h4>
+  <div class="form-grid" style="grid-template-columns:1fr;">
+    <div class="field"><label>E1. 你是否经常感到疲惫或乏力？</label>
+      <select id="lm-e1"><option value="">请选择</option><option value="0">很少或从不（0 分）</option><option value="1">有时（1 分）</option><option value="2">经常（2 分）</option><option value="3">几乎总是（3 分）</option></select></div>
+    <div class="field"><label>E2. 你是否感到注意力难以集中？</label>
+      <select id="lm-e2"><option value="">请选择</option><option value="0">很少或从不（0 分）</option><option value="1">有时（1 分）</option><option value="2">经常（2 分）</option><option value="3">几乎总是（3 分）</option></select></div>
+  </div>
+
+  <h4 style="color:var(--brand);margin:12px 0 8px;font-family:'PingFang SC',sans-serif;">F. 体能（肌肉酸痛/僵硬/易受伤）</h4>
+  <div class="form-grid" style="grid-template-columns:1fr;">
+    <div class="field"><label>F1. 你是否经常感到肌肉酸痛或身体僵硬？</label>
+      <select id="lm-f1"><option value="">请选择</option><option value="0">很少或从不（0 分）</option><option value="1">有时（1 分）</option><option value="2">经常（2 分）</option><option value="3">几乎总是（3 分）</option></select></div>
+    <div class="field"><label>F2. 你是否感到比平时更容易受伤？</label>
+      <select id="lm-f2"><option value="">请选择</option><option value="0">否（0 分）</option><option value="1">是，有些（1 分）</option><option value="2">是，明显（2 分）</option></select></div>
+  </div>
+
+  <h4 style="color:var(--brand);margin:12px 0 8px;font-family:'PingFang SC',sans-serif;">G. 睡眠</h4>
+  <div class="form-grid" style="grid-template-columns:1fr;">
+    <div class="field"><label>G1. 你的睡眠质量如何？</label>
+      <select id="lm-g1"><option value="">请选择</option><option value="0">良好（0 分）</option><option value="1">一般（1 分）</option><option value="2">较差（2 分）</option><option value="3">很差（3 分）</option></select></div>
+  </div>
+
+  <h4 style="color:var(--brand);margin:12px 0 8px;font-family:'PingFang SC',sans-serif;">H. 恢复与精力水平</h4>
+  <div class="form-grid" style="grid-template-columns:1fr;">
+    <div class="field"><label>H1. 训练后你是否感觉恢复比以前慢？</label>
+      <select id="lm-h1"><option value="">请选择</option><option value="0">否（0 分）</option><option value="1">有些（1 分）</option><option value="2">明显变慢（2 分）</option></select></div>
+    <div class="field"><label>H2. 你是否觉得训练表现有所下降？</label>
+      <select id="lm-h2"><option value="">请选择</option><option value="0">否（0 分）</option><option value="1">有些下降（1 分）</option><option value="2">明显下降（2 分）</option></select></div>
+    <div class="field"><label>H3. 你日常的精力水平如何？</label>
+      <select id="lm-h3"><option value="">请选择</option><option value="0">充沛（0 分）</option><option value="1">一般（1 分）</option><option value="2">偏低（2 分）</option><option value="3">很低（3 分）</option></select></div>
+  </div>
+
+  <h4 style="color:var(--accent);margin:14px 0 8px;font-family:'PingFang SC',sans-serif;">⭐ I. 性欲（唯一经验证的有效筛查域）</h4>
+  <div style="margin-bottom:10px;padding:8px 14px;background:#e8ecf0;border-radius:8px;font-size:13px;font-family:'PingFang SC',sans-serif;color:var(--brand);">
+    性欲域是 LEAM-Q 中<b>唯一</b>经过临床标志物（睾酮、骨密度、T3 等）验证能有效区分 LEA 高风险与低风险个体的指标。低性欲阳性判定标准：(A) 自评性欲低/对性不感兴趣，<b>或</b> (B) 过去一个月极少/从无晨勃 <b>且</b> 频率低于自身正常水平。
+  </div>
+  <div class="form-grid" style="grid-template-columns:1fr;">
+    <div class="field"><label>I1. 你如何评价你目前的性欲？</label>
+      <select id="lm-i1"><option value="">请选择</option><option value="normal">正常 / 良好</option><option value="low">偏低 / 不太感兴趣</option></select></div>
+    <div class="field"><label>I2. 过去一个月内晨勃频率？</label>
+      <select id="lm-i2"><option value="">请选择</option><option value="normal">正常（与以往相同）</option><option value="less">比平时少一些</option><option value="rarely">很少或从未</option></select></div>
+    <div class="field"><label>I3. 与你自身平时正常水平相比，晨勃频率变化？</label>
+      <select id="lm-i3"><option value="">请选择</option><option value="same">没有变化</option><option value="less">少了一些</option><option value="much_less">明显减少很多</option></select></div>
+  </div>
+
+  <button class="btn" id="leamq-btn" style="margin-top:14px;">计算 LEAM-Q 结果</button>`;
+  $('#leamq-btn').addEventListener('click', scoreLEAMQ);
+}
+
+function scoreLEAMQ(){
+  const res=$('#leamq-res');
+  const gv=(id)=>{const el=$(id);if(!el)return '';return el.value;};
+  const pn=(v)=>{const n=parseFloat(v);return isNaN(n)?0:n;};
+  // Collect symptom domain scores (for reference only, NOT validated cutoffs)
+  const secA=pn(gv('#lm-a1'));
+  const secB=pn(gv('#lm-b1'))+pn(gv('#lm-b2'))+pn(gv('#lm-b3'))+pn(gv('#lm-b4'));
+  const secC=pn(gv('#lm-c1'));
+  const secD=pn(gv('#lm-d1'))+pn(gv('#lm-d2'))+pn(gv('#lm-d3'));
+  const secE=pn(gv('#lm-e1'))+pn(gv('#lm-e2'));
+  const secF=pn(gv('#lm-f1'))+pn(gv('#lm-f2'));
+  const secG=pn(gv('#lm-g1'));
+  const secH=pn(gv('#lm-h1'))+pn(gv('#lm-h2'))+pn(gv('#lm-h3'));
+  const symptomTotal=secA+secB+secC+secD+secE+secF+secG+secH;
+
+  // Sex drive scoring (the ONLY validated domain)
+  const i1=gv('#lm-i1'), i2=gv('#lm-i2'), i3=gv('#lm-i3');
+  // Criterion A: low sex drive OR not much interested
+  const critA = (i1==='low');
+  // Criterion B: rarely/never morning erections AND consider it less frequent than normal
+  const critB = (i2==='rarely' && (i3==='less'||i3==='much_less'));
+  const sexDrivePositive = critA || critB;
+
+  // Overall risk assessment based on validated criterion
+  let cls,title,detail;
+  if(sexDrivePositive){
+    cls='red';
+    title='LEAM-Q 性欲域筛查阳性 ｜ 建议进一步临床评估';
+    detail='性欲域是 LEAM-Q 中唯一经验证能有效区分 LEA 高风险与低风险个体的指标（Lundy et al., 2022）。低性欲与低睾酮、低骨密度、低 T3 等临床标志物显著相关。<b>建议按 CAT2 流程转介医学评估</b>：检测睾酮、T3、骨密度（DXA）、血常规、铁、电解质等。';
+  }else{
+    cls='green';
+    title='LEAM-Q 性欲域筛查阴性';
+    detail='性欲域未达阳性标准。但请注意：<b>LEAM-Q 其他维度（头晕、胃肠、体温调节、伤病、疲劳、体能、睡眠、恢复、精力）目前尚无经验证的切分值</b>，仅作为症状自评供临床参考。阴性结果不能完全排除 LEA 风险。如有体重持续下降、表现下滑、反复伤病等情况，仍需保持警惕并建议医学评估。';
+  }
+
+  res.className='result show';
+  res.innerHTML='<div class="verdict-box '+cls+'"><h4>'+title+'</h4>'+detail+'</div>'+
+    '<table><tr><th>维度</th><th>得分</th><th>验证状态</th></tr>'+
+    '<tr><td>A. 头晕</td><td>'+secA+'</td><td style="font-size:12px;color:var(--ink-soft);">未验证切值，仅供参考</td></tr>'+
+    '<tr><td>B. 胃肠道功能</td><td>'+secB+'</td><td style="font-size:12px;color:var(--ink-soft);">未验证切值，仅供参考</td></tr>'+
+    '<tr><td>C. 静息体温调节</td><td>'+secC+'</td><td style="font-size:12px;color:var(--ink-soft);">未验证切值，仅供参考</td></tr>'+
+    '<tr><td>D. 损伤与生病</td><td>'+secD+'</td><td style="font-size:12px;color:var(--ink-soft);">未验证切值，仅供参考</td></tr>'+
+    '<tr><td>E. 疲劳</td><td>'+secE+'</td><td style="font-size:12px;color:var(--ink-soft);">未验证切值，仅供参考</td></tr>'+
+    '<tr><td>F. 体能</td><td>'+secF+'</td><td style="font-size:12px;color:var(--ink-soft);">未验证切值，仅供参考</td></tr>'+
+    '<tr><td>G. 睡眠</td><td>'+secG+'</td><td style="font-size:12px;color:var(--ink-soft);">未验证切值，仅供参考</td></tr>'+
+    '<tr><td>H. 恢复与精力水平</td><td>'+secH+'</td><td style="font-size:12px;color:var(--ink-soft);">未验证切值，仅供参考</td></tr>'+
+    '<tr><td>症状维度总分</td><td><b>'+symptomTotal+'</b></td><td style="font-size:12px;color:var(--ink-soft);">无验证总分切值</td></tr>'+
+    '<tr style="background:'+(sexDrivePositive?'#f8e8e8':'#e6f0ea')+'"><td><b>⭐ I. 性欲域</b></td><td colspan="2">'+(sexDrivePositive?'<b style="color:var(--bad);">阳性 — 低性欲和/或晨勃明显减少（唯一验证指标）</b>':'<b style="color:var(--ok);">阴性 — 未发现异常（唯一验证指标）</b>')+'</td></tr>'+
+    '</table>'+
+    '<p style="font-size:13px;color:var(--ink-soft);margin-top:10px;">LEAM-Q 内部一致性 α = 0.71。仅性欲域经 ROC 分析确认有效筛查效力（敏感性 ≥60%），其他维度与临床标志物无显著关联而被排除出验证模型。<br>（Lundy et al., 2022, Nutrients, 14(9):1873. doi:10.3390/nu14091873）</p>';
+}
+
+/* ============ EDE-Q 进食障碍检查问卷 ============ */
+function buildEDEQ(){
+  const sec=$('#edeq-form');
+  if(!sec) return;
+  const scale7=['0 无天数','1 (1–5天)','2 (6–12天)','3 (13–15天)','4 (16–22天)','5 (23–27天)','6 每天'];
+  const sevLabels=['0 完全不会','1 稍许','2 中等','3 明显','4','5','6 极度'];
+  const items1to12=[
+    {id:'eq1',q:'1. 过去 28 天中，有多少天你在刻意限制食量以控制体型或体重（不管是否成功）？',sub:'Restraint'},
+    {id:'eq2',q:'2. 过去 28 天中，有多少天你连续 8 小时以上不吃任何东西以控制体型或体重？',sub:'Restraint'},
+    {id:'eq3',q:'3. 过去 28 天中，有多少天你试图排除自己喜欢的食物以控制体型或体重？',sub:'Restraint'},
+    {id:'eq4',q:'4. 过去 28 天中，有多少天你试图遵守严格的饮食规则（如卡路里限制）以控制体型或体重？',sub:'Restraint'},
+    {id:'eq5',q:'5. 过去 28 天中，有多少天你有强烈的愿望要保持空腹以影响体型或体重？',sub:'Restraint'},
+    {id:'eq6',q:'6. 过去 28 天中，有多少天你强烈希望拥有完全平坦的腹部？',sub:'Shape'},
+    {id:'eq7',q:'7. 过去 28 天中，有多少天关于食物、饮食或热量的想法让你很难集中注意力？',sub:'Eating'},
+    {id:'eq8',q:'8. 过去 28 天中，有多少天关于体型或体重的想法让你很难集中注意力？',sub:'Shape+Weight'},
+    {id:'eq9',q:'9. 过去 28 天中，有多少天你害怕失去对饮食的控制？',sub:'Eating'},
+    {id:'eq10',q:'10. 过去 28 天中，有多少天你害怕体重增加？',sub:'Shape+Weight'},
+    {id:'eq11',q:'11. 过去 28 天中，有多少天你觉得自己很胖？',sub:'Shape'},
+    {id:'eq12',q:'12. 过去 28 天中，有多少天你有强烈的减重愿望？',sub:'Weight'}
+  ];
+  let html=`
+  <div style="margin-bottom:14px;padding:12px 16px;background:var(--gold-soft);border-radius:8px;font-family:'PingFang SC',sans-serif;font-size:14px;">
+    <b>说明：</b>以下问题涉及过去 <b>4 周（28 天）</b>内你的饮食、体型和体重的想法与行为。请仔细阅读每道题并如实作答。<br>
+    <b>重要：</b>本问卷为筛查工具，不用于确诊进食障碍。阳性结果须转介专业临床评估。
+  </div>
+  <h4 style="color:var(--brand);margin:14px 0 10px;font-family:'PingFang SC',sans-serif;">第 1–12 题：态度与认知（0–6 分，按过去 28 天的天数/程度）</h4>
+  <div class="form-grid" style="grid-template-columns:1fr;">`;
+  items1to12.forEach(item=>{
+    html+=`<div class="field"><label>${item.q}<br><span style="font-size:12px;color:var(--ink-soft);">维度：${item.sub}</span></label>
+      <select id="${item.id}"><option value="">请选择</option>
+      ${scale7.map((s,i)=>`<option value="${i}">${s}</option>`).join('')}
+      </select></div>`;
+  });
+  html+=`</div>
+  <h4 style="color:var(--brand);margin:14px 0 10px;font-family:'PingFang SC',sans-serif;">第 13–18 题：核心症状行为频率（填入数字，不计入子量表分）</h4>
+  <div style="margin-bottom:8px;padding:8px 14px;background:#fbeaea;border-radius:8px;font-size:13px;font-family:'PingFang SC',sans-serif;color:var(--bad);">
+    以下 4 项为补偿行为核心指标（暴食/催吐/泻药/强迫运动），不计入子量表总分但须单独呈现。任何补偿行为 ≥1 次/28 天均应引起关注。
+  </div>
+  <div class="form-grid" style="grid-template-columns:1fr;">
+    <div class="field"><label>13. 过去 28 天内，你有多少次吃了别人会认为异常大量的食物？</label><input id="eq13" type="number" min="0" placeholder="次数"></div>
+    <div class="field"><label>14. 其中有多少次你感到失去了对饮食的控制？</label><input id="eq14" type="number" min="0" placeholder="次数"></div>
+    <div class="field"><label>15. 过去 28 天内，你有多少天出现过暴食发作（大量进食 + 失控感）？</label><input id="eq15" type="number" min="0" max="28" placeholder="天数"></div>
+    <div class="field"><label>16. 过去 28 天内，你有多少次通过催吐来控制体型或体重？</label><input id="eq16" type="number" min="0" placeholder="次数"></div>
+    <div class="field"><label>17. 过去 28 天内，你有多少次使用泻药来控制体型或体重？</label><input id="eq17" type="number" min="0" placeholder="次数"></div>
+    <div class="field"><label>18. 过去 28 天内，你有多少次以「强迫性」方式运动来控制体重/体型/燃烧卡路里？</label><input id="eq18" type="number" min="0" placeholder="次数"></div>
+  </div>
+  <h4 style="color:var(--brand);margin:14px 0 10px;font-family:'PingFang SC',sans-serif;">第 19–28 题：态度与评价（0–6 分，按程度/频率）</h4>
+  <div class="form-grid" style="grid-template-columns:1fr;">
+    <div class="field"><label>19. 过去 28 天内，有多少天你偷偷进食（不含暴食发作）？<br><span style="font-size:12px;color:var(--ink-soft);">维度：Eating Concern</span></label>
+      <select id="eq19"><option value="">请选择</option>${scale7.map((s,i)=>`<option value="${i}">${s}</option>`).join('')}</select></div>
+    <div class="field"><label>20. 在多大比例的时间里，你因食物对体型/体重的影响而感到内疚？<br><span style="font-size:12px;color:var(--ink-soft);">维度：Eating Concern</span></label>
+      <select id="eq20"><option value="">请选择</option>
+      <option value="0">0 完全没有</option><option value="1">1 少数时候</option><option value="2">2 不到一半</option><option value="3">3 一半时候</option><option value="4">4 超过一半</option><option value="5">5 大部分时候</option><option value="6">6 每次都是</option>
+      </select></div>
+    <div class="field"><label>21. 过去 28 天内，你对别人看到你进食有多在意？<br><span style="font-size:12px;color:var(--ink-soft);">维度：Eating Concern</span></label>
+      <select id="eq21"><option value="">请选择</option>
+      <option value="0">0 完全不会</option><option value="1">1 稍微</option><option value="2">2 中等</option><option value="3">3 明显</option><option value="4">4</option><option value="5">5</option><option value="6">6 极度</option>
+      </select></div>
+    <div class="field"><label>22. 在过去 28 天内，体重在多大程度上影响了你对自己的评价？<br><span style="font-size:12px;color:var(--ink-soft);">维度：Weight Concern</span></label>
+      <select id="eq22"><option value="">请选择</option>${sevLabels.map((s,i)=>`<option value="${i}">${i} ${s}</option>`).join('')}</select></div>
+    <div class="field"><label>23. 在过去 28 天内，体型在多大程度上影响了你对自己的评价？<br><span style="font-size:12px;color:var(--ink-soft);">维度：Shape Concern</span></label>
+      <select id="eq23"><option value="">请选择</option>${sevLabels.map((s,i)=>`<option value="${i}">${i} ${s}</option>`).join('')}</select></div>
+    <div class="field"><label>24. 如果让你每周称一次体重（持续 4 周），你会有多不安？<br><span style="font-size:12px;color:var(--ink-soft);">维度：Weight Concern</span></label>
+      <select id="eq24"><option value="">请选择</option>${sevLabels.map((s,i)=>`<option value="${i}">${i} ${s}</option>`).join('')}</select></div>
+    <div class="field"><label>25. 过去 28 天内，你对自己的体重有多不满意？<br><span style="font-size:12px;color:var(--ink-soft);">维度：Weight Concern</span></label>
+      <select id="eq25"><option value="">请选择</option>${sevLabels.map((s,i)=>`<option value="${i}">${i} ${s}</option>`).join('')}</select></div>
+    <div class="field"><label>26. 过去 28 天内，你对自己的体型有多不满意？<br><span style="font-size:12px;color:var(--ink-soft);">维度：Shape Concern</span></label>
+      <select id="eq26"><option value="">请选择</option>${sevLabels.map((s,i)=>`<option value="${i}">${i} ${s}</option>`).join('')}</select></div>
+    <div class="field"><label>27. 过去 28 天内，看到自己的身体（如镜中、橱窗倒影）有多不舒服？<br><span style="font-size:12px;color:var(--ink-soft);">维度：Shape Concern</span></label>
+      <select id="eq27"><option value="">请选择</option>${sevLabels.map((s,i)=>`<option value="${i}">${i} ${s}</option>`).join('')}</select></div>
+    <div class="field"><label>28. 过去 28 天内，别人看到你的体型/身材有多不舒服？<br><span style="font-size:12px;color:var(--ink-soft);">维度：Shape Concern</span></label>
+      <select id="eq28"><option value="">请选择</option>${sevLabels.map((s,i)=>`<option value="${i}">${i} ${s}</option>`).join('')}</select></div>
+  </div>
+  <div class="field" style="margin-top:12px;max-width:300px;"><label>性别（用于选择 IOC REDs CAT2 临床界值）</label>
+    <select id="eq-sex"><option value="f">女（界值 >2.30）</option><option value="m">男（界值 >1.68）</option></select></div>
+  <button class="btn" id="edeq-btn" style="margin-top:14px;">计算 EDE-Q 结果</button>`;
+  sec.innerHTML=html;
+  $('#edeq-btn').addEventListener('click', scoreEDEQ);
+}
+
+function scoreEDEQ(){
+  const res=$('#edeq-res');
+  const gv=(id)=>{const el=$(id);if(!el)return null;const v=el.value;if(v===''||v===' ')return null;return parseFloat(v);};
+  // Check completeness for 22 scaled items
+  const scaleIds=['eq1','eq2','eq3','eq4','eq5','eq6','eq7','eq8','eq9','eq10','eq11','eq12','eq19','eq20','eq21','eq22','eq23','eq24','eq25','eq26','eq27','eq28'];
+  const vals={};
+  let incomplete=false;
+  scaleIds.forEach(id=>{
+    vals[id]=gv('#'+id);
+    if(vals[id]===null) incomplete=true;
+  });
+  if(incomplete){
+    res.className='result show';
+    res.innerHTML='<div class="verdict-box yellow"><h4>填写不完整</h4>请完成所有 22 道计分项（第 1–12 题 + 第 19–28 题）后再计算。</div>';
+    return;
+  }
+  // Subscale calculations (Fairburn & Beglin 1994 / EDE-Q 6.0 scoring)
+  // Restraint: Q1,2,3,4,5 → mean (÷5)
+  const restraint=(vals.eq1+vals.eq2+vals.eq3+vals.eq4+vals.eq5)/5;
+  // Eating Concern: Q7,9,19,20,21 → mean (÷5)
+  const eating=(vals.eq7+vals.eq9+vals.eq19+vals.eq20+vals.eq21)/5;
+  // Shape Concern: Q6,8,10,11,23,26,27,28 → mean (÷8)
+  const shape=(vals.eq6+vals.eq8+vals.eq10+vals.eq11+vals.eq23+vals.eq26+vals.eq27+vals.eq28)/8;
+  // Weight Concern: Q8,12,22,24,25 → mean (÷5)
+  const weight=(vals.eq8+vals.eq12+vals.eq22+vals.eq24+vals.eq25)/5;
+  // Global score = mean of 4 subscale means
+  const global=(restraint+eating+shape+weight)/4;
+
+  const sex=$('#eq-sex').value;
+  // IOC REDs CAT2 (2023) cutoffs
+  const cutoff = sex==='f' ? 2.30 : 1.68;
+  const cutoffLabel = sex==='f' ? 'IOC CAT2 女性界值 >2.30' : 'IOC CAT2 男性界值 >1.68';
+  const isPositive = sex==='f' ? global>2.30 : global>1.68;
+
+  let cls,title,detail;
+  if(isPositive){
+    cls='red';
+    title='EDE-Q 全局分 = '+global.toFixed(2)+' ｜ 筛查阳性（'+cutoffLabel+'）';
+    detail='提示存在进食障碍相关的认知与行为症状风险。<b>须转介精神心理 + 临床营养 MDT 评估</b>（教材第5章 第3节）。注意：本问卷不能替代临床诊断，需结合临床访谈进一步评估。';
+  }else{
+    cls='green';
+    title='EDE-Q 全局分 = '+global.toFixed(2)+' ｜ 筛查阴性（≤ '+cutoff+'）';
+    detail='当前未发现明显的进食障碍相关认知与行为症状。但仍需关注第 13–18 题中的行为频率数据（暴食、催吐、泻药、强迫运动），如有任何补偿行为也应保持警惕。';
+  }
+  // Behavioral flags from Q13-18
+  const binge=gv('#eq15')||0;
+  const vomit=gv('#eq16')||0;
+  const lax=gv('#eq17')||0;
+  const compEx=gv('#eq18')||0;
+  let behFlags=[];
+  if(binge>0) behFlags.push('暴食 '+binge+' 天/28天');
+  if(vomit>0) behFlags.push('催吐 '+vomit+' 次/28天');
+  if(lax>0) behFlags.push('泻药 '+lax+' 次/28天');
+  if(compEx>0) behFlags.push('强迫运动 '+compEx+' 次/28天');
+
+  res.className='result show';
+  res.innerHTML='<div class="verdict-box '+cls+'"><h4>'+title+'</h4>'+detail+'</div>'+
+    '<table><tr><th>子量表</th><th>条目</th><th>维度均分（0–6）</th></tr>'+
+    '<tr><td>饮食限制 Restraint</td><td>Q1, Q2, Q3, Q4, Q5（5 项）</td><td>'+restraint.toFixed(2)+'</td></tr>'+
+    '<tr><td>进食关注 Eating Concern</td><td>Q7, Q9, Q19, Q20, Q21（5 项）</td><td>'+eating.toFixed(2)+'</td></tr>'+
+    '<tr><td>体型关注 Shape Concern</td><td>Q6, Q8, Q10, Q11, Q23, Q26, Q27, Q28（8 项）</td><td>'+shape.toFixed(2)+'</td></tr>'+
+    '<tr><td>体重关注 Weight Concern</td><td>Q8, Q12, Q22, Q24, Q25（5 项）</td><td>'+weight.toFixed(2)+'</td></tr>'+
+    '<tr style="background:'+(isPositive?'#f8e8e8':'#e6f0ea')+'"><td><b>全局分 Global Score</b></td><td>四子量表均值的平均</td><td><b>'+global.toFixed(2)+'</b>（'+cutoffLabel+'）</td></tr>'+
+    '</table>'+
+    (behFlags.length>0?'<div style="margin:10px 0;padding:10px 14px;background:#fbeaea;border-radius:8px;border:1px solid #e3c6c6;font-family:\'PingFang SC\',sans-serif;font-size:14px;"><b>⚠️ 补偿行为报告（Q13–18）：</b><br>'+behFlags.join(' ｜ ')+'<br><span style="font-size:13px;color:var(--bad);">任何补偿行为均应引起关注。即使全局分未达界值，补偿行为的存在也建议进一步评估。</span></div>':
+    '<div style="margin:10px 0;padding:10px 14px;background:#e6f0ea;border-radius:8px;border:1px solid #a8c5b8;font-family:\'PingFang SC\',sans-serif;font-size:14px;"><b>✓ 补偿行为（Q13–18）：</b>均未报告暴食/催吐/泻药/强迫性行为。</div>')+
+    '<p style="font-size:13px;color:var(--ink-soft);margin-top:10px;">EDE-Q 6.0：Fairburn &amp; Beglin (1994) <i>Int J Eat Disord</i>, 16, 363–370。IOC REDs CAT2 (2023) 界值：女性 &gt;2.30、男性 &gt;1.68（Mond et al., 2004 男性数据）。<br>注意 Q8 同时计入 Shape Concern 和 Weight Concern 两个子量表。第 13–18 题为行为频率题，不参与子量表计分。</p>';
+}
+
 
 /* ============ 初始化 ============ */
 renderChips();
